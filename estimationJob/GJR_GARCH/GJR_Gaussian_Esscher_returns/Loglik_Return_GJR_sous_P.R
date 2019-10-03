@@ -124,7 +124,7 @@ GJR_likelihood_ret <- function(para_h, Data.returns) {
   a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]
   
   h = c()                                                          ####  A vector containing h from the model,
-  h[1]= (a0 )/(1 - b1 - a1- a2/2)                         ####  The first value for h, Unconditional Variance
+  h[1]= (a0 )/(1 - b1 - a1- a2/2)                                  ####  The first value for h, Unconditional Variance
   dens = Retdensity(para_h,ret[1],h[1],rt[1])
     
   for (i in 2:Z1){
