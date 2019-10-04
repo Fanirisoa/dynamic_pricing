@@ -26,8 +26,6 @@ source(paste(path,"/Simulation_MC.r",sep=""))
 source(paste(path,"/RMSE_VIX_GJR.r",sep=""))
 
 
-
-first(Data.returns)
 ######################################################################################
 ###               Volatility   plot under the initial parameters               #######
 ######################################################################################
