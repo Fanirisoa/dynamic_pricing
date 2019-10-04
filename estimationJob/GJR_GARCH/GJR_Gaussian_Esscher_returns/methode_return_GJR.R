@@ -11,43 +11,39 @@ library("fBasics")
 library("numDeriv")
 library("nlme")
 library("Matrix")
-
+library(xts)
 
 ##################################################################################################
 ###              Load : Data source,    Parameters of the model,  function to use          #######
 ##################################################################################################
 setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")  
-source("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/GJR_GARCH/GJR_Gaussian_Esscher_returns/parameters_settting.R")
-source("/Users/leafanirisoa/Documents/ProjectAll/Code_Pricing/Code_septembre_2019/Estimation_paper_3_2019/GJR_GARCH/GJR_Gaussian_Esscher_returns/Loglik_Return_GJR_sous_P.R")
+path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/GJR_GARCH/GJR_Gaussian_Esscher_returns"
+
+source(paste(path,"/parameters_settting.R",sep=""))
+source(paste(path,"Loglik_Return_GJR_sous_P.R",sep=""))
+source(paste(path,"/Function_Pricer_VIX_GJR.r",sep=""))
+source(paste(path,"/Simulation_MC.r",sep=""))
+source(paste(path,"/RMSE_VIX_GJR.r",sep=""))
 
 
-Data.returns
+
+first(Data.returns)
 ######################################################################################
 ###               Volatility   plot under the initial parameters               #######
 ######################################################################################
-
-set.seed(1)
-x = ts(rnorm(20), frequency = 4, start = c(1959, 2))
-y = ts(rnorm(20), frequency = 4, start = c(1959, 2))
-ts.plot(x, y, gpars = list(col = c("black", "red")))
-
-
 ts.vol_P= shape_vol_P (para_h, Data.returns) 
 ts.plot(ts.vol_P , col = "steelblue", main = "GJR Garch Model",xlab="Time",ylab="Volatility")
 grid()
-
 
 ts.vol_Q= shape_vol_Q (para_h, Data.returns) 
 ts.plot(ts.vol_Q, col = "steelblue", main = "GJR Garch Model",xlab="Time",ylab="Volatility")
 grid()
 
-ts.plot(cbind(ts.vol_P, ts.vol_Q), gpars = list(col = c("black", "red")),  main = "GJR Garch Model",xlab="Time",ylab="Volatility")
+ts.plot(cbind(ts.vol_P, ts.vol_Q),  gpars = list(col = c("black", "red")), main = "GJR Garch Model",xlab="Time",ylab="Volatility")
+grid()
 
-x_P = ts(ts.vol_P, frequency = 1, start = c(2000, 2))
-x_Q = ts(ts.vol_Q, frequency = 1, start = c(2000, 2))
-ts.plot(x_P, x_Q, gpars = list(col = c("black", "red")), main = "GJR Garch Model",xlab="Time",ylab="Volatility")
 #####################################################
-###              LOg values returns           #######
+###              Log values returns           #######
 #####################################################
 start.time <- Sys.time()
 ILK=GJR_likelihood_ret(para_h, Data.returns)
@@ -80,10 +76,7 @@ S_e
 
 N=8^5
 N
-path = "/Users/leafanirisoa/Documents/ProjectAll/Code_Pricing/Code_septembre_2019/Estimation_paper_3_2019/GJR_GARCH/GJR_Gaussian_Esscher_returns"
-source(paste(path,"/Function_Pricer_VIX_GJR.r",sep=""))
-source(paste(path,"/Simulation_MC.r",sep=""))
-source(paste(path,"/RMSE_VIX_GJR.r",sep=""))
+
 
 
 para_h <-para_h1 
