@@ -63,19 +63,12 @@ Sol
 para_h1<-Sol$par
 
 
-# Standard error
-Hess=fdHess(para_h1,GJR_likelihood_ret, Data.returns=Data.returns)
-S_e <- sqrt(diag(solve(nearPD(Hess$Hessian)$mat)))
-S_e
-
 ############################################################
 ####                        RMSE                          ##
 ############################################################
 
 N=8^5
 N
-
-
 
 para_h <-para_h1 
 start.time <- Sys.time()
