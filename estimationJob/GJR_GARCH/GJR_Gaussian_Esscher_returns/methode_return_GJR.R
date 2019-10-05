@@ -20,7 +20,7 @@ setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")
 path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/GJR_GARCH/GJR_Gaussian_Esscher_returns"
 
 source(paste(path,"/parameters_settting.R",sep=""))
-source(paste(path,"/Loglik_Return_GJR_sous_P.R",sep=""))
+source(paste(path,"/Loglik_Return_GJR.R",sep=""))
 source(paste(path,"/Function_Pricer_VIX_GJR.r",sep=""))
 source(paste(path,"/Simulation_MC.r",sep=""))
 source(paste(path,"/RMSE_VIX_GJR.r",sep=""))

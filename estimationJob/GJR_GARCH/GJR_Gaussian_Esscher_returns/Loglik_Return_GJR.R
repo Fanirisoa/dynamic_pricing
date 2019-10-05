@@ -194,6 +194,7 @@ gsqrt_Q <- function(para_h,ret,h,rt)
   }
   return(resultat)
 }
+
 ####################################################
 ######         The volatility shape under Q       ##
 ####################################################
