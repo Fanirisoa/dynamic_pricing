@@ -69,6 +69,7 @@ para_h1<-Sol$par
 RMSE_by_N <- function(set_N,para_h, Data.returns) {
   Ni=length(set_N)      ####  length of the vector containing N,
 
+  RMSE <-rep(NA, Ni)
   RMSE_simple <-rep(NA, Ni)
   RMSE_norm <- rep(NA, Ni)
   time_Computation <- rep(NA, Ni)
@@ -84,6 +85,7 @@ RMSE_by_N <- function(set_N,para_h, Data.returns) {
     start.time <- Sys.time()
     RMSE[i]=RMSEsim(para_h1,Data.N,N[i])
     end.time <- Sys.time()
+    print(paste0("level: ", 9))
     
     time.taken <- end.time - start.time
     time_Computation[i]=time.taken  
