@@ -118,7 +118,7 @@ Matrice_Mart<-function(k,B,N_v){
   r=Data.N$r/250   ####  Interest rate Data.contract$r
   Z1=length(r)
   
-  
+  N=N_v
   T=Data.N$T       
   T=T*250
   T=round(T,0)     ####  Time to maturity expressed in terms of days
