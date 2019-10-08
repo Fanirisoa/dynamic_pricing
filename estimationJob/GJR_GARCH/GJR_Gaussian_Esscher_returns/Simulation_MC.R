@@ -32,9 +32,9 @@ Sim<-function(para_h,ht){
 ##        Generate return Y_t=log(St)-log(St-1) from time 1 to T        ##
 ##########################################################################
 
-Matrice_ret<-function(x){  
+Matrice_ret<-function(x,N_v){  
   # para_h<-c() set up the parameters of the model 
-  
+  N = N_v
   a0=para_h1[1]; a1=para_h1[2]; a2=para_h1[3];  b1= para_h1[4] ;  lamda0= para_h1[5]  ; ro=para_h1[6]
   
   # Parameter under the physical probability
@@ -111,7 +111,7 @@ MC_Sim_St<-function(B){
 ##############################################     
 ## Step 3 : Martingalisation of the sample  ##
 ##############################################  
-Matrice_Mart<-function(k,B){ 
+Matrice_Mart<-function(k,B,N_v){ 
   T=Data.N$T       ####  Time to maturity expressed in terms of years 
   S=Data.N$S       ####  Prix du sous-jacent: Data.contract$S
   K=Data.N$K       ####  Strike  Prix d'exercice: data$strike
@@ -140,7 +140,7 @@ Matrice_Mart<-function(k,B){
 }
 
 
-Mar_St<-function(B){  
+Mar_St<-function(B,N_v){  
   T=Data.N$T       ####  Time to maturity expressed in terms of years 
   S=Data.N$S       ####  Prix du sous-jacent: Data.contract$S
   K=Data.N$K       ####  Strike  Prix d'exercice: data$strike
@@ -156,7 +156,7 @@ Mar_St<-function(B){
   Y=list()
   for(i in 1:Z1)  
   {
-    Y[[i]]= Matrice_Mart(i,B)
+    Y[[i]]= Matrice_Mart(i,B,,N_v)
   }
   result=Y
   return(result) 

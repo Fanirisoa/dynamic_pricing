@@ -130,10 +130,13 @@ Vega <- function(Data.N, type="C")
 ############################################################
 
 
-RMSEsim <- function(para_h1 ,Data.N)
+RMSEsim <- function(para_h1 ,Data.N,N_v)
 {  
-
+  N <- N_v
   C=Data.N$C       ####  Call price
+  
+  print(paste0("level: ", 3))
+  
   P<-Pricer(N,para_h1,Data.N)$P
   V<-Vega(Data.N=Data.N, type="C")
 

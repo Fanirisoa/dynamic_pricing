@@ -1,12 +1,12 @@
 ######################################################################
 ######         Compute option prices using MC simulation            ##
 ######################################################################
-Pricer<-function(N,para_h1 ,Data.N){
+Pricer<-function(N_v,para_h1 ,Data.N){
   ## This function compute option prices by MC, using the function "h" and "sim"
   ## para_h is a vector containing the volatility's parameters
   ## para_distribution is a vector containing the distribution's parameters
   # para_h<-c() set up the parameters of the model 
- 
+  
   a0=para_h1[1]; a1=para_h1[2]; a2=para_h1[3];  b1= para_h1[4] ;  lamda0= para_h1[5]  ; ro=para_h1[6]
   
   T=Data.N$T       ####  Time to maturity expressed in terms of years 
@@ -23,8 +23,9 @@ Pricer<-function(N,para_h1 ,Data.N){
   ######################################     
   ##   Step 1 : Sampling the returns  ## 
   ######################################  
+  print(paste0("level: ", 4))
   
-  Y_t= lapply(1:Z1, function(x) Matrice_ret(x))
+  Y_t= lapply(1:Z1, function(x) Matrice_ret(x,N_v))
   
   
   #####################################################     
@@ -37,7 +38,7 @@ Pricer<-function(N,para_h1 ,Data.N){
   ## Step 3 : Martingalisation of the sample  ##
   ##############################################  
    
-  St_Mar=Mar_St(St)
+  St_Mar=Mar_St(St,N_v)
   
   ################################################     
   ## Step 4 : Computation of the option prices  ##

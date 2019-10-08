@@ -63,28 +63,10 @@ Sol
 para_h1<-Sol$par
 
 
-############################################################
-####                        RMSE                          ##
-############################################################
-
-N=1000
-
-
-para_h <-para_h1 
-start.time <- Sys.time()
-RMSE1=RMSEsim(para_h1,Data.N)
-end.time <- Sys.time()
-time.taken <- end.time - start.time
-time.taken
-
-RMSE1$rmse
-RMSE1$norm_rmse
-
-
 ####################################################
 ######         RMSE compare by values of N       ##
 ####################################################
-shape_vol_Q <- function(set_N,para_h, Data.returns) {
+RMSE_by_N <- function(set_N,para_h, Data.returns) {
   Ni=length(set_N)      ####  length of the vector containing N,
   h = c()               ####  A vector containing h from the model,
 
@@ -92,10 +74,14 @@ shape_vol_Q <- function(set_N,para_h, Data.returns) {
   RMSE_norm <- rep(0, Ni)
   time_Computation <- rep(0, Ni)
   
+  print(paste0("level: ", 1))
+  
   for (i in 1:length(C)){
-    N = Ni[i]
+    N[i] = Ni[i]
     start.time <- Sys.time()
-    RMSE[i]=RMSEsim(para_h1,Data.N)
+    
+    print(paste0("level: ", 2))
+    RMSE[i]=RMSEsim(para_h1,Data.N,N[i])
     end.time <- Sys.time()
     time.taken <- end.time - start.time
     time_Computation[i]=time.taken  
@@ -107,6 +93,49 @@ shape_vol_Q <- function(set_N,para_h, Data.returns) {
   return(list(RMSE_simple=RMSE_simple,RMSE_norm = RMSE_norm,time_Computation = time_Computation, set_N = set_N)) 
 
   }
+
+N_1<-c(100, 200, 300, 400, 500)  
+start.time <- Sys.time()
+RMSE_N=RMSE_by_N(N_1,para_h1,Data.N)
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+
+RMSE_N$RMSE_simple
+RMSE_N$RMSE_norm
+RMSE_N$time_Computation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+############################################################
+####                        RMSE                          ##
+############################################################
+
+para_h <-para_h1 
+start.time <- Sys.time()
+RMSE1=RMSEsim(para_h1,Data.N)
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+
+RMSE1$rmse
+RMSE1$norm_rmse
 
 
 
