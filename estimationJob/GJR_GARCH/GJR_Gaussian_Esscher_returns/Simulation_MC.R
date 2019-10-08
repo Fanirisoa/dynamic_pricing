@@ -156,7 +156,7 @@ Mar_St<-function(B,N_v){
   Y=list()
   for(i in 1:Z1)  
   {
-    Y[[i]]= Matrice_Mart(i,B,,N_v)
+    Y[[i]]= Matrice_Mart(i,B,N_v)
   }
   result=Y
   return(result) 
