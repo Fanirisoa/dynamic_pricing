@@ -83,14 +83,15 @@ RMSE_by_N <- function(set_N,para_h, Data.returns) {
     
     print(paste0("level: ", 2))
     start.time <- Sys.time()
-    RMSE[i]=RMSEsim(para_h1,Data.N,N[i])
+    RMSE=RMSEsim(para_h1,Data.N,N[i])
     end.time <- Sys.time()
-    print(paste0("level: ", 9))
     
+    print(paste0("level: ", 9))
+  
     time.taken <- end.time - start.time
     time_Computation[i]=time.taken  
-    RMSE_simple[i] = RMSE[i]$rmse
-    RMSE_norm[i] = RMSE[i]$norm_rmse
+    RMSE_simple[i] = RMSE$rmse
+    RMSE_norm[i] = RMSE$norm_rmse
     
   }
 
