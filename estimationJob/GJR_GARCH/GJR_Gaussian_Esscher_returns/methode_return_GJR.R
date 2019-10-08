@@ -68,7 +68,7 @@ para_h1<-Sol$par
 ############################################################
 
 N=1000
-N
+
 
 para_h <-para_h1 
 start.time <- Sys.time()
@@ -82,26 +82,28 @@ RMSE1$norm_rmse
 
 
 ####################################################
-######         The volatility shape under Q       ##
+######         RMSE compare by values of N       ##
 ####################################################
 shape_vol_Q <- function(set_N,para_h, Data.returns) {
-  ret=Data.returns$ret   
-  rt=Data.returns$rt/250        
-  Z1=length(set_N)
+  Ni=length(set_N)      ####  length of the vector containing N,
+  h = c()               ####  A vector containing h from the model,
+
+  RMSE_Computation <- rep(0, Ni)
+  time_Computation <- rep(0, Ni)
   
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]
-  
-  
-  h = c()                                                        ####  A vector containing h from the model,
-  h[1]=(a0 )/(1 - b1 - a1- a2/2)                                 ####  The first value for h, Unconditional Variance
-  
-  for (i in 2:Z1){
-    h[i]= gsqrt_Q (para_h,ret[i-1],h[i-1],rt[i-1]) ### a0 +b1*h[i-1]+a1*(((ret[i-1]-rt[i-1]-lamda0*(h[i-1]))/(sqrt(h[i-1]))) - a2*(sqrt(h[i-1])))^2
+  for (i in 1:length(C)){
+    N = Ni[i]
+    start.time <- Sys.time()
+    RMSE[i]=RMSEsim(para_h1,Data.N)
+    end.time <- Sys.time()
+    time.taken <- end.time - start.time
+    time_Computation[i]=time.taken  
   }
-  
-  return(h)  
-}
+  norm_rmse<-Norm_b*sqrt((mean(error)))
+  rmse<-sqrt((mean(error)))
+  return(list(rmse=rmse,P=P,error=error,norm_rmse=norm_rmse)) 
+
+  }
 
 
 
