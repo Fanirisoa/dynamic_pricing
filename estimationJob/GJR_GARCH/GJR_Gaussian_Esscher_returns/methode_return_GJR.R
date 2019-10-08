@@ -88,7 +88,8 @@ shape_vol_Q <- function(set_N,para_h, Data.returns) {
   Ni=length(set_N)      ####  length of the vector containing N,
   h = c()               ####  A vector containing h from the model,
 
-  RMSE_Computation <- rep(0, Ni)
+  RMSE_simple <- rep(0, Ni)
+  RMSE_norm <- rep(0, Ni)
   time_Computation <- rep(0, Ni)
   
   for (i in 1:length(C)){
@@ -98,10 +99,12 @@ shape_vol_Q <- function(set_N,para_h, Data.returns) {
     end.time <- Sys.time()
     time.taken <- end.time - start.time
     time_Computation[i]=time.taken  
+    RMSE_simple[i] = RMSE[i]$rmse
+    RMSE_norm[i] = RMSE[i]$norm_rmse
+    
   }
-  norm_rmse<-Norm_b*sqrt((mean(error)))
-  rmse<-sqrt((mean(error)))
-  return(list(rmse=rmse,P=P,error=error,norm_rmse=norm_rmse)) 
+
+  return(list(RMSE_simple=RMSE_simple,RMSE_norm = RMSE_norm,time_Computation = time_Computation, set_N = set_N)) 
 
   }
 
