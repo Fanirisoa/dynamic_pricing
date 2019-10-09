@@ -99,7 +99,7 @@ RMSE_by_N <- function(set_N,para_h, Data.returns) {
 
 }
 
-N_1<-c(100, 200, 300, 400, 500)  
+N_1<-c(1000, 2000, 3000, 4000, 5000)  
 start.time <- Sys.time()
 RMSE_N=RMSE_by_N(N_1,para_h1,Data.N)
 end.time <- Sys.time()
