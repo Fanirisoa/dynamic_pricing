@@ -99,20 +99,30 @@ RMSE_by_N <- function(set_N,para_h, Data.returns) {
 
 }
 
-N_1<-c(15000, 20000)  
+N_1<-c(1500, 2500, 3500, 4500, 5500)
 start.time <- Sys.time()
-RMSE_N=RMSE_by_N(N_1,para_h1,Data.N)
+RMSE_N_1=RMSE_by_N(N_1,para_h1,Data.N)
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
 
-RMSE_N$RMSE_simple
-RMSE_N$RMSE_norm
-RMSE_N$time_Computation
+RMSE_N_1$RMSE_simple
+RMSE_N_1$RMSE_norm
+RMSE_N_1$time_Computation
 
 
 
+N_2<-c(6500, 7500, 8500, 9500)  
 
+start.time <- Sys.time()
+RMSE_N_2=RMSE_by_N(N_2,para_h1,Data.N)
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+
+RMSE_N_2$RMSE_simple
+RMSE_N_2$RMSE_norm
+RMSE_N_2$time_Computation
 
 
 
