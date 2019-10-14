@@ -127,6 +127,17 @@ RMSE_N_2$time_Computation
 
 
 
+N_3<-c(1500)  
+
+start.time <- Sys.time()
+RMSE_N_3=RMSE_by_N(N_3,para_h1,Data.N)
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+
+RMSE_N_3$RMSE_simple
+RMSE_N_3$RMSE_norm
+RMSE_N_3$time_Computation
 
 
 
@@ -141,6 +152,7 @@ RMSE_N_2$time_Computation
 ############################################################
 ####                        RMSE                          ##
 ############################################################
+
 
 para_h <-para_h1 
 start.time <- Sys.time()
