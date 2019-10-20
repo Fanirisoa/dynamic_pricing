@@ -127,7 +127,7 @@ RMSE_N_2$time_Computation
 
 
 
-N_3<-c(10000)  
+N_3<-c(125000)  
 
 start.time <- Sys.time()
 RMSE_N_3=RMSE_by_N(N_3,para_h1,Data.N)
