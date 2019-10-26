@@ -176,6 +176,20 @@ legend("topleft", legend = c("Line 1", "Line 2"),
 
 
 
+N_liste <-    c(15000, 25000, 35000, 45000, 55000,  65000,75000,85000,100000,125000)
+
+############################################################
+####              Plot the time                          ##
+############################################################
+time_sim_in <- c(1.401163, 3.152843, 2.460967, 3.421017, 4.409233,13.59997 ,9.391688 ,11.84392,8.219551,12.69681)
+time_sim_ou <- c(1.531122, 1.804257, 2.227241, 2.866397, 3.936067,7.524419 ,9.928634 ,8.141212,10.201256,12.086141)
+plot(N_liste, time_liste, type = "b", frame = FALSE, pch = 19,col ="red", xlab = "N number of simulation", ylab =  "simulation time in h", lty = 1, lwd = 1)
+lines(x, time_liste_ou, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
+legend("topleft", legend = c("time_liste_in", "time_liste_ou "), col = c("red", "blue"), lty = 1:2, cex = 0.8)
+
+
+data.frame(x = runif(n = 12, min = min(time_liste), max = max(time_liste)),
+           y = runif(n = 12, min = min(time_liste), max = max(time_liste)))
 
 ############################################################
 ####                        RMSE                          ##
