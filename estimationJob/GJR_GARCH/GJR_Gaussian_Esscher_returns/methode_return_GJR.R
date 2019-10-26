@@ -161,8 +161,8 @@ legend("topleft", legend = 1:4, col=1:4, pch=1) # optional legend
 
 # 1. Create some variables
 x <- c(15000, 25000, 35000, 45000, 55000,  65000,75000,85000,100000,125000)
-y1 <- RMSE_liste_1
-y2  <- RMSE_liste_2
+y2 <- RMSE_liste_1
+y1 <- time_liste 
 
 # 2. Plot a first line
 plot(x, y1, type = "b", frame = FALSE, pch = 19,col = "red", xlab = "x", ylab = "y", lty = 1, lwd = 1)
