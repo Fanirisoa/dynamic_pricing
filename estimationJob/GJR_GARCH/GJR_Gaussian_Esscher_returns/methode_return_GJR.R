@@ -141,10 +141,38 @@ RMSE_N_3$time_Computation
 
 
 
+N_liste <-    c(15000, 25000, 35000, 45000, 55000,  65000,75000,85000,100000,125000)
+RMSE_liste_1 <- c(0.09517586, 0.09336052, 0.09385983,0.09524498, 0.0940919,0.09382993,0.09387618,0.09432774,0.09696839,0.09357514)
+RMSE_liste_2 <-  c(0.08417003, 0.0825646, 0.08300617,0.08423116, 0.08321141,0.08297974,0.08302064, 0.08341998,0.08575528,0.08275441)
+time_liste <- c(1.401163, 3.152843, 2.460967, 3.421017, 4.409233,13.59997 ,9.391688 ,11.84392,8.219551,12.69681)
 
 
 
 
+dat <- matrix(runif(40,1,20),ncol=4) # make data
+matplot(dat, type = c("b"),pch=1,col = 1:4) #plot
+legend("topleft", legend = 1:4, col=1:4, pch=1) # optional legend
+
+
+dat_2 <- cbind(N_liste, RMSE_liste, RMSE_norm,time_liste)
+matplot(dat_2, type = c("b"),pch=1,col = 1:4) #plot
+legend("topleft", legend = 1:4, col=1:4, pch=1) # optional legend
+
+
+# 1. Create some variables
+x <- c(15000, 25000, 35000, 45000, 55000,  65000,75000,85000,100000,125000)
+y1 <- RMSE_liste_1
+y2  <- RMSE_liste_2
+
+# 2. Plot a first line
+plot(x, y1, type = "b", frame = FALSE, pch = 19,col = "red", xlab = "x", ylab = "y", lty = 1, lwd = 1)
+
+# 3. Add a second line
+lines(x, y2, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
+
+# 4. Add a legend to the plot and set legend lty
+legend("topleft", legend = c("Line 1", "Line 2"),
+       col = c("red", "blue"), lty = 1:2, cex = 0.8)
 
 
 
