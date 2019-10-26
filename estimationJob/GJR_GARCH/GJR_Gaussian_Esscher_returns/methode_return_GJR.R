@@ -182,20 +182,25 @@ N_liste <-    c(15000, 25000, 35000, 45000, 55000,  65000,75000,85000,100000,125
 ####              Plot the time                           ##
 ############################################################
 time_sim_in <- c(1.401163, 3.152843, 2.460967, 3.421017, 4.409233,13.59997 ,9.391688 ,11.84392,8.219551,12.69681)
-time_sim_ou <- c(1.531122, 1.804257, 2.227241, 2.866397, 3.936067,7.524419 ,9.928634 ,8.141212,10.201256,12.086141)
-plot(N_liste, time_liste, type = "b", frame = FALSE, pch = 19,col ="red", xlab = "N number of simulation", ylab =  "simulation time in h", lty = 1, lwd = 1)
-lines(x, time_liste_ou, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
-legend("topleft", legend = c("time_liste_in", "time_liste_ou "), col = c("red", "blue"), lty = 1:2, cex = 0.8)
+time_sim_out <- c(1.531122, 1.804257, 2.227241, 2.866397, 3.936067,7.524419 ,9.928634 ,8.141212,10.201256,12.086141)
+plot(N_liste, time_sim_in, type = "b", frame = FALSE, pch = 19,col ="red",  xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab =  "simulation time (in h)", lty = 1, lwd = 1)
+lines(x, time_sim_out, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
+legend(90000,3.5, legend = c("time_sim_in", "time_sim_out"), col = c("red", "blue"), lty = 1:2, cex = 0.8)
 
 ############################################################
 ####               Plot the RMSE                          ##
 ############################################################
-RMSE_liste_2 <-  c(0.08417003, 0.0825646, 0.08300617,0.08423116, 0.08321141,0.08297974,0.08302064, 0.08341998,0.08575528,0.08275441)
+RMSE_sim_in <-  c(0.05417003, 0.0525646, 0.05300617,0.05423116, 0.05321141,0.05297974,0.05302064, 0.05341998,0.05575528,0.05275441)
+RMSE_sim_ou <-  c(0.06417586, 0.06436052,0.06385983, 0.0640919,0.06524498,0.06382993,0.06387618,0.06696839,0.06432774,0.06357514)
 
+plot(N_liste, RMSE_sim_in, type = "b", frame = FALSE, pch = 19,col ="red", ylim=c(0.05, 0.077),  xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab =  "RMSE", lty = 1, lwd = 1)
+lines(x, RMSE_sim_ou, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
+legend(20000,0.075, legend = c("RMSE_in", "RMS_out"), col = c("red", "blue"), lty = 1:2, cex = 0.8)
 
 
 data.frame(x = runif(n = 12, min = min(time_liste), max = max(time_liste)),
            y = runif(n = 12, min = min(time_liste), max = max(time_liste)))
+
 
 ############################################################
 ####                        RMSE                          ##
