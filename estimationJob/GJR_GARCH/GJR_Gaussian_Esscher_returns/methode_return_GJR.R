@@ -142,17 +142,25 @@ RMSE_N_3$time_Computation
 
 
 sales = 7237782.949999999
-galion= 9.353094601999997E7
-filiales = 7.095520544000003E7
+galion= 4.353094601999997E7
+filiales = 3.095520544000003E7
 jdbc = 22499.43999999997
 escale= 1325268
 
 T = sales + galion + filiales + jdbc  + escale
 T
 
-X = escale * 100 / sales
-X
+X_sales = sales * 100 / T
+X_galion = galion * 100 / T
+X_filial = filiales * 100 / T
+X_jdbc = jdbc * 100 / T
+X_escale = escale * 100 / T
 
+X_sales
+X_galion
+X_filial
+X_jdbc
+X_escale
 
 
 N_liste <-    c(15000, 25000, 35000, 45000, 55000,  65000,75000,85000,100000,125000)
