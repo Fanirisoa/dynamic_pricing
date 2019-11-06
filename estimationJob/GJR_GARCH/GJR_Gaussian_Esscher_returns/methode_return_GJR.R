@@ -215,7 +215,7 @@ legend(90000,3.5, legend = c("time_sim_in", "time_sim_out"), col = c("red", "blu
 RMSE_sim_in <-  c(0.05417003, 0.0525646, 0.05300617,0.05423116, 0.05321141,0.05297974,0.05302064, 0.05341998,0.05575528,0.05275441)
 RMSE_sim_ou <-  c(0.06417586, 0.06436052,0.06385983, 0.0640919,0.06524498,0.06382993,0.06387618,0.06696839,0.06432774,0.06357514)
 
-plot(N_liste, RMSE_sim_in, type = "b", frame = FALSE, pch = 19,col ="red", ylim=c(0.05, 0.077),  xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab =  "RMSE", lty = 1, lwd = 1)
+plot(N_liste, RMSE_sim_in, type = "b", frame = FALSE, pch = 19,col ="red", ylim=c(0.05, 0.085),  xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab =  "RMSE", lty = 1, lwd = 1)
 lines(x, RMSE_sim_ou, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
 legend(20000,0.075, legend = c("RMSE_in", "RMS_out"), col = c("red", "blue"), lty = 1:2, cex = 0.8)
 
