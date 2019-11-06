@@ -232,6 +232,42 @@ data.frame(x = runif(n = 12, min = min(time_liste), max = max(time_liste)),
            y = runif(n = 12, min = min(time_liste), max = max(time_liste)))
 
 
+
+
+############################################################
+####              Plot the time in                          ##
+############################################################
+time_sim_out_1 <- c(1.531122, 1.804257, 2.227241, 2.866397, 3.936067,7.524419 ,9.928634 ,8.141212,10.201256,12.086141)
+time_sim_out_2 <- c(2.548941, 4.395757,  5.880141, 6.205051, 8.269049, 9.547638 ,11.499478, 10.958627, 12.751420,15.052313)
+time_sim_out_3 <- c(2.492356, 3.244655, 3.338507, 4.937348, 5.045035, 5.517742, 6.602285,7.408210, 9.026084,12.407307)
+
+plot(N_liste, time_sim_out_1, type = "b", frame = FALSE, pch = 16,col ="red", ylim=c(1, 17), xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab =  "simulation time (out-of sample)", lty = 1, lwd = 1)
+lines(x, time_sim_out_2, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
+lines(x, time_sim_out_3, pch = 18, col = "green", type = "b", lty = 3, lwd = 1)
+legend(80000,3.5, legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess"), col = c("red", "blue","green"), lty = 1:3, cex = 0.8)
+
+############################################################
+####               Plot the RMSE                          ##
+############################################################
+RMSE_sim_out_1 <-  c(0.06417586, 0.06436052,0.06385983, 0.0640919,0.06524498,0.06382993,0.06387618,0.06696839,0.06432774,0.06357514)
+RMSE_sim_out_2 <-  c(0.06302266, 0.06297079 , 0.06255062, 0.06238454, 0.06253211, 0.06156294, 0.06155880, 0.06119888, 0.06143892, 0.06006366)
+RMSE_sim_out_3 <-  c(0.07898468, 0.07747175, 0.07452121, 0.07693879, 0.07674357, 0.07505989, 0.07585888, 0.07442683, 0.07357803,0.07332828)
+
+plot(N_liste, RMSE_sim_out_1, type = "b", frame = FALSE, pch = 19,col ="red", ylim=c(0.06, 0.08),  xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab =  "RMSE in sample", lty = 1, lwd = 1)
+lines(x, RMSE_sim_out_2, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
+lines(x, RMSE_sim_out_3, pch = 18, col = "green", type = "b", lty = 3, lwd = 1)
+legend(20000,0.07, legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess"), col = c("red", "blue","green"), lty = 1:3, cex = 0.8)
+
+
+
+
+
+
+
+
+
+
+
 ############################################################
 ####                        RMSE                          ##
 ############################################################
