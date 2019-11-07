@@ -253,7 +253,7 @@ RMSE_sim_out_1 <-  c(0.06417586, 0.06436052,0.06385983, 0.0640919,0.06524498,0.0
 RMSE_sim_out_2 <-  c(0.06302266, 0.06297079 , 0.06255062, 0.06238454, 0.06253211, 0.06156294, 0.06155880, 0.06119888, 0.06143892, 0.06006366)
 RMSE_sim_out_3 <-  c(0.07898468, 0.07747175, 0.07452121, 0.07693879, 0.07674357, 0.07505989, 0.07585888, 0.07442683, 0.07357803,0.07332828)
 
-plot(N_liste, RMSE_sim_out_1, type = "b", frame = FALSE, pch = 19,col ="red", ylim=c(0.06, 0.08),  xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab =  "RMSE in sample", lty = 1, lwd = 1)
+plot(N_liste, RMSE_sim_out_1, type = "b", frame = FALSE, pch = 19,col ="red", ylim=c(0.06, 0.08),  xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab =  "RMSE out of sample", lty = 1, lwd = 1)
 lines(x, RMSE_sim_out_2, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
 lines(x, RMSE_sim_out_3, pch = 18, col = "green", type = "b", lty = 3, lwd = 1)
 legend(20000,0.07, legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess"), col = c("red", "blue","green"), lty = 1:3, cex = 0.8)
