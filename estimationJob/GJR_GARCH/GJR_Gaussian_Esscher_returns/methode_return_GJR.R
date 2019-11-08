@@ -124,7 +124,7 @@ RMSE_N_2$RMSE_simple
 RMSE_N_2$RMSE_norm
 RMSE_N_2$time_Computation
 
-
+2^10
 
 
 N_3<-c(12500)  
@@ -257,7 +257,6 @@ plot(N_liste, RMSE_sim_out_1, type = "b", frame = FALSE, pch = 19,col ="red", yl
 lines(x, RMSE_sim_out_2, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
 lines(x, RMSE_sim_out_3, pch = 18, col = "green", type = "b", lty = 3, lwd = 1)
 legend(20000,0.07, legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess"), col = c("red", "blue","green"), lty = 1:3, cex = 0.8)
-
 
 
 
