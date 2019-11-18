@@ -20,8 +20,8 @@ setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")
 path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NGARCH/N_Ess_ret_VIX"
 
 source(paste(path,"/parameters_settting.R",sep=""))
-source(paste(path,"/Loglik_VIX_NGARCH",sep=""))
-source(paste(path,"/Log_Mixte_VIX_Ret",sep=""))
+source(paste(path,"/Loglik_VIX_NGARCH.R",sep=""))
+source(paste(path,"/Log_Mixte_VIX_Ret.R",sep=""))
 source(paste(path,"/NGARCH_returns_loglike.R",sep=""))
 
 
