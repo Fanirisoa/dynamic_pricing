@@ -24,6 +24,9 @@ source(paste(path,"/Loglik_VIX_NGARCH.R",sep=""))
 source(paste(path,"/Log_Mixte_VIX_Ret.R",sep=""))
 source(paste(path,"/NGARCH_returns_loglike.R",sep=""))
 
+source(paste(path,"/Simulation_MC_Pricer_return_NGARCH.R",sep=""))
+source(paste(path,"/Function_Pricer_return_NGARCH.R",sep=""))
+source(paste(path,"/RMSES_return_NGARCH.R",sep=""))
 
 #####################################################
 ###               Volatility                  #######
@@ -59,19 +62,6 @@ para_h<-Sol$par
 Hess=fdHess(para_h1,NGARCH_likelihood_MixViX, Data.returns=Data.returns)
 S_e <- sqrt(diag(solve(nearPD(Hess$Hessian)$mat)))
 S_e
-#####################################################
-###          Part 3     RMSE Simulation       #######
-#####################################################
-###         Source function to use            #######
-#####################################################
-##source("C:/Users/e0g411k03dt/Desktop/Estimation  Paper 2 Mars 2016/Simulation VIX HN/VIX Heston N/Simulation MC VIX HN.r")
-
-source("C:/Users/fanir/Desktop/Simulation_juin2018/NGARCH/N Esscher returns/Simulation_MC_Pricer_return_NGARCH.r")
-source("C:/Users/fanir/Desktop/Simulation_juin2018/NGARCH/N Esscher returns/Function_Pricer_return_NGARCH.r")
-source("C:/Users/fanir/Desktop/Simulation_juin2018/NGARCH/N Esscher returns/RMSES_return_NGARCH.r")
-
-
-N= 8^10
 
 ############################################################
 ####                        RMSE                          ##
