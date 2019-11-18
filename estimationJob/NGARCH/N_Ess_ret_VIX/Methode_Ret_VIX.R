@@ -1,11 +1,6 @@
-#####################################################
-###              Load Data source             #######
-#####################################################
-setwd("C:/Users/fanir/Desktop/Simulation_juin2018/Data")  
-
-#####################################################
-###             Clean the repertoir           #######
-#####################################################
+###################################################################################
+###               Clean the repertoir and laod all the library used         #######
+###################################################################################
 rm(list=ls())
 gc()
 library(compiler)
@@ -16,46 +11,19 @@ library("fBasics")
 library("numDeriv")
 library("nlme")
 library("Matrix")
+library(xts)
 
+##################################################################################################
+###              Load : Data source,    Parameters of the model,  function to use          #######
+##################################################################################################
+setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")  
+path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NGARCH/N_Ess_ret_VIX"
 
-#####################################################
-###    Load both data.contract and data.ret   #######
-#####################################################
-load("DataPrice20092010.Rdata")
+source(paste(path,"/parameters_settting.R",sep=""))
+source(paste(path,"/Loglik_VIX_NGARCH",sep=""))
+source(paste(path,"/Log_Mixte_VIX_Ret",sep=""))
+source(paste(path,"/NGARCH_returns_loglike.R",sep=""))
 
-#####################################################
-###                 Data set                  #######
-#####################################################
-#Data.N=Data.N2
-
-Data.N=Data.N2[-c(506,1462,1638,1645),]
-
-
-#####################################################
-###         Source function to use            #######
-#####################################################
-source("C:/Users/fanir/Desktop/Simulation_juin2018/NGARCH/N Esscher returns-VIX/NGARCH_returns_loglike.R")
-source("C:/Users/fanir/Desktop/Simulation_juin2018/NGARCH/N Esscher returns-VIX/Log_Mixte_VIX_Ret.r")
-source("C:/Users/fanir/Desktop/Simulation_juin2018/NGARCH/N Esscher returns-VIX/Loglik_VIX_NGARCH.r")
-
-#####################################################
-###         Parameters of the model           #######
-#####################################################
-###   Initial parameter  ####
-##    a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5]; a=para_h[6]; b=para_h[7] ;  ro=para_h[8]## ; c=para_h[5]; d=para_h[6] ; ro=para_h[8]
-para_h<-c(1.016620e-05,  2.041894e-03,  3.317506e+03,  4.501851e-05, -7.465712e-03,  1.258399e+02,  9.945561e-01) 
-
-para_h<-c(1.603e-06 , 0.7957  ,0.06175 , 1.146, 0.03736 , 3.805 , -0.7806, 0.95417)  ## RMSE2$rmse :    RMSE3$rmse :  0.04496318
-
-para_h<-c(2.157e-03 , 0.6358  ,0.0954 , 0.545, 0.08762 , 2.7878 , -1.07865, 0.85687)  ## RMSE2$rmse :    RMSE3$rmse :  0.07741942
-
-para_h<-c(1.157e-03 , 0.5358  ,0.0954 , 0.745, 0.08762 , 2.7878 , -1.02865, 0.92687)  ## RMSE2$rmse :    RMSE3$rmse :  0.007396033
-
-para_h<-c(4.966114e-06, 1.240920e-01, 2.314276e-02, 8.504266e-01, 1.989254e-01, 1.258399e+02,  9.945561e-01) 
-
-para_h<-c(1.016620e-05,  2.041894e-03,  3.317506e+03,  4.501851e-05, 7.465712e-03,  1.258399e+02,  9.945561e-01) 
-
-para_h=c(1.783635e-06 ,9.329418e-01, 3.877832e-02, 8.775196e-08, 4.582560e-01,2.7878 , -1.07865, 9.170033e-01) 
 
 #####################################################
 ###               Volatility                  #######
