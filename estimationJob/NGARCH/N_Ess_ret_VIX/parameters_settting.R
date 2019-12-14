@@ -70,7 +70,11 @@ N = 5500
 ##RMSE2$norm_rmse
 ##[1] 0.005783915
 
-  
-  
+##N = 5500 
+##Time difference of 1.105039 days
+##RMSE2$rmse
+##[1] 0.006537957
+##RMSE2$norm_rmse
+##[1] 0.005781929  
   
   
