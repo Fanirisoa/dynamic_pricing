@@ -125,7 +125,7 @@ RMSE_N_2$RMSE_norm
 RMSE_N_2$time_Computation
 
 2^10
-
+ 
 
 N_3<-c(12500)  
 
@@ -198,7 +198,6 @@ legend("topleft", legend = c("Line 1", "Line 2"),
 
 
 
-N_liste <-    c(15000, 25000, 35000, 45000, 55000,  65000,75000,85000,100000,125000)
 
 
 
@@ -211,6 +210,8 @@ rnorm(20, mean = 0.07733, sd = 0.0023)
 ############################################################
 ####              Plot the time                           ##
 ############################################################
+x <- c(15000, 25000, 35000, 45000, 55000,  65000,75000,85000,100000,125000)
+N_liste <-    c(15000, 25000, 35000, 45000, 55000,  65000,75000,85000,100000,125000)
 time_sim_in <- c(1.401163, 3.152843, 2.460967, 3.421017, 4.409233,13.59997 ,9.391688 ,11.84392,8.219551,12.69681)
 time_sim_out <- c(1.531122, 1.804257, 2.227241, 2.866397, 3.936067,7.524419 ,9.928634 ,8.141212,10.201256,12.086141)
 plot(N_liste, time_sim_in, type = "b", frame = FALSE, pch = 19,col ="red",  xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab =  "simulation time (in h)", lty = 1, lwd = 1)
@@ -233,18 +234,21 @@ data.frame(x = runif(n = 12, min = min(time_liste), max = max(time_liste)),
 
 
 
-
+0.04633 0.05929
 ############################################################
 ####              Plot the time in                          ##
 ############################################################
 time_sim_out_1 <- c(1.531122, 1.804257, 2.227241, 2.866397, 3.936067,7.524419 ,9.928634 ,8.141212,10.201256,12.086141)
 time_sim_out_2 <- c(2.548941, 4.395757,  5.880141, 6.205051, 8.269049, 9.547638 ,11.499478, 10.958627, 12.751420,15.052313)
 time_sim_out_3 <- c(2.492356, 3.244655, 3.338507, 4.937348, 5.045035, 5.517742, 6.602285,7.408210, 9.026084,12.407307)
+time_sim_out_4 <- c(3.900022, 4.938065, 6.338507, 7.357821, 9.82656, 11.027597, 13.105039,16.52500, 17.34413,20.341950)
 
-plot(N_liste, time_sim_out_1, type = "b", frame = FALSE, pch = 16,col ="red", ylim=c(1, 17), xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab =  "simulation time (out-of sample)", lty = 1, lwd = 1)
+
+plot(N_liste, time_sim_out_1, type = "b", frame = FALSE, pch = 16,col ="red", ylim=c(-2, 17), xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab =  "simulation time (out-of sample)", lty = 1, lwd = 1)
 lines(x, time_sim_out_2, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
 lines(x, time_sim_out_3, pch = 18, col = "green", type = "b", lty = 3, lwd = 1)
-legend(80000,3.5, legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess"), col = c("red", "blue","green"), lty = 1:3, cex = 0.8)
+lines(x, time_sim_out_4, pch = 18, col = "deepskyblue", type = "b", lty = 3, lwd = 1)
+legend(90000,3.5,bty = "n", legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess", "NIG.NGARCH.Ret.VIX.Ess"), col = c("red", "blue","green","deepskyblue"), lty = 1:4, cex = 0.8)
 
 ############################################################
 ####               Plot the RMSE                          ##
@@ -256,7 +260,7 @@ RMSE_sim_out_3 <-  c(0.07898468, 0.07747175, 0.07452121, 0.07693879, 0.07674357,
 plot(N_liste, RMSE_sim_out_1, type = "b", frame = FALSE, pch = 19,col ="red", ylim=c(0.06, 0.08),  xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab =  "RMSE out of sample", lty = 1, lwd = 1)
 lines(x, RMSE_sim_out_2, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
 lines(x, RMSE_sim_out_3, pch = 18, col = "green", type = "b", lty = 3, lwd = 1)
-legend(20000,0.07, legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess"), col = c("red", "blue","green"), lty = 1:3, cex = 0.8)
+legend(20000,0.07, legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess"), col = c("red", "blue","green"), lty = 1:2, cex = 0.8)
 
 
 
