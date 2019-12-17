@@ -83,6 +83,10 @@ N = 5500
 
   rnorm(20, mean = 0.05929, sd = 0.0053) 
   
+  
+  
+  x <- c(15000, 25000, 35000, 45000, 55000,  65000,75000,85000,100000,125000)
+
   ############################################################
   ####              Plot the time in                        ##
   ############################################################
@@ -149,9 +153,53 @@ N = 5500
   legend(90000,0.084, bty = "n", legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess", "NIG.NGARCH.Ret.VIX.Ess"), col = c("red", "blue","green","deepskyblue"), lty = 1:4, cex = 0.8)
   
   
-  x <- c(1024, 2048, 4096, 8192, 16384)
+  
+  ## Y <- c(2^11, 2^12, 2^13, 2^14, 2^15)
+  ############################################################
+  ####              Plot the time in                        ##
+  ############################################################
+  time_sim_in_IG_GARCH_RET_VIX_Us <- c(3.927617 ,8.771856 ,8.771856 ,51.29552 ,148.98882)
+
   
   
+  plot(N_liste, time_sim_in_G.GJR.Ret.VIX.Ess, type = "b", frame = FALSE, pch = 16,col ="red", ylim=c(-2, 17), xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab = "simulation time (in-of sample)", lty = 1, lwd =1)
+  lines(x, time_sim_in_G.GJR.Ret.VIX.Qua, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
+  lines(x, time_sim_in_G.GJR.Ret.Ess, pch = 18, col = "green", type = "b", lty = 3, lwd = 1)
+  lines(x, time_sim_in_NIG.NGARCH.Ret.VIX.Ess, pch = 18, col = "deepskyblue", type = "b", lty = 3, lwd = 1)
+  legend(90000,3.5,bty = "n", legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess", "NIG.NGARCH.Ret.VIX.Ess"), col = c("red", "blue","green","deepskyblue"), lty = 1:4, cex = 0.8)
+  
+  
+  
+  ## N_val = 2^11
+  ## 3.927617 mins
+  ## 0.06113377
+  ## 0.05406446
+  
+  
+  ## N_val = 2^12
+  ## 8.771856 mins
+  ## 0.05925612
+  ## 0.05240393
+  
+  
+  
+  ## N_val = 2^13
+  ## 8.771856 mins
+  ## 0.05793751
+  ## 0.0512378
+  
+  
+  
+  ## N_val = 2^14
+  ## 51.29552 mins
+  ## 0.05753171
+  ## 0.05087892
+  
+  
+  ## N_val = 2^15
+  ## 2.483147 hours
+  ## 0.05732707
+  ## 0.05069795
   
   
   
