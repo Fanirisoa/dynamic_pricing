@@ -129,10 +129,9 @@ N = 5500
   lines(x, RMSE_sim_in_G.GJR.Ret.Ess, pch = 18, col = "green", type = "b", lty = 3, lwd = 1)
   lines(x, RMSE_sim_in_NIG.NGARCH.Ret.VIX.Ess, pch = 18, col = "deepskyblue", type = "b", lty = 3, lwd = 1)
   
-  legend(20000,0.07, bty = "n", legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess", "NIG.NGARCH.Ret.VIX.Ess"), col = c("red", "blue","green","deepskyblue"), lty = 1:4, cex = 0.8)
+  legend(90000,0.07, bty = "n", legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess", "NIG.NGARCH.Ret.VIX.Ess"), col = c("red", "blue","green","deepskyblue"), lty = 1:4, cex = 0.8)
   
-  
-  
+
   
   ############################################################
   ####          Plot the RMSE  out sample                   ##
@@ -140,13 +139,21 @@ N = 5500
   RMSE_sim_out_G.GJR.Ret.VIX.Ess <-  c(0.064175 ,0.064360 ,0.063859 ,0.064091 ,0.065244 ,0.063829 ,0.063876 ,0.066968 ,0.064327 ,0.063575)
   RMSE_sim_out_G.GJR.Ret.VIX.Qua <-  c(0.063022 ,0.062970,0.062550 ,0.062384 ,0.062532 ,0.061562 ,0.061558 ,0.061198,0.061438 ,0.060063)
   RMSE_sim_out_G.GJR.Ret.Ess <-      c(0.078984 ,0.077471 ,0.074521 ,0.076938 ,0.076743 ,0.075059 ,0.075858 ,0.074426 ,0.073578 ,0.073328)
-  RMSE_sim_out_NIG.NGARCH.Ret.VIX.Ess <- c(0.05911073,0.05907717,0.05887404,0.05908849,0.005780608,0.005788528,0.005778745,0.005783915,0.05803498 , 0.005781929) 
+  RMSE_sim_out_NIG.NGARCH.Ret.VIX.Ess <- c(0.05911073,0.05907717,0.05887404,0.05908849,0.05780608,0.05788528,0.05778745,0.05783915,0.05803498 , 0.05781929) 
   
-  plot(N_liste,RMSE_sim_out_G.GJR.Ret.VIX.Ess, type = "b",frame = FALSE, pch = 19,col ="red", ylim=c(0.06, 0.08),xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab = "RMSE out of sample", lty = 1, lwd = 1)
+  plot(N_liste,RMSE_sim_out_G.GJR.Ret.VIX.Ess, type = "b",frame = FALSE, pch = 19,col ="red", ylim=c(0.055, 0.085),xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab = "RMSE out of sample", lty = 1, lwd = 1)
   lines(x, RMSE_sim_out_G.GJR.Ret.VIX.Qua, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
   lines(x, RMSE_sim_out_G.GJR.Ret.Ess, pch = 18, col = "green", type = "b", lty = 3, lwd = 1)
-  lines(x, RMSE_sim_in_NIG.NGARCH.Ret.VIX.Ess, pch = 18, col = "deepskyblue", type = "b", lty = 3, lwd = 1)
+  lines(x, RMSE_sim_out_NIG.NGARCH.Ret.VIX.Ess, pch = 18, col = "deepskyblue", type = "b", lty = 3, lwd = 1)
   
-  legend(20000,0.07, bty = "n", legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess", "NIG.NGARCH.Ret.VIX.Ess"), col = c("red", "blue","green","deepskyblue"), lty = 1:4, cex = 0.8)
+  legend(90000,0.084, bty = "n", legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess", "NIG.NGARCH.Ret.VIX.Ess"), col = c("red", "blue","green","deepskyblue"), lty = 1:4, cex = 0.8)
+  
+  
+  x <- c(1024, 2048, 4096, 8192, 16384)
+  
+  
+  
+  
+  
   
   

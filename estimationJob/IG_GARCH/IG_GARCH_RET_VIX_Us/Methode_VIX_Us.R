@@ -24,6 +24,7 @@ source(paste(path,"/parameters_settting.R",sep=""))
 source(paste(path,"/LoglikReturn.R",sep=""))
 source(paste(path,"/Loglik_VIX_Us.r",sep=""))
 source(paste(path,"/LogMixte_Us.r",sep=""))
+source(paste(path,"/RMSE_function_Us.R",sep=""))
 
 #####################################################
 ###         Volatility and  Price             #######
@@ -57,17 +58,16 @@ Sol
 para_h1<-Sol$par
 
 # Standard error
-Hess=fdHess(para_h1,IGGARCH_likelihood_MixViX, Data.returns=Data.returns)
-S_e <- sqrt(diag(solve(nearPD(Hess$Hessian)$mat)))
-S_e
+# Hess=fdHess(para_h1,IGGARCH_likelihood_MixViX, Data.returns=Data.returns)
+# S_e <- sqrt(diag(solve(nearPD(Hess$Hessian)$mat)))
+
 
 ############################################################
 ####                        RMSE                          ##
 ############################################################
-source("C:/Users/fanir/Desktop/Simulation_juin2018/IG-GARCH/IG_U_shape_returns_VIX/RMSE_function_Us.R")
-
+N_val = 2^15
 start.time <- Sys.time()
-RMSE1=RMSE(para_h1,Data.ret,Data.N)
+RMSE1=RMSE(para_h1,Data.ret,Data.N,N_val)
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
