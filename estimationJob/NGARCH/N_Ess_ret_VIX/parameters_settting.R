@@ -89,8 +89,7 @@ N = 5500
   time_sim_in_G.GJR.Ret.VIX.Ess <- c(1.401163 ,3.152843 ,2.460967 ,3.421017 ,4.409233 ,13.59997 ,9.391688 ,11.84392 ,8.219551 ,12.69681)
   time_sim_in_G.GJR.Ret.VIX.Qua <- c(2.017113 ,2.745760 ,3.219285 ,3.337781 ,4.545135 ,7.594880 ,9.148706 ,10.24158 ,13.01430 ,15.358608)
   time_sim_in_G.GJR.Ret.Ess <- c(1.536341 ,2.503385 ,2.804722 ,3.125717 ,4.650576 ,5.545035 ,6.139679 ,9.014243 ,11.75729 ,13.387144)
-  
-  time_sim_in_NIG.NGARCH.Ret.VIX.Ess <- c(3.900022, 4.938065, 6.338507, 7.357821, 9.82656, 11.027597, 13.105039,16.52500, 17.34413,20.341950)
+  time_sim_in_NIG.NGARCH.Ret.VIX.Ess <- c(3.900022, 4.938065, 6.338507, 7.357821, 9.82656, 10.027597, 13.105039,16.52500, 17.34413,20.341950)
   
   
   plot(N_liste, time_sim_in_G.GJR.Ret.VIX.Ess, type = "b", frame = FALSE, pch = 16,col ="red", ylim=c(-2, 17), xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab = "simulation time (out-of sample)", lty = 1, lwd =1)
@@ -103,14 +102,13 @@ N = 5500
   ############################################################
   ####              Plot the time out                       ##
   ############################################################
-  time_sim_out_G.GJR.Ret.VIX.Ess <- c(1.531122 ,1.804257 ,2.227241 ,2.866397 ,3.936067 ,7.524419  ,9.928634  ,8.141212 ,10.201256 ,12.086141)
-  time_sim_out_G.GJR.Ret.VIX.Qua <- c(2.548941 ,4.395757 , 5.880141 ,6.205051 ,8.269049 ,9.547638  &11.499478 ,10.958627 ,12.751420 ,15.052313 )
-  time_sim_out_G.GJR.Ret.Ess <- c(2.492356 ,3.244655 ,3.338507 ,4.937348 ,5.045035 ,5.517742 ,6.602285 &7.408210 ,9.026084 ,12.407307)
+  time_sim_out_G.GJR.Ret.VIX.Ess <-          c(1.531122 ,1.804257 ,2.227241 ,2.866397 ,3.936067 ,7.524419  ,9.928634  ,8.141212 ,10.201256 ,12.086141)
+  time_sim_out_G.GJR.Ret.VIX.Qua <-          c(2.548941 ,4.395757 , 5.880141 ,6.205051 ,8.269049 ,9.547638 ,11.499478 ,10.958627 ,12.751420 ,15.052313 )
+  time_sim_out_G.GJR.Ret.Ess <-              c(2.492356 ,3.244655 ,3.338507 ,4.937348 ,5.045035 ,5.517742 ,6.602285 ,7.408210 ,9.026084 ,12.407307)
+  time_sim_out_NIG.NGARCH.Ret.VIX.Ess <-     c(2.669400 ,4.543659 ,5.746091,6.555268 ,7.256107 , 7.668065 ,9.082052 ,9.733186, 11.284891 ,12.884694 )
+
   
-  time_sim_out_NIG.NGARCH.Ret.VIX.Ess <- c(3.900022, 4.938065, 6.338507, 7.357821, 9.82656, 11.027597, 13.105039,16.52500, 17.34413,20.341950)
-  
-  
-  plot(N_liste, time_sim_out_G.GJR.Ret.VIX.Ess type = "b", frame = FALSE, pch = 16,col ="red", ylim=c(-2, 17), xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab = "simulation time (out-of sample)", lty = 1, lwd =1)
+  plot(N_liste, time_sim_out_G.GJR.Ret.VIX.Ess, type = "b", frame = FALSE, pch = 16,col ="red", ylim=c(-2, 17), xlim=c(10000, 125000), xlab = "number of simulation (N)", ylab = "simulation time (out-of sample)", lty = 1, lwd =1)
   lines(x, time_sim_out_G.GJR.Ret.VIX.Qua, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
   lines(x, time_sim_out_G.GJR.Ret.Ess, pch = 18, col = "green", type = "b", lty = 3, lwd = 1)
   lines(x, time_sim_out_NIG.NGARCH.Ret.VIX.Ess, pch = 18, col = "deepskyblue", type = "b", lty = 3, lwd = 1)
