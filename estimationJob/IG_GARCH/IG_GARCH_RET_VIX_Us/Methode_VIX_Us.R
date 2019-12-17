@@ -25,32 +25,6 @@ source(paste(path,"/LoglikReturn.R",sep=""))
 source(paste(path,"/Loglik_VIX_Us.r",sep=""))
 source(paste(path,"/LogMixte_Us.r",sep=""))
 
-
-#####################################################
-###         Source function to use            #######
-#####################################################
-source("C:/Users/fanir/Desktop/Simulation_juin2018/IG-GARCH/IG_U_shape_returns_VIX/LoglikReturn.R")
-source("C:/Users/fanir/Desktop/Simulation_juin2018/IG-GARCH/IG_U_shape_returns_VIX/Loglik_VIX_Us.r")
-source("C:/Users/fanir/Desktop/Simulation_juin2018/IG-GARCH/IG_U_shape_returns_VIX/LogMixte_Us.r")
-
-
-#####################################################
-###         Parameters of the model           #######
-#####################################################
-###   Initial parameter  ####
-#   w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6] ; PI=para_h[7] ; ro=para_h[8]
-
-para_h<-c(3.238940e-06 , 2.058376e-03  ,3.317425e+03 , 5.058743e-05, -8.281782e-03 , 1.2584e+02, 1.632707e+00 ,  9.83599e-01 )  ## RMSE2$rmse :0.04287557  RMSE3$rmse : 0.05661406
-
-para_h<-c(3.238940e-06 , 2.058376e-03  ,3.317425e+03 , 5.058743e-05, -8.281782e-03 , 1.2584e+02, 1.1003707e+00 ,  9.83599e-01 )   ## RMSE2$rmse :0.04620022  RMSE3$rmse : 0.06100658 
-
-##   solution  ####
-para_h<-c(9.876201e-06,  8.626756e-03,  3.317423e+03 , 4.491365e-05, -7.516695e-03 , 1.258370e+02,  1.097198e+00 , 9.962589e-01 )   
-
-para_h<-c(1.010747e-05,  2.282316e-03,  3.317425e+03,  4.514664e-05, -7.499894e-03,  1.258394e+02,  1.100010e+00,  9.945118e-01 ) 
-
-para_h<-c(3.238940e-06 , 2.058376e-03  ,3.317425e+03 , 5.058743e-05, -8.281782e-03 , 1.2584e+02, 1.4003707e+00 ,  9.83599e-01 )   ## RMSE2$rmse :0.04620022  RMSE3$rmse : 0.06100658 
-
 #####################################################
 ###         Volatility and  Price             #######
 #####################################################
@@ -58,8 +32,6 @@ para_h<-c(3.238940e-06 , 2.058376e-03  ,3.317425e+03 , 5.058743e-05, -8.281782e-
 ts.vol_P= shape_h_P(para_h, Data.returns) 
 ts.plot(ts.vol_P, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
 grid()
-
-
 
 #####################################################
 ###              LOg values                   #######
