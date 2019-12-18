@@ -89,7 +89,7 @@ time_sim_in_G.GJR.Ret.Ess <- c(1.536341 ,2.503385 ,2.804722 ,3.125717 ,4.650576 
 time_sim_in_NIG.NGARCH.Ret.VIX.Ess <- c(3.900022, 4.938065, 6.338507, 7.357821, 9.82656, 10.027597, 13.105039,16.52500, 17.34413,20.341950)
 
 
-plot(x, time_sim_in_G.GJR.Ret.VIX.Ess, type = "b", frame = FALSE, pch = 16,col ="red", ylim=c(-2, 17), xlim=c(10000, 125000), xlab = "Number of simulation (N) to compute the option price (based on Duan and Simonato 1998)", ylab = "Simulation time in-sample (h)", lty = 1, lwd =1)
+plot(x, time_sim_in_G.GJR.Ret.VIX.Ess, type = "b", frame = FALSE, pch = 16,col ="red", ylim=c(-2, 20.4), xlim=c(10000, 125000), xlab = "Number of simulation (N) to compute the option price (based on Duan and Simonato 1998)", ylab = "Simulation time in-sample (h)", lty = 1, lwd =1)
 lines(x, time_sim_in_G.GJR.Ret.VIX.Qua, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
 lines(x, time_sim_in_G.GJR.Ret.Ess, pch = 18, col = "green", type = "b", lty = 3, lwd = 1)
 lines(x, time_sim_in_NIG.NGARCH.Ret.VIX.Ess, pch = 18, col = "deepskyblue", type = "b", lty = 3, lwd = 1)
@@ -119,12 +119,12 @@ RMSE_sim_in_G.GJR.Ret.VIX.Qua <-  c(0.052052 ,0.051620 ,0.051930 ,0.051100 ,0.05
 RMSE_sim_in_G.GJR.Ret.Ess <-  c(0.058019 ,0.057765 ,0.057701 ,0.057361 ,0.056347 ,0.056314 ,0.055243 ,0.056380 ,0.056230 ,0.054456)
 RMSE_sim_in_NIG.NGARCH.Ret.VIX.Ess <- c(0.04586464,0.04545419, 0.04574357, 0.04540203,0.04511759,0.04537957, 0.04485929,0.04437037,0.04404326, 0.04392981)
 
-plot(x, RMSE_sim_in_G.GJR.Ret.VIX.Ess, type = "b", frame = FALSE, pch = 19,col ="red", ylim=c(0.04, 0.06),  xlim=c(10000, 125000), xlab = "number of simulation (N) to compute the option price (based on Duan and Simonato 1998)", ylab =  "RMSE in-sample", lty = 1, lwd = 1)
+plot(x, RMSE_sim_in_G.GJR.Ret.VIX.Ess, type = "b", frame = FALSE, pch = 19,col ="red", ylim=c(0.04, 0.065),  xlim=c(10000, 125000), xlab = "number of simulation (N) to compute the option price (based on Duan and Simonato 1998)", ylab =  "RMSE in-sample", lty = 1, lwd = 1)
 lines(x, RMSE_sim_in_G.GJR.Ret.VIX.Qua, pch = 18, col = "blue", type = "b", lty = 2, lwd = 1)
 lines(x, RMSE_sim_in_G.GJR.Ret.Ess, pch = 18, col = "green", type = "b", lty = 3, lwd = 1)
 lines(x, RMSE_sim_in_NIG.NGARCH.Ret.VIX.Ess, pch = 18, col = "deepskyblue", type = "b", lty = 3, lwd = 1)
 
-legend(90000,0.07, bty = "n", legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess", "NIG.NGARCH.Ret.VIX.Ess"), col = c("red", "blue","green","deepskyblue"), lty = 1:4, cex = 0.8)
+legend(90000,0.065, bty = "n", legend = c("G.GJR.Ret.VIX.Ess", "G.GJR.Ret.VIX.Qua","G.GJR.Ret.Ess", "NIG.NGARCH.Ret.VIX.Ess"), col = c("red", "blue","green","deepskyblue"), lty = 1:4, cex = 0.8)
 
 ############################################################
 ####          Plot the RMSE  out sample                   ##
@@ -150,7 +150,7 @@ Y <- c(2^11, 2^12, 2^13, 2^14, 2^15,2^16)
 #time_sim_in_IG_GARCH_RET_VIX_Us <- c(3.927617 ,8.771856 ,33.06697212 ,51.29552 ,148.98882,988.047)
 time_sim_in_IG_GARCH_RET_VIX_Us <- c(0.06546028,  0.14619760 , 0.55111620 , 0.85492533 , 2.48314700 ,16.46745000)
 time_sim_out_IG_GARCH_RET_VIX_Us <- c(0.08682170 ,0.1730496 , 0.6530810 ,0.9351302 ,3.184715,17.39113)
-plot(Y, time_sim_in_IG_GARCH_RET_VIX_Us, type = "b", frame = FALSE, pch = 16,col ="red", ylim=c(0, 19), xlim=c(2^10 - 15, 2^16 + 15), xlab = "number of simulation (N) inside the FFT pricing computation", ylab = "simulation time in-of sample by hours (h)", lty = 1, lwd =1)
+plot(Y, time_sim_in_IG_GARCH_RET_VIX_Us, type = "b", frame = FALSE, pch = 16,col ="red", ylim=c(0, 19), xlim=c(2^10 - 15, 2^16 + 15), xlab = "number of simulation (N) inside the FFT pricing computation", ylab = "simulation time in and out-of sample by hours (h)", lty = 1, lwd =1)
 lines(Y, time_sim_out_IG_GARCH_RET_VIX_Us, pch = 18, col = "deepskyblue", type = "b", lty = 3, lwd = 1)
 legend(1000,15,bty = "n", legend = c("Time_in_sample_IG_GARCH_RET_VIX_Us","Time_out_sample_IG_GARCH_RET_VIX_Us"), col = c("red","deepskyblue"), lty = 1:4, cex = 0.8)
 
@@ -159,7 +159,7 @@ legend(1000,15,bty = "n", legend = c("Time_in_sample_IG_GARCH_RET_VIX_Us","Time_
 ############################################################
 RMSE_sim_in_IG_GARCH_RET_VIX_Us <- c(0.04406446,0.04240393, 0.0412378, 0.04087892, 0.04069795,0.040615)
 RMSE_sim_out_IG_GARCH_RET_VIX_Us <- c(0.05793377,0.05625612, 0.05493751, 0.05453171, 0.05432707, 0.05423328)
-plot(Y, RMSE_sim_in_IG_GARCH_RET_VIX_Us, type = "b", frame = FALSE, pch = 19,col ="red", ylim=c(0.04, 0.062),  xlim=c(2^10 - 15, 2^16 + 15), xlab = "number of simulation (N)", ylab =  "RMSE in of sample", lty = 1, lwd = 1)
+plot(Y, RMSE_sim_in_IG_GARCH_RET_VIX_Us, type = "b", frame = FALSE, pch = 19,col ="red", ylim=c(0.04, 0.062),  xlim=c(2^10 - 15, 2^16 + 15), xlab = "number of simulation (N) inside the FFT pricing computation", ylab =  "RMSE in and out-of sample", lty = 1, lwd = 1)
 lines(Y, RMSE_sim_out_IG_GARCH_RET_VIX_Us, pch = 18, col = "deepskyblue", type = "b", lty = 3, lwd = 1)
 legend(40000,0.059,bty = "n", legend = c("RMSE_in_IG_GARCH_RET_VIX_Us","RMSE_out_IG_GARCH_RET_VIX_Us"), col =  c("red","deepskyblue"), lty = 1:4, cex = 0.8)
 
