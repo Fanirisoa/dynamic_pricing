@@ -25,6 +25,7 @@ source(paste(path,"/LoglikReturn.R",sep=""))
 source(paste(path,"/Loglik_VIX_Us.r",sep=""))
 source(paste(path,"/LogMixte_Us.r",sep=""))
 source(paste(path,"/RMSE_function_Us.R",sep=""))
+source(paste(path,"/Table_RMSE.R",sep=""))
 
 #####################################################
 ###         Volatility and  Price             #######
@@ -65,7 +66,7 @@ para_h1<-Sol$par
 ############################################################
 ####                        RMSE                          ##
 ############################################################
-N_val = 2^16
+N_val = 2^10
 start.time <- Sys.time()
 RMSE1=RMSE(para_h1,Data.ret,Data.N,N_val)
 end.time <- Sys.time()
@@ -106,10 +107,13 @@ end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
 
-
 RMSE2$rmse
 RMSE2$norm_rmse
 
+##############################
+###   Table Test GMM   #######
+##############################
+Table_RMSE(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N)
 
 
 
