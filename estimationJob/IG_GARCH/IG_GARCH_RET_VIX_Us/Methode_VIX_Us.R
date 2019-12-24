@@ -76,6 +76,12 @@ time.taken
 RMSE1$rmse
 RMSE1$norm_rmse
 
+##############################
+###   Table Test GMM   #######
+##############################
+Table_RMSE(para_h=para_h1,Data.ret=Data.ret, Data.N=Data.N,N_val)
+
+
 
 #####################################################
 ###    Load both data.contract and data.ret   #######

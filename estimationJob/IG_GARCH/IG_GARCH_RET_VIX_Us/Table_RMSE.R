@@ -6,7 +6,7 @@
 ##############################
 ###   Table Test GMM   #######
 ##############################
-Table_RMSE <- function(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N){
+Table_RMSE <- function(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N,N_hat ){
   
 ####################################################
 ######   Black-Scholes Function for call          ##
@@ -79,7 +79,7 @@ Ip <- function(Data.contract, type="C")
 Data.contract=Data.N
 para_h<-para_h1
 
-Pr<-Price_fft(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N)
+Pr<-Price_fft(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N,N_hat)
 Veg<-Vega(Data.N=Data.N, type="C")
 
 
