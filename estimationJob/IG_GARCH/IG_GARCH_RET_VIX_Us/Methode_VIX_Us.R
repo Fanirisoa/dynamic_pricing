@@ -66,7 +66,7 @@ para_h1<-Sol$par
 ############################################################
 ####                        RMSE                          ##
 ############################################################
-N_val = 2^10
+N_val = 2^14
 start.time <- Sys.time()
 RMSE1=RMSE(para_h1,Data.ret,Data.N,N_val)
 end.time <- Sys.time()
@@ -103,12 +103,13 @@ end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
 
+0.05756
 ############################################################
 ####                        RMSE                          ##
 ############################################################
 Data.N=Data.N2
 start.time <- Sys.time()
-RMSE2=RMSE(para_h1,Data.ret,Data.N)
+RMSE2=RMSE(para_h1,Data.ret,Data.N,N_val)
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
@@ -119,7 +120,7 @@ RMSE2$norm_rmse
 ##############################
 ###   Table Test GMM   #######
 ##############################
-Table_RMSE(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N)
+Table_RMSE(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N,N_val)
 
 
 

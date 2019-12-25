@@ -101,12 +101,15 @@ IVRMSE <- function(para_h,Data.ret,Data.contract)
   P=Data.contract$P       ####  Call price
   V=Data.contract$V       ####  Call price
 
+  Norm_b= (1/sqrt((1/length(C))*sum((C)^2)))*100
+  
   error <- rep(NA, length(C))
   for (i in 1:length(C)){
     error[i] = ((P[i]  -  C[i])/V[i])^2
   }
   rmse<-sqrt((mean(error)))
-  return(rmse)
+  norm_rmse<-Norm_b*sqrt((mean(error)))
+  return(norm_rmse)
 }
 
 
