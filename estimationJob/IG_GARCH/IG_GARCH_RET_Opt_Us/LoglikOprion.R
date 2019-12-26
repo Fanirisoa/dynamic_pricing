@@ -143,7 +143,7 @@ FC_Q<-function(x,para_h,Data.ret ,Data.N){
 ####################################################
 ######  The call option from the model using FFT  ##
 ####################################################
-Price_fft<-function(para_h,Data.ret,Data.N){
+Price_fft<-function(para_h,Data.ret,Data.N,N_hat){
   S=Data.N$S       ####  Prix du sous-jacent: Data.contract$S
   K=Data.N$K       ####  Strike  Prix d'exercice: data$strike
   Mod=Data.N$Mod   ####  Class of equivalence
@@ -153,7 +153,7 @@ Price_fft<-function(para_h,Data.ret,Data.N){
   Data.contract.mod=data.frame(S=Data.contract$S,T=Data.contract$T,r=Data.contract$r,Pe=Data.contract$Pe,Per=Data.contract$Per)
   Data.class=unique(Data.contract.mod)
   
-  N=2^10           # Number of subdivision in [0,a]
+  N= N_hat         # Number of subdivision in [0,a]
   alpha=2          # alpha is the parameter to make C square-integrable 
   delta= 0.25      # delta= a/N  where a is the up value of w (w in [0,a])
   lambda=(2*pi)/(N*delta)
@@ -266,10 +266,10 @@ Vega <- function(Data.N, type="C")
 ############################################################
 #### Function that returns Root Mean Squared Error        ##
 ############################################################
-MSE <- function(para_h,Data.ret,Data.N)
+MSE <- function(para_h,Data.ret,Data.N,N_hat)
 {  
   C=Data.N$C       ####  Call price
-  P<-Price_fft(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N)
+  P<-Price_fft(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N,N_hat)
   error <- rep(NA, length(C))
   for (i in 1:length(C)){
     error[i] = (P[i]  -  C[i])^2
@@ -278,10 +278,10 @@ MSE <- function(para_h,Data.ret,Data.N)
   return(MSE)
 }
 
-RMSE <- function(para_h,Data.ret,Data.N)
+RMSE <- function(para_h,Data.ret,Data.N,N_hat)
 {  
   C=Data.N$C       ####  Call price
-  P<-Price_fft(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N)
+  P<-Price_fft(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N,N_hat)
   V<-Vega(Data.N=Data.N, type="C")
   error <- rep(NA, length(C))
   for (i in 1:length(C)){
@@ -294,10 +294,10 @@ RMSE <- function(para_h,Data.ret,Data.N)
 ###########################################################
 #####       The Log-likeelihood over all Option        ####
 ###########################################################
-IGGARCH_likelihood_opti <- function(para_h,Data.ret, Data.N) {
+IGGARCH_likelihood_opti <- function(para_h,Data.ret, Data.N,N_hat) {
   C=Data.N$C       ####  Call dividende
   
-  P<-Price_fft(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N)
+  P<-Price_fft(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N,,N_hat)
   V<-Vega(Data.N=Data.N, type="C")
   
   error <- rep(NA, length(C))
