@@ -13,7 +13,7 @@ h<-function(para_h,Data.ret){
   Z1=length(ret)
   
   # para_h<-c() set up the parameters (physical probability) of the model 
-  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6]  ; PI=para_h[7] ; ro=para_h[8]
+  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6]  ; PI=para_h[7]  
   
   
   # Variable of risk neutral
@@ -37,8 +37,7 @@ h<-function(para_h,Data.ret){
   if (neta>=0){drapeau=1}
   if (PI<=1.1){drapeau=1}
   if (nu<=0){drapeau=1}
-  if (ro<=0){drapeau=1}
-  if (ro>=1){drapeau=1}
+
   
   if (drapeau==0){
     resultat=h_star
@@ -55,7 +54,7 @@ h<-function(para_h,Data.ret){
 ####################################################
 Fun<-function(para_h,x,r,T,h,S,A_Q ,B_Q ){
   ## set up the parameters of the model : para_h
-  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6]  ; PI=para_h[7] ; ro=para_h[8]
+  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6]  ; PI=para_h[7]  
   
   drapeau=0
   if (w<=0){drapeau=1}
@@ -93,7 +92,7 @@ FC_Q<-function(x,para_h,Data.ret ,Data.contract){
   Z=length(S)
   
   # para_h<-c() set up the parameters (physical probability) of the model 
-  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6]  ; PI=para_h[7] ; ro=para_h[8]
+  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6]  ; PI=para_h[7]  
   
   
   # Variable of risk neutral

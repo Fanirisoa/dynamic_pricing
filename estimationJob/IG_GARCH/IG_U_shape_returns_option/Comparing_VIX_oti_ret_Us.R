@@ -13,7 +13,7 @@ h<-function(para_h,Data.returns){
   Z1=length(ret)
   
   # para_h<-c() set up the parameters (physical probability) of the model 
-  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6]  ; PI=para_h[7] ; ro=para_h[8]
+  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6]  ; PI=para_h[7] 
   
   
   # Variable of risk neutral
@@ -21,7 +21,6 @@ h<-function(para_h,Data.returns){
   nu0= nu/PI
   w0=w*PI; b0=b; a0=(a*neta)/(neta0*PI);  c0=(c*neta0*PI)/neta
   
-  g1=(a*(neta^2) +b +(c*(neta^(-2))))
   
   
   h_star = c()                                                                ####  A vector containing h from the model,
@@ -29,8 +28,6 @@ h<-function(para_h,Data.returns){
   for (i in 2:Z1){
     h_star[i]=w0+b0*h_star[i-1]+ c0*(neta0^(-1))*(ret[i-1]-rt[i-1]-(nu0*h_star[i-1]))+((a0*neta0*(h_star[i-1])^2)/(ret[i-1]-rt[i-1]-(nu0*h_star[i-1])))
   }
-  
-  g0=(a0*(neta0^2)+ b0 +(c0*(neta0^(-2))))
   
   drapeau=0
   if (w<=0){drapeau=1}
@@ -40,13 +37,7 @@ h<-function(para_h,Data.returns){
   if (neta>=0){drapeau=1}
   if (PI<=1.0259e+00){drapeau=1}
   if (nu<=0){drapeau=1}
-  if (ro<=0){drapeau=1}
-  if (ro>=1){drapeau=1}
-  if (g0<=0.98){drapeau=1}
-  if (g0>=0.99996){drapeau=1}
-  if (g1<=0.7555){drapeau=1}
-  if (g1>=0.97899){drapeau=1}
-  
+
   if (drapeau==0){
     resultat=h_star
   }else{
@@ -63,8 +54,7 @@ VIX_Q<-function(para_h,h,Ret,r){
   tau = 250
   T_0=22
   # para_h<-c() set up the parameters (physical probability) of the model 
-  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6] ; PI=para_h[7] ; ro=para_h[8]
-  
+  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6] ; PI=para_h[7] 
   
   # Variable of risk neutral
   neta0=cbrt(((PI/nu)^2)*(-1+ sqrt(1+(8*nu)/(27*PI)))) + cbrt(((PI/nu)^2)*(-1-sqrt(1+(8*nu)/(27*PI)))) 
@@ -80,11 +70,9 @@ VIX_Q<-function(para_h,h,Ret,r){
   if (a<=0){drapeau=1}
   if (c<=0){drapeau=1}
   if (neta>=0){drapeau=1}
-  if (PI<=1.2259e+00){drapeau=1}
+  if (PI<=1.0259e+00){drapeau=1}
   if (nu<=0){drapeau=1}
-  if (ro<=0){drapeau=1}
-  if (ro>=1){drapeau=1}
-  
+
   if (is.na(h)==TRUE){drapeau=1}else{
     if (h<0){drapeau=1}
     if (abs(h)==Inf){drapeau=1}
@@ -123,46 +111,81 @@ VIX_Q<-function(para_h,h,Ret,r){
   
 }
 
-###########################################################
-#####       The Log-likeelihood over all Option        ####
-###########################################################
-IGGARCH_likelihood_vix <- function(para_h,Data.returns) {
+##################################################################
+#####       Comparing predictibility of time series VIX       ####
+##################################################################
+Compa_vix <- function(para_h,Data.returns) {
   Vix=Data.returns$VIX      ####  Call dividende
   ret =Data.returns$ret     #### Returns : Data.BSJ$ret
   rt=Data.returns$rt/250  
   
   # para_h<-c() set up the parameters (physical probability) of the model 
-  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6] ; PI=para_h[7] ; ro=para_h[8]
+  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6] ; PI=para_h[7] 
   
   VIX_Market<-Vix
   
+  
   Nvix=length(Vix)
+  
+  
   
   h = h(para_h,Data.returns)
   
-  VIX_Model <- rep(NA, Nvix)
+  
+  VIX_Model <- rep(0, Nvix)
   for (i in 1:Nvix){
-    VIX_Model[i]= VIX_Q(para_h,h[i+1],ret[i+1],rt[i+1])
+    VIX_Model[i]= VIX_Q(para_h,h[i+1])
   }  
   
+  
+  VIX_Model=VIX_Model[2241: 2717]
+  VIX_Market=VIX_Market[2241: 2717]
+  
+  N_VIX_2012= length(VIX_Model)
+  
+  #a= (1/sqrt((1/N_VIX_2012)*sum((VIX_Market)^2)))*100
+  Norm_b= (1/sqrt((1/N_VIX_2012)*sum((VIX_Market)^2)))*100
+  Norm_a= 100/mean(VIX_Market)
   ## Error terms :
   
-  error <- rep(NA, Nvix)
-  error[Nvix]=0
-  for (i in 1:Nvix-1){
-    error[i]= VIX_Market[i] - VIX_Model[i]
+  error <- rep(0,N_VIX_2012)
+  #error[Nvix]=0
+  for (i in 1:N_VIX_2012-1){
+    error[i]= (VIX_Model[i]/ VIX_Market[i]) - 1
+  }
+  ## MPE :
+  
+  MPE_Vix <- rep(NA, N_VIX_2012)
+  MPE_Vix[N_VIX_2012]=0
+  for (i in 1:N_VIX_2012-1){
+    MPE_Vix[i]= (VIX_Model[i]*(1/VIX_Market[i]))-1
   }
   
-  error_2 <- rep(NA, Nvix)
-  error_2[1]=0
-  for (i in 2:Nvix){
-    error_2[i]= ((error[i]-ro*error[i-1])^2)/(1-ro^2)
+  MPE<-  Norm_a*(mean(MPE_Vix))
+  
+  ## MAE :
+  
+  MAE_Vix <- rep(NA, N_VIX_2012)
+  MAE_Vix[N_VIX_2012]=0
+  for (i in 1:N_VIX_2012-1 ){
+    MAE_Vix[i]= abs((VIX_Model[i]*(1/VIX_Market[i]))-1)
   }
   
-  sigma=mean(error^2)
-  log_like=-1/2*sum(log(sigma)+((error^2)/sigma))-(Nvix/2)*(log(2*pi)+log(sigma*(1-(ro^2))))+ (1/2)*(log(sigma*(1-(ro^2)))-log(sigma))-(1/(2*sigma))*(error[i]^2+sum(error_2))
+  MAE<-  Norm_a*(mean(MAE_Vix))
   
-  return(log_like)  
+  ## RMSE_Vix :
+  RMSE_Vix <- rep(NA, N_VIX_2012)
+  RMSE_Vix[N_VIX_2012]=0
+  for (i in 1:N_VIX_2012-1){
+    RMSE_Vix[i]= (VIX_Market[i]-VIX_Model[i])^2
+  }
   
+  Vrmse<- Norm_b*sqrt((mean(RMSE_Vix)))
+  
+  ## MAE :
+  MAE2<-  Norm_a*(mean(abs(error)))
+  
+  mse<- Norm_b*mean(RMSE_Vix)
+  
+  return(list(MPE=MPE, MAE=MAE ,MAE2=MAE2 ,Vrmse=Vrmse, MSE_VIX=mse,VIX_Market=VIX_Market,VIX_Model=VIX_Model))   
 }
-
