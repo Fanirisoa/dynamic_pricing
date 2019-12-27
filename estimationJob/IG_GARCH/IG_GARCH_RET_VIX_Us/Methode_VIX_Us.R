@@ -66,7 +66,7 @@ para_h1<-Sol$par
 ############################################################
 ####                        RMSE                          ##
 ############################################################
-N_val = 2^14
+N_val = 2^13
 start.time <- Sys.time()
 RMSE1=RMSE(para_h1,Data.ret,Data.N,N_val)
 end.time <- Sys.time()
