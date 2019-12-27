@@ -40,7 +40,7 @@ grid()
 ###              LOg values                   #######
 #####################################################
 start.time <- Sys.time()
-ILK=IGGARCH_likelihood_Mix(para_h,Data.ret, Data.N,Data.returns)
+ILK=IGGARCH_likelihood_Mix(para_h,Data.ret, Data.N,Data.returns,N_hat)
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
@@ -51,7 +51,7 @@ ILK
 ###      Optimization  of the model           #######
 #####################################################
 start.time <- Sys.time()
-Sol=optim(para_h,IGGARCH_likelihood_Mix ,Data.ret=Data.ret, Data.N = Data.N,Data.returns=Data.returns, method="Nelder-Mead",control = list(maxit = 5000))
+Sol=optim(para_h,IGGARCH_likelihood_Mix ,Data.ret=Data.ret, Data.N = Data.N,Data.returns=Data.returns, N_hat = N_hat, method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
@@ -66,9 +66,8 @@ S_e
 ############################################################
 ####                        RMSE                          ##
 ############################################################
-source("C:/Users/fanir/Desktop/Simulation_juin2018/IG-GARCH/IG_U_shape_returns_option/RMSE_function_Us.R")
 start.time <- Sys.time()
-RMSE1=RMSE(para_h1,Data.ret,Data.N)
+RMSE1=RMSE(para_h1,Data.ret,Data.N,N_hat)
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
@@ -79,7 +78,7 @@ RMSE1$norm_rmse
 ##############################
 ###   Table Test GMM   #######
 ##############################
-Table_RMSE(para_h=para_h1,Data.ret=Data.ret, Data.N=Data.N,N_val)
+Table_RMSE(para_h=para_h1,Data.ret=Data.ret, Data.N=Data.N,N_hat)
 
 
 #####################################################
@@ -104,7 +103,7 @@ time.taken
 ############################################################
 Data.N=Data.N2
 start.time <- Sys.time()
-RMSE2=RMSE(para_h1,Data.ret,Data.N)
+RMSE2=RMSE(para_h1,Data.ret,Data.N,N_hat)
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken

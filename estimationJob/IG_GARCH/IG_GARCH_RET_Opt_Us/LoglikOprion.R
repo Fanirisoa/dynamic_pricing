@@ -297,7 +297,7 @@ RMSE <- function(para_h,Data.ret,Data.N,N_hat)
 IGGARCH_likelihood_opti <- function(para_h,Data.ret, Data.N,N_hat) {
   C=Data.N$C       ####  Call dividende
   
-  P<-Price_fft(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N,,N_hat)
+  P<-Price_fft(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N,N_hat)
   V<-Vega(Data.N=Data.N, type="C")
   
   error <- rep(NA, length(C))
