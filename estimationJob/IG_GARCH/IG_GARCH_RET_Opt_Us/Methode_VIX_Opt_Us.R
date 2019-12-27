@@ -126,7 +126,7 @@ Stand_error
 ##############################
 ###   Table Test GMM   #######
 ##############################
-Table_RMSE(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N,N_val)
-
+Table_RMSE(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N,N_hat)
+#0.05664
 
 
