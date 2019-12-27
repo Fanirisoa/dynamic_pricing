@@ -27,6 +27,9 @@ source(paste(path,"/NGARCH_returns_loglike.R",sep=""))
 source(paste(path,"/Simulation_MC_Pricer_return_NGARCH.R",sep=""))
 source(paste(path,"/Function_Pricer_return_NGARCH.R",sep=""))
 source(paste(path,"/RMSES_return_NGARCH.R",sep=""))
+source(paste(path,"/Table_RMSE.R",sep=""))
+
+
 
 #####################################################
 ###               Volatility                  #######
