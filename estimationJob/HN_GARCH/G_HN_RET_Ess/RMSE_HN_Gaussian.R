@@ -124,7 +124,7 @@ Price_fft<-function(para_h,Data.ret,Data.N,N_hat){
   Data.contract.mod=data.frame(S=Data.contract$S,T=Data.contract$T,r=Data.contract$r,Pe=Data.contract$Pe,Per=Data.contract$Per)
   Data.class=unique(Data.contract.mod)
   
-  N=N_hat           # Number of subdivision in [0,a]
+  N=N_hat          # Number of subdivision in [0,a]
   alpha=2          # alpha is the parameter to make C square-integrable 
   delta= 0.25      # delta= a/N  where a is the up value of w (w in [0,a])
   lambda=(2*pi)/(N*delta)
