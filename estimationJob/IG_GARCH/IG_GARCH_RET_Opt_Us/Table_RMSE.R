@@ -109,7 +109,9 @@ Table_RMSE <- function(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N,N_hat ){
     }
     rmse<-sqrt((mean(error)))
     norm_rmse<-Norm_b*sqrt((mean(error)))
-    return(norm_rmse)
+    ##return(norm_rmse)
+    return(rmse)
+    
   }
   
   
