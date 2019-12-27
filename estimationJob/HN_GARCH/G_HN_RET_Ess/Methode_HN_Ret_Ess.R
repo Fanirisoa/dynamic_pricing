@@ -34,10 +34,6 @@ ts.plot(ts.vol_P , col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="
 grid()
 
 
-ts.vol_Q= shape_vol_Q (para_h, Data.returns) 
-ts.plot(ts.vol_Q, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
-grid()
-
 #####################################################
 ###              LOg values returns           #######
 #####################################################
