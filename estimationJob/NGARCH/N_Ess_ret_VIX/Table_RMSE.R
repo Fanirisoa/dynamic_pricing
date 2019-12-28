@@ -79,7 +79,7 @@ Ip <- function(Data.contract, type="C")
 Data.contract=Data.N
 para_h<-para_h1
 
-Pr<-Pricer(N_hat,para_h1,Data.N)
+Pr<-Pricer(N_hat,para_h1,Data.N)$P
 Veg<-Vega(Data.N=Data.N, type="C")
 
 
@@ -109,7 +109,7 @@ IVRMSE <- function(para_h,Data.ret,Data.contract)
   }
   rmse<-sqrt((mean(error)))
   norm_rmse<-Norm_b*sqrt((mean(error)))
-  return(norm_rmse)
+  return(rmse)
 }
 
 
