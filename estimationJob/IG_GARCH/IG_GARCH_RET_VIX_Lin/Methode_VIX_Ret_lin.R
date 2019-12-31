@@ -20,72 +20,14 @@ library(xts)
 setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used") 
 path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/IG_GARCH/IG_GARCH_RET_VIX_Lin"
 
-source(paste(path,"/parameters_settting.R",sep=""))
-source(paste(path,"/LoglikReturn.R",sep=""))
-source(paste(path,"/Loglik_VIX_Us.r",sep=""))
-source(paste(path,"/LogMixte_Us.r",sep=""))
-source(paste(path,"/RMSE_function_Us.R",sep=""))
-source(paste(path,"/Table_RMSE.R",sep=""))
+source(paste(path,"/parameters_set.R",sep=""))
+source(paste(path,"/LoglikReturn_lin.R",sep=""))
+source(paste(path,"/Loglik_VIX_lin.R",sep=""))
+source(paste(path,"/LogMixte_lin.R",sep=""))
+source(paste(path,"/RMSE_function_lin.R",sep=""))
 
 
 
-#####################################################
-###              Load Data source             #######
-#####################################################
-setwd("C:/Users/fanir/Desktop/Simulation_juin2018/Data")  
-
-#####################################################
-###             Clean the repertoir           #######
-#####################################################
-rm(list=ls())
-gc()
-library(compiler)
-enableJIT(1)
-enableJIT(3)
-library("fBasics")
-#library("pracma")
-library("numDeriv")
-library("nlme")
-library("Matrix")
-
-#####################################################
-###    Load both data.contract and data.ret   #######
-#####################################################
-load("DataPrice20092010.Rdata")
-
-#####################################################
-###                 Data set                  #######
-#####################################################
-#Data.N=Data.N2
-
-Data.N=Data.N2[-c(506,1462,1638,1645),]
-
-
-#####################################################
-###         Source function to use            #######
-#####################################################
-source("C:/Users/fanir/Desktop/Simulation_juin2018/IG-GARCH/IG_Esscher_returns_VIX/LoglikReturn.R")
-source("C:/Users/fanir/Desktop/Simulation_juin2018/IG-GARCH/IG_Esscher_returns_VIX/Loglik_VIX_lin.r")
-source("C:/Users/fanir/Desktop/Simulation_juin2018/IG-GARCH/IG_Esscher_returns_VIX/LogMixte.r")
-
-
-
-#####################################################
-###         Parameters of the model           #######
-#####################################################
-###   Initial parameter  ####
-##    w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6]; ro=para_h[7]
-
-para_h<-c(4.238940e-06 , 2.058376e-03  ,3.317425e+03 , 5.058743e-05, -8.281782e-03 , 1.2584e+02,  9.84599e-01 )  ## RMSE2$rmse :0.04354643  RMSE3$rmse : 0.05756848
-
-##   solution  ####
-para_h<-c(1.016620e-05,  2.041894e-03,  3.317506e+03,  4.501851e-05, -7.465712e-03,  1.258399e+02,  9.945561e-01) 
-
-para_h<-c(9.817584e-06 , 1.215612e-03 , 3.322312e+03 , 4.542147e-05, -7.531277e-03,  1.258401e+02,9.94599e-01 ) 
-
-para_h=c(1.206116e-06,  2.305289e-03,  3.317425e+03,  4.902499e-05, -7.972150e-03,  1.258400e+02,9.94599e-01 ) 
-
-para_h=c(2.234137e-06,  2.318400e-03,  3.317424e+03,  4.894911e-05, -7.955236e-03,  1.258397e+02,  9.978291e-01)
 
 #####################################################
 ###         Volatility and  Price             #######
