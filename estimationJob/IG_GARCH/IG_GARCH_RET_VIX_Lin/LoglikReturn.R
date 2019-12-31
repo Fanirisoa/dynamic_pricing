@@ -25,8 +25,8 @@ shape_h_P<-function(para_h,Data.ret){
   if (a<=0){drapeau=1}
   if (c<=0){drapeau=1}
   if (a<=0){drapeau=1}
-  if (g0<=0.8555){drapeau=1}
-  if (g0>=0.9686){drapeau=1}
+  # if (g0<=0.8555){drapeau=1}
+  # if (g0>=0.9686){drapeau=1}
   # if (nu<=0){drapeau=1}
   if (drapeau==0){
     resultat=h 
@@ -36,8 +36,6 @@ shape_h_P<-function(para_h,Data.ret){
   return(resultat)
 }
 
-
-
 ###########################################################
 #####  The conditional density of the daily return     ####
 ###########################################################
@@ -45,10 +43,7 @@ shape_h_P<-function(para_h,Data.ret){
 Retdensity <- function(para_h,Ret,h,r)
 {
   ## set up the parameters of the model : para_h
-  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6] 
-  
-  z1= (Ret-r-nu*h)/neta
-  z2=2*pi*((Ret-r-nu*h)^3)*neta^(-3)  
+  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6]; ro=para_h[7]
   
   theta0= (1/2)*((neta)^(-1) - (1/((nu^2)*(neta^3)))*(1 + ((nu^2)*(neta^3))/2)^2)
   neta0=neta/(1 - 2*neta*theta0)
@@ -57,10 +52,11 @@ Retdensity <- function(para_h,Ret,h,r)
   
   # The volatility under the physical probability
   nu0=(1/(neta0^2))*(((1-2*neta0)^(1/2))-1)
-  g0=  ( a0*(neta0^2) + b0+ (c0*(neta0^(-2))))   
-  g1=(a*(neta^2) +b +(c*(neta^(-2))))
   
-
+  z1= (Ret-r-nu*h)/neta
+  z2=2*pi*((Ret-r-nu*h)^3)*neta^(-3)  
+  PI=(neta0/neta)^(3/2)
+  
   drapeau=0
   if (w<=0){drapeau=1}
   if (b<=0){drapeau=1}
@@ -68,11 +64,8 @@ Retdensity <- function(para_h,Ret,h,r)
   if (c<=0){drapeau=1}
   if (neta>=0){drapeau=1}
   if (nu<=0){drapeau=1}
-  if (g1<=0.8555){drapeau=1}
-  if (g1>=0.9686){drapeau=1}
-  if (g0<=0.9786){drapeau=1}
-  if (g0>=0.9996){drapeau=1}
-  if (g1>=g0){drapeau=1}
+  if (ro<=0){drapeau=1}
+  if (ro>=1){drapeau=1}
   if (is.na(h)==TRUE){drapeau=1}else{
     if (h<=0){drapeau=1}
     if (abs(h)==Inf){drapeau=1}
@@ -88,7 +81,12 @@ Retdensity <- function(para_h,Ret,h,r)
     if (abs(z2)==Inf){drapeau=1}
     if (1/abs(z2)==Inf){drapeau=1}
   }
-  
+  if (is.na(PI)==TRUE){drapeau=1}else{
+    if (PI< 0.8223){drapeau=1}
+    if (abs(PI)==Inf){drapeau=1}
+    if (1/abs(PI)==Inf){drapeau=1}
+  }
+
   if (drapeau==0){
     resultat= ((h*abs(neta^(-3)))/(sqrt(2*pi*((Ret-r-nu*h)^3)*neta^(-3))))*exp((-1/2)*(sqrt((Ret-r-nu*h)/neta)- (h/(neta^2))*sqrt(neta/(Ret-r-nu*h)))^2)
   }else{
@@ -109,7 +107,7 @@ IGGARCH_likelihood_ret <- function(para_h, Data.returns) {
   Z1=length(rt)
   
   ## set up the parameters of the model : para_h
-  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6]  
+  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6]  ; ro=para_h[7]
   
   h = c()                                                        ####  A vector containing h from the model,
   h[1]=(w + a*(neta^4))/(1 - a*(neta^2) - b - (c*(neta^(-2))))   ####  The first value for h, Unconditional Variance

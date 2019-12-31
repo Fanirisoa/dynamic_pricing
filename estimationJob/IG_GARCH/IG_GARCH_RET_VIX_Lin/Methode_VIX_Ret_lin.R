@@ -21,9 +21,14 @@ setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")
 path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/IG_GARCH/IG_GARCH_RET_VIX_Lin"
 
 source(paste(path,"/parameters_set.R",sep=""))
-source(paste(path,"/LoglikReturn_lin.R",sep=""))
-source(paste(path,"/Loglik_VIX_lin.R",sep=""))
-source(paste(path,"/LogMixte_lin.R",sep=""))
+## source(paste(path,"/LoglikReturn_lin.R",sep=""))
+## source(paste(path,"/Loglik_VIX_lin.R",sep=""))
+## source(paste(path,"/LogMixte_lin.R",sep=""))
+
+source(paste(path,"/Log_Mixte_new_lin.R",sep=""))
+source(paste(path,"/Loglik_new_VIX_lin.R",sep=""))
+source(paste(path,"/LoglikReturn.R",sep=""))
+
 source(paste(path,"/RMSE_function_lin.R",sep=""))
 
 
