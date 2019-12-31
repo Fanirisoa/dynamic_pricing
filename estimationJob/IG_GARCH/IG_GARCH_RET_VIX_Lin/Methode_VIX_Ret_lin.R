@@ -27,8 +27,6 @@ source(paste(path,"/LogMixte_lin.R",sep=""))
 source(paste(path,"/RMSE_function_lin.R",sep=""))
 
 
-
-
 #####################################################
 ###         Volatility and  Price             #######
 #####################################################
@@ -63,9 +61,9 @@ Sol
 para_h1<-Sol$par
 
 # Standard error
-Hess=fdHess(para_h1,IGGARCH_likelihood_MixViX, Data.returns=Data.returns)
-S_e <- sqrt(diag(solve(nearPD(Hess$Hessian)$mat)))
-S_e
+# Hess=fdHess(para_h1,IGGARCH_likelihood_MixViX, Data.returns=Data.returns)
+# S_e <- sqrt(diag(solve(nearPD(Hess$Hessian)$mat)))
+# S_e
 
 ############################################################
 ####                        RMSE                          ##
