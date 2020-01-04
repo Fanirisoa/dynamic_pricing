@@ -71,7 +71,6 @@ para_h1<-Sol$par
 ############################################################
 ####                        RMSE                          ##
 ############################################################
-source("C:/Users/fanir/Desktop/Simulation_juin2018/IG-GARCH/IG_Esscher_returns_VIX/RMSE_function.R")
 start.time <- Sys.time()
 RMSE1=RMSE(para_h1,Data.ret,Data.N)
 end.time <- Sys.time()
