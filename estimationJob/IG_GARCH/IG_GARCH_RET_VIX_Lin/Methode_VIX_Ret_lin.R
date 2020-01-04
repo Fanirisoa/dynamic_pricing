@@ -31,6 +31,7 @@ source(paste(path,"/LoglikReturn.R",sep=""))
 
 source(paste(path,"/RMSE_function_lin.R",sep=""))
 
+para_h<-c( 6.4945e-06 , 5.4045e-01  ,3.6359e+02,  1.1031e-05, -5.0328e-03 , 1.9460e+02  ,9.974099e-01 )
 
 #####################################################
 ###         Volatility and  Price             #######
