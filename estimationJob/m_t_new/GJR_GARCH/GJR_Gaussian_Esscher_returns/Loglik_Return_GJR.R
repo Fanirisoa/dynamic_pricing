@@ -71,8 +71,11 @@ Retdensity <- function(para_h,Ret,h,r)
 
   # Parameter under the physical probability
   h0=(a0 )/(1 - b1 - a1- a2/2)   
+  
+  lambda = (lamda0/sqrt(h0)) - (1/2)
+  
   g1=b1+ a1+ a2/2
-  g0=b1+ (a1+a2*(pnorm(lamda0)))*(1+lamda0^2)+a2*lamda0*dnorm(lamda0) 
+  g0=b1+ (a1+a2*(pnorm(lamda)))*(1+lamda^2)+a2*lamda*dnorm(lamda) 
 
   drapeau=0
   if (a0<=0){drapeau=1}
@@ -105,7 +108,7 @@ Retdensity <- function(para_h,Ret,h,r)
   }
  
   if (drapeau==0){
-    resultat= (1/(sqrt(2*pi*h)))*exp((-1/2)*(((Ret-r-lamda0*h)^2)/h)) 
+    resultat= (1/(sqrt(2*pi*h)))*exp((-1/2)*(((Ret-r-lamda*h)^2)/h)) 
   }else{
     resultat=NA
   }
