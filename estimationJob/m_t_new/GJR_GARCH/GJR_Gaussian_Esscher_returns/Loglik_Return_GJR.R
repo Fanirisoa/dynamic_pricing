@@ -11,8 +11,8 @@ gsqrt <- function(para_h,ret,h,rt)
   h0=(a0 )/(1 - b1 - a1- a2/2)   
   g0=b1+ a1+ a2/2
 
-  mt=lamda0*((h)^(1/2))- (h)/2
-  g1=b1+ (a1+a2*(pnorm(lamda0)))*(1+lamda0^2)+a2*lamda0*dnorm(lamda0) 
+  mt = lamda0*((h)^(1/2))- (h)/2
+  g1 = b1+ (a1+a2*(pnorm(lamda0)))*(1+lamda0^2)+a2*lamda0*dnorm(lamda0) 
   
   drapeau=0
   if (a0<=0){drapeau=1}
