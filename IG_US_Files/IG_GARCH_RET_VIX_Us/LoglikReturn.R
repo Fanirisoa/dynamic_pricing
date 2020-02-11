@@ -16,7 +16,7 @@ shape_h_P<-function(para_h,Data.ret){
   for (i in 2:Z1){
     h[i]=w+b*h[i-1]+ c*(neta^(-1))*(ret[i-1]-rt[i-1]-(nu*h[i-1]))+((a*neta*(h[i-1])^2)/(ret[i-1]-rt[i-1]-(nu*h[i-1])))
   }
-  g0=(a*(neta^2) +b +(c*(neta^(-2))))
+  g0=(a*(neta^2) +b +(c*(neta^(-2))))                            ####  to have h[1] > 0           
   
   drapeau=0
   if (w<=0){drapeau=1}
@@ -47,8 +47,8 @@ Retdensity <- function(para_h,Ret,h,r)
   ## set up the parameters of the model : para_h
   w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6] 
   
-  z1= (Ret-r-nu*h)/neta
-  z2=2*pi*((Ret-r-nu*h)^3)*neta^(-3)  
+  z1= (Ret-r-nu*h)/neta                         ####  to have h > 0
+  z2=2*pi*((Ret-r-nu*h)^3)*neta^(-3)            ####  to have positive value inside sqrt()
  
   g0=(a*(neta^2) +b +(c*(neta^(-2))))
   
