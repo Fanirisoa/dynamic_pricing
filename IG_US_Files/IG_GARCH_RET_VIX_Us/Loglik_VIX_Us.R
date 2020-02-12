@@ -18,30 +18,55 @@ h<-function(para_h,Data.returns){
   # Without the parameter a: para_h<-c() set up the parameters of the model 
   w=para_h[1]; b=para_h[2];  c= para_h[3]; neta=para_h[4]; nu=para_h[5]  ; PI=para_h[6] ; ro=para_h[7]
   
-  
-  
-  
   # Variable of risk neutral
   neta0=cbrt(((PI/nu)^2)*(-1+ sqrt(1+(8*nu)/(27*PI)))) + cbrt(((PI/nu)^2)*(-1-sqrt(1+(8*nu)/(27*PI)))) 
   nu0= nu/PI
-  w0=w*PI; b0=b; a0=(a*neta)/(neta0*PI);  c0=(c*neta0*PI)/neta
   
-  g1=(a*(neta^2) +b +(c*(neta^(-2))))                                         ####  to have h[1] > 0  
+  # With the parameter a: 
+  # w0=w*PI; b0=b; a0=(a*neta)/(neta0*PI);  c0=(c*neta0*PI)/neta
+  
+  # Without the parameter a: 
+  w0=w*PI; b0=b;  c0=(c*neta0*PI)/neta
+  
+  # With the parameter a: 
+  # g0=(a*(neta^2) +b +(c*(neta^(-2))))         ####  to have h[1] > 0    
+  
+  # Without the parameter a: 
+  g0=(b +(c*(neta^(-2))))                       ####  to have h[1] > 0      
   
   
-  h_star = c()                                                                ####  A vector containing h from the model,
-  h_star[1]=(w0 + a0*(neta0^4))/(1 - a0*(neta0^2) - b0 - (c0*(neta0^(-2))))   ####  The first value for h,
+  # Without the parameter a: 
+  h_star = c()                                  ####  A vector containing h from the model,
+  h_star[1]=(w0)/(1 - b0 - (c0*(neta0^(-2))))   ####  The first value for h,
+  
+  # With the parameter a: 
+  # h_star = c()                                                                ####  A vector containing h from the model,
+  # h_star[1]=(w0 + a0*(neta0^4))/(1 - a0*(neta0^2) - b0 - (c0*(neta0^(-2))))   ####  The first value for h,
+  
   for (i in 2:Z1){
+    
+    # With the parameter a: 
     h_star[i]=w0+b0*h_star[i-1]+ c0*(neta0^(-1))*(ret[i-1]-rt[i-1]-(nu0*h_star[i-1]))+((a0*neta0*(h_star[i-1])^2)/(ret[i-1]-rt[i-1]-(nu0*h_star[i-1])))
+    
+    # Without the parameter a: 
+    h_star[i]=w0+b0*h_star[i-1]+ c0*(neta0^(-1))*(ret[i-1]-rt[i-1]-(nu0*h_star[i-1]))   
+    
   }
   
-  g0=(a0*(neta0^2)+ b0 +(c0*(neta0^(-2))))                                    ####  to have h*[1] > 0  
+  # With the parameter a:  
+  # g0=(a0*(neta0^2)+ b0 +(c0*(neta0^(-2))))                                    ####  to have h*[1] > 0  
+  
+  # Without the parameter a: 
+  g0=(b0 +(c0*(neta0^(-2))))                                    ####  to have h*[1] > 0  
   
   drapeau=0
   if (w<=0){drapeau=1}
   if (b<=0){drapeau=1}
-  if (a<=0){drapeau=1}
   if (c<=0){drapeau=1}
+  
+  # With the parameter a: 
+  # if (a<0){drapeau=1}
+  
   if (neta>=0){drapeau=1}
   if (PI<=1.0259e+00){drapeau=1}
   if (nu<=0){drapeau=1}
@@ -67,14 +92,24 @@ h<-function(para_h,Data.returns){
 VIX_Q<-function(para_h,h,Ret,r){
   tau = 250
   T_0=22
-  # para_h<-c() set up the parameters (physical probability) of the model 
-  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6] ; PI=para_h[7] ; ro=para_h[8]
+
+  # With the parameter a: para_h<-c() set up the parameters of the model 
+  # w=para_h[1]; b=para_h[2];  a=para_h[3];  c= para_h[4]; neta=para_h[5]; nu=para_h[6] ; PI=para_h[7] ; ro=para_h[8]
   
+  # Without the parameter a: para_h<-c() set up the parameters of the model 
+  w=para_h[1]; b=para_h[2];  c= para_h[3]; neta=para_h[4]; nu=para_h[5]  ; PI=para_h[6] ; ro=para_h[7]
+
   
   # Variable of risk neutral
   neta0=cbrt(((PI/nu)^2)*(-1+ sqrt(1+(8*nu)/(27*PI)))) + cbrt(((PI/nu)^2)*(-1-sqrt(1+(8*nu)/(27*PI)))) 
   nu0= nu/PI
-  w0=w*PI; b0=b; a0=(a*neta)/(neta0*PI);  c0=(c*neta0*PI)/neta
+  
+  # With the parameter a: 
+  # w0=w*PI; b0=b; a0=(a*neta)/(neta0*PI);  c0=(c*neta0*PI)/neta
+  
+  # Without the parameter a: 
+  w0=w*PI; b0=b;  c0=(c*neta0*PI)/neta
+  
   
   # z1= (Ret-r-nu*h)/neta
   # z2=2*pi*((Ret-r-nu*h)^3)*neta^(-3)
@@ -82,7 +117,10 @@ VIX_Q<-function(para_h,h,Ret,r){
   drapeau=0
   if (w<=0){drapeau=1}
   if (b<=0){drapeau=1}
-  if (a<=0){drapeau=1}
+
+  # With the parameter a: 
+  # if (a<0){drapeau=1}
+
   if (c<=0){drapeau=1}
   if (neta>=0){drapeau=1}
   if (PI<=1.2259e+00){drapeau=1}
@@ -113,9 +151,13 @@ VIX_Q<-function(para_h,h,Ret,r){
   # nu0= nu/PI
   # w0=w*PI; b0=b; a0=(a*neta)/(neta0*PI);  c0=(c*neta0*PI)/neta
   
+  # With the parameter a: 
+  # Psy = b0+ (c0/(neta0^2))+a0*(neta0^2)
+  # h_0=(w0 + a0*(neta0^4))/(1 - a0*(neta0^2) - b0 - (c0*(neta0^(-2))))
   
-  Psy = b0+ (c0/(neta0^2))+a0*(neta0^2)
-  h_0=(w0 + a0*(neta0^4))/(1 - a0*(neta0^2) - b0 - (c0*(neta0^(-2))))
+  # Without the parameter a: 
+  Psy = b0+ (c0/(neta0^2))
+  h_0=(w0 )/(1  - b0 - (c0*(neta0^(-2))))
   
   #  VIX 
   
@@ -136,8 +178,12 @@ IGGARCH_likelihood_vix <- function(para_h,Data.returns) {
   ret =Data.returns$ret     #### Returns : Data.BSJ$ret
   rt=Data.returns$rt/250  
   
-  # para_h<-c() set up the parameters (physical probability) of the model 
-  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6] ; PI=para_h[7] ; ro=para_h[8]
+  # With the parameter a: para_h<-c() set up the parameters of the model 
+  # w=para_h[1]; b=para_h[2];  a=para_h[3];  c= para_h[4]; neta=para_h[5]; nu=para_h[6] ; PI=para_h[7] ; ro=para_h[8]
+  
+  # Without the parameter a: para_h<-c() set up the parameters of the model 
+  w=para_h[1]; b=para_h[2];  c= para_h[3]; neta=para_h[4]; nu=para_h[5]  ; PI=para_h[6] ; ro=para_h[7]
+  
   
   VIX_Market<-Vix
   
