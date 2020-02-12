@@ -12,7 +12,7 @@ shape_h_P<-function(para_h,Data.ret){
   
   
   h = c()                                                        ####  A vector containing h from the model,
-  h[1]=(w + a*(neta^4))/(1 - a*(neta^2) - b - (c*(neta^(-2))))   ####  The first value for h,
+  h[1]=(w + a*(neta^4))/(1 - a*(neta^2) - b - (c*(neta^(-2))))   ####  The first value for h, // variance empirique
   for (i in 2:Z1){
     h[i]=w+b*h[i-1]+ c*(neta^(-1))*(ret[i-1]-rt[i-1]-(nu*h[i-1]))+((a*neta*(h[i-1])^2)/(ret[i-1]-rt[i-1]-(nu*h[i-1])))
   }

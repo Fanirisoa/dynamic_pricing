@@ -59,10 +59,10 @@ time.taken
 para_h1<-Sol$par
 para_h1=para_h
 
-# Standard error
-Hess=fdHess(para_h1,IGGARCH_likelihood_Mix,Data.ret=Data.ret, Data.N = Data.N, Data.returns=Data.returns)
-S_e <- sqrt(diag(solve(nearPD(Hess$Hessian)$mat)))
-S_e
+#Standard error
+#Hess=fdHess(para_h1,IGGARCH_likelihood_Mix,Data.ret=Data.ret, Data.N = Data.N, Data.returns=Data.returns)
+#S_e <- sqrt(diag(solve(nearPD(Hess$Hessian)$mat)))
+#S_e
 ############################################################
 ####                        RMSE                          ##
 ############################################################
@@ -72,7 +72,6 @@ end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
 
-RMSE1$rmse
 RMSE1$norm_rmse
 
 ##############################
@@ -80,23 +79,10 @@ RMSE1$norm_rmse
 ##############################
 Table_RMSE(para_h=para_h1,Data.ret=Data.ret, Data.N=Data.N,N_hat)
 
-
 #####################################################
 ###    Load both data.contract and data.ret   #######
 #####################################################
 load("DataPrice20112012.Rdata")
-
-############################################################
-####                       Compare VIX                    ##
-############################################################
-source("C:/Users/fanir/Desktop/Simulation_juin2018/IG-GARCH/IG_U_shape_returns_option/Comparing_VIX_oti_ret_Us.r")
-
-start.time <- Sys.time()
-C_VIX= Compa_vix(para_h1,Data.returns)
-end.time <- Sys.time()
-time.taken <- end.time - start.time
-time.taken
-
 
 ############################################################
 ####                        RMSE                          ##
@@ -108,25 +94,6 @@ end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
 
-RMSE2$rmse
 RMSE2$norm_rmse
-
-############################################################
-####               Hessian Matrix                         ##
-############################################################
-start.time <- Sys.time()
-Stand_error= Standard_errors(para_h1)
-end.time <- Sys.time()
-time.taken <- end.time - start.time
-time.taken
-Stand_error
-
-
-
-##############################
-###   Table Test GMM   #######
-##############################
-Table_RMSE(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N,N_hat)
-#0.05664
 
 

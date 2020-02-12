@@ -272,8 +272,7 @@ RMSE <- function(para_h,Data.ret,Data.N,N_hat)
     error[i] = ((P[i]  -  C[i])/V[i])^2
   }
   norm_rmse<-Norm_b*sqrt((mean(error)))
-  rmse<-sqrt((mean(error)))
-  return(list(rmse=rmse,P=P,error=error,norm_rmse=norm_rmse)) 
+  return(list(P=P,error=error,norm_rmse=norm_rmse)) 
 }
 
 

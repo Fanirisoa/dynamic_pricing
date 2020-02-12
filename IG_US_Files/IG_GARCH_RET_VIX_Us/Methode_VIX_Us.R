@@ -72,7 +72,6 @@ end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
 
-RMSE1$rmse
 RMSE1$norm_rmse
 
 ##############################
@@ -90,16 +89,6 @@ load("DataPrice20112012.Rdata")
 ####           out sample   RMSE                          ##
 ############################################################
 Data.N=Data.N2
-############################################################
-####                       Compare VIX                    ##
-############################################################
-source("C:/Users/fanir/Desktop/Simulation_juin2018/IG-GARCH/IG_U_shape_returns_VIX/Comparing_VIX_Us.R")
-
-start.time <- Sys.time()
-C_VIX= Compa_vix(para_h1,Data.returns)
-end.time <- Sys.time()
-time.taken <- end.time - start.time
-time.taken
 
 ############################################################
 ####                        RMSE                          ##
@@ -111,12 +100,4 @@ end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
 
-RMSE2$rmse
 RMSE2$norm_rmse
-
-##############################
-###   Table Test GMM   #######
-##############################
-Table_RMSE(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N,N_val)
-
-

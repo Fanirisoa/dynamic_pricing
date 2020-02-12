@@ -6,13 +6,19 @@ shape_h_P<-function(para_h,Data.ret){
   ret =Data.ret$ret         #### Returns : Data.BSJ$ret
   Z1=length(ret)
   
-  # para_h<-c() set up the parameters of the model 
-  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5]; nu=para_h[6] 
-  
+  # With the parameter a: para_h<-c() set up the parameters of the model 
+  # w=para_h[1]; b=para_h[2];  a=para_h[3];  c= para_h[4]; neta=para_h[5]; nu=para_h[6] 
+ 
+  # Without the parameter a: para_h<-c() set up the parameters of the model 
+  w=para_h[1]; b=para_h[2];  c= para_h[4]; neta=para_h[5]; nu=para_h[6]  
 
   
   h = c()                                                        ####  A vector containing h from the model,
   h[1]=(w + a*(neta^4))/(1 - a*(neta^2) - b - (c*(neta^(-2))))   ####  The first value for h,
+  
+  h = c()                                                        ####  A vector containing h from the model,
+  h[1]=(w + a*(neta^4))/(1 - a*(neta^2) - b - (c*(neta^(-2))))   ####  The first value for h,
+  
   for (i in 2:Z1){
     h[i]=w+b*h[i-1]+ c*(neta^(-1))*(ret[i-1]-rt[i-1]-(nu*h[i-1]))+((a*neta*(h[i-1])^2)/(ret[i-1]-rt[i-1]-(nu*h[i-1])))
   }
