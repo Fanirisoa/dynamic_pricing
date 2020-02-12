@@ -44,8 +44,6 @@ shape_h_P<-function(para_h,Data.ret){
   # With the parameter a: 
   # if (a<0){drapeau=1}
   
-  if (g0<=0.852){drapeau=1}
-  if (g0>=0.97666){drapeau=1}
   
   if (neta>=0){drapeau=1}
   if (drapeau==0){
@@ -89,9 +87,7 @@ Retdensity <- function(para_h,Ret,h,r)
   # With the parameter a: 
   # if (a<0){drapeau=1}
   
-  if (g0<=0.852){drapeau=1}
-  if (g0>=0.9777){drapeau=1}
-  
+
   if (neta>=0){drapeau=1}
   if (nu<=0){drapeau=1}
 
