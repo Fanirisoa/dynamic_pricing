@@ -45,6 +45,7 @@ time.taken
 ILK
 IGGARCH_likelihood_ret(para_h, Data.returns)
 IGGARCH_likelihood_vix(para_h,Data.returns)
+
 #####################################################
 ###      Optimization  of the model           #######
 #####################################################
