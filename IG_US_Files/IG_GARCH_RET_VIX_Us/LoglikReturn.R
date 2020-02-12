@@ -10,30 +10,44 @@ shape_h_P<-function(para_h,Data.ret){
   # w=para_h[1]; b=para_h[2];  a=para_h[3];  c= para_h[4]; neta=para_h[5]; nu=para_h[6] 
  
   # Without the parameter a: para_h<-c() set up the parameters of the model 
-  w=para_h[1]; b=para_h[2];  c= para_h[4]; neta=para_h[5]; nu=para_h[6]  
+  w=para_h[1]; b=para_h[2];  c= para_h[3]; neta=para_h[4]; nu=para_h[5] 
 
+  # With the parameter a: 
+  # h = c()                                                      ####  A vector containing h from the model,
+  # [1]=(w + a*(neta^4))/(1 - a*(neta^2) - b - (c*(neta^(-2))))  ####  The first value for h,
   
+  # Without the parameter a: 
   h = c()                                                        ####  A vector containing h from the model,
-  h[1]=(w + a*(neta^4))/(1 - a*(neta^2) - b - (c*(neta^(-2))))   ####  The first value for h,
-  
-  h = c()                                                        ####  A vector containing h from the model,
-  h[1]=(w + a*(neta^4))/(1 - a*(neta^2) - b - (c*(neta^(-2))))   ####  The first value for h,
+  h[1]=(w)/(1- b - (c*(neta^(-2))))                              ####  The first value for h,
   
   for (i in 2:Z1){
-    h[i]=w+b*h[i-1]+ c*(neta^(-1))*(ret[i-1]-rt[i-1]-(nu*h[i-1]))+((a*neta*(h[i-1])^2)/(ret[i-1]-rt[i-1]-(nu*h[i-1])))
+    
+    # With the parameter a: 
+    # h[i]=w+b*h[i-1]+ c*(neta^(-1))*(ret[i-1]-rt[i-1]-(nu*h[i-1]))+((a*neta*(h[i-1])^2)/(ret[i-1]-rt[i-1]-(nu*h[i-1])))
+    
+    # Without the parameter a: 
+    h[i]=w+b*h[i-1]+ c*(neta^(-1))*(ret[i-1]-rt[i-1]-(nu*h[i-1])) 
+    
   }
-  g0=(a*(neta^2) +b +(c*(neta^(-2))))                            ####  to have h[1] > 0           
+  
+  # With the parameter a: 
+  # g0=(a*(neta^2) +b +(c*(neta^(-2))))                            ####  to have h[1] > 0    
+  
+  # Without the parameter a: 
+  g0=(b +(c*(neta^(-2))))                                        ####  to have h[1] > 0      
   
   drapeau=0
   if (w<=0){drapeau=1}
   if (b<=0){drapeau=1}
-  if (a<=0){drapeau=1}
   if (c<=0){drapeau=1}
-  if (a<=0){drapeau=1}
+  
+  # With the parameter a: 
+  # if (a<0){drapeau=1}
+  
   if (g0<=0.852){drapeau=1}
   if (g0>=0.97666){drapeau=1}
+  
   if (neta>=0){drapeau=1}
-  # if (nu<=0){drapeau=1}
   if (drapeau==0){
     resultat=h 
   }else{
@@ -50,22 +64,34 @@ shape_h_P<-function(para_h,Data.ret){
 
 Retdensity <- function(para_h,Ret,h,r)
 {
-  ## set up the parameters of the model : para_h
-  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6] 
+  # With the parameter a: para_h<-c() set up the parameters of the model 
+  # w=para_h[1]; b=para_h[2];  a=para_h[3];  c= para_h[4]; neta=para_h[5]; nu=para_h[6] 
+  
+  # Without the parameter a: para_h<-c() set up the parameters of the model 
+  w=para_h[1]; b=para_h[2];  c= para_h[3]; neta=para_h[4]; nu=para_h[5] 
+  
   
   z1= (Ret-r-nu*h)/neta                         ####  to have h > 0
   z2=2*pi*((Ret-r-nu*h)^3)*neta^(-3)            ####  to have positive value inside sqrt()
  
-  g0=(a*(neta^2) +b +(c*(neta^(-2))))
+  # With the parameter a: 
+  # g0=(a*(neta^2) +b +(c*(neta^(-2))))         ####  to have h[1] > 0    
+  
+  # Without the parameter a: 
+  g0=(b +(c*(neta^(-2))))                       ####  to have h[1] > 0      
+  
   
   drapeau=0
   if (w<=0){drapeau=1}
   if (b<=0){drapeau=1}
-  if (a<=0){drapeau=1}
   if (c<=0){drapeau=1}
-  if (a<=0){drapeau=1}
+
+  # With the parameter a: 
+  # if (a<0){drapeau=1}
+  
   if (g0<=0.852){drapeau=1}
   if (g0>=0.9777){drapeau=1}
+  
   if (neta>=0){drapeau=1}
   if (nu<=0){drapeau=1}
 
@@ -104,15 +130,24 @@ IGGARCH_likelihood_ret <- function(para_h, Data.returns) {
   rt=Data.returns$rt/250        
   Z1=length(rt)
   
-  ## set up the parameters of the model : para_h
-  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6]  
+  # With the parameter a: para_h<-c() set up the parameters of the model 
+  # w=para_h[1]; b=para_h[2];  a=para_h[3];  c= para_h[4]; neta=para_h[5]; nu=para_h[6] 
   
-  h = c()                                                        ####  A vector containing h from the model,
-  h[1]=(w + a*(neta^4))/(1 - a*(neta^2) - b - (c*(neta^(-2))))   ####  The first value for h, Unconditional Variance
+  # Without the parameter a: para_h<-c() set up the parameters of the model 
+  w=para_h[1]; b=para_h[2];  c= para_h[3]; neta=para_h[4]; nu=para_h[5]   
+  
+  # Without the parameter a: 
+  h = c()                                                          ####  A vector containing h from the model,
+  h[1]=(w)/(1- b - (c*(neta^(-2))))                                ####  The first value for h,
+
+  # With the parameter a:   
+  # h = c()                                                        ####  A vector containing h from the model,
+  # h[1]=(w + a*(neta^4))/(1 - a*(neta^2) - b - (c*(neta^(-2))))   ####  The first value for h, Unconditional Variance
+  
+  
   dens = Retdensity(para_h,ret[1],h[1],rt[1])
-  
   for (i in 2:Z1){
-    h[i]=w+b*h[i-1]+ c*(neta^(-1))*(ret[i-1]-rt[i-1]-(nu*h[i-1]))+((a*neta*(h[i-1])^2)/(ret[i-1]-rt[i-1]-(nu*h[i-1])))
+    h[i]=w+b*h[i-1]+ c*(neta^(-1))*(ret[i-1]-rt[i-1]-(nu*h[i-1]))
     temp=Retdensity(para_h,ret[i],h[i],rt[i])
     dens<-dens+log(temp)
   }

@@ -12,8 +12,13 @@ h<-function(para_h,Data.returns){
   ret =Data.returns$ret         #### Returns : Data.BSJ$ret
   Z1=length(ret)
   
-  # para_h<-c() set up the parameters (physical probability) of the model 
-  w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6]  ; PI=para_h[7] ; ro=para_h[8]
+  # With the parameter a: para_h<-c() set up the parameters of the model 
+  # w=para_h[1]; b=para_h[2];  a=para_h[3];  c= para_h[4]; neta=para_h[5]; nu=para_h[6] ; PI=para_h[7] ; ro=para_h[8]
+  
+  # Without the parameter a: para_h<-c() set up the parameters of the model 
+  w=para_h[1]; b=para_h[2];  c= para_h[3]; neta=para_h[4]; nu=para_h[5]  ; PI=para_h[6] ; ro=para_h[7]
+  
+  
   
   
   # Variable of risk neutral
