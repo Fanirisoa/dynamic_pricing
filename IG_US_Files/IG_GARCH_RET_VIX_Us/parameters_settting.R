@@ -9,14 +9,19 @@ load("DataPrice20092010.Rdata")
 #Data.N=Data.N2
 
 Data.N=Data.N2[-c(506,1462,1638,1645),]
-N_val = 2^17
+N_val = 2^5
 #####################################################
 ###         Parameters of the model           #######
 #####################################################
-#   w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5] ; nu=para_h[6] ; PI=para_h[7] ; ro=para_h[8]
+# With the parameter a: para_h<-c() set up the parameters of the model 
+# w=para_h[1]; b=para_h[2];  a=para_h[3];  c= para_h[4]; neta=para_h[5]; nu=para_h[6] ; PI=para_h[7] ; ro=para_h[8]
+
+# Without the parameter a: para_h<-c() set up the parameters of the model 
+# w=para_h[1]; b=para_h[2]; c= para_h[3]; neta=para_h[4]; nu=para_h[5]  ; PI=para_h[6] ; ro=para_h[7]
 
 ###   Initial parameter  ####
+# para_h<-c(3.238940e-06 , 2.058376e-03 , 5.058743e-05, -8.281782e-03 , 1.2584e+02, 1.632707e+00 ,  9.83599e-01 ) 
+# para_h<-c(3.238940e-06 , 2.058376e-03 , 5.058743e-05, -8.281782e-03 , 1.2584e+02, 1.1003707e+00,  9.83599e-01 )   
 
-para_h<-c(3.238940e-06 , 2.058376e-03  ,3.317425e+03 , 5.058743e-05, -8.281782e-03 , 1.2584e+02, 1.632707e+00 ,  9.83599e-01 ) 
 
-para_h<-c(3.238940e-06 , 2.058376e-03  ,3.317425e+03 , 5.058743e-05, -8.281782e-03 , 1.2584e+02, 1.1003707e+00 ,  9.83599e-01 )   
+para_h<-c(3.238940e-06 , 2.058376e-03 , 5.058743e-05, -8.281782e-03 , 160, 1.1003707e+00,  9.83599e-01 )   
