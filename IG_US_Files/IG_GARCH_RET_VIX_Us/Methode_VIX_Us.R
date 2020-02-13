@@ -31,8 +31,13 @@ source(paste(path,"/parameters_settting.R",sep=""))
 #####################################################
 
 ts.vol_P= shape_h_P(para_h, Data.returns) 
-ts.plot(ts.vol_P, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
+ts.plot(ts.vol_P, col = "steelblue", main = "IG Garch Model under P",xlab="2009",ylab="Volatility")
 grid()
+
+ts.vol_Q= h(para_h, Data.returns) 
+ts.plot(ts.vol_Q, col = "steelblue", main = "IG Garch Model under Q",xlab="2009",ylab="Volatility")
+grid()
+
 
 #####################################################
 ###              LOg values                   #######
@@ -58,46 +63,3 @@ time.taken
 Sol
 para_h1<-Sol$par
 
-# Standard error
-# Hess=fdHess(para_h1,IGGARCH_likelihood_MixViX, Data.returns=Data.returns)
-# S_e <- sqrt(diag(solve(nearPD(Hess$Hessian)$mat)))
-
-
-############################################################
-####                        RMSE                          ##
-############################################################
-start.time <- Sys.time()
-RMSE1=RMSE(para_h1,Data.ret,Data.N,N_val)
-end.time <- Sys.time()
-time.taken <- end.time - start.time
-time.taken
-
-RMSE1$norm_rmse
-
-##############################
-###   Table Test GMM   #######
-##############################
-Table_RMSE(para_h=para_h1,Data.ret=Data.ret, Data.N=Data.N,N_val)
-
-
-#####################################################
-###    Load both data.contract and data.ret   #######
-#####################################################
-load("DataPrice20112012.Rdata")
-
-############################################################
-####           out sample   RMSE                          ##
-############################################################
-Data.N=Data.N2
-
-############################################################
-####                        RMSE                          ##
-############################################################
-Data.N=Data.N2
-start.time <- Sys.time()
-RMSE2=RMSE(para_h1,Data.ret,Data.N,N_val)
-end.time <- Sys.time()
-time.taken <- end.time - start.time
-time.taken
-
-RMSE2$norm_rmse

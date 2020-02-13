@@ -28,11 +28,32 @@ N_val = 2^5
 
 # para_h<-c(3.238940e-04 , 2.058376e-03 , 5.058743e-05, -8.281782e-03 , 100, 1.1003707e+00,  9.83599e-01 )    OK
 
-para_h<-c(3.438940e-04 , 2.058376e-02 , 5.058743e-05, -8.281782e-03 , 100, 1.0003707e+00,  9.73599e-01 )    
+# para_h<-c(3.438940e-04 , 2.058376e-02 , 5.058743e-05, -8.281782e-03 , 100, 0.903707e+00,  9.73599e-01 )    
+# IGGARCH_likelihood_ret(para_h, Data.returns) ; 6592.562
+# IGGARCH_likelihood_vix(para_h,Data.returns) ;  NA 
 
 
+para_h<-c(3.438940e-04 , 2.058376e-02 , 5.058743e-05, -8.281782e-03 , 100, 1.903707e+00,  9.73599e-01 )    
+# IGGARCH_likelihood_ret(para_h, Data.returns) ; 6592.562
+# IGGARCH_likelihood_vix(para_h,Data.returns) ;  -18082.78
+# ILK : 11490.22
 
 
-
-
-
+# Optimisation
+# Time difference of 26.6229 secs
+# > Sol
+# $par
+# [1]  1.895750e-04  1.268234e-02  6.777842e-05 -9.181324e-03  1.000047e+02  1.885036e+00  9.981974e-01
+# 
+# $value
+# [1] 7854.24
+# 
+# $counts
+# function gradient 
+# 1151       NA 
+# 
+# $convergence
+# [1] 0
+# 
+# $message
+# NULL
