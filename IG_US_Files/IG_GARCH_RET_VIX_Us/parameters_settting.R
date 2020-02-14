@@ -33,7 +33,7 @@ N_val = 2^5
 # IGGARCH_likelihood_vix(para_h,Data.returns) ;  NA 
 
 
-para_h<-c(3.438940e-04 , 2.058376e-02 , 5.058743e-05, -8.281782e-03 , 100, 1.903707e+00,  9.73599e-01 )    
+# para_h<-c(3.438940e-04 , 2.058376e-02 , 5.058743e-05, -8.281782e-03 , 100, 1.903707e+00,  9.73599e-01 )    
 # IGGARCH_likelihood_ret(para_h, Data.returns) ; 6592.562
 # IGGARCH_likelihood_vix(para_h,Data.returns) ;  -18082.78
 # ILK : 11490.22
@@ -57,3 +57,7 @@ para_h<-c(3.438940e-04 , 2.058376e-02 , 5.058743e-05, -8.281782e-03 , 100, 1.903
 # 
 # $message
 # NULL
+
+
+para_h<-c(3.438940e-04 , 2.058376e-02 , 5.058743e-05, -8.281782e-03 , 125, 1.303707e+00,  9.73599e-01 )    
+
