@@ -42,10 +42,7 @@ h<-function(para_h,Data.returns){
   if (nu<=0){drapeau=1}
   if (ro<=0){drapeau=1}
   if (ro>=1){drapeau=1}
-  if (g0<=0.98){drapeau=1}
-  if (g0>=0.99996){drapeau=1}
-  if (g1<=0.7555){drapeau=1}
-  if (g1>=0.97899){drapeau=1}
+
   
   if (drapeau==0){
     resultat=h_star
@@ -80,7 +77,7 @@ VIX_Q<-function(para_h,h,Ret,r){
   if (a<=0){drapeau=1}
   if (c<=0){drapeau=1}
   if (neta>=0){drapeau=1}
-  if (PI<=1.2259e+00){drapeau=1}
+  if (PI<=1.0259e+00){drapeau=1}
   if (nu<=0){drapeau=1}
   if (ro<=0){drapeau=1}
   if (ro>=1){drapeau=1}
