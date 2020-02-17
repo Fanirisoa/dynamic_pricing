@@ -33,6 +33,10 @@ ts.vol_P= shape_h_P(para_h, Data.returns)
 ts.plot(ts.vol_P, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
 grid()
 
+ts.vol_Q= h(para_h, Data.returns) 
+ts.plot(ts.vol_Q, col = "steelblue", main = "IG Garch Model under Q",xlab="2009",ylab="Volatility")
+grid()
+
 #####################################################
 ###              LOg values                   #######
 #####################################################
@@ -44,6 +48,8 @@ time.taken
 ILK
 IGGARCH_likelihood_ret(para_h, Data.returns)
 IGGARCH_likelihood_vix(para_h,Data.returns)
+
+
 #####################################################
 ###      Optimization  of the model           #######
 #####################################################
