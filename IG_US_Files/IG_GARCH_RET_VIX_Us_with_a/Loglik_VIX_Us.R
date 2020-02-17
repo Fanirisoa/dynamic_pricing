@@ -23,7 +23,7 @@ h<-function(para_h,Data.returns){
   
   g1=(a*(neta^2) +b +(c*(neta^(-2))))
   
-  
+
   h_star = c()                                                                ####  A vector containing h from the model,
   h_star[1]=(w0 + a0*(neta0^4))/(1 - a0*(neta0^2) - b0 - (c0*(neta0^(-2))))   ####  The first value for h,
   for (i in 2:Z1){
@@ -38,14 +38,11 @@ h<-function(para_h,Data.returns){
   if (a<=0){drapeau=1}
   if (c<=0){drapeau=1}
   if (neta>=0){drapeau=1}
-  if (PI<=1.0259e+00){drapeau=1}
+  if (PI<=1.4259e+00){drapeau=1}
   if (nu<=0){drapeau=1}
   if (ro<=0){drapeau=1}
   if (ro>=1){drapeau=1}
-  if (g0<=0.98){drapeau=1}
-  if (g0>=0.99996){drapeau=1}
-  if (g1<=0.7555){drapeau=1}
-  if (g1>=0.97899){drapeau=1}
+
   
   if (drapeau==0){
     resultat=h_star
@@ -80,7 +77,7 @@ VIX_Q<-function(para_h,h,Ret,r){
   if (a<=0){drapeau=1}
   if (c<=0){drapeau=1}
   if (neta>=0){drapeau=1}
-  if (PI<=1.2259e+00){drapeau=1}
+  if (PI<=1.4259e+00){drapeau=1}
   if (nu<=0){drapeau=1}
   if (ro<=0){drapeau=1}
   if (ro>=1){drapeau=1}

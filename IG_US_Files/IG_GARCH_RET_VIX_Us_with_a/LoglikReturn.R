@@ -9,8 +9,6 @@ shape_h_P<-function(para_h,Data.ret){
   # para_h<-c() set up the parameters of the model 
   w=para_h[1]; b=para_h[2]; a=para_h[3];  c= para_h[4]; neta=para_h[5]; nu=para_h[6] 
   
-
-  
   h = c()                                                        ####  A vector containing h from the model,
   h[1]=(w + a*(neta^4))/(1 - a*(neta^2) - b - (c*(neta^(-2))))   ####  The first value for h,
   for (i in 2:Z1){
@@ -24,8 +22,6 @@ shape_h_P<-function(para_h,Data.ret){
   if (a<=0){drapeau=1}
   if (c<=0){drapeau=1}
   if (a<=0){drapeau=1}
-  if (g0<=0.852){drapeau=1}
-  if (g0>=0.97666){drapeau=1}
   if (neta>=0){drapeau=1}
   # if (nu<=0){drapeau=1}
   if (drapeau==0){
@@ -58,8 +54,6 @@ Retdensity <- function(para_h,Ret,h,r)
   if (a<=0){drapeau=1}
   if (c<=0){drapeau=1}
   if (a<=0){drapeau=1}
-  if (g0<=0.852){drapeau=1}
-  if (g0>=0.9777){drapeau=1}
   if (neta>=0){drapeau=1}
   if (nu<=0){drapeau=1}
 
