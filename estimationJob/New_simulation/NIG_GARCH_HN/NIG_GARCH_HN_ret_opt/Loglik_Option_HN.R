@@ -314,6 +314,7 @@ Heston_likelihood_opti <- function(para_h,Data.ret, Data.N) {
   C=Data.N$C       ####  Call dividende
   
   P<-Price_fft(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N)
+  P<-Pricer(N,para_h1,para_distribution1,Data.N)$P
   V<-Vega(Data.N=Data.N, type="C")
   
   error <- rep(NA, length(C))
