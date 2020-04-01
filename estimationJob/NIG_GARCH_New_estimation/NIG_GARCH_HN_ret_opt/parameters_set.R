@@ -11,22 +11,30 @@ load("DataPrice20092010.Rdata")
 Data.N=Data.N2[-c(506,1462,1638,1645),]
 
 #####################################################
+###      Parameters of the silulation         #######
+#####################################################
+N= 100
+
+#####################################################
 ###         Parameters of the model           #######
 #####################################################
-##a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] 
+##a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]   
 
-###   Initial parameter  ####
-para_h<-c(6.094e-07, 1.240e-01, 2.314e-02, 8.504e-01, 6.025e-02)  ## RMSE2$rmse : 0.1451813  RMSE3$rmse : 0.05582874
+###   Initial parameter  ####``
+###   Initial parameter  para_h<-c() set up the parameters of the volatility  ####
 
-para_h<-c(6.094e-11, 1.240e-01, 2.314e-02, 4.011e-01, 3.025e-02)  ## RMSE1$rmse : 0.06668887  RMSE3$rmse : 0.07391531
+para_h<-c(1.180234e-12, 1.547729e-06, 4.550518e+02, 6.500111e-01 ,8.596182e+00)
 
-para_h<-c(6.094e-11, 1.240e-01, 2.314e-02, 4.011e-01, 2.025e-02)  ## RMSE1$rmse : 0.06295168  RMSE3$rmse : 0.08068807
+#para_h=c(1.854299e-04, 3.345238e-04 ,0.142406e+01 ,1.124012e-03 ,6.573458e-01)
+#para_h<-c( 5.881028e-07,  1.506407e-06,  4.550518e+02,  6.500114e-01,  8.596182e+00)
 
-para_h<-c(6.094e-11, 1.240e-01, 2.314e-02, 4.011e-01, 4.025e-02)  ## RMSE1$rmse : 0.06295168  RMSE3$rmse : 0.08068807
+###   Initial parameter  para_distribution<-c() set up the parameters of the distribution   ####
+### alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4];
+
+para_distribution<-c(5, 1.397610234,   0.007012446,  -0.286886696)
+#para_distribution<-c(2.237095e+01, -1.047143e+01,  7.135328e-03,  8.048087e-04)
 
 
-para_h<-c(5.987174e-08,  1.240911e-01,  2.314265e-02,  8.504269e-01,  3.784983e-02)
+para_M = c(para_distribution,para_h)
 
-para_h<-c(6.094e-11, 1.240e-01, 2.314e-02, 4.011e-01, 3.025e-02)  ## RMSE1$rmse : 0.06295168  RMSE3$rmse : 0.05582874
 
-para_h <-c(1.445949e-05,  3.107684e-01,  1.055816e-01,  6.311811e-01,  4.208730e-03)

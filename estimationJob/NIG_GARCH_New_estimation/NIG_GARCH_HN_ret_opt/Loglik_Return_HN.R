@@ -70,7 +70,7 @@ NIG_likelihood_dens_QML <- function(para_M,Data.returns) {
   for (i in 2:Z1){
     h[i]=a0 +b1*h[i-1]+a1*(((ret[i-1]-rt[i-1]-lamda0*(h[i-1]))/(sqrt(h[i-1]))) - gama*(sqrt(h[i-1])))^2
     z[i]=(ret[i]-rt[i]-lamda0*(h[i]))/sqrt(h[i])
-    temp=densite(para_distribution,para_h,z[i])
+    temp=densite(para_M,z[i])
     dens<-dens+log(temp)
   }
   

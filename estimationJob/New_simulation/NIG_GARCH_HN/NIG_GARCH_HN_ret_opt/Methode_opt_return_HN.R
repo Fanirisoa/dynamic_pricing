@@ -130,7 +130,6 @@ S_e2
 #####################################################
 source("C:/Users/fanir/Desktop/Simulation_juin2018/NIG_GARCH_HN/NIG_GARCH_HN_ret_opt/Fun_Pricer_opt_ret_HN.r")
 source("C:/Users/fanir/Desktop/Simulation_juin2018/NIG_GARCH_HN/NIG_GARCH_HN_ret_opt/MCSim_opt_ret_HN.r")
-source("C:/Users/fanir/Desktop/Simulation_juin2018/NIG_GARCH_HN/NIG_GARCH_HN_ret_opt/MCSim_opt_ret_HN.r")
 
 N= 2
 

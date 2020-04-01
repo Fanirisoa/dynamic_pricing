@@ -64,7 +64,7 @@ Sim<-function(para_h,para_distribution,ht){
 ##        Generate return Y_t=log(St)-log(St-1) from time 1 to T        ##
 ##########################################################################
 
-Matrice_ret<-function(x){  
+Matrice_ret<-function(x,para_h1,para_distribution1){  
   # para_h<-c() set up the parameters of the model 
   
   a0=para_h1[1]; a1=para_h1[2]; gama=para_h1[3];  b1= para_h1[4] ;  lamda0= para_h1[4] 
