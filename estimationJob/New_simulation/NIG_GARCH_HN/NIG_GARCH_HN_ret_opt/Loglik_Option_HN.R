@@ -109,7 +109,7 @@ RMSE <- function(para_h,Data.ret,Data.N)
 ###########################################################
 #####       The Log-likeelihood over all Option        ####
 ###########################################################
-Heston_likelihood_opti <- function(para_M,Data.ret, Data.N) {
+Heston_likelihood_opti <- function(N,para_M,Data.ret, Data.N) {
   
   # alpha=para_distribution[1], beta=para_distribution[2], delta=para_distribution[3], mu=para_distribution[4]
   # a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] 
