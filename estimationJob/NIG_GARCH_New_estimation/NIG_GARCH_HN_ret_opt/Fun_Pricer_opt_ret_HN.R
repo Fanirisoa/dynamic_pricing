@@ -8,6 +8,7 @@ Pricer<-function(N,para_h1,para_distribution1,Data.N){
   # para_h<-c() set up the parameters of the model 
   
   a0=para_h1[1]; a1=para_h1[2]; gama=para_h1[3];  b1= para_h1[4] ;  lamda0= para_h1[4] 
+  alpha=para_distribution1[1] ; beta=para_distribution1[2] ; delta=para_distribution1[3] ; mu=para_distribution1[4]
   
   # Parameter under the physical probability
   lamda0star= -(1/2)
@@ -27,7 +28,7 @@ Pricer<-function(N,para_h1,para_distribution1,Data.N){
   ######################################     
   ##   Step 1 : Sampling the returns  ## 
   ######################################  
-
+  
   Y_t= lapply(1:Z1, function(x) Matrice_ret(x,para_h1,para_distribution1))
   
   #####################################################     

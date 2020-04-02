@@ -68,6 +68,7 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
   # para_h<-c() set up the parameters of the model 
   
   a0=para_h1[1]; a1=para_h1[2]; gama=para_h1[3];  b1= para_h1[4] ;  lamda0= para_h1[4] 
+  alpha=para_distribution1[1] ; beta=para_distribution1[2] ; delta=para_distribution1[3] ; mu=para_distribution1[4]
   
   # Parameter under the physical probability
   lamda0star= -(1/2)
@@ -87,6 +88,11 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
   g1= b1 + a1*(gamastar^2)           ####  The percistence
   h0=(a0 + a1)/(1 - g1)              ####  The first value for h, Unconditional Variance
   
+  drapeau=0
+  if (abs(alpha) < abs(beta)){drapeau=1}
+  
+  if (drapeau==0){
+    
   base_sim=matrix(0,T[x],N)  
   for(j in 1:N)  
   {
@@ -109,6 +115,11 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
       base_sim[i,j]= r[x]-((ht[i])/2)+(vol[i])*Inv[i]
     }
   }
+  
+  }else{
+    resultat=NA
+  }
+  
   return(base_sim)  
 }
 
