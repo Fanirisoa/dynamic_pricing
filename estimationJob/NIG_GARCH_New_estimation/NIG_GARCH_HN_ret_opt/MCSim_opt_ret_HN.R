@@ -55,8 +55,17 @@ Sim<-function(para_h,para_distribution,ht){
   # change in parameter under RN distribution
   beta0=beta + sqrt(ht)*theta
   
+  drapeau=0
+  if (abs(alpha) < abs(beta)){drapeau=1}
+  
+  if (drapeau==0){
+    
   result=rgh(1,alpha,beta0,delta,mu,-1/2)[1]
   
+  }else{
+    result=NA
+  }
+
   return(result)
 }
 
@@ -88,15 +97,10 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
   g1= b1 + a1*(gamastar^2)           ####  The percistence
   h0=(a0 + a1)/(1 - g1)              ####  The first value for h, Unconditional Variance
   
-  drapeau=0
-  if (abs(alpha) < abs(beta)){drapeau=1}
-  
-  if (drapeau==0){
-    
+
   base_sim=matrix(0,T[x],N)  
   for(j in 1:N)  
   {
-    
     vol= c()                                         ####  Collecte vector of vol
     ht= c()                                           ####  Collecte vector of ht
     Inv= c()                                         ####  Collecte vector of innovation
@@ -115,11 +119,7 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
       base_sim[i,j]= r[x]-((ht[i])/2)+(vol[i])*Inv[i]
     }
   }
-  
-  }else{
-    resultat=NA
-  }
-  
+
   return(base_sim)  
 }
 
