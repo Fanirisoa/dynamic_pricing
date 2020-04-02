@@ -60,7 +60,19 @@ end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
 
-para_h1<-Sol$par
+para_M1<-Sol$par
 
-para_h1<-para_h
+
+
+############################################################
+####                        RMSE                          ##
+############################################################
+start.time <- Sys.time()
+RMSE2=RMSEsim(N,para_M1,Data.ret,Data.N) 
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+
+RMSE2$rmse
+RMSE2$norm_rmse
 

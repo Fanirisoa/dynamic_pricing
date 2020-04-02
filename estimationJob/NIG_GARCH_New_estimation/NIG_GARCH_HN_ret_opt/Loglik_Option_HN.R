@@ -184,6 +184,39 @@ RMSE <- function(para_h,Data.ret,Data.N)
   return(rmse)
 }
 
+
+############################################################
+#### Function that returns Root Mean Squared Error        ##
+############################################################
+
+
+RMSEsim <- function(N,para_M,Data.ret, Data.N)
+{  
+  C=Data.N$C       ####  Call price
+  
+  ## set up the parameters of the model : para_M = c(para_distribution,para_h) 
+  alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]                   ## para_distribution<-c() set up the parameters of NIG
+  a0=para_M[5]; a1=para_M[6]; gama=para_M[7];  b1= para_M[8] ;  lamda0= para_M[9]     ## para_h<-c() set up the parameters of the model
+  
+  para_h1 = c(a0,a1,gama,b1,lamda0)
+  para_distribution1= c(alpha,beta,delta,mu)
+  
+  P<-Pricer(N,para_h1,para_distribution1,Data.N)$P
+  V<-Vega(Data.N=Data.N, type="C")
+  
+  Norm_b= (1/sqrt((1/length(C))*sum((C)^2)))*100
+  
+  error <- rep(NA, length(C))
+  for (i in 1:length(C)){
+    error[i] = ((P[i]  -  C[i])/V[i])^2
+  }
+  norm_rmse<-Norm_b*sqrt((mean(error)))
+  rmse<-sqrt((mean(error)))
+  return(list(rmse=rmse,P=P,error=error,norm_rmse=norm_rmse)) 
+}
+
+
+
 ###########################################################
 #####       The Log-likeelihood over all Option        ####
 ###########################################################
@@ -198,15 +231,13 @@ Heston_likelihood_opti <- function(N,para_M,Data.ret, Data.N) {
   
   para_h1 = c(a0,a1,gama,b1,lamda0)
   para_distribution1= c(alpha,beta,delta,mu)
-  
-  print("OK_2")
+
   
   C=Data.N$C       ####  Call dividende
   
   P<-Pricer(N,para_h1,para_distribution1,Data.N)$P
   V<-Vega(Data.N=Data.N, type="C")
   
-  print("OK_3")
   
   error <- rep(NA, length(C))
   for (i in 1:length(C)){
