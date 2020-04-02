@@ -45,9 +45,10 @@ ILK=Heston_likelihood_Mix(para_M,Data.ret, Data.N,Data.returns,N)
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
+ILK
 
-NIG_likelihood_dens_QML(para_M, Data.returns)
-Heston_likelihood_opti(N,para_M, Data.ret, Data.N)
+# NIG_likelihood_dens_QML(para_M, Data.returns)
+# Heston_likelihood_opti(N,para_M, Data.ret, Data.N)
 
 
 
