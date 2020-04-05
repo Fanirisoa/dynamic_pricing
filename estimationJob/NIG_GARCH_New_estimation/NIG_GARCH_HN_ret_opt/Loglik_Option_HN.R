@@ -236,6 +236,7 @@ Heston_likelihood_opti <- function(N,para_M,Data.ret, Data.N) {
   C=Data.N$C       ####  Call dividende
   
   print("ok_1")
+  
   P<-Pricer(N,para_h1,para_distribution1,Data.N)$P
   V<-Vega(Data.N=Data.N, type="C")
   
