@@ -240,8 +240,7 @@ Heston_likelihood_opti <- function(N,para_M,Data.ret, Data.N) {
   P<-Pricer(N,para_h1,para_distribution1,Data.N)$P
   V<-Vega(Data.N=Data.N, type="C")
   
-  print(P)
-  print("ok_2")
+
   
   error <- rep(NA, length(C))
   for (i in 1:length(C)){
@@ -249,17 +248,8 @@ Heston_likelihood_opti <- function(N,para_M,Data.ret, Data.N) {
   }
   sigma <- mean(error^2)
   
-  print(error)
-  print("ok_3")
-  print(sigma)
-  print(log(sigma))
-  print( (-1/2)*(sum((error^2)/sigma)))
   
   log_like_NIG <- (-1/2)*(sum(log(sigma)+((error^2)/sigma)))
-  
-  print("ok_4")
-  print("log_like_Nig :")
-  print(log_like_NIG)
   
   return(log_like_NIG)  
   
