@@ -233,12 +233,18 @@ Heston_likelihood_opti <- function(N,para_M,Data.ret, Data.N) {
   para_distribution1= c(alpha,beta,delta,mu)
 
   
+  drapeau=0
+  if (abs(alpha)<= abs(beta)){drapeau=1}
+  if (alpha<=0){drapeau=1}
+  if (alpha==Inf){drapeau=1}
+  if (delta<=0){drapeau=1}
+  
+  if (drapeau==0){
+    
   C=Data.N$C       ####  Call dividende
   
-
   P<-Pricer(N,para_h1,para_distribution1,Data.N)$P
   V<-Vega(Data.N=Data.N, type="C")
-  
 
   
   error <- rep(NA, length(C))
@@ -247,9 +253,10 @@ Heston_likelihood_opti <- function(N,para_M,Data.ret, Data.N) {
   }
   sigma <- mean(error^2)
   
-  
   log_like_NIG <- (-1/2)*(sum(log(sigma)+((error^2)/sigma)))
-  
+  }else{
+    log_like_NIG = NA
+  }
   return(log_like_NIG)  
   
 }
