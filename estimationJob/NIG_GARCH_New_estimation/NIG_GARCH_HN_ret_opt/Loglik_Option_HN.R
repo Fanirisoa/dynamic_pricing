@@ -252,7 +252,14 @@ Heston_likelihood_opti <- function(N,para_M,Data.ret, Data.N) {
   print(error)
   print("ok_3")
   print(sigma)
-  log_like <- -1/2*sum(log(sigma)+((error^2)/sigma))
+  print(log(sigma))
+  print( (-1/2)*(sum((error^2)/sigma)))
+  
+  log_like <- (-1/2)*(sum(log(sigma)+((error^2)/sigma)))
+  
+  
+  print(log_like)
+  
   return(log_like)  
   
 }
