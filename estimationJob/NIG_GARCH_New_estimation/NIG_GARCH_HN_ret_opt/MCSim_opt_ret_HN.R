@@ -57,15 +57,13 @@ Sim<-function(para_h,para_distribution,ht){
   
   print("ok")
 
-  drapeau=0
-  if (abs(alpha) <= abs(beta0)){drapeau=1}
-
-  if (drapeau==0){
+  if (abs(alpha) <= abs(beta0)){
 
     result=rgh(1,alpha,beta0,delta,mu,-1/2)[1]
 
   }else{
-    result=rgh(1,alpha,beta0,delta,mu,-1/2)[1]
+    
+    result= NA
   }
     
   return(result)
