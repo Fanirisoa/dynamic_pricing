@@ -56,10 +56,16 @@ Sim<-function(para_h,para_distribution,ht){
   beta0=beta + sqrt(ht)*theta
   
   print("ok")
+  print("alpha")
   print(alpha)
+  print("beta0")
   print(beta0)
+  print(theta)
+  print("ht")
+  print(ht)
   print(abs(alpha)-abs(beta0))
-  
+  print("result")
+  print(result)
   
   result  <- rgh(1,alpha,beta0,delta,mu,-1/2)[1]
     
