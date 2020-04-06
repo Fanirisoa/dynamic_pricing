@@ -57,11 +57,18 @@ Sim<-function(para_h,para_distribution,ht){
   
   drapeau=0
   if (abs(alpha)<= abs(beta0)){drapeau=1}
+  if (alpha<=0){drapeau=1}
+  if (alpha==Inf){drapeau=1}
+  if (theta==Inf){drapeau=1}
+  if (theta==NaN){drapeau=1}
+  if (beta0==NaN){drapeau=1}
   
   if (drapeau==0){
     beta1 = beta0
+    result  <- rgh(1,alpha,beta1,delta,mu,-1/2)[1]
   }else{
-    beta1 = -1.480919
+    beta2 = -1.480919
+    result  <- rgh(1,alpha,beta2,delta,mu,-1/2)[1]
   }
   
   print("ok")
@@ -73,10 +80,6 @@ Sim<-function(para_h,para_distribution,ht){
   print("ht")
   print(ht)
   print(abs(alpha)-abs(beta0))
-
-  result  <- rgh(1,alpha,beta1,delta,mu,-1/2)[1]
-    
-  
   print("result")
   print(result)
   
