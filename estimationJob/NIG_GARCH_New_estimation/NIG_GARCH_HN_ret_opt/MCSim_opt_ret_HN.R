@@ -64,11 +64,12 @@ Sim<-function(para_h,para_distribution,ht){
   print("ht")
   print(ht)
   print(abs(alpha)-abs(beta0))
-  print("result")
-  print(result)
+
   
   result  <- rgh(1,alpha,beta0,delta,mu,-1/2)[1]
     
+  
+  print("result")
   print(result)
   
   
