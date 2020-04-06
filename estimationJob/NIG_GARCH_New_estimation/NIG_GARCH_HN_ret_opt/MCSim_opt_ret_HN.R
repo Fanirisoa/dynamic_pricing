@@ -60,9 +60,7 @@ Sim<-function(para_h,para_distribution,ht){
   if (alpha<=0){drapeau=1}
   if (alpha==Inf){drapeau=1}
   if (theta==Inf){drapeau=1}
-  if (theta==NaN){drapeau=1}
-  if (beta0==NaN){drapeau=1}
-  
+  if (beta0==Inf){drapeau=1}
   if (drapeau==0){
     beta1 = beta0
     result  <- rgh(1,alpha,beta1,delta,mu,-1/2)[1]
