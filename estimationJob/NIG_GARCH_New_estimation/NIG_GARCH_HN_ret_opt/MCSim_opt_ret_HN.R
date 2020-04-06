@@ -44,28 +44,28 @@ Sim<-function(para_h,para_distribution,ht){
   
   
   # first part of theta
-  A= ((alpha*mt+ sqrt(delta*ht)* beta* gama_d)^2)/(ht*delta*(gama_d^(3)))
+  A <-((alpha*mt+ sqrt(delta*ht)* beta* gama_d)^2)/(ht*delta*(gama_d^(3)))
   
   # second part of theta  
-  B = ((4*(alpha^4)*(delta^2))/(ht*delta*(gama_d^(3)) + (alpha*mt+sqrt(delta*ht)* beta*gama_d  )^2)) -1
+  B <- ((4*(alpha^4)*(delta^2))/(ht*delta*(gama_d^(3)) + (alpha*mt+sqrt(delta*ht)* beta*gama_d  )^2)) -1
   
   # value of theta   
-  theta =  -1/2 - ((alpha* beta*sqrt(delta))/(sqrt(ht)*(gama_d^(3/2)))) -(1/2)*((A*B)^(1/2))
+  theta <-  -1/2 - ((alpha* beta*sqrt(delta))/(sqrt(ht)*(gama_d^(3/2)))) -(1/2)*((A*B)^(1/2))
   
   # change in parameter under RN distribution
   beta0=beta + sqrt(ht)*theta
   
   print("ok")
-
-  if (abs(alpha) <= abs(beta0)){
-
-    result=rgh(1,alpha,beta0,delta,mu,-1/2)[1]
-
-  }else{
+  print(alpha)
+  print(beta0)
+  print(abs(alpha)-abs(beta0))
+  
+  
+  result  <- rgh(1,alpha,beta0,delta,mu,-1/2)[1]
     
-    result= NA
-  }
-    
+  print(result)
+  
+  
   return(result)
 }
 
