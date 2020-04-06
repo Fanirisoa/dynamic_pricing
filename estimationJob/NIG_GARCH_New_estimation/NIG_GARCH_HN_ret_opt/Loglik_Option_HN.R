@@ -257,6 +257,7 @@ Heston_likelihood_opti <- function(N,para_M,Data.ret, Data.N) {
   }else{
     log_like_NIG = NA
   }
+  
   return(log_like_NIG)  
   
 }
