@@ -55,6 +55,15 @@ Sim<-function(para_h,para_distribution,ht){
   # change in parameter under RN distribution
   beta0=beta + sqrt(ht)*theta
   
+  drapeau=0
+  if (abs(alpha)<= abs(beta0)){drapeau=1}
+  
+  if (drapeau==0){
+    beta1 = beta0
+  }else{
+    beta1 = -1.480919
+  }
+  
   print("ok")
   print("alpha")
   print(alpha)
@@ -65,8 +74,7 @@ Sim<-function(para_h,para_distribution,ht){
   print(ht)
   print(abs(alpha)-abs(beta0))
 
-  
-  result  <- rgh(1,alpha,beta0,delta,mu,-1/2)[1]
+  result  <- rgh(1,alpha,beta1,delta,mu,-1/2)[1]
     
   
   print("result")
