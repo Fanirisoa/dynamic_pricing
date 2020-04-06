@@ -57,9 +57,7 @@ Sim<-function(para_h,para_distribution,ht){
   
   drapeau=0
   if (is.na(theta)){drapeau=1}
-  if (is.na(beta0)){drapeau=1}
   if (is.nan(theta)){drapeau=1}
-  if (is.nan(beta0)){drapeau=1}
   if (abs(alpha)<= abs(beta0)){drapeau=1}
   if (drapeau==0){
     beta1 = beta0
@@ -69,17 +67,17 @@ Sim<-function(para_h,para_distribution,ht){
     result  <- rgh(1,alpha,beta2,delta,mu,-1/2)[1]
   }
   
-  print("ok")
-  print("alpha")
-  print(alpha)
-  print("beta0")
-  print(beta0)
-  print(theta)
-  print("ht")
-  print(ht)
-  print(abs(alpha)-abs(beta0))
-  print("result")
-  print(result)
+  # print("ok")
+  # print("alpha")
+  # print(alpha)
+  # print("beta0")
+  # print(beta0)
+  # print(theta)
+  # print("ht")
+  # print(ht)
+  # print(abs(alpha)-abs(beta0))
+  # print("result")
+  # print(result)
   
   
   return(result)
@@ -122,8 +120,14 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
     Inv= c()                                         ####  Collecte vector of innovation
     
     vol[1]= sqrt(h0)             ####  volatility starting value #### vol= 10e-8 sqrt((a0 + a1)/(1 - b1 - a1*(gamastar)^2 ))   0.0001220703  
-    ht[1]= vol[1]*vol[1]                                                      ####  ht starting value
+    ht[1]= vol[1]*vol[1]                                                     ####  ht starting value
     Inv[1]= Sim(para_h1,para_distribution1,ht[1])                            ####  innovation starting value
+    
+    print("ht[1]")
+    print(ht[1])    
+    print("Inv[1]")
+    print(Inv[1])
+        
     base_sim[1,j]= r[x]-((ht[1])/2)+(vol[1])*Inv[1]
     
     for(i in 2:T[x])  
