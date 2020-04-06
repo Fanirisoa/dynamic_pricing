@@ -56,8 +56,10 @@ Sim<-function(para_h,para_distribution,ht){
   beta0=beta + sqrt(ht)*theta
   
   drapeau=0
-  if (!is.na(theta)){drapeau=1}
-  if (!is.na(beta0)){drapeau=1}
+  if (is.na(theta)){drapeau=1}
+  if (is.na(beta0)){drapeau=1}
+  if (is.nan(theta)){drapeau=1}
+  if (is.nan(beta0)){drapeau=1}
   if (abs(alpha)<= abs(beta0)){drapeau=1}
   if (drapeau==0){
     beta1 = beta0
