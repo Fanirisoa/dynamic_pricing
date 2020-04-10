@@ -142,7 +142,7 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
       print("j")
       print(j)
 
-      if (ht[i]>=1){
+      if (ht[i]>=0.0005){
         ht[i] <- 0.0001220703
       }else{
         ht[i] <- ht[i]
