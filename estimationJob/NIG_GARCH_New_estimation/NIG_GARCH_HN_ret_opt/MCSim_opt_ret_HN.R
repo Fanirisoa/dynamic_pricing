@@ -56,8 +56,8 @@ Sim<-function(para_h,para_distribution,ht){
   beta0=beta + sqrt(ht)*theta
   
   drapeau=0
-  #if (is.na(theta)){drapeau=1}
-  if (is.nan(theta)){drapeau=1}
+  if (is.na(beta0)){drapeau=1}
+  if (is.nan(beta0)){drapeau=1}
   if (abs(alpha)<= beta0){drapeau=1}
   if (drapeau==0){
     beta1 = beta0
@@ -119,22 +119,41 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
     ht= c()                                           ####  Collecte vector of ht
     Inv= c()                                         ####  Collecte vector of innovation
     
-    vol[1]= sqrt(h0)             ####  volatility starting value #### vol= 10e-8 sqrt((a0 + a1)/(1 - b1 - a1*(gamastar)^2 ))   0.0001220703  
+    vol[1]= 0.0001220703      ####  sqrt(h0)             ####  volatility starting value #### vol= 10e-8 sqrt((a0 + a1)/(1 - b1 - a1*(gamastar)^2 ))   0.0001220703  
     ht[1]= vol[1]*vol[1]                                                     ####  ht starting value
-    Inv[1]= Sim(para_h1,para_distribution1,ht[1])                            ####  innovation starting value
     
-    # print("ht[1]")
-    # print(ht[1])    
-    # print("Inv[1]")
-    # print(Inv[1])
+    Inv[1]= Sim(para_h1,para_distribution1,ht[1])                            ####  innovation starting value
+
         
     base_sim[1,j]= r[x]-((ht[1])/2)+(vol[1])*Inv[1]
+    
+    print("ok")
     
     for(i in 2:T[x])  
     {
       vol[i]=variance(para_h1,Inv[i-1] ,ht[i-1])
       ht[i]=(vol[i])^2
+      
+      print(vol[i])
+      print("ht[i]")
+      print(ht[i])   
+      print("i")
+      print(i)
+      print("j")
+      print(j)
+
+      if (ht[i]>=1){
+        ht[i] <- 0.0001220703
+      }else{
+        ht[i] <- ht[i]
+      }
+      
       Inv[i]= Sim(para_h1,para_distribution1,ht[i]) 
+      
+      
+      print("Inv[i]")
+      print(Inv[i])
+      print("ok_inv") 
       
       base_sim[i,j]= r[x]-((ht[i])/2)+(vol[i])*Inv[i]
     }
