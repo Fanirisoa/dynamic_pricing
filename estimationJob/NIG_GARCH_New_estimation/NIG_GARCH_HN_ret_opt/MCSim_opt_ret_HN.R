@@ -57,7 +57,7 @@ Sim<-function(para_h,para_distribution,ht){
   
   drapeau=0
   if (is.na(theta)){drapeau=1}
-  if (is.nan(theta)){drapeau=1}
+  #if (is.nan(theta)){drapeau=1}
   if (abs(alpha)<= abs(beta0)){drapeau=1}
   if (drapeau==0){
     beta1 = beta0
@@ -123,10 +123,10 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
     ht[1]= vol[1]*vol[1]                                                     ####  ht starting value
     Inv[1]= Sim(para_h1,para_distribution1,ht[1])                            ####  innovation starting value
     
-    print("ht[1]")
-    print(ht[1])    
-    print("Inv[1]")
-    print(Inv[1])
+    # print("ht[1]")
+    # print(ht[1])    
+    # print("Inv[1]")
+    # print(Inv[1])
         
     base_sim[1,j]= r[x]-((ht[1])/2)+(vol[1])*Inv[1]
     
