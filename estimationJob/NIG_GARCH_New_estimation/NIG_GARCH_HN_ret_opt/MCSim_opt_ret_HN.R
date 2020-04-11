@@ -9,8 +9,24 @@ variance<-function(para_h,innovation,ht){
   # Parameter under the physical probability
   lamda0star= -(1/2)
   gamastar= gama+lamda0+(1/2)
+ 
+  print("innovation")
+  print(innovation) 
+  print("ht")
+  print(ht)
+  print("(innovation - gamastar*(sqrt(ht)))^2")
+  print((innovation - gamastar*(sqrt(ht)))^2)
   
-  ht_next=a0 +b1*ht+a1*(innovation - gamastar*(sqrt(ht)))^2
+  if (is.na(ht)){drapeau=1}
+  if (is.nan(ht)){drapeau=1}
+  if (ht>=0.0005){drapeau=1}
+  if (drapeau==0){
+    ht_next=a0 +b1*ht+a1*(innovation - gamastar*(sqrt(ht)))^2
+  }else{
+
+    ht_next = 0.0001220703
+    
+  }
   vol=sqrt(ht_next)
   
   return(vol)  
@@ -152,8 +168,7 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
         Inv[i]= Sim(para_h1,para_distribution1,0.0001220703) 
         
       }
-      
-      
+    
       # 
       # print("Inv[i]")
       # print(Inv[i])
