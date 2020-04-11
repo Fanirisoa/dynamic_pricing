@@ -127,20 +127,20 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
         
     base_sim[1,j]= r[x]-((ht[1])/2)+(vol[1])*Inv[1]
     
-    print("ok")
+
     
     for(i in 2:T[x])  
     {
       vol[i]=variance(para_h1,Inv[i-1] ,ht[i-1])
       ht[i]=(vol[i])^2
       
-      print(vol[i])
-      print("ht[i]")
-      print(ht[i])   
-      print("i")
-      print(i)
-      print("j")
-      print(j)
+      # print(vol[i])
+      # print("ht[i]")
+      # print(ht[i])   
+      # print("i")
+      # print(i)
+      # print("j")
+      # print(j)
 
       if (ht[i]>=0.0005){
         ht[i] <- 0.0001220703
@@ -150,10 +150,10 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
       
       Inv[i]= Sim(para_h1,para_distribution1,ht[i]) 
       
-      
-      print("Inv[i]")
-      print(Inv[i])
-      print("ok_inv") 
+      # 
+      # print("Inv[i]")
+      # print(Inv[i])
+      # print("ok_inv") 
       
       base_sim[i,j]= r[x]-((ht[i])/2)+(vol[i])*Inv[i]
     }
