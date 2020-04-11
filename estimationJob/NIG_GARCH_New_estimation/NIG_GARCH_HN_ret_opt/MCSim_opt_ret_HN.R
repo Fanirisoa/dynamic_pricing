@@ -141,14 +141,18 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
       # print(i)
       # print("j")
       # print(j)
-
-      if (ht[i]>=0.0005){
-        ht[i] <- 0.0001220703
+      
+      drapeau=0
+      if (is.na(ht[i])){drapeau=1}
+      if (is.nan(ht[i])){drapeau=1}
+      if (ht[i]>=0.0005){drapeau=1}
+      if (drapeau==0){
+        Inv[i]= Sim(para_h1,para_distribution1,ht[i]) 
       }else{
-        ht[i] <- ht[i]
+        Inv[i]= Sim(para_h1,para_distribution1,0.0001220703) 
+        
       }
       
-      Inv[i]= Sim(para_h1,para_distribution1,ht[i]) 
       
       # 
       # print("Inv[i]")
