@@ -8,7 +8,7 @@ Retdensity <- function(para_M,Ret,h,r){
 
   ## set up the parameters of the model : para_M = c(para_distribution,para_h) 
   alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]
-  a0=para_M[1]; a1=para_M[2]; a2=para_M[3];  b1= para_M[4] ;  lamda0= para_M[5]  ; ro=para_M[6]
+  a0=para_M[5]; a1=para_M[6]; a2=para_M[7];  b1= para_M[8] ;  lamda0= para_M[9]  ; ro=para_M[10]
   
   
   Z0=b1 + a1 + a2/2
@@ -55,7 +55,7 @@ Heston_likelihood_ret <- function(para_M,Data.returns)  {
   
   ## set up the parameters of the model : para_M = c(para_distribution,para_h) 
   alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]
-  a0=para_M[1]; a1=para_M[2]; a2=para_M[3];  b1= para_M[4] ;  lamda0= para_M[5]  ; ro=para_M[6]
+  a0=para_M[5]; a1=para_M[6]; a2=para_M[7];  b1= para_M[8] ;  lamda0= para_M[9]  ; ro=para_M[10]
   
   
   h = c()                                                        ####  A vector containing h from the model,
@@ -76,13 +76,26 @@ Heston_likelihood_ret <- function(para_M,Data.returns)  {
 }
 
 
+
+
+
+##################################
+######   plot The volatility    ##
+##################################
 ####################################################
 ######   The volatility updating rule under Q     ##
 ####################################################
-gsqrt_Q <- function(para_h,ret,h,rt)
+gsqrt_Q <- function(para_M,ret,h,rt) 
 {
-  ## set up the parameters of the model : para_h
-  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]   
+  
+  # para_M = c(para_distribution,para_h) 
+  # alpha=para_distribution[1], beta=para_distribution[2], delta=para_distribution[3], mu=para_distribution[4]
+  # a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]
+  
+  ## set up the parameters of the model : para_M = c(para_distribution,para_h) 
+  alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]
+  a0=para_M[5]; a1=para_M[6]; a2=para_M[7];  b1= para_M[8] ;  lamda0= para_M[9]  ; ro=para_M[10]
+
   
   # Parameter under the physical probability
   h0=(a0 )/(1 - b1 - a1- a2/2)   
@@ -134,13 +147,18 @@ gsqrt_Q <- function(para_h,ret,h,rt)
 ####################################################
 ######         The volatility shape under Q       ##
 ####################################################
-shape_vol_P <- function(para_h, Data.returns) {
+shape_vol_P <- function(para_M, Data.returns) {
   ret=Data.returns$ret   
   rt=Data.returns$rt/250        
   Z1=length(rt)
   
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]
+  # para_M = c(para_distribution,para_h) 
+  # alpha=para_distribution[1], beta=para_distribution[2], delta=para_distribution[3], mu=para_distribution[4]
+  # a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]
+  
+  ## set up the parameters of the model : para_M = c(para_distribution,para_h) 
+  alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]
+  a0=para_M[5]; a1=para_M[6]; a2=para_M[7];  b1= para_M[8] ;  lamda0= para_M[9]  ; ro=para_M[10]
   
   
   h = c()                                                        ####  A vector containing h from the model,
@@ -156,13 +174,18 @@ shape_vol_P <- function(para_h, Data.returns) {
 ####################################################
 ######         The volatility shape under Q       ##
 ####################################################
-shape_vol_Q <- function(para_h, Data.returns) {
+shape_vol_Q <- function(para_M, Data.returns) {
   ret=Data.returns$ret   
   rt=Data.returns$rt/250        
   Z1=length(rt)
   
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]
+  # para_M = c(para_distribution,para_h) 
+  # alpha=para_distribution[1], beta=para_distribution[2], delta=para_distribution[3], mu=para_distribution[4]
+  # a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]
+  
+  ## set up the parameters of the model : para_M = c(para_distribution,para_h) 
+  alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]
+  a0=para_M[5]; a1=para_M[6]; a2=para_M[7];  b1= para_M[8] ;  lamda0= para_M[9]  ; ro=para_M[10]
   
   
   h = c()                                                        ####  A vector containing h from the model,
