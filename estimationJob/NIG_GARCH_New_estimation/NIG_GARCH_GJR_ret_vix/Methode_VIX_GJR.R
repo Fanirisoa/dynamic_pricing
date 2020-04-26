@@ -36,63 +36,7 @@ source(paste(path,"/Loglik_Option_HN.R",sep=""))
 
 
 
-
-#####################################################
-###              Load Data source             #######
-#####################################################
-setwd("C:/Users/fanir/Desktop/Simulation_juin2018/Data")  
-
-#####################################################
-###             Clean the repertoir           #######
-#####################################################
-rm(list=ls())
-gc()
-library(compiler)
-enableJIT(1)
-enableJIT(3)
-library("fBasics")
-#library("pracma")
-library("numDeriv")
-library("nlme")
-library("Matrix")
-
-
-#####################################################
-###    Load both data.contract and data.ret   #######
-#####################################################
-load("DataPrice20092010.Rdata")
-
-#####################################################
-###                 Data set                  #######
-#####################################################
-#Data.N=Data.N2
-
-Data.N=Data.N2[-c(506,1462,1638,1645),]
-
-
-#####################################################
-###         Part 1 Mixt-estimation            #######
-#####################################################
-###         Source function to use            #######
-#####################################################
-source("C:/Users/fanir/Desktop/Simulation_juin2018/NIG_GARCH_GJR/NIG_GARCH_GJR_ret/Loglik_Ret_VIX_GJR.r")
-source("C:/Users/fanir/Desktop/Simulation_juin2018/NIG_GARCH_GJR/NIG_GARCH_GJR_ret/Loglik_Opt_VIX_GJR.r")
-source("C:/Users/fanir/Desktop/Simulation_juin2018/NIG_GARCH_GJR/NIG_GARCH_GJR_ret/Loglik_Mix_VIX_GJR.r")
-
-#####################################################
-###         Parameters of the model           #######
-#####################################################
-###   Initial parameter  para_h<-c() set up the parameters of the model   ####
-
-### a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]   
- para_h<-c(5.192896e-06, 1.240918e-01, 2.314273e-02, 8.504267e-01, 1.821112e-01, 9.657773e-01)
-
-para_h<-c(5.987174e-06,  1.240911e-01,  2.314265e-02,  8.504269e-01,  3.784983e-02, 9.546611e-01)  ## RMSE1$rmse : 0.06265758 RMSE3$rmse :0.07367674
-
-para_h1<-c(2.275545e-13, 1.496457e-06, 4.634467e+02, 6.713043e-01, 1.799994e-01, 9.646982e-016)
-
-###   Solution   para_h<-c() set up the parameters of the model   ####
-
+=====> change para_M
 #####################################################
 ###               Volatility  shape           #######
 #####################################################
