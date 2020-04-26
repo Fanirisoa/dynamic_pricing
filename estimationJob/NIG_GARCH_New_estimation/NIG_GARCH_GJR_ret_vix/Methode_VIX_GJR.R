@@ -21,7 +21,9 @@ setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")
 path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NIG_GARCH_New_estimation/NIG_GARCH_GJR_ret_vix"
 
 source(paste(path,"/parameters_set.R",sep=""))
-source(paste(path,"/Loglik_Return_HN.R",sep=""))
+source(paste(path,"/Loglik_Return_GJR.R",sep=""))
+source(paste(path,"/Loglik_VIX_GJR.R",sep=""))
+source(paste(path,"/Loglik_Mix_GJR.R",sep=""))
 
 
 
@@ -29,7 +31,6 @@ source(paste(path,"/Loglik_Return_HN.R",sep=""))
 source(paste(path,"/Fun_Pricer_opt_ret_HN.R",sep=""))
 source(paste(path,"/MCSim_opt_ret_HN.R",sep=""))
 source(paste(path,"/Loglik_Option_HN.R",sep=""))
-source(paste(path,"/Loglik_Opt_ret_HN.R",sep=""))
 
 
 
