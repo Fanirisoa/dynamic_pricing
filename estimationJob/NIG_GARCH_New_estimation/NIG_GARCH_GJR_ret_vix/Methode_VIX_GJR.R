@@ -32,23 +32,14 @@ source(paste(path,"/Fun_Pricer_opt_ret_HN.R",sep=""))
 source(paste(path,"/MCSim_opt_ret_HN.R",sep=""))
 source(paste(path,"/Loglik_Option_HN.R",sep=""))
 
-
-
-
-
-=====> change para_M
 #####################################################
 ###               Volatility  shape           #######
 #####################################################
-
-ts.vol_P= shape_vol_P (para_h, Data.returns) 
+ts.vol_P= shape_vol_P (para_M, Data.returns) 
 ts.plot(ts.vol_P , col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
 grid()
 
 
-ts.vol_Q= shape_vol_Q (para_h, Data.returns) 
-ts.plot(ts.vol_Q, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
-grid()
 
 #####################################################
 ###              LOg values                   #######
