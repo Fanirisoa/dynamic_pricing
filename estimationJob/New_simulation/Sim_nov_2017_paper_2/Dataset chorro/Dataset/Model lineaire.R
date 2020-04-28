@@ -6,7 +6,7 @@ library(zoo)
 ### Code to transforme the data set #######
 ###########################################
 ## Set working directory
-setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NIG_GARCH_New_estimation/NIG_GARCH_HN_ret_opt/Test_data")  
+setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NIG_GARCH_New_estimation/Test_data")  
 
 
 path_data=paste(getwd(),"/Dataset/",sep="")
@@ -86,7 +86,7 @@ for(i in 1:length(Serie.data)) {
   Data.contract <- rbind(Data.contract, cbind(Serie.data[[i]]))
 }
 
-Data.contract
+Data.contract[1:10,] 
 
 
 ####################################################
