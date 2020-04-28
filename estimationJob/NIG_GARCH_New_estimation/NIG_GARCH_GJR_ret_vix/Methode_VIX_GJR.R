@@ -52,7 +52,7 @@ time.taken
 ILK
 
 GJR_likelihood_ret(para_M, Data.returns)
-GJR_likelihood_vix(para_M,Data.returns) 
+GJR_likelihood_vix(para_M,Data.returns,Data.ret) 
 
 
 

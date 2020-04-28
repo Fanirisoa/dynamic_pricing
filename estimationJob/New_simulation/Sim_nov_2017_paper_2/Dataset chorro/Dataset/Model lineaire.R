@@ -5,19 +5,21 @@ library(zoo)
 ###########################################
 ### Code to transforme the data set #######
 ###########################################
-setwd("C:/Users/Leacalin/Desktop/Simulation 2015 chorro/Dataset chorro") 
+## Set working directory
+setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NIG_GARCH_New_estimation/NIG_GARCH_HN_ret_opt/Test_data")  
+
 
 path_data=paste(getwd(),"/Dataset/",sep="")
 dates_ini=as.Date("07/01/2009","%d/%m/%Y")
 dates_fini=as.Date("18/04/2012","%d/%m/%Y")
 dates_courantes=seq(dates_ini,dates_fini,7)
 n_dates=length(dates_courantes)
-dataset=list() # Liste des donnèes
+dataset=list() # Liste des donn?es
 index_list=1
 for (i in 1:n_dates){
   nom=paste(path_data,dates_courantes[i],".csv",sep="")
   x=read.delim(nom,header=FALSE,sep=";")
-  # Traitement des donnÈes
+  # Traitement des donn?es
   strike=x[,3]
   Maturity=as.matrix(x[,4])
   SJ=x[,5]
@@ -26,7 +28,7 @@ for (i in 1:n_dates){
   div=x[,8]
   ttm=x[,9] 
   
-  #Récupèration des prix
+  #R?cup?ration des prix
   dataset[[index_list]]=""
   dataset[[index_list]]$strike=strike          
   dataset[[index_list]]$Maturity=Maturity
@@ -37,7 +39,7 @@ for (i in 1:n_dates){
   dataset[[index_list]]$ttm=ttm
   index_list=index_list+1
 } 
-# Export des donnèes au bon format pour le pricer 
+# Export des donn?es au bon format pour le pricer 
 exportation<-function(dataset){
   n=length(dataset)
   strike=list()
