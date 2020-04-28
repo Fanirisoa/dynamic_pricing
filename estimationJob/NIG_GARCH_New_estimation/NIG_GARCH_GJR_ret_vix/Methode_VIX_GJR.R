@@ -40,6 +40,27 @@ ts.plot(ts.vol_P , col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="
 grid()
 
 
+#####################################################
+###              Log values returns           #######
+#####################################################
+
+start.time <- Sys.time()
+ILK=Heston_likelihood_Mix(para_M,Data.ret, Data.N,Data.returns,N) 
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+ILK
+
+GJR_likelihood_ret(para_M, Data.returns)
+GJR_likelihood_vix(para_M,Data.returns) 
+
+
+
+
+
+
+
+
 
 #####################################################
 ###              LOg values                   #######

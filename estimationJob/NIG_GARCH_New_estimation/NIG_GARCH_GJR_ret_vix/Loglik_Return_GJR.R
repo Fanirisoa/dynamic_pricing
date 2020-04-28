@@ -2,7 +2,7 @@
 #      Fonction densite chaque loi conditionelle pour les returns      # 
 ########################################################################
 
-densite <- function(para_M,l){
+densite <- function(para_M,h){
   # para_M = c(para_distribution,para_h) 
   # alpha=para_distribution[1], beta=para_distribution[2], delta=para_distribution[3], mu=para_distribution[4]
   # a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]

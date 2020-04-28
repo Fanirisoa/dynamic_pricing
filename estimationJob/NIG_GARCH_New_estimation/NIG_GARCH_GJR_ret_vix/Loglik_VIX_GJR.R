@@ -156,7 +156,7 @@ VIX_Q<-function(para_h,h){
 ###########################################################
 #####       The Log-likeelihood over all Option        ####
 ###########################################################
-GJR_likelihood_vix <- function(para_M,Data.returns) {
+GJR_likelihood_vix <- function(para_M, Data.returns,Data.ret){
   Vix=Data.ret$VIX      ####  Call dividende
   
   # para_M = c(para_distribution,para_h) 
