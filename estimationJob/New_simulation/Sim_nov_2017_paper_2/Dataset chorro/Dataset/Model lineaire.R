@@ -64,16 +64,17 @@ data=exportation(dataset)
 
 price_C <- data$prix     #### Prix du call: data$prix .... Call_market price
 Strike_k <-data$strike   #### Prix d'exercice: data$strike
-T<-data$ttm      #### Time to maturity: data$ttm
-S<- data$SJ       #### Prix du sous-jacent: data$SJ
-r<- data$tsr      #### Taux d'interet sans risque: data$tsr
-div_d<-data$div      #### dividende: data$div
+T<-data$ttm              #### Time to maturity: data$ttm
+S<- data$SJ              #### Prix du sous-jacent: data$SJ
+r<- data$tsr             #### Taux d'interet sans risque: data$tsr
+div_d<-data$div          #### dividende: data$div
 
 S_0 <- c()
 S_0[1]=903.25
 for (i in 2:172){
   S_0[i]=data$SJ[[i-1]][1]
 }
+
 
 ###############################################
 ###  Transforming the data to data frame ######
