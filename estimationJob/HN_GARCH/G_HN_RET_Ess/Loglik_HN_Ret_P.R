@@ -197,7 +197,7 @@ shape_vol_P <- function(para_h, Data.returns) {
   
   
   h = c()                                                        ####  A vector containing h from the model,
-  h[1]=(a0 + a1)/(1 - b1 - a1*(gama)^2)                         ####  The first value for h, Unconditional Variance
+  h[1]=(a0 + a1)/(1 - b1 - a1*(gama)^2)                          ####  The first value for h, Unconditional Variance
   
   for (i in 2:Z1){
     h[i]= gsqrt(para_h,ret[i-1],h[i-1],rt[i-1]) ### a0 +b1*h[i-1]+a1*(((ret[i-1]-rt[i-1]-lamda0*(h[i-1]))/(sqrt(h[i-1]))) - gama*(sqrt(h[i-1])))^2
