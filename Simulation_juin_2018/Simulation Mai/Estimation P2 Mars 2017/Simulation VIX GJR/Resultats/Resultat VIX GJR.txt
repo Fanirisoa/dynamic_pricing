@@ -1,0 +1,74 @@
+############################################################
+####             VIX Heston Nandi estimation              ##
+############################################################
+##   Initial parameter  ##
+#a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
+
+para_h<-c(5.02e-6, 1.32e-6, 421.39, 0.589,0.18, 9.646950e-01)
+
+###   Solution 
+para_h<-c(6.584269e-01,  1.216719e-14,  4.622122e+02,  5.889999e-01,  1.800008e-01,  9.646960e-01)
+
+> Sol
+$par
+[1] 6.584269e-01 1.216719e-14 4.622122e+02 5.889999e-01 1.800008e-01 9.646960e-01
+
+$value
+[1] 6556.06
+
+$counts
+function gradient 
+     479       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL
+
+##########################################################
+#                QML estimation  NIG                     # 
+##########################################################
+###   Initial parameter  para_h<-c() set up the parameters of the model   ####
+### alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4];
+
+para_distribution<-c(1.785, 0.175, 1.1749, 0.174)
+
+###   Solution 
+para_h<-c(23.254077016, -14.397610234,   0.007012446,  -0.286886696)
+
+> QMLSol
+$par
+[1]  23.254077016 -14.397610234   0.007012446  -0.286886696
+
+$value
+[1] -8007.262
+
+$counts
+function gradient 
+     457       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

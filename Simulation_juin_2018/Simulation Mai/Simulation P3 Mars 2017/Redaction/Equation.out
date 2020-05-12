@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section.1}{The Heston Nandi Model: GARCH-HN-Gaussian}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{ GARCH-HN-Gaussian-Ess: Messt=etXt+t}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{VIX for GARCH-HN-Gaussian :}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{ GARCH-HN-Gaussian-Qua: Mquat=e2,tX2t+1,tXt+t}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{VIX for GARCH-HN-Gaussian :}{section.1}% 5
+\BOOKMARK [1][-]{section.2}{The GJR Model: GARCH-GJR-Gaussian}{}% 6
+\BOOKMARK [2][-]{subsection.2.1}{ GARCH-GJR-Gaussian-Ess: Messt=etXt+t}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.2}{VIX for GARCH-HN-Gaussian :}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.3}{ GARCH-GJR-Gaussian-Qua: Mquat=e2,tX2t+1,tXt+t}{section.2}% 9
+\BOOKMARK [1][-]{section.3}{The Inverse-Gaussian-GARCH Model: IG-GARCH}{}% 10
+\BOOKMARK [2][-]{subsection.3.1}{ IG-GARCH-Esscher : Messt=etXt+t}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.2}{IG-GARCH-Ushaped : \040MUshpt=etXt+t+tyt}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.3}{VIX for IG-GARCH-Ushaped :}{section.3}% 13
+\BOOKMARK [1][-]{section.4}{Comparing predictibility of time series VIX :}{}% 14
+\BOOKMARK [2][-]{subsection.4.1}{The mean of pricing errors \(MPE\):}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.2}{The mean of absolute pricing errors \(MAE\):}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.3}{The root mean of square pricing errors \(RMSE\):}{section.4}% 17

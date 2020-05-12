@@ -17,7 +17,7 @@ densite <- function(para_distribution,para_h,l){
   ## Normalisation :
   sigma_z = (delta*(alpha^2))/((gamma_0)^3)
   
-  mu_z= mu - ((delta*beta)/(gamma_0 ))
+  mu_z = mu - ((delta*beta)/(gamma_0 ))
   
   ## Parametrization : 
   

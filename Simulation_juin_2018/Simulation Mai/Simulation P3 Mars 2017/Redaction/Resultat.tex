@@ -1,0 +1,371 @@
+%\documentclass[review,times]{elsarticle}
+%\documentclass[final,1p,times]{elsarticle}
+\documentclass[preprint,times,12pt]{elsarticle}
+%\documentclass[final,1p,times,twocolumn]{elsarticle}
+%\documentclass[final,3p,times]{elsarticle}
+%\documentclass[final,3p,times,twocolumn]{elsarticle}
+%\documentclass[final,5p,times]{elsarticle}
+%\documentclass[final,5p,times,twocolumn]{elsarticle}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{anysize}
+%\usepackage{natbib}
+\usepackage{rotating,booktabs}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{listings}
+%\usepackage[options]{natbib}
+%\usepackage{lscape}
+%\usepackage{fancyhdr}
+%\linespread{1.11}
+%\usepackage{hyperref}
+\usepackage{dsfont}
+%\setlength{\parindent}{0pt}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{color}
+
+
+
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+\renewcommand{\theequation}{\arabic{section}\mbox{.}\arabic{equation}}
+\newcommand{\id}{\mbox{\boldmath 1 \hspace{-0.95em}1}}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}{Proposition}[section]
+%\newtheorem{corollary}{Corollary}[section]
+\newtheorem{rem}{Remark}[section]
+%\newenvironment{proof}[1][Proof]{\textbf{#1} }{\hfill $\blacksquare$}
+\DeclareMathOperator{\comb}{C}
+\DeclareMathOperator{\e}{e}
+\newcommand{\ud}{\mathrm{d}}
+%\linespread{1.50}
+%\journal{***Journal Name here***}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+
+%%\linenumbers
+%\section*{Proposition that are used}
+%\begin{proposition}
+%The dynamics of the log returns under $ \mathbb{Q} $ is given by:
+%\begin{equation}\label{HestonNandi}
+%\left\{
+%  \begin{array}{rcl}
+%X_{t}& =&  r-\dfrac{h_{t}}{2} + \sqrt{h_{t}}\xi_{t}\\
+%h_{t}&=&F\left(\xi_{t-1}-\dfrac{m_{t-1}}{\sqrt{h_{t-1} }}-\dfrac{\sqrt{h_{t-1} }}{2},h_{t-1} \right).\\
+%  \end{array}
+%\right.
+%\end{equation} 
+%where the $ \xi_{t} $ are $ i.i.d \ N(0,1) $ under $ \mathbb{Q} $.
+%\end{proposition}
+%
+%R\'esultat avant r\'eduction des contrats
+%
+%\begin{table}[h]
+%\centering
+%\begin{tabular}{|c|c|c|c|c|}
+%\hline
+%%Joint-Estimation            & \multicolumn{2}{c|}{Returns-Option} & \multicolumn{2}{c|}{Returns-VIX} \\ \hline
+%IVRMSE               & Calibration   & MLE Opt-ret HN   & MLE VIX-ret HN &  MLE VIX-ret GJR  \\ \hline
+%In-of-sample            &$0.034657855$ &$0.01253354$ &$0.01253172$ & $0.01253293$ \\
+%Out-of-sample        &$0.054837623$&$0.009501089$ & $0.009497926$ &$0.009500157$ \\ \hline 
+%\bottomrule
+%\end{tabular}\hspace*{-1cm}
+%\begin{small}
+%\caption{Summary fits of Nonlinear least squares (NLS) estimates on Option  of historical parameters $ (\lambda_{0},\theta^{V}) $ and Joint MLE on Option-Returns, VIX-Returns  of historical parameters $ (\lambda_{0},\theta^{V}) $ using in of sample 2009.}
+%\label{TableRMSE2009allGJRHN}
+%\end{small}
+%\end{table}
+%
+%R\'esultat apr\`es r\'eduction des contrats
+%
+%\begin{table}[ht]
+%\centering
+%\begin{tabular}{|c|c|c|c|c|}
+%\hline
+%%Joint-Estimation            & \multicolumn{2}{c|}{Returns-Option} & \multicolumn{2}{c|}{Returns-VIX} \\ \hline
+%Sample     &  Numbre of       & NLS Calibration   & 2-steps Modifized-QML   & 2-steps Modifized-QML  \\ 
+%           & contracts & Gaussian  & GJR-NIG-Option-returns    & HN-NIG-VIX-returns    \\ \hline
+%
+%$2009$   & $1294$  &$0.0146842$ & $0.01328446$ & $0.01273579$\\
+%$2010$   & $1416$ &$0.0147767$ & $0.01095872$& $0.00995957$\\ \hline
+%\bottomrule
+%\end{tabular}\hspace*{-1cm}
+%\begin{small}
+%\caption{Summary fits of Nonlinear least squares (NLS) estimates on Option  of historical parameters $ (\lambda_{0},\theta^{V}) $ and Joint 2-steps Modifized-QML on Option-Returns, VIX-Returns  of historical parameters $ (\lambda_{0},\theta^{V}) $ using in of sample 2009.}
+%\label{TableMMLE2009all}
+%\end{small}
+%\end{table}
+%Pour 2009
+%\begin{itemize}
+%\item  J'ai enlev\'e $28$ contrats d'option qui font explose l'IVRMSE. Crit\`ere de s\'election: j'enl\`eve les contrats qui v\'erifient $C-(S-K)<3$ (normalement lors du filtration on utilise $C-(S-K)< 0$ ).
+%\item  Ensuite, j'ai estim\'e les model\'es a partir des donnes de $1294$ contrats.
+%\item  Enfin, je calcule l'IVRMSE par simulation des prix a partir des r\'esultats estimation.
+%\end{itemize}
+%
+%
+%Pour 2010
+%\begin{itemize}
+%\item  J'ai enlev\'e $56$ contrats d'option qui font explose l'IVRMSE. M\^eme Crit\`ere de s\'election.
+%\item  Ensuite, j'ai estim\'e les model\'es a partir des donnes de $1416$ contrats.
+%\item  Enfin, je calcule l'IVRMSE par simulation des prix a partir des r\'esultats estimation.
+%\end{itemize}
+%
+%
+%
+%Interpr\'etation:
+%\begin{itemize}
+%\item  Dans le cas du calibration, on enlevant les \'el\'ements qui font explose l'IVRMSE on arrive a des valeurs tr\`es faible pas trop diff\'erents de ceux avec d'autre méthodes.
+%\item  Ensuite, Pour le cas des $2-steps$ Modifized-QML le fait de r\'eduire les contrats ne change pas trop les valeurs de l'IVRMSE. Cependant que change le nombre de contrat influence le mean du fait que les erreurs ont les m\^eme ordre de grandeurs pour 2009 et 2010 mais c'est le nombre de contrat qui les diff\'erencies (200 contrats). Ainsi si on r\'eduit le nombre de contrat de telle sort que l'on a environ les m\^eme nombre de contrat.
+%\end{itemize}
+%
+%
+
+%R\'esultat avant r\'eduction des contrats:
+%
+%
+%\begin{table}[h]
+%\centering
+%\begin{tabular}{|c|c|c|c|c|c|}
+%\hline
+%Parameters   &  $a_{0}$ &  $a_{1}$  &  $b_{1}$ &  $\gamma$  &  $\lambda_{0}$ \\ \hline
+%Parameters   &$4.102\ e^{-08}$ &$1.479\ e^{-06}$ &$ 6.713\ e^{-01}$&$4.634 \ e^{+02}$ & $1.800 \ e^{-01}$ \\
+%SE        &$-$&$-$ & $-$ &$-$ &$-$\\ \hline 
+%\bottomrule
+%\end{tabular}\hspace*{-1cm}
+%\begin{small}
+%\caption{Summary fits of MLE estimates on Option  of historical parameters $ (\lambda_{0},\theta^{V}) $ using in of sample 2009.}
+%\label{TableRMSE2009allGJRHN}
+%\end{small}
+%\end{table}
+%
+%
+%
+%\begin{table}[h]
+%\centering
+%\begin{tabular}{|c|c|c|}
+%\hline
+%IVRMSE         & F.F.T   & M.C Simulation    \\ \hline
+%In-of-sample   &$0.05348894$ &$0.01231075$ \\
+%Out-of-sample  &$0.1212427$&$0.01540306$  \\ \hline 
+%\bottomrule
+%\end{tabular}\hspace*{-1cm}
+%\begin{small}
+%\caption{Implied Volatility RMSE by moneyness and maturity from the in-sample option data $2009$ and out of-sample option data $2010$ under HN model}
+%\label{TableRMSE2009allGJRHN1}
+%\end{small}
+%\end{table}
+%
+%
+%R\'esultat apr\'es r\'eduction des contrats:
+%
+%
+%\begin{table}[h]
+%\centering
+%\begin{tabular}{|c|c|c|}
+%\hline
+%IVRMSE         & F.F.T   & M.C Simulation    \\ \hline
+%In-of-sample   &$0.04337495$ &$0.01025107$ \\
+%Out-of-sample  &$0.06113035$&$0.01210248$  \\ \hline 
+%\bottomrule
+%\end{tabular}\hspace*{-1cm}
+%\begin{small}
+%\caption{Implied Volatility RMSE by moneyness and maturity from the in-sample option data $2009$ and out of-sample option data $2010$ under HN model}
+%\label{TableRMSE2009allGJRHN4}
+%\end{small}
+%\end{table}
+%\begin{itemize}
+%\item J'ai consid\`ere in-sample 2009 seulement les returns, ensuite j'ai effectue MLE avec HN-Model Gaussian.
+%\item  Apr\`es j'ai calcule IVMRSE par les deux m\'ethodes : Fast Fourier Transorm F.F.T, et Monte Carlo Simulation.
+%\end{itemize}
+%
+%
+%j'ai utilise exactement les m\^eme codes que avant, sauf que pour le cas M.C Simulation ou j'ai utilise un N(0,1) dans la simulation de St  sous la probabilite sans risque (Proposition 3.2.2).
+
+%
+
+R\'esultat Gaussian-GARCH-HN:
+ 
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+Estimation            &\multicolumn{5}{c|}{ Gaussian-GARCH-HN} \\ \hline
+Parameters               &  \footnotesize{$M^{Ess}$ Ret}  &  \footnotesize{$M^{Ess}$ Ret-opt}  &  \footnotesize{$M^{Ess}$ Ret-VIX} &\footnotesize{$M^{Qua}$ Rett-opt} &\footnotesize{$M^{Qua}$ Ret-VIX} \\ \hline
+\textbf{$a_{0}$}      &$2.176\ e^{-11}$ & $1.874\ e^{-04}$ & $3.285\ e^{-05}$ &$4.454\ e^{-04}$ &$3.779\ e^{-08}$ \\
+     &$(0.003\ e^{-05})$ & $(0.045\ e^{-07})$& $(0.156\ e^{-09})$ &$(0.078\ e^{-06})$ &$(0.014\ e^{-04})$ \\
+\textbf{$a_{1}$}      &$3.285\ e^{-04}$& $3.345\ e^{-04}$\ & $3.600\ e^{-04}$& $3.257\ e^{-05}$&$1.279\ e^{-05}$ \\ 
+     &$(0.782\ e^{-07})$ & $(0.891\ e^{-07})$& $(1.264\ e^{-07})$ &$(2.451\ e^{-07})$ &$(1.564\ e^{-06})$ \\
+\textbf{$a_{2}$}      &$-$& $-$& $-$& & \\ 
+     &$-$ & $-$& $-$ &$-$ &$-$ \\
+\textbf{$b_{1}$}      &$6.255 \ e^{-01}$&$1.124\ e^{-03}$ & $2.510\ e^{-01}$&$1.123 \ e^{-03}$ &$9.221\ e^{-01 }$ \\
+     &$(0.213\ e^{-03})$ & $(0.739\ e^{-03})$& $(0.049\ e^{-03})$ &$(0.077\ e^{-03})$ &$(0.037\ e^{-03})$ \\
+\textbf{$\gamma$}     &$8.622\ e^{+00}$ & $1.142\ e^{+00}$& $ 9.258\ e^{+00}$&$8.424\ e^{+00}$ &$9.750\ e^{+00}$ \\ 
+     &$(0.048\ e^{-08})$ & $(0.785\ e^{-08})$& $(0.028\ e^{-08})$ &$(0.001\ e^{-07})$ &$(0.001\ e^{-06})$ \\
+\textbf{$\lambda_{0}$}  &$2.300\e^{-03}$ &  $ 6.573\ e^{-01}$ & $1.353\ e^{-06}$& $6.573\ e^{-01}$& $ 8.882\ e^{-07}$\\   
+     &$(0.007\ e^{-02})$ & $(0.004\ e^{-02})$& $(0.002\ e^{-02})$ &$(0.001\ e^{-03})$ &$(0.008\ e^{-02})$ \\
+\textbf{$\gamma^{*}$}     &$-$ & $-$ &$-$ &$-$& \\ 
+     &$-$ & $-$& $-$ &$-$ &$-$  \\
+\textbf{$\pi $}     &$-$ & $-$ &$-$ &$ 1.382\ e^{+00}$&$ 1.356\ e^{+00}$\\ 
+     &$-$ & $-$& $-$ &$(0.00009)$ &$(0.00204)$\\
+\textbf{$\varrho$}     &$-$ & $-$& $0.9718 $&$-$& $0.843 $\\ 
+     & $-$& $-$ &$(0.00001)$ &$-$ &$(0.00001)$ \\[0.1cm] 
+ Times $ (h) $ &$0.0034$ &$17.453$ &$ 0.00191$&$27.802$ &$0.0016$ \\ [0.1cm] 
+\footnotesize{\textbf{Model Properties}} :  & & & $-$ &$-$ &$-$  \\ 
+Persistence           &$-$  &$-$& $-$ &$-$ &$-$\\ 
+%Annualized volatility & $-$ &$-$& $-$ &$-$ &$-$ &$-$  \\
+%Leverage coefficient   &$-$ &$-$& $-$ &$-$ &$-$ &$-$ \\
+Log-likelihood   &$3601.888$ &$6157.784$& $5391.126$ &$6375.122$ &$4508.567$ \\
+\footnotesize{\textbf{Pricing performances}} :  & && $-$ &$-$ &$-$ \\ 
+in-IVRMSE            &$0.06380$ &$0.05609$ & $0.05737$ &$0.05231$ &$0.05397$ \\
+out-IVRMSE        &$0.08184$&$0.07343$ & $0.07463$ &$0.06875$ &$0.07031$\\
+\footnotesize{\textbf{Predictibility of VIX :}}  & && $-$ &$-$ &$-$ \\ 
+$ MPE_{VIX} $   &$0.98350$  &$0.87433$& $0.81234$ &$0.81472$ &$0.77446$\\ 
+$ MAE_{VIX} $   & $0.99918$&$0.90143$ & $0.83630$ &$0.82288$ &$0.74113$\\
+$ RMSE_{VIX} $  &$1.19059$&$1.22255$& $1.00021$ &$1.12682$ &$0.96737$ \\ \hline 
+\bottomrule
+\end{tabular}\hspace*{-1cm}
+\begin{small}
+\caption{Summary fits of Joint MLE-estimation procedure with Returns data, Option-Returns data or  VIX-Returns data  in of sample 2009-2010.}
+\label{TableMMLE2009a}
+\end{small}
+\end{table}
+
+
+
+
+
+\newpage
+R\'esultat Gaussian-GARCH-GJR:
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Estimation            &\multicolumn{2}{c|}{ Gaussian-GARCH-GJR} \\ \hline
+
+Parameters               &  \footnotesize{$M^{Ess}$ Ret}  &  \footnotesize{$M^{Ess}$ Ret-VIX}  \\ \hline
+\textbf{$a_{0}$}      &$1.445\ e^{-05}$ & $4.966\ e^{-06}$\\
+     &$(0.00075)$ &$(0.00008)$  \\
+\textbf{$a_{1}$}      &$3.107 e^{-01}$& $1.240\ e^{-02}$ \\ 
+    &$(0.00450)$ &$(0.00120)$ \\
+\textbf{$a_{2}$}      &$1.055\ e^{-01}$& $2.314\ e^{-02}$ \\ 
+     &$(0.00001)$ &$(0.00001)$  \\
+\textbf{$b_{1}$}      &$6.311 \ e^{-01}$&$8.504\ e^{-01}$ \\
+    &$(0.00001)$ &$(0.00001)$ \\
+\textbf{$\gamma$}     &$-$ & $-$\\ 
+     &$-$ &$-$ \\
+\textbf{$\lambda_{0}$}      &$4.208\ e^{-03}$ &  $ 1.989\ e^{-01}$ \\   
+     &$(0.00481)$ &$(0.00261)$\\
+\textbf{$\gamma^{*}$}     &$-$ & $-$ \\ 
+     &$-$ &$-$  \\
+\textbf{$\varrho$}     &$-$ &  $0.8924$\\ 
+     &$-$ &$(0.01179)$\\[0.1cm] 
+ Times $ (h) $ &$0.0018$ &$0.0066$ \\ [0.1cm] 
+\textbf{Model Properties} :  & & \\ 
+Persistence           &$-$  &$-$\\ 
+Annualized volatility & $-$ &$-$  \\
+Leverage coefficient   &$-$ &$-$ \\
+Log-likelihood   &$5284.952$ &$6075.361$\\
+\textbf{Pricing performances} :  & &  \\ 
+IVRMSE in sample             &$0.061832$ &$0.052961$ \\
+IVRMSE out of sample         &$0.069847$&$0.064482$ \\
+\textbf{Predictibility of VIX :} :  & & \\ 
+$ MPE_{VIX} $   &$0.860545$  &$0.654981$\\ 
+$ MAE_{VIX} $   & $0.980997$&$0.639153$ \\
+$ RMSE_{VIX} $  &$1.001299$&$0.803589$\\ \hline 
+\bottomrule
+\end{tabular}\hspace*{-1cm}
+\begin{small}
+\caption{Summary fits of Joint MLE-estimation procedure  of historical parameters with Option-Returns data or  VIX-Returns data  in of sample 2009-2010.}
+\label{TableMMLE2009all}
+\end{small}
+\end{table}
+
+
+\newpage
+R\'esultat IG-GARCH:
+
+\begin{table}[h]
+\centering
+\caption{\textcolor[rgb]{0,0,0}{Estimated parameters for the IG model and the two stochastic discount factors.}} 
+{\begin{tabular}{@{}cccccc@{}} \toprule
+Joint-Estimation            & Returns & \multicolumn{2}{c}{Returns-Option} & \multicolumn{2}{c}{Returns-VIX} \\\midrule
+Model               & &$ M^{ess}_{t}$   & $ M^{Ushp}_{t}$     & $ M^{ess}_{t}$    & $ M^{Ushp}_{t}$   \\ \hline
+\textbf{Parameters} : &  && & & \\ [0.1cm] 
+\textbf{$ w $}      &$ 9.8322 \ e^{-06}$ &$9.9095 \ e^{-06}$ &$9.9109\ e^{-06}$ &$ 1.0166\ e^{-06}$ &$ 9.8762\ e^{-06}$\\ 
+Stand.Dev           &$(0.00485)$ &$(0.00452)$ &$(0.00301)$&$(0.00248)$  &$(0.00752)$\\ 
+\textbf{$ b $}  & $1.2158 \ e^{-03}$  &$1.4019 \ e^{-03}$ &$2.0123\ e^{-03}$&$2.0418\ e^{-03}$ &$8.6267\ e^{-03}$\\[0.07cm]
+Stand.Dev           &$(0.00001)$ &$(0.00001)$ &$(0.00015)$&$(0.00045)$  &$(0.00003)$\\ 
+\textbf{$ c $}     & $4.5438  \ e^{-05}$ &$5.1407  \ e^{-05}$ & $4.7859\ e^{-05}$&$ 4.5018 \ e^{-05}$ &$4.4913 \ e^{-05}$\\ 
+Stand.Dev           &$(0.00428)$ &$(0.00035)$ &$(0.00025)$&$(0.00002)$  &$(0.00001)$\\ 
+\textbf{$ a $}     &$3.3174 \ e^{+03}$&$3.0174 \ e^{+03}$ &$3.3174\ e^{+02}$&$ 3.3175 \ e^{+03}$ &$3.3174 \ e^{+03 }$\\ 
+Stand.Dev           &$(0.00004)$ &$(0.01520)$ &$(0.03471)$&$(0.01450)$  &$(0.00001)$\\ 
+\textbf{$\eta$}    &$-7.5313 \ e^{-03}$&$-9.0121\ e^{-03}$&$-8.176  \ e^{-03}$&$-7.465\ e^{-03}$ &$-7.516 \ e^{-03}$\\ 
+Stand.Dev           &$(0.00150)$ &$(0.00457)$ &$(0.00145)$&$(0.00365)$  &$(0.00096)$\\ 
+\textbf{$ \nu $}   &$1.2596 \ e^{+02}$&$1.2592 \ e^{+02}$ &$1.2584 \ e^{+02}$ &$1.2588 \ e^{+02}$ &$1.2583\ e^{+02}$\\
+Stand.Dev           &$(0.00001)$ &$(0.00001)$ &$(0.00001)$&$(0.00001)$  &$(0.00001)$\\ 
+\textbf{$\pi$}     & $-$ &$-$ &$1.1305 \ $ &  $-$           &$1.2971 $\\ 
+Stand.Dev          &$-$  &$-$ &$(0.00072)$&$-$  &$(0.00108)$\\ 
+\textbf{$\varrho$}  & &$-$ &$-$ &$ 9.9455 \ e^{-01}$  &$9.9625 \ e^{-01}$\\ 
+Stand.Dev           &$-$ &$-$ &$-$&$(0.00150)$  &$(0.00206)$\\ 
+\textbf{Model Properties} :  & & & & & \\ 
+ Times $ (h) $           &$0.0097$ &$19.5574$ &$20.4178$&$0.0028$  &$0.0041$\\ 
+Persistence           &$-$  &$-$ &$-$ &$-$&$-$\\ 
+Annualized volatility & $-$ &$-$ &$-$ &$-$ &$-$\\
+Leverage coefficient   &$-$ &$-$ &$-$ &$-$ &$-$\\
+Log-likelihood   &$3873.447$ &$8919.914$ &$8930.341$ &$4451.978$ &$4625.001$\\
+% &$ 5471.516$ &$4706.226 $ &$5840.641$        &$4625.001$\\ 
+
+\textbf{Pricing performances} :  & & & & & \\ 
+IVRMSE in sample             &$0.054358$ &$0.046160$ &$0.043546$ &$0.046483$   &$0.043872$\\
+IVRMSE out of sample         &$0.067427$ &$0.061058$ &$0.056641$ &$0.061834$   &$0.057568$\\
+\textbf{Predictibility of VIX :} :  & & & & & \\ 
+$ MPE_{VIX} $          &$0.9851$  &$0.7248$ &$0.7187$ &$0.6709$&$0.6392$\\ 
+$ MAE_{VIX} $ & $1.0967$ &$0.7408$ &$0.7293$ &$0.6823$&$0.6505$\\
+$ RMSE_{VIX} $   &$ 1.2023$ &$0.8682$ &$0.8593$ &$0.8210$&$0.7846$\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+
+
+
+\end{document}

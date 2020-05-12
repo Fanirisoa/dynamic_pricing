@@ -41,7 +41,7 @@ densite <- function(para_M,l){
   if (lamda0<=0){drapeau=1}
   
   if (is.na(l)==TRUE){drapeau=1}else{
-    if (l<=0){drapeau=1}
+    #   if (l<=0){drapeau=1}
     if (abs(l)==Inf){drapeau=1}
     if (1/abs(l)==Inf){drapeau=1}
   }
@@ -59,8 +59,7 @@ densite <- function(para_M,l){
   ## if (delta_1<=0){drapeau=1}
   
 
-  print(l)
-  print(drapeau)
+
   if (drapeau==0){
     resultat=dgh(l,alpha_1,beta_1,delta_1,mu_1,-1/2)
 
@@ -69,7 +68,6 @@ densite <- function(para_M,l){
     resultat=NA
   }
   
-  print(resultat)
   return(resultat)
 }
 
@@ -88,7 +86,7 @@ GJR_likelihood_ret <- function(para_M,Data.returns) {
   alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]                                  ## para_distribution<-c() set up the parameters of NIG
   a0=para_M[5]; a1=para_M[6]; a2=para_M[7];  b1= para_M[8] ;  lamda0= para_M[9]  ; ro=para_M[10]     ## para_h<-c() set up the parameters of the model
   
-  
+
   gamma_0 = sqrt((alpha^2) -(beta^2))
   
   ## Normalisation :
@@ -113,18 +111,17 @@ GJR_likelihood_ret <- function(para_M,Data.returns) {
   z = c()                                                        ####  A vector containing z from the model,  innovation
   z[1]=(ret[1]-rt[1] -mt[1])/ (sqrt(h[1]))  
   
-  dens = densite(para_distribution,para_h,z[1])
+  dens <- densite(para_M,z[1])
   
   for (i in 2:Z1){
     h[i]=a0 +b1*h[i-1]+(a1*(ret[i-1]-rt[i-1]-mt[i-1])^2)+ (a2*max(0,-(ret[i-1]-rt[i-1]-mt[i-1])^2))
     mt[i]=lamda0*((h[i])^(1/2))- (h[i])/2
     z[i]=(ret[i]-rt[i] -mt[i])/ (sqrt(h[i])) 
-    temp=densite(para_distribution,para_h,z[i])
+    temp=densite(para_M,z[i])
     dens<-dens+log(temp)
   }
   
-  return(dens/length(dens))
-  
+  return(-dens/length(dens))
 }
 
 

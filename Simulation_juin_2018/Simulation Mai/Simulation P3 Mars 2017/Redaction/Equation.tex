@@ -1,0 +1,390 @@
+%\documentclass[review,times]{elsarticle}
+%\documentclass[final,1p,times]{elsarticle}
+\documentclass[preprint,times,12pt]{elsarticle}
+%\documentclass[final,1p,times,twocolumn]{elsarticle}
+%\documentclass[final,3p,times]{elsarticle}
+%\documentclass[final,3p,times,twocolumn]{elsarticle}
+%\documentclass[final,5p,times]{elsarticle}
+%\documentclass[final,5p,times,twocolumn]{elsarticle}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{anysize}
+%\usepackage{natbib}
+\usepackage{rotating,booktabs}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{listings}
+%\usepackage[options]{natbib}
+%\usepackage{lscape}
+%\usepackage{fancyhdr}
+%\linespread{1.11}
+%\usepackage{hyperref}
+\usepackage{dsfont}
+%\setlength{\parindent}{0pt}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{color}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+\renewcommand{\theequation}{\arabic{section}\mbox{.}\arabic{equation}}
+\newcommand{\id}{\mbox{\boldmath 1 \hspace{-0.95em}1}}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}{Proposition}[section]
+%\newtheorem{corollary}{Corollary}[section]
+\newtheorem{rem}{Remark}[section]
+%\newenvironment{proof}[1][Proof]{\textbf{#1} }{\hfill $\blacksquare$}
+\DeclareMathOperator{\comb}{C}
+\DeclareMathOperator{\e}{e}
+\newcommand{\ud}{\mathrm{d}}
+%\linespread{1.50}
+%\journal{***Journal Name here***}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%\begin{frontmatter}
+%
+%\title{\textsc{New paper : estimation of GARCH}}
+%\author[rvt,focal]{Rahantamialisoa. H. Fanirisoa\corref{cor1}}
+%\ead{fanirisoa.zazaravaka@gmail.com}
+%\cortext[cor1]{Corresponding author. University Paris 1 Panth\'eon-Sorbonne, Maison des Sciences {\'E}conomiques (MSE) MSE, 106-112 Boulevard de l'H\^opital, 75013 Paris, France.}
+%\address[focal]{Centre d'{\'E}conomie  de la Sorbonne (CES), Maison des Sciences {\'E}conomie (MSE), University Paris 1 Panth\'eon-Sorbonne, 106-112 Boulevard de l'H\^opital, 75013 Paris, France.}
+%\address[rvt]{Dipartimento di Economia - Universit\`a Ca' Foscari Venezia - Venezia (San Giobbe), Italy}
+
+%
+%\begin{abstract}
+%\\
+%\end{abstract}
+
+%
+%\begin{keyword}
+%\sep QML Estimation \sep $ VIX $\sep $ GARCH $\sep $ S\&P500 $. \\~~\\
+%\textit{JEL Classification}: C02; C21; C51; C52.
+%\end{keyword}
+%
+%\end{frontmatter}
+
+%%\linenumbers
+%\section*{Proposition that are used}
+%\begin{proposition}
+%The dynamics of the log returns under $ \mathbb{Q} $ is given by:
+%\begin{equation}\label{HestonNandi}
+%\left\{
+%  \begin{array}{rcl}
+%X_{t}& =&  r-\dfrac{h_{t}}{2} + \sqrt{h_{t}}\xi_{t}\\
+%h_{t}&=&F\left(\xi_{t-1}-\dfrac{m_{t-1}}{\sqrt{h_{t-1} }}-\dfrac{\sqrt{h_{t-1} }}{2},h_{t-1} \right).\\
+%  \end{array}
+%\right.
+%\end{equation} 
+%where the $ \xi_{t} $ are $ i.i.d \ N(0,1) $ under $ \mathbb{Q} $.
+%\end{proposition}
+
+\section{The Heston Nandi Model: GARCH-HN-Gaussian}
+We consider a Heston model
+\begin{equation}\label{HestonNandistar}
+\left\{
+  \begin{array}{rcl}
+X_{t}& = & r+\lambda_{0}h_{t} + \sqrt{h_{t}}z_{t}\\
+h_{t}=F\left(z_{t-1},h_{t-1} \right) & = & a_{0}+a_{1}\left(z_{t-1}-\gamma\sqrt{h_{t-1}} \right)^{2}+b_{1}h_{t-1}.\\
+  \end{array}
+\right.
+\end{equation}
+where $ z_{t} $ are i.i.d $ \mathcal{N}(0,1) $ random. In this case, a uniaue second stationary solution  exists if and only if $a_{1}\gamma^{2}+b_{1}<1  $. The average level of volatility is a comination of all the volatility parameters, as :
+\begin{equation*}
+h_{0}=\mathbb{E}\left[h_{t}\right] =\dfrac{a_{0}+a_{1}}{1-b_{1}-a_{1}(\gamma)^{2}}.
+\end{equation*}
+
+\subsection{ GARCH-HN-Gaussian-Ess: $M^{ess}_{t}=e^{\theta_{t}X_{t}+\varepsilon_{t}}$}
+
+The dynamic still the same under the risk-neutral measure with the same parameter . The difference between the empirical and risk neutral dynamic that is the innovation $ z_{t+1} $ is Gaussian with scale parameter :
+\begin{equation*}
+\lambda_{0}^{*}=\lambda_{0}+\theta  \qquad \text{and }\qquad h_{t+1}^{*}=h_{t+1}
+\end{equation*}
+The parameters of the Linear kernel density can be obtain from the pricing relation.  We can obtain the expression of $\theta$: 
+\begin{equation*}
+(\lambda_{0}+\theta)h_{t+1}+\frac{h_{t+1}}{2}=0 \qquad\Rightarrow  \qquad\theta =-\frac{1}{2}-\lambda_{0}\qquad\Rightarrow  \qquad \lambda_{0}^{*}=-\frac{1}{2}
+\end{equation*}
+
+The associated risk neutral dynamics is described as follows :
+\begin{equation}\label{HestonNandiriskdyn}
+\left\{
+  \begin{array}{rcl}
+X_{t}& = & r-\frac{1}{2}h_{t} + \sqrt{h_{t}}z_{t}^{*}\\
+h_{t}& = & a_{0}+a_{1}\left(z_{t-1}^{*}-\left(\gamma+\lambda_{0}+\frac{1}{2}\right)\sqrt{h_{t-1}} \right)^{2}+b_{1}h_{t-1}.\\
+  \end{array}
+\right.
+\end{equation}
+where the first value for the variance is set to be equal to its long term value :
+\begin{equation}
+h_{0}^{*}=\dfrac{a_{0}+a_{1}}{1-b_{1}-a_{1}(\gamma^{*})^{2}}=\dfrac{a_{0}+a_{1}}{1-b_{1}-a_{1}(\gamma+\lambda_{0}+\frac{1}{2})^{2}}
+\end{equation}
+
+
+\subsection{VIX for  GARCH-HN-Gaussian :}
+\begin{equation}
+\mathbb{E}_\mathbb{Q}\left[ h_{t+j} \mid \mathcal{F}_{t+j-2}\right] =h_{t+j-1} \psi^{*}  + h_{0}^{*}\left[1-\psi^{*} \right]
+\end{equation}
+with  $ \psi^{*}=b_{1}+a_{1}(\gamma+\lambda_{0}+\frac{1}{2})^{2}$.
+
+
+
+
+\subsection{ GARCH-HN-Gaussian-Qua: $M^{qua}_{t}=e^{\theta_{2,t}X^{2}_{t}+\theta_{1,t}X_{t}+\varepsilon_{t}}$}
+
+On a dans la page $ 98 $, assuming a constant proportional wedge between $h_{t}$  et $h_{t}^{*}$ i.e $\left( \dfrac{h_{t}^{*}}{h_{t}}=\pi >0\right)$ we have :
+\begin{equation*}
+1+2 \theta_{2,t}^{q}h_{t}^{*}=\pi \qquad \text{and }\qquad 1-2 \theta_{2,t}^{q}h_{t}=\dfrac{1}{\pi}
+\end{equation*}
+Thus, we obtain under $ \mathbb{Q}^{Qua}$,
+
+\begin{equation}\label{HestonNandiriskdynqua}
+\left\{
+  \begin{array}{rcl}
+X_{t}& = & r-\frac{1}{2}h_{t}^{*} + \sqrt{h_{t}^{*}}z_{t}^{*}\\
+h_{t}& = & \pi a_{0}+\pi^{2} a_{1}\left(z_{t-1}^{*}-\left(\dfrac{\gamma}{\pi}+\dfrac{\lambda_{0}}{\pi}+\dfrac{1}{2}\right)\sqrt{h_{t-1}^{*}} \right)^{2}+b_{1}h_{t-1}^{*}.\\
+  \end{array}
+\right.
+\end{equation}
+
+where $ z_{t}^{*} $ are  i.i.d $ \mathcal{N}(0,1) $ under $ \mathbb{Q}^{Qua}$.
+
+
+\subsection{VIX for  GARCH-HN-Gaussian :}
+\begin{align*}
+\mathbb{E}_\mathbb{Q}\left[ h_{t+j} \mid \mathcal{F}_{t+j-2}\right] &=\mathbb{E}_\mathbb{Q}\left[ \dfrac{h^{*}_{t+j}}{\pi} \mid \mathcal{F}_{t+j-2}\right]\\ 
+ &=\dfrac{1}{\pi}\mathbb{E}_\mathbb{Q}\left[ \pi a_{0}+\pi^{2} a_{1}\left(z_{t+j-1}^{*}-\left(\dfrac{\gamma}{\pi}+\dfrac{\lambda_{0}}{\pi}+\dfrac{1}{2}\right)\sqrt{h_{t+j-1}^{*}} \right)^{2}+b_{1}h_{t+j-1}^{*}\right]\\
+ &= h_{t+j-1} \psi^{*}  + h_{0}^{*}\left[1-\psi^{*} \right]
+\end{align*}
+with  $ \psi^{*}= b_{1}-\pi^{2} a_{1}\left( \dfrac{\gamma}{\pi}+\dfrac{\lambda_{0}}{\pi}+\dfrac{1}{2}\right) ^{2}$ and $ h_{0}^{*}=\dfrac{  a_{0}+\pi  a_{1}}{1-\psi^{*}} $.
+
+
+
+
+\section{The GJR  Model: GARCH-GJR-Gaussian}
+
+We consider a GJR Model\footnote{I
+It is possible to used other equivalet definition as explain in the book page $35$  definition $2.3.1$ 
+\begin{equation*}\label{GJR}
+h_{t}= a_{0}+a_{+} \left(\sqrt{h_{t}}z_{t}\right)^{2}\mathds{1}_{\left\lbrace \sqrt{h_{t}}z_{t}\geqslant 0\right\rbrace }+a_{-} \left(\sqrt{h_{t}}z_{t}\right)^{2}\mathds{1}_{\left\lbrace \sqrt{h_{t}}z_{t}< 0\right\rbrace }+b_{1}h_{t-1}.\\
+\end{equation*} 
+where $  X_{t-1}-  r -\lambda_{0}\sqrt{h_{t-1}}+\frac{h_{t}}{2}= \sqrt{h_{t}}z_{t} $,\  $a_{+}=a_{1}$ and $a_{-}=a_{1}+a_{2}$.}
+ \begin{equation*}
+\left\{
+  \begin{array}{rcl}
+X_{t}& = & r+\lambda_{0}\sqrt{h_{t}}-\dfrac{h_{t}}{2}+\sqrt{h_{t}}z_{t}\\
+h_{t}& = & a_{0}+b_{1}h_{t-1}+a_{1} \left(X_{t-1}-  r -\lambda_{0}\sqrt{h_{t}}+\dfrac{h_{t}}{2}\right)^{2}
++a_{2} \max\left( 0, - \left(X_{t-1}-  r -\lambda_{0}\sqrt{h_{t}}+\dfrac{h_{t}}{2} \right)^{2}\right) \\
+  \end{array}
+\right.
+\end{equation*}
+where $ z_{t} $ are i.i.d $ \mathcal{N}(0,1) $ random variables under $ \mathbb{P} $, with $a_{0}> 0$ and, $a_{1}, a_{2}, b_{1}\geqslant 0$ for the positive conditional variance and  $\lambda_{0}> 0$ for the positive equity risk-premium.   The variance is weak stationary under the physical $ \Psi= b_{1}+a_{1}+\dfrac{a_{2}}{2} <1$. The unconditional variance under the physical measure can be expressed as $h_{0}=\dfrac{a_{0}}{1-\Psi}$.
+
+
+
+
+\subsection{ GARCH-GJR-Gaussian-Ess: $M^{ess}_{t}=e^{\theta_{t}X_{t}+\varepsilon_{t}}$}
+
+According to Duan's (1995) under the Gaussian framework, total return dynamics can be expressed under the risk-neutral measure as : 
+ \begin{equation*}
+\left\{
+  \begin{array}{rcl}
+X_{t}& = & r-\dfrac{h_{t}}{2}+\sqrt{h_{t}}\tilde{z}_{t}\\
+h_{t}& = & a_{0}+b_{1}h_{t-1}+a_{1} \left(X_{t-1}-  r -\lambda_{0}\sqrt{h_{t}}+\dfrac{h_{t}}{2} \right)^{2}
++a_{2} \max\left( 0, - \left(X_{t-1}- r-\lambda_{0}\sqrt{h_{t}}+\dfrac{h_{t}}{2}  \right)^{2}\right) \\
+  \end{array}
+\right.
+\end{equation*}
+where $\tilde{z}_{t}\sim \mathcal{N}(0,1)$. The variance is weak stationary under the risk-neutral measure if  
+\begin{equation*} 
+\tilde{\Psi}= b_{1}+ \left[ a_{1}+a_{2} N(\lambda_{0})\right]\left(1+\lambda_{0}^{2} \right) +a_{2}\lambda_{0}n(\lambda_{0})<1
+\end{equation*}
+where $N(.)$ and $n(.)$ denote the standard normal cumulative and density distribution functions. The unconditional variance $\tilde{h}_{0}$ associate to the risk neutral measure :
+\begin{equation*}
+\tilde{h}_{0}^{*} =\dfrac{a_{0}}{1-\tilde{\Psi}}
+\end{equation*}
+Here $ \Psi $	and $ \tilde{\Psi} $ denote the volatility persistence under the physical and risk-neutral measures, respectively.
+
+\subsection{VIX for  GARCH-HN-Gaussian :}
+\begin{equation}
+\mathbb{E}_\mathbb{Q}\left[ h_{t+j} \mid \mathcal{F}_{t+j-2}\right] =h_{t+j-1} \tilde{\Psi}  + h_{0}^{*}\left[1-\tilde{\Psi}\right].
+\end{equation}
+
+
+
+
+
+\subsection{ GARCH-GJR-Gaussian-Qua: $M^{qua}_{t}=e^{\theta_{2,t}X^{2}_{t}+\theta_{1,t}X_{t}+\varepsilon_{t}}$}
+
+On a dans la page $ 97 $ proposition 3.5.1 (Monfort and Pegoraro 2012), if $ \forall t \in \left\lbrace 1, \cdots, T\right\rbrace  $, $ \theta_{2,t}^{q}<\dfrac{1}{2 h_{t}}$, 
+\begin{itemize}
+\item the functional relation between $\theta_{1,t}^{q}$ and $\theta_{2,t}^{q}$ is global and explicit:
+\begin{equation*}
+\dfrac{h_{t}}{2\left( 1-2 \theta_{2,t}^{q}\right)}+\dfrac{h_{t}\theta_{1,t}^{q}+r+\lambda_{0}\sqrt{h_{t}}-\dfrac{h_{t}}{2}}{ 1-2 \theta_{2,t}^{q}} =r
+\end{equation*}
+\item Under $ \mathbb{Q}^{Qua}$ :
+ \begin{equation*}
+\left\{
+  \begin{array}{rcl}
+X_{t}& = & r-\dfrac{h_{t}^{*}}{2}+\sqrt{h_{t}^{*}}\tilde{z}_{t}\\
+\dfrac{h_{t}^{*}}{1+2 \theta_{2,t}^{q}h_{t}^{*}}& =& F\left(\sqrt{1+2 \theta_{2,t}^{q}h_{t}^{*}}\left[-\dfrac{m_{t-1}}{\sqrt{h_{t-1}^{*}}} -\dfrac{\sqrt{h_{t-1}^{*}}}{2}+\tilde{z}_{t}\right],\dfrac{h_{t-1}^{*}}{1+2 \theta_{2,t-1}^{q}h_{t-1}^{*}}  \right) \\
+  \end{array}
+\right.
+\end{equation*}
+where $ h_{t}^{*}=\dfrac{h_{t}}{ 1-2 \theta_{2,t}^{q}h_{t}} $, and   $\tilde{z}_{t}$ are i.i.d $ \mathcal{N}(0,1) $ random variables, with 
+ \begin{equation*}
+F\left(X_{t-1},h_{t} \right)=  a_{0}+b_{1}h_{t-1}+a_{1} \left(X_{t-1}-  r -\lambda_{0}\sqrt{h_{t}}+\dfrac{h_{t}}{2} \right)^{2}
++a_{2} \max\left( 0, - \left(X_{t-1}- r-\lambda_{0}\sqrt{h_{t}}+\dfrac{h_{t}}{2}  \right)^{2}\right).
+\end{equation*}
+
+\end{itemize}
+
+
+\section{The Inverse-Gaussian-GARCH   Model: IG-GARCH}
+
+We consider  
+\begin{equation}\label{equa1}
+\left\{
+  \begin{array}{rcl}
+X_{t} & = &  r+\nu h_{t} +\eta y_{t} \\
+h_{t}& = &w+bh_{t-1} + cy_{t-1} +a\frac{h_{t-1}^{2}}{y_{t}}\\
+  \end{array}
+\right.
+\end{equation}
+where the  $(y_t)_{ t\in \{1,...,T\}}$ are  random variables generating an information filtration denoted by $(\mathcal{F}_t)_{ t\in \{0,...,T\}}$ where $\mathcal{F}_0=\{\emptyset,\Omega\}$ and $(\mathcal{F}_t=\sigma(y_u;  1 \leq u\leq t))_{ t\in \{1,...,T\}}$. Moreover,  we suppose that, given  $\mathcal{F}_{t-1}$, $y_{t}$ follows an Inverse Gaussian distribution with degree of freedom  $\delta_{t}=\frac{h_{t}}{\eta^{2}}$.
+
+\subsection{ IG-GARCH-Esscher : $M^{ess}_{t}=e^{\theta_{t}X_{t}+\varepsilon_{t}}$}
+
+Assuming that the process $(X_{t})_{t}$ is defined by $\ref{equa1}$, then, Under $\mathbb{Q}^{ess}$, the process $(X_{t})_{t}$ is again an IG-GARCH model with changed parameters :
+\begin{equation}\label{Lineker}
+\left\{
+  \begin{array}{rcl}
+X_{t+1}=\log\left(\frac{S_{t+1}}{S_{t}}\right) & = &  r +\nu^{*} h^{*}_{t+1} +\eta^{*} y^{*}_{t+1} \\
+h^{*}_{t+1}& = &w^{*}+b^{*}h^{*}_{t} + c^{*}y^{*}_{t} +a^{*}\frac{(h^{*}_{t})^{2}}{y^{*}_{t}}\\
+  \end{array}
+\right.
+\end{equation}
+\begin{equation*}
+\begin{array}{rl}
+\text{where} \qquad \quad\nu^{*}&=\nu\left(\frac{\eta^{*}}{\eta}\right)^{-\frac{3}{2}},\quad y^{*}_{t+1}=y_{t+1}\left(\frac{\eta^{*}}{\eta}\right)^{-1},\\
+ w^{*}&=w\left(\frac{\eta^{*}}{\eta}\right)^{\frac{3}{2}},\quad c^{*}=c\left(\frac{\eta^{*}}{\eta}\right)^{\frac{5}{2}}, \quad a^{*}=a\left(\frac{\eta^{*}}{\eta}\right)^{-\frac{5}{2}},
+\end{array}
+\end{equation*}with $\eta^{*}=\dfrac{\eta}{1-2\theta^*\eta}$
+and where, given  $\mathcal{F}_{t-1}$, $y_{t}^{*}$ follows an Inverse Gaussian distribution with degree of freedom  $\delta^*_{t}=\frac{h^*_{t}}{(\eta^*)^{2}}$ and $(\theta^{*}_t,\varepsilon_{t}^{*})$  by :
+\begin{equation*}
+\begin{array}{cl}
+&\theta^{*}_t=\theta^{*}=\frac{1}{2}\left[ \eta^{-1}-\frac{1}{\nu^{2} \eta^{3}}\left[1+\frac{\nu^{2} \eta^{3}}{2} \right]^{2}\right]\\
+&\varepsilon_{t}^{*}=-r(\theta^{*}+1)-\theta^{*}\nu h_{t} - \left[ \delta_{t}\left(1-\sqrt{(1-2\theta^{*}\eta)}\right) \right].
+\end{array}
+\end{equation*} 
+
+
+
+\subsection{IG-GARCH-Ushaped : $ M^{Ushp}_{t}=e^{\theta_{t}X_{t}+\varepsilon_{t}+\frac{\rho_{t}}{y_{t}}}$}
+
+Under the risk-neutral probability $\mathbb{Q}^{Ushp}$ associated to $(M^{Ushp}_{t})_{t\in \{1,\cdots,T\}}$, the overall dynamics of the log-return is, once again  similar the historical one: 
+
+
+    $\forall t\in \{1,\cdots,T\}$, if we assume a constant proportional wedge between $h_t$ and $h_t^*$ (i.e $\dfrac{h^{*}_{t}}{h_{t}} =\pi$) the dynamics of  $Y_{t}$ under   $\mathbb{Q}^{Ushp}$is of the form:
+
+\begin{equation}\label{Quaker}
+\left\{
+  \begin{array}{rcl}
+X_{t+1}  & = &  r +\nu^{*} h^{*}_{t+1} +\eta^{*} y^{*}_{t+1} \\
+h^{*}_{t+1}& = &w^{*}+b h^{*}_{t} + c^{*}y^{*}_{t} +a^{*}\dfrac{(h^{*}_{t})^{2}}{y^{*}_{t}}\\
+  \end{array}
+\right.
+\end{equation}
+\begin{equation*}
+\begin{array}{rl}
+\text{where} \qquad \quad&\nu^{*}=\dfrac{\nu}{\pi},\quad w^{*}=w\pi,\quad c^{*}=\dfrac{c\pi \eta^*}{\eta},\quad a^{*}=\dfrac{a\eta}{\pi \eta^*},\\
+&\eta^*=\sqrt[3]{{\pi^{2}\over \nu^{2}}\left( -1+\sqrt{1+{8\nu\over 27 \pi}}\right) } +\sqrt[3]{{\pi^{2}\over \nu^{2}}\left( -1-\sqrt{1+{8\nu\over 27 \pi}}\right)},
+\end{array}
+\end{equation*}
+and where, given $\mathcal{F}_t$, $y^{*}_{t+1}$ follows an IG distribution  with degree of freedom $ \delta_{t+1}^{*}=\dfrac{h^{*}_{t+1}}{(\eta^*)^{2}}$.
+
+\subsection{VIX for  IG-GARCH-Ushaped :}
+
+Under both specifications of the pricing kernel, the risk-neutral dynamics of the IG-GARCH  model may be written as 
+
+\begin{equation*}
+\left\{
+  \begin{array}{rcl}
+X_{t+1} & = &  r +\nu^{*} h^{*}_{t+1} +\eta^{*} y^{*}_{t+1} \\
+h^{*}_{t+1}& = &w^{*}+b^{*}h^{*}_{t} + c^{*}y^{*}_{t} +a^{*}\frac{(h^{*}_{t})^{2}}{y^{*}_{t}}\\
+  \end{array}
+\right.
+\end{equation*}where, given $\mathcal{F}_t$, $y^{*}_{t+1}$ follows an IG distribution with parameter $\frac{h^*_{t+1}}{\eta^*}$ under the risk-neutral probability $\mathbb{Q}$. Thus\footnote{Using the fact that an IG random variable $Z$ with degree of freedom $\delta$ fulfills $E[\frac{1}{Z}]=\frac{1}{\delta}+\frac{1}{\delta^2}$.},
+
+
+\begin{align*}
+\mathbb{E}_\mathbb{Q}\left[ h_{t+j} \mid \mathcal{F}_{t+j-2}\right] &=\mathbb{E}_\mathbb{Q}\left[ \dfrac{h^{*}_{t+j}}{\pi} \mid \mathcal{F}_{t+j-2}\right]\\ 
+ &=\dfrac{1}{\pi}\left[ w^{*} +b h^*_{t+j-1}+\dfrac{c^{*}}{(\eta^{*})^{2}} h^{*}_{t+j-1}+a^{*}\mathbb{E}_\mathbb{Q}\left[\dfrac{(h^*_{t+j-1})^{2}}{y^{*}_{t+j-1}} \mid \mathcal{F}_{t+j-2} \right]\right] \\
+  &= \dfrac{1}{\pi}\left[w^{*} +\left[b +\dfrac{c^{*}}{\left( \eta^{*}\right) ^{2}} + a^{*}  \left(\eta^{*}\right)^{2}\right] h^{*}_{t+j-1} + a^{*} \left( \eta^{*}\right)^4\right] \\
+  &= \dfrac{1}{\pi}\left[h^*_{t+j-1} \psi^{*}  + h^{*}_{0}\left[1-\psi^{*} \right]\right] = h_{t+j-1} \psi^{*}  + h_{0}\left[1-\psi^{*} \right] 
+\end{align*}
+
+
+
+
+
+\section{Comparing predictibility of time series VIX :}
+\subsection{The mean of pricing errors (MPE):}
+\begin{equation*}
+MPE_{VIX}=\dfrac{1}{N}\sum^{N}_{j=1}\left(\dfrac{VIX^{m}_{j}}{VIX^{M}_{j}}-1\right) 
+\end{equation*}
+where $ VIX^{m}_{j} $ is the computed $ VIX $ and  $VIX^{M}_{j}$ the market $ VIX $ for date $ j $.
+
+\subsection{The mean of absolute pricing errors (MAE):}
+\begin{equation*}
+MAE_{VIX}=\dfrac{1}{N}\sum^{N}_{j=1}\left(\abs*{\dfrac{VIX^{m}_{j}}{VIX^{M}_{j}}-1}\right) 
+\end{equation*}
+where $ VIX^{m}_{j} $ is the computed $ VIX $ and  $VIX^{M}_{j}$ the market $ VIX $ for date $ j $.
+\subsection{The root mean of square pricing errors (RMSE):}
+\begin{equation*}
+RMSE_{VIX}=\sqrt{\dfrac{1}{N}\sum^{N}_{j=1}\left( VIX^{m}_{j}-VIX^{M}_{j} \right)^{2}} 
+\end{equation*}
+where $ VIX^{m}_{j} $ is the computed $ VIX $ and  $VIX^{M}_{j}$ the market $ VIX $ for date $ j $.
+
+
+
+
+\end{document}
