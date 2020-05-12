@@ -19,7 +19,7 @@ return(uni)
 ######################################################################
 ######         Compute the variance given the paste variance        ##
 ######################################################################
-variance<-function(para_h,innovation,ht){
+variance<-function(para_h1,innovation,ht){
   # para_h<-c() set up the parameters of the model 
   a0=para_h1[1]; a1=para_h1[2]; a2=para_h1[3];  b1= para_h1[4] ;  lamda0= para_h1[5]  ; ro=para_h1[6]
   

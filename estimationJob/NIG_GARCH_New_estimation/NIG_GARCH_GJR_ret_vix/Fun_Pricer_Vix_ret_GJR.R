@@ -24,7 +24,7 @@ Pricer<-function(N,para_h1,para_distribution1,Data.N){
   ##   Step 1 : Sampling the returns  ## 
   ######################################  
   
-  Y_t= lapply(1:Z1, function(x) Matrice_ret(x))
+  Y_t= lapply(1:Z1, function(x) Matrice_ret(x,para_h1,para_distribution1))
   
   
   #####################################################     
