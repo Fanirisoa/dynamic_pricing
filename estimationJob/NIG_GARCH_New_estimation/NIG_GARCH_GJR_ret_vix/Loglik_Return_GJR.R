@@ -25,7 +25,7 @@ densite <- function(para_M,l){
   delta_1 <- delta/(sigma_z)
   mu_1 <- (1/(sigma_z))*(mu-mu_z)
   
-  Z0=b1 + a1 + a2/2
+  ## Z0=b1 + a1 + a2/2
   
   drapeau=0
   if (abs(alpha)<= abs(beta)){drapeau=1}
@@ -33,10 +33,11 @@ densite <- function(para_M,l){
   if (alpha==Inf){drapeau=1}
   if (delta<=0){drapeau=1}
   
-  if (a0<=0){drapeau=1}
-  if (a1<=0){drapeau=1}
-  if (a2<=0){drapeau=1}
-  if (b1<=0){drapeau=1}
+  # if (a0<=0){drapeau=1}
+  # if (a1<=0){drapeau=1}
+  # if (a2<=0){drapeau=1}
+  # if (b1<=0){drapeau=1}
+  
   if (lamda0<=0){drapeau=1}
   
   if (is.na(l)==TRUE){drapeau=1}else{
@@ -44,23 +45,31 @@ densite <- function(para_M,l){
     if (abs(l)==Inf){drapeau=1}
     if (1/abs(l)==Inf){drapeau=1}
   }
-  if (is.na(Z0)==TRUE){drapeau=1}else{
-    if (Z0>=1){drapeau=1}
-    if (Z0<=0){drapeau=1}
-    if (abs(Z0)==Inf){drapeau=1}
-    if (1/abs(Z0)==Inf){drapeau=1}
-  }
+  
+  # if (is.na(Z0)==TRUE){drapeau=1}else{
+  #   if (Z0>=1){drapeau=1}
+  #   if (Z0<=0){drapeau=1}
+  #   if (abs(Z0)==Inf){drapeau=1}
+  #   if (1/abs(Z0)==Inf){drapeau=1}
+  # }
   
   ## if (abs(alpha_1)<= abs(beta_1)){drapeau=1}
   ## if (alpha_1<=0){drapeau=1}
   ## if (alpha_1==Inf){drapeau=1}
   ## if (delta_1<=0){drapeau=1}
   
+
+  print(l)
+  print(drapeau)
   if (drapeau==0){
     resultat=dgh(l,alpha_1,beta_1,delta_1,mu_1,-1/2)
+
+    
   }else{
     resultat=NA
   }
+  
+  print(resultat)
   return(resultat)
 }
 
@@ -85,16 +94,23 @@ GJR_likelihood_ret <- function(para_M,Data.returns) {
   z <- c()                                                         ####  A vector containing z from the model,  innovation
   z[1] <- (ret[1]-rt[1]-lamda0*(h[1]))/sqrt(h[1])
   
-  mt = c()                                                       ####  the predictible excess of return process mt,
+  mt = c()                                                         ####  the predictible excess of return process mt,
   mt[1]=lamda0*((h[1])^(1/2))- (h[1])/2
   
+  print(z[1])
+
+  
   dens <- densite(para_M,z[1])
+  print(dens)
   
   for (i in 2:Z1){
     h[i]=a0 +b1*h[i-1]+(a1*(ret[i-1]-rt[i-1]-mt[i-1])^2)+ (a2*max(0,-(ret[i-1]-rt[i-1]-mt[i-1])^2))
     z[i]=(ret[i]-rt[i]-lamda0*(h[i]))/sqrt(h[i])
     mt[i]=lamda0*((h[i])^(1/2))- (h[i])/2
     temp=densite(para_M,z[i])
+    
+    print(z[i])
+    print(temp) 
     dens<-dens+log(temp)
   }
   
@@ -128,7 +144,7 @@ shape_vol_P <- function(para_M, Data.returns) {
   h[1]=(a0 )/(1 - b1 - a1- a2/2)                        ####  The first value for h, Unconditional Variance
   
   for (i in 2:Z1){
-    h[i]= gsqrt(para_h,ret[i-1],h[i-1],rt[i-1]) ### a0 +b1*h[i-1]+a1*(((ret[i-1]-rt[i-1]-lamda0*(h[i-1]))/(sqrt(h[i-1]))) - a2*(sqrt(h[i-1])))^2
+    h[i]= gsqrt(para_h,ret[i-1],h[i-1],rt[i-1])    ### a0 +b1*h[i-1]+a1*(((ret[i-1]-rt[i-1]-lamda0*(h[i-1]))/(sqrt(h[i-1]))) - a2*(sqrt(h[i-1])))^2
   }
   
   return(h)  

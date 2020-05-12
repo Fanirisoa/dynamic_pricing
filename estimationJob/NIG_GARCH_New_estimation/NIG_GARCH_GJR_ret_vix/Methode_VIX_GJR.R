@@ -28,9 +28,9 @@ source(paste(path,"/Loglik_Mix_GJR.R",sep=""))
 
 
 
-source(paste(path,"/Fun_Pricer_opt_ret_HN.R",sep=""))
-source(paste(path,"/MCSim_opt_ret_HN.R",sep=""))
-source(paste(path,"/Loglik_Option_HN.R",sep=""))
+## source(paste(path,"/Fun_Pricer_opt_ret_HN.R",sep=""))
+## source(paste(path,"/MCSim_opt_ret_HN.R",sep=""))
+## source(paste(path,"/Loglik_Option_HN.R",sep=""))
 
 #####################################################
 ###               Volatility  shape           #######
