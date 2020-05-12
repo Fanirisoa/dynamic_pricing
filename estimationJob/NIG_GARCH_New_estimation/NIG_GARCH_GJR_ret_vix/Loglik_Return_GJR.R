@@ -89,32 +89,42 @@ GJR_likelihood_ret <- function(para_M,Data.returns) {
   a0=para_M[5]; a1=para_M[6]; a2=para_M[7];  b1= para_M[8] ;  lamda0= para_M[9]  ; ro=para_M[10]     ## para_h<-c() set up the parameters of the model
   
   
-  h <- c()                                                         ####  A vector containing h from the model,
-  h[1]<-(a0 )/(1 - b1 - a1- a2/2)                                  ####  The first value for h, Unconditional Variance
-  z <- c()                                                         ####  A vector containing z from the model,  innovation
-  z[1] <- (ret[1]-rt[1]-lamda0*(h[1]))/sqrt(h[1])
+  gamma_0 = sqrt((alpha^2) -(beta^2))
   
-  mt = c()                                                         ####  the predictible excess of return process mt,
+  ## Normalisation :
+  sigma_z = (delta*(alpha^2))/((gamma_0)^3)
+  
+  mu_z= mu - ((delta*beta)/(gamma_0 ))
+  
+  ## Parametrization : 
+  
+  alpha_1 = alpha*(sigma_z)
+  beta_1 =beta*(sigma_z)
+  delta_1 =delta/(sigma_z)
+  mu_1 =(1/(sigma_z))*(mu-mu_z)
+  
+  
+  h = c()                                                        ####  A vector containing h from the model,
+  h[1]=(a0 )/(1 - b1 - a1- a2/2)                                 ####  The first value for h, Unconditional Variance
+  
+  mt = c()                                                       ####  the predictible excess of return process mt,
   mt[1]=lamda0*((h[1])^(1/2))- (h[1])/2
   
-  print(z[1])
-
+  z = c()                                                        ####  A vector containing z from the model,  innovation
+  z[1]=(ret[1]-rt[1] -mt[1])/ (sqrt(h[1]))  
   
-  dens <- densite(para_M,z[1])
-  print(dens)
+  dens = densite(para_distribution,para_h,z[1])
   
   for (i in 2:Z1){
     h[i]=a0 +b1*h[i-1]+(a1*(ret[i-1]-rt[i-1]-mt[i-1])^2)+ (a2*max(0,-(ret[i-1]-rt[i-1]-mt[i-1])^2))
-    z[i]=(ret[i]-rt[i]-lamda0*(h[i]))/sqrt(h[i])
     mt[i]=lamda0*((h[i])^(1/2))- (h[i])/2
-    temp=densite(para_M,z[i])
-    
-    print(z[i])
-    print(temp) 
+    z[i]=(ret[i]-rt[i] -mt[i])/ (sqrt(h[i])) 
+    temp=densite(para_distribution,para_h,z[i])
     dens<-dens+log(temp)
   }
   
-  return(-dens/length(dens))
+  return(dens/length(dens))
+  
 }
 
 
