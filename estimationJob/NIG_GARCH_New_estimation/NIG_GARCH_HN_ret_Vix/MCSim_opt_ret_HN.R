@@ -10,13 +10,7 @@ variance<-function(para_h,innovation,ht){
   lamda0star= -(1/2)
   gamastar= gama+lamda0+(1/2)
  
-  # print("innovation")
-  # print(innovation) 
-  # print("ht")
-  # print(ht)
-  # print("(innovation - gamastar*(sqrt(ht)))^2")
-  # print((innovation - gamastar*(sqrt(ht)))^2)
-  
+
   drapeau=0
   if (is.na(ht)){drapeau=1}
   if (is.nan(ht)){drapeau=1}
