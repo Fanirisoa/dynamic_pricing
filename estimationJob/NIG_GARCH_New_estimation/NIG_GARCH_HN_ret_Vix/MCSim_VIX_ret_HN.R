@@ -10,7 +10,13 @@ variance<-function(para_h,innovation,ht){
   lamda0star= -(1/2)
   gamastar= gama+lamda0+(1/2)
  
-
+  # print("innovation")
+  # print(innovation) 
+  # print("ht")
+  # print(ht)
+  # print("(innovation - gamastar*(sqrt(ht)))^2")
+  # print((innovation - gamastar*(sqrt(ht)))^2)
+  # 
   drapeau=0
   if (is.na(ht)){drapeau=1}
   if (is.nan(ht)){drapeau=1}
@@ -329,63 +335,4 @@ P_T<-function(B){
 
 
 
-
-
-
-
-
-######################################################################
-######         Seuil pour vol[1] initial value of the volatility    ##
-######################################################################
-##Seuil<-function(para_h,para_distribution,ht){
-##  a0=para_h1[1]; a1=para_h1[2]; gama=para_h1[3];  b1= para_h1[4] ;  lamda0= para_h1[4] 
-
-##  alpha=para_distribution1[1];  beta=para_distribution1[2];  delta=para_distribution1[3];  mu=para_distribution1[4]
-
-##  B = ((4*(alpha^4)*(delta^2))/(ht*delta*(gama^(3)) + (alpha*mt+sqrt(delta*ht)* beta*gama)^2)) -1
-
-##  fun <- function (x)  ((4*(alpha^4)*(delta^2))/(x*delta*(gama^(3)) + (alpha*lamda0*x+sqrt(delta*x)* beta*gama)^2)) -1
-
-##  uni <- uniroot(fun, c(0, 1))$root
-##  return(uni)  
-##}
-
-
-
-
-
-
-####################################################
-######          Simulation Monte Carlo            ##
-####################################################
-# 
-# SimNIG<-function(para_h,para_distribution,ht){
-#   # vol contains current volatility
-#   # r contains the risk free rate 
-#   
-#   # para_h<-c() set up the parameters of the model 
-#   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[4] 
-#   
-#   # para_distribution<-c() set up the parameters of the NIG distribution under P
-#   alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4]
-#   
-#   # mt contains the risk premium
-#   mt = lamda0*sqrt(ht)-(ht/2)
-#   
-#   # first part of theta
-#   A= ((alpha*mt+ sqrt(delta*ht)* beta* gama)^2)/(ht*delta*(gama^(3)))
-#   
-#   # second part of theta  
-#   B = ((4*(alpha^4)*(delta^2))/(ht*delta*(gama^(3)) + (alpha*mt+sqrt(delta*ht)* beta* gama  )^2)) -1
-#   
-#   # value of theta   
-#   theta =  -1/2 - (alpha* beta*sqrt(delta))/(sqrt(ht)*(gama^(3/2))) -(1/2)*((A*B)^(1/2))
-#   
-#   # change in parameter under RN distribution
-#   beta=beta + ht*theta
-#   
-#   result=rnig(1, alpha, beta, delta, mu)[1]
-#   
-#   return(result)
-# }
 

@@ -19,13 +19,13 @@ library(xts)
 setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")  
 path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NIG_GARCH_New_estimation/NIG_GARCH_HN_ret_Vix"
 
-source(paste(path,"/Fun_Pricer_opt_ret_HN.R",sep=""))
-source(paste(path,"/MCSim_opt_ret_HN.R",sep=""))
+source(paste(path,"/Fun_Pricer_VIX_ret_HN.R",sep=""))
+source(paste(path,"/MCSim_VIX_ret_HN.R",sep=""))
 source(paste(path,"/Loglik_VIX_HN.R",sep=""))
 source(paste(path,"/Loglik_VIX_ret_HN.R",sep=""))
 source(paste(path,"/Loglik_Return_HN.R",sep=""))
 source(paste(path,"/parameters_set.R",sep=""))
-
+source(paste(path,"/RMSE_VIX_ret.R",sep=""))
 
 ######################################################################################
 ###               Volatility   plot under the initial parameters               #######
@@ -48,7 +48,7 @@ time.taken
 ILK
 
 NIG_likelihood_dens(para_M, Data.returns)
-Heston_likelihood_vix(N,para_M, Data.ret, Data.N)
+Heston_likelihood_vix(para_M,Data.returns,Data.ret) 
 
 
 #####################################################
