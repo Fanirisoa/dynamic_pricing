@@ -64,6 +64,8 @@ Sim<-function(para_h,para_distribution,ht){
   # change in parameter under RN distribution
   beta0=beta + sqrt(ht)*theta
   
+  print("beta0: "++beta0)
+  print("alpha: "++beta0)
   result=rgh(1,alpha,beta0,delta,mu,-1/2)[1]
   
   return(result)
