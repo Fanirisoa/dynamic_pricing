@@ -41,7 +41,7 @@ densite <- function(para_M,l){
   if (lamda0<=0){drapeau=1}
   
   if (is.na(l)==TRUE){drapeau=1}else{
-    #   if (l<=0){drapeau=1}
+    if (l<=0){drapeau=1}
     if (abs(l)==Inf){drapeau=1}
     if (1/abs(l)==Inf){drapeau=1}
   }
@@ -104,6 +104,7 @@ GJR_likelihood_ret <- function(para_M,Data.returns) {
   
   h = c()                                                        ####  A vector containing h from the model,
   h[1]=(a0 )/(1 - b1 - a1- a2/2)                                 ####  The first value for h, Unconditional Variance
+  print( h[1])
   
   mt = c()                                                       ####  the predictible excess of return process mt,
   mt[1]=lamda0*((h[1])^(1/2))- (h[1])/2
@@ -111,6 +112,7 @@ GJR_likelihood_ret <- function(para_M,Data.returns) {
   z = c()                                                        ####  A vector containing z from the model,  innovation
   z[1]=(ret[1]-rt[1] -mt[1])/ (sqrt(h[1]))  
   
+         
   dens <- densite(para_M,z[1])
   
   for (i in 2:Z1){
