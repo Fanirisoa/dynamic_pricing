@@ -1,8 +1,9 @@
 ########################################################################
 #      Fonction densite chaque loi conditionelle pour les returns      # 
 ########################################################################
-# para_M = c(para_distribution,para_h) 
+
 densite <- function(para_M,l){
+  # para_M = c(para_distribution,para_h) 
   # alpha=para_distribution[1], beta=para_distribution[2], delta=para_distribution[3], mu=para_distribution[4]
   # a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] 
   
@@ -47,7 +48,7 @@ densite <- function(para_M,l){
 ##########################################################
 #                likelihood function                     # 
 ##########################################################  
-NIG_likelihood_dens_QML <- function(para_M,Data.returns) {
+NIG_likelihood_dens<- function(para_M,Data.returns) {
   ret=Data.returns$ret   
   rt=Data.returns$rt/250        
   Z1=length(rt)
@@ -58,8 +59,8 @@ NIG_likelihood_dens_QML <- function(para_M,Data.returns) {
   ## set up the parameters of the model : para_M = c(para_distribution,para_h) 
   alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]                   ## para_distribution<-c() set up the parameters of NIG
   a0=para_M[5]; a1=para_M[6]; gama=para_M[7];  b1= para_M[8] ;  lamda0= para_M[9]     ## para_h<-c() set up the parameters of the model
-
-
+  
+  
   h <- c()                                                        ####  A vector containing h from the model,
   h[1]<- (a0 + a1)/(1 - b1 - a1*(gama)^2 )                         ####  The first value for h, Unconditional Variance
   z <- c()                                                        ####  A vector containing z from the model,  innovation

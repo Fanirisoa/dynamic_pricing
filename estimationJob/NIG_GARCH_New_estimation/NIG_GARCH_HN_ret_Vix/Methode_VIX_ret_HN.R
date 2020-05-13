@@ -17,12 +17,12 @@ library(xts)
 ###              Load : Data source,    Parameters of the model,  function to use          #######
 ##################################################################################################
 setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")  
-path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NIG_GARCH_New_estimation/NIG_GARCH_HN_ret_opt"
+path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NIG_GARCH_New_estimation/NIG_GARCH_HN_ret_Vix"
 
 source(paste(path,"/Fun_Pricer_opt_ret_HN.R",sep=""))
 source(paste(path,"/MCSim_opt_ret_HN.R",sep=""))
-source(paste(path,"/Loglik_Option_HN.R",sep=""))
-source(paste(path,"/Loglik_Opt_ret_HN.R",sep=""))
+source(paste(path,"/Loglik_VIX_HN.R",sep=""))
+source(paste(path,"/Loglik_VIX_ret_HN.R",sep=""))
 source(paste(path,"/Loglik_Return_HN.R",sep=""))
 source(paste(path,"/parameters_set.R",sep=""))
 
@@ -47,8 +47,8 @@ time.taken <- end.time - start.time
 time.taken
 ILK
 
-# NIG_likelihood_dens_QML(para_M, Data.returns)
-# Heston_likelihood_opti(N,para_M, Data.ret, Data.N)
+NIG_likelihood_dens(para_M, Data.returns)
+Heston_likelihood_vix(N,para_M, Data.ret, Data.N)
 
 
 #####################################################
