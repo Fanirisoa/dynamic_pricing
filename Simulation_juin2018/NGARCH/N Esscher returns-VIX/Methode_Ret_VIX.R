@@ -1,3 +1,42 @@
+###################################################################################
+###               Clean the repertoir and laod all the library used         #######
+###################################################################################
+rm(list=ls())
+gc()
+library(compiler)
+enableJIT(1)
+enableJIT(3)
+library("fBasics")
+#library("pracma")
+library("numDeriv")
+library("nlme")
+library("Matrix")
+library(xts)
+
+
+##################################################################################################
+###              Load : Data source,    Parameters of the model,  function to use          #######
+##################################################################################################
+setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")  
+path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NIG_GARCH_New_estimation/NGARCH_ret_vix"
+
+
+
+### source(paste(path,"/parameters_set.R",sep=""))
+### source(paste(path,"/Loglik_Return_GJR.R",sep=""))
+### source(paste(path,"/Loglik_VIX_GJR.R",sep=""))
+### source(paste(path,"/Loglik_Mix_GJR.R",sep=""))
+### source(paste(path,"/Fun_Pricer_Vix_ret_GJR.R",sep=""))
+### source(paste(path,"/RMSE_VIX_GJR.R",sep=""))
+### source(paste(path,"/RMSE_VIX_GJR.R",sep=""))
+### source(paste(path,"/MCSim_VIX_ret_GJR.R",sep=""))
+
+
+
+
+
+
+
 #####################################################
 ###              Load Data source             #######
 #####################################################
