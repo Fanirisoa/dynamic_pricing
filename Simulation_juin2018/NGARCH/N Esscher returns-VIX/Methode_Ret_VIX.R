@@ -20,16 +20,28 @@ library(xts)
 setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")  
 path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NIG_GARCH_New_estimation/NGARCH_ret_vix"
 
+source(paste(path,"/Loglik_Return_NGARCH.R",sep=""))
+source(paste(path,"/parameters_set.R",sep=""))
 
 
-### source(paste(path,"/parameters_set.R",sep=""))
-### source(paste(path,"/Loglik_Return_GJR.R",sep=""))
 ### source(paste(path,"/Loglik_VIX_GJR.R",sep=""))
 ### source(paste(path,"/Loglik_Mix_GJR.R",sep=""))
 ### source(paste(path,"/Fun_Pricer_Vix_ret_GJR.R",sep=""))
 ### source(paste(path,"/RMSE_VIX_GJR.R",sep=""))
 ### source(paste(path,"/RMSE_VIX_GJR.R",sep=""))
 ### source(paste(path,"/MCSim_VIX_ret_GJR.R",sep=""))
+
+
+#####################################################
+###               Volatility  shape           #######
+#####################################################
+ts.vol_P= shape_vol_P (para_M, Data.returns) 
+ts.plot(ts.vol_P , col = "steelblue", main = "NGARCH Model",xlab="2009",ylab="Volatility")
+grid()
+
+Data.returns
+
+
 
 
 
