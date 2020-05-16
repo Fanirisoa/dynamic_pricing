@@ -47,28 +47,11 @@ NGARCH_likelihood_ret <- function(para_M,Data.returns) {
   gamastar =  gama+lambda
   g0=b1 + a1*(gamastar)^2  
   
-  # Parameter under the physical probability
-  h0=a0/(1- (b1+a1*(1+gama^2)))    
-  
-  
-  h[i]= a0 +b1*h[i-1]+a1**h[i-1]*((ret[i-1]-rt[i-1]- lambda*sqrt(h)+(1/2)*h)/(sqrt(h))-gama)^2
-  mt[i]= lambda*sqrt(h[i])-(1/2)*h[i]
-  z[i]= ret[i]-rt[i]- lambda*sqrt(h[i])+(1/2)*h[i]
-  
-  for (i in 2:Z1){
-    h[i]=a0 +b1*h[i-1]+(a1*(ret[i-1]-rt[i-1]-mt[i-1])^2)+ (a2*max(0,-(ret[i-1]-rt[i-1]-mt[i-1])^2))
-    mt[i]=lamda0*((h[i])^(1/2))- (h[i])/2
-    z[i]=ret[i]-rt[i]-lamda0*((h[i])^(1/2)) + (h[i])/2
-    temp=densite(para_M,z[i])
-    dens<-dens+log(temp)
-  }
-
-  
   h = c()                                                        ####  A vector containing h from the model,
-  h[1]=(a0 )/(1 - b1 - a1- a2/2)                                 ####  The first value for h, Unconditional Variance
+  h[1]= a0/(1- (b1+a1*(1+gama^2)))                               ####  The first value for h, Unconditional Variance
   
   mt = c()                                                       ####  the predictible excess of return process mt,
-  mt[1]=lamda0*((h[1])^(1/2))- (h[1])/2
+  mt[1]=  lambda*sqrt(h[1])-(1/2)*h[1]
   
   z = c()                                                        ####  A vector containing z from the model,  innovation
   z[1]=ret[1]-rt[1] -mt[1]
@@ -76,9 +59,9 @@ NGARCH_likelihood_ret <- function(para_M,Data.returns) {
   dens <- densite(para_M,z[1])
   
   for (i in 2:Z1){
-    h[i]=a0 +b1*h[i-1]+(a1*(ret[i-1]-rt[i-1]-mt[i-1])^2)+ (a2*max(0,-(ret[i-1]-rt[i-1]-mt[i-1])^2))
-    mt[i]=lamda0*((h[i])^(1/2))- (h[i])/2
-    z[i]=ret[i]-rt[i]-lamda0*((h[i])^(1/2)) + (h[i])/2
+    h[i]= a0 +b1*h[i-1]+a1**h[i-1]*((ret[i-1]-rt[i-1]- mt[i-1])/(sqrt(h))-gama)^2
+    mt[i]= lambda*sqrt(h[i])-(1/2)*h[i]
+    z[i]= ret[i]-rt[i]- lambda*sqrt(h[i])+(1/2)*h[i]
     temp=densite(para_M,z[i])
     dens<-dens+log(temp)
   }
