@@ -51,22 +51,18 @@ NGARCH_likelihood_ret <- function(para_M,Data.returns) {
   h0=a0/(1- (b1+a1*(1+gama^2)))    
   
   
+  h[i]= a0 +b1*h[i-1]+a1**h[i-1]*((ret[i-1]-rt[i-1]- lambda*sqrt(h)+(1/2)*h)/(sqrt(h))-gama)^2
+  mt[i]= lambda*sqrt(h[i])-(1/2)*h[i]
+  z[i]= ret[i]-rt[i]- lambda*sqrt(h[i])+(1/2)*h[i]
   
-  
-  gamma_0 = sqrt((alpha^2) -(beta^2))
-  
-  ## Normalisation :
-  sigma_z = (delta*(alpha^2))/((gamma_0)^3)
-  
-  mu_z= mu - ((delta*beta)/(gamma_0 ))
-  
-  ## Parametrization : 
-  
-  alpha_1 = alpha*(sigma_z)
-  beta_1 =beta*(sigma_z)
-  delta_1 =delta/(sigma_z)
-  mu_1 =(1/(sigma_z))*(mu-mu_z)
-  
+  for (i in 2:Z1){
+    h[i]=a0 +b1*h[i-1]+(a1*(ret[i-1]-rt[i-1]-mt[i-1])^2)+ (a2*max(0,-(ret[i-1]-rt[i-1]-mt[i-1])^2))
+    mt[i]=lamda0*((h[i])^(1/2))- (h[i])/2
+    z[i]=ret[i]-rt[i]-lamda0*((h[i])^(1/2)) + (h[i])/2
+    temp=densite(para_M,z[i])
+    dens<-dens+log(temp)
+  }
+
   
   h = c()                                                        ####  A vector containing h from the model,
   h[1]=(a0 )/(1 - b1 - a1- a2/2)                                 ####  The first value for h, Unconditional Variance
