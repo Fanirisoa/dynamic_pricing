@@ -1,0 +1,78 @@
+##################################### 
+####         G.HN.Ret.ess          ##
+#####################################
+############################################################
+####             Optimization  of the model               ##
+############################################################
+##   Initial parameter  :
+## a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]   
+
+para_h<-c(5.282379e-13, 2.252557e-05 ,8.143868e+00 ,9.154310e-01 ,1.026485e-0)
+
+
+###   Solution :
+
+> start.time <- Sys.time()
+> Sol=optim(para_h, Heston_likelihood_ret, Data.returns=Data.returns, method="Nelder-Mead",control = list(maxit = 5000))
+> end.time <- Sys.time()
+> time.taken <- end.time - start.time
+
+> para_h1<-Sol$par
+> Sol
+$`par`
+[1] 2.697046e-13 2.250781e-05 8.973734e+00 8.793940e-01 1.037815e+00
+
+$value
+[1] -8280.123
+
+$counts
+function gradient 
+     397       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL
+
+###   Time computation :
+> time.taken
+Time difference of 9.628767 secs
+> 
+
+###  Stand_error
+> Hess=fdHess(para_h1,Heston_likelihood_ret, Data.returns=Data.returns)
+> S_e <- sqrt(diag(solve(nearPD(Hess$Hessian)$mat)))
+> S_e
+[1] 1.404920e-02 1.468525e-06 1.405362e-02 1.450208e-02 1.423384e-02
+
+###  In-RMSE 2009 
+> RMSE1$rmse
+[1] 0.0593918
+###  Out-RMSE 2010   
+> RMSE2$rmse
+[1] 0.0777018
+###  we-RMSE 2010   
+> RMSE3$rmse
+[1] 0.0664718
+
+############################################################
+####                 RMSE Tables                          ##
+############################################################
+> VRP 
+[1] 2.726401
+
+> C_VIX
+$MPE
+[1]  0.9735005
+
+$MAE
+[1] 0.987113
+
+$MAE2
+[1] 0.9991884
+
+$Vrmse
+[1] 1.15993
+
+
