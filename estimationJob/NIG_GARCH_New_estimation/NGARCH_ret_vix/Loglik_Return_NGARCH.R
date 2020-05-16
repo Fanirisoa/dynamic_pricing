@@ -9,7 +9,7 @@ densite <- function(para_M,l){
   
   ## set up the parameters of the model : para_M = c(para_distribution,para_h) 
   alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]
-  a0=para_M[5]; b1=para_M[6]; a1=para_M[7];  gamma= para_M[8] ;  lamda= para_M[9]  ; ro=para_M[10]
+  a0=para_M[5]; b1=para_M[6]; a1=para_M[7];  gama= para_M[8] ;  lambda= para_M[9]  ; ro=para_M[10]
 
   
   drapeau=0
@@ -40,7 +40,7 @@ NGARCH_likelihood_ret <- function(para_M,Data.returns) {
   
   ## set up the parameters of the model : para_M = c(para_distribution,para_h) 
   alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]                                    ## para_distribution<-c() set up the parameters of NIG
-  a0=para_M[5]; b1=para_M[6]; a1=para_M[7];  gamma= para_M[8] ;  lamda= para_M[9]  ; ro=para_M[10]     ## para_h<-c() set up the parameters of the model
+  a0=para_M[5]; b1=para_M[6]; a1=para_M[7];  gama= para_M[8] ;  lambda= para_M[9]  ; ro=para_M[10]     ## para_h<-c() set up the parameters of the model
   
   
   g1=(b1+a1*(1+gama^2))
@@ -59,7 +59,7 @@ NGARCH_likelihood_ret <- function(para_M,Data.returns) {
   dens <- densite(para_M,z[1])
   
   for (i in 2:Z1){
-    h[i]= a0 +b1*h[i-1]+a1**h[i-1]*((ret[i-1]-rt[i-1]- mt[i-1])/(sqrt(h))-gama)^2
+    h[i]= a0 +b1*h[i-1]+a1*h[i-1]*((ret[i-1]-rt[i-1]- mt[i-1])/(sqrt(h[i-1]))-gama)^2
     mt[i]= lambda*sqrt(h[i])-(1/2)*h[i]
     z[i]= ret[i]-rt[i]- lambda*sqrt(h[i])+(1/2)*h[i]
     temp=densite(para_M,z[i])
@@ -94,10 +94,7 @@ gsqrt <- function(para_h,ret,h,rt)
   if (g1<=0.7){drapeau=1}
   if (g0>=0.996132){drapeau=1}
   if (g1>=0.996132){drapeau=1}
-  if (ro<=0.7){drapeau=1}
-  if (ro>=0.998765){drapeau=1}
   if (gama<=0){drapeau=1}
-  
   if (is.na(h0)==TRUE){drapeau=1}else{
     if (h0<=0){drapeau=1}
     if (abs(h0)==Inf){drapeau=1}
@@ -126,7 +123,7 @@ shape_vol_P <-function(para_M,Data.returns) {
   
   ## set up the parameters of the model : para_M = c(para_distribution,para_h) 
   alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]                                    ## para_distribution<-c() set up the parameters of NIG
-  a0=para_M[5]; b1=para_M[6]; a1=para_M[7];  gamma= para_M[8] ;  lamda= para_M[9]  ; ro=para_M[10]     ## para_h<-c() set up the parameters of the model
+  a0=para_M[5]; b1=para_M[6]; a1=para_M[7];  gama= para_M[8] ;  lambda= para_M[9]  ; ro=para_M[10]     ## para_h<-c() set up the parameters of the model
   
   para_h = c()
   para_h[1]= a0; para_h[2]=b1; para_h[3]=a1; para_h[4]=gama;  para_h[5]=lambda ; para_h[8]=ro

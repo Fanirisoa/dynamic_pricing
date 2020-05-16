@@ -22,10 +22,10 @@ path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NI
 
 source(paste(path,"/Loglik_Return_NGARCH.R",sep=""))
 source(paste(path,"/parameters_set.R",sep=""))
-
+source(paste(path,"/Loglik_Mix_NGARCH.R",sep=""))
 
 ### source(paste(path,"/Loglik_VIX_GJR.R",sep=""))
-### source(paste(path,"/Loglik_Mix_GJR.R",sep=""))
+
 ### source(paste(path,"/Fun_Pricer_Vix_ret_GJR.R",sep=""))
 ### source(paste(path,"/RMSE_VIX_GJR.R",sep=""))
 ### source(paste(path,"/RMSE_VIX_GJR.R",sep=""))
@@ -39,13 +39,25 @@ ts.vol_P= shape_vol_P (para_M, Data.returns)
 ts.plot(ts.vol_P , col = "steelblue", main = "NGARCH Model",xlab="2009",ylab="Volatility")
 grid()
 
-Data.returns
+
+
+#####################################################
+###              Log values returns           #######
+#####################################################
+
+start.time <- Sys.time()
+ILK=GJR_likelihood_Mix(para_M,Data.ret, Data.N,Data.returns,N) 
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+ILK
+
+NGARCH_likelihood_ret(para_M, Data.returns)
+GJR_likelihood_vix(para_M,Data.returns,Data.ret) 
 
 
 
-
-
-
+warnings()
 
 
 
