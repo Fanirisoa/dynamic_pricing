@@ -1,7 +1,7 @@
 #############################################################
 #####  tHE LOGLIKELIHOODE of both the mixe return-option ####
 #############################################################
-GJR_likelihood_Mix <- function(para_M,Data.ret, Data.N,Data.returns,N) {
+NGARCH_likelihood_Mix <- function(para_M,Data.ret, Data.N,Data.returns,N) {
   ret =Data.returns$ret   
   T=Data.N$T
   N1=length(ret)

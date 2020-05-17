@@ -66,7 +66,7 @@ NGARCH_likelihood_ret <- function(para_M,Data.returns) {
     dens<-dens+log(temp)
   }
   
-  return(-dens/length(dens))
+  return(dens/length(dens))
 }
 
 ####################################################
@@ -126,7 +126,8 @@ shape_vol_P <-function(para_M,Data.returns) {
   a0=para_M[5]; b1=para_M[6]; a1=para_M[7];  gama= para_M[8] ;  lambda= para_M[9]  ; ro=para_M[10]     ## para_h<-c() set up the parameters of the model
   
   para_h = c()
-  para_h[1]= a0; para_h[2]=b1; para_h[3]=a1; para_h[4]=gama;  para_h[5]=lambda ; para_h[8]=ro
+  para_h[1]= a0; para_h[2]=b1; para_h[3]=a1; para_h[4]=gama;  para_h[5]=lambda ; para_h[6]=ro
+  
   
   # Parameter under the physical probability
   h0=a0/(1- (b1+a1*(1+gama^2)))    

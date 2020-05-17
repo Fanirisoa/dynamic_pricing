@@ -77,7 +77,7 @@ for (i in 2:Z1){
   dens<-dens+log(temp)
 }
 
-return(-dens/length(dens))
+return(dens/length(dens))
 }
 
 
