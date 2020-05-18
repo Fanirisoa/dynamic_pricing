@@ -75,7 +75,7 @@ NIG_likelihood_dens_QML <- function(para_M,Data.returns) {
     dens<-dens+log(temp)
   }
   
-  return(-dens/length(dens))
+  return(dens/length(dens))
 }
 
 

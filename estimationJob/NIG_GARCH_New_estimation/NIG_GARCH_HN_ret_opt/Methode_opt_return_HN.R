@@ -47,8 +47,8 @@ time.taken <- end.time - start.time
 time.taken
 ILK
 
-# NIG_likelihood_dens_QML(para_M, Data.returns)
-# Heston_likelihood_opti(N,para_M, Data.ret, Data.N)
+NIG_likelihood_dens_QML(para_M, Data.returns)
+Heston_likelihood_opti(N,para_M, Data.ret, Data.N)
 
 
 
@@ -56,13 +56,14 @@ ILK
 ###      Optimization  of the model           #######
 #####################################################
 start.time <- Sys.time()
-Sol=optim(para_M,Heston_likelihood_Mix ,Data.ret=Data.ret, Data.N = Data.N,Data.returns=Data.returns, N=N, method="Nelder-Mead",control = list(maxit = 10))
+Sol=optim(para_M,Heston_likelihood_Mix ,Data.ret=Data.ret, Data.N = Data.N,Data.returns=Data.returns, N=N, method="Nelder-Mead",control = list(maxit = 50))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
 
+Sol
 para_M1<-Sol$par
-
+para_M
 
 
 ############################################################
