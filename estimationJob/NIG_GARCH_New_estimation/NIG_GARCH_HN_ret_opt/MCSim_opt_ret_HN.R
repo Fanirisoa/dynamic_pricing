@@ -75,13 +75,20 @@ Sim<-function(para_h,para_distribution,ht){
 
   if (is.nan(beta_0) || is.na(beta0)){
     v <- c(1.762313, -1.76079, -1.761573,  -1.761083, -1.761151,  -1.761161, -1.760833,  -1.761174,  -1.761196, -1.986122)
-    beta0 = sample(v, 1)
+    beta0 <- sample(v, 1)
+    result  <- rgh(1,alpha,beta0,delta,mu,-1/2)[1]
   }else{
-    beta0 = beta_0
+    beta0 <- beta_0
+    result  <- rgh(1,alpha,beta0,delta,mu,-1/2)[1]
   }
   
+  print("beta_0")
+  print(beta_0)
+  print("beta0")
+  print(beta0)
   
-  result  <- rgh(1,alpha,beta0,delta,mu,-1/2)[1]
+  
+  
   
   # drapeau=0
   # if (is.na(beta0)){drapeau=1}
@@ -94,7 +101,7 @@ Sim<-function(para_h,para_distribution,ht){
   #   beta2 = -1.480919
   #   result  <- rgh(1,alpha,beta2,delta,mu,-1/2)[1]
   # }
-  
+  # 
   # print("ok")
   # print("alpha")
   # print(alpha)
@@ -108,7 +115,7 @@ Sim<-function(para_h,para_distribution,ht){
   # print(result)
   
   
-  return(rgh(1,alpha,beta0,delta,mu,-1/2)[1])
+  return(result)
 }
 
 ##########################################################################
