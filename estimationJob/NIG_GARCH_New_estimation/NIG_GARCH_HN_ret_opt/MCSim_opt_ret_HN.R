@@ -10,22 +10,17 @@ variance<-function(para_h,innovation,ht){
   lamda0star= -(1/2)
   gamastar= gama+lamda0+(1/2)
  
-  print("innovation")
-  print(innovation)
-  print("ht")
-  print(ht)
-  print("(innovation - gamastar*(sqrt(ht)))^2")
-  print((innovation - gamastar*(sqrt(ht)))^2)
+
 
   drapeau=0
   if (is.na(ht)){drapeau=1}
   if (is.nan(ht)){drapeau=1}
-  if (ht>=0.0005){drapeau=1}
   if (drapeau==0){
-    ht_next=a0 +b1*ht+a1*(innovation - gamastar*(sqrt(ht)))^2
+    ht_next=a0 +b1*ht+a1*(innovation - gamastar*(sqrt(abs(ht))))^2
   }else{
 
-    ht_next = 0.0001220703
+    v <- c(0.004791519,0.0002532843,0.4112256, 2.03423, 0.6579539, 1.82348, 0.5221694,0.0003014343, 0.6417815, 0.03610618,0.0004268574, 0.2940531, 0.03243031, 0.04024623, 0.007511524, 0.03384112, 0.1993153, 0.03679305, 0.0002753676,0.0001220703)
+    ht_next = sample(v, 1)
     
   }
   vol=sqrt(ht_next)
@@ -70,19 +65,35 @@ Sim<-function(para_h,para_distribution,ht){
   theta <-  -1/2 - ((alpha* beta*sqrt(delta))/(sqrt(ht)*(gama_d^(3/2)))) -(1/2)*((A*B)^(1/2))
   
   # change in parameter under RN distribution
-  beta0=beta + sqrt(ht)*theta
+  beta_0=beta + sqrt(abs(ht))*theta
   
-  drapeau=0
-  if (is.na(beta0)){drapeau=1}
-  if (is.nan(beta0)){drapeau=1}
-  if (abs(alpha)<= beta0){drapeau=1}
-  if (drapeau==0){
-    beta1 = beta0
-    result  <- rgh(1,alpha,beta1,delta,mu,-1/2)[1]
+  
+  print("beta_0")
+  print(beta_0)
+  print("alpha")
+  print(alpha)
+
+  if (is.nan(beta_0) || is.na(beta0)){
+    v <- c(1.762313, -1.76079, -1.761573,  -1.761083, -1.761151,  -1.761161, -1.760833,  -1.761174,  -1.761196, -1.986122)
+    beta0 = sample(v, 1)
   }else{
-    beta2 = -1.480919
-    result  <- rgh(1,alpha,beta2,delta,mu,-1/2)[1]
+    beta0 = beta_0
   }
+  
+  
+  result  <- rgh(1,alpha,beta0,delta,mu,-1/2)[1]
+  
+  # drapeau=0
+  # if (is.na(beta0)){drapeau=1}
+  # if (is.nan(beta0)){drapeau=1}
+  # 
+  # if (drapeau==0){
+  #   beta1 = beta0
+  #   result  <- rgh(1,alpha,beta1,delta,mu,-1/2)[1]
+  # }else{
+  #   beta2 = -1.480919
+  #   result  <- rgh(1,alpha,beta2,delta,mu,-1/2)[1]
+  # }
   
   # print("ok")
   # print("alpha")
@@ -97,7 +108,7 @@ Sim<-function(para_h,para_distribution,ht){
   # print(result)
   
   
-  return(result)
+  return(rgh(1,alpha,beta0,delta,mu,-1/2)[1])
 }
 
 ##########################################################################
@@ -162,10 +173,11 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
       drapeau=0
       if (is.na(ht[i])){drapeau=1}
       if (is.nan(ht[i])){drapeau=1}
-      if (ht[i]>=0.0005){drapeau=1}
       if (drapeau==0){
         Inv[i]= Sim(para_h1,para_distribution1,ht[i]) 
       }else{
+        v <- c(0.004791519,0.0002532843,0.4112256, 2.03423, 0.6579539, 1.82348, 0.5221694,0.0003014343, 0.6417815, 0.03610618,0.0004268574, 0.2940531, 0.03243031, 0.04024623, 0.007511524, 0.03384112, 0.1993153, 0.03679305, 0.0002753676,0.0001220703)
+        ht[i]= sample(v, 1)
         Inv[i]= Sim(para_h1,para_distribution1,0.0001220703) 
         
       }
