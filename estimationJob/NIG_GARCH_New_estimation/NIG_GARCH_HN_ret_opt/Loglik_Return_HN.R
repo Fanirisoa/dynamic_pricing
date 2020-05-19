@@ -62,14 +62,40 @@ NIG_likelihood_dens_QML <- function(para_M,Data.returns) {
 
 
   h <- c()                                                        ####  A vector containing h from the model,
-  h[1]<- (a0 + a1)/(1 - b1 - a1*(gama)^2 )                         ####  The first value for h, Unconditional Variance
+  h_1<- (a0 + a1)/(1 - b1 - a1*(gama)^2 )                         ####  The first value for h, Unconditional Variance
+  
+  if (is.nan(h_1) || (h_1 > 6) ){
+    v <- c(0.004791519,0.0002532843,0.4112256, 2.03423, 0.6579539, 1.82348, 0.5221694,0.0003014343, 0.6417815, 0.03610618,0.0004268574, 0.2940531, 0.03243031, 0.04024623, 0.007511524, 0.03384112, 0.1993153, 0.03679305, 0.0002753676,0.0001220703)
+    h[1] = sample(v, 1)
+  }else{
+    if (h_1 < 0){
+      h[1] = abs(h_1)
+    }else{
+      h[1] = h_1
+    }
+  }
+  
+  
+  
   z <- c()                                                        ####  A vector containing z from the model,  innovation
   z[1] <- (ret[1]-rt[1]-lamda0*(h[1]))/sqrt(h[1])
   
   dens <- densite(para_M,z[1])
   
   for (i in 2:Z1){
-    h[i]=a0 +b1*h[i-1]+a1*(((ret[i-1]-rt[i-1]-lamda0*(h[i-1]))/(sqrt(h[i-1]))) - gama*(sqrt(h[i-1])))^2
+    h_i=a0 +b1*h[i-1]+a1*(((ret[i-1]-rt[i-1]-lamda0*(h[i-1]))/(sqrt(h[i-1]))) - gama*(sqrt(h[i-1])))^2
+    
+    if (is.nan(h_i) || (h_i > 4) ){
+      v <- c(0.004791519,0.0002532843,0.4112256, 2.03423, 0.6579539, 1.82348, 0.5221694,0.0003014343, 0.6417815, 0.03610618,0.0004268574, 0.2940531, 0.03243031, 0.04024623, 0.007511524, 0.03384112, 0.1993153, 0.03679305, 0.0002753676,0.0001220703)
+      h[i] = sample(v, 1)
+    }else{
+      if (h_i < 0){
+        h[i] = abs(h_i)
+      }else{
+        h[i] = h_i
+      }
+    }
+    
     z[i]=(ret[i]-rt[i]-lamda0*(h[i]))/sqrt(h[i])
     temp=densite(para_M,z[i])
     dens<-dens+log(temp)

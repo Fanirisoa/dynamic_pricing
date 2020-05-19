@@ -2,7 +2,16 @@
 ######################################################################
 ######         Compute the variance given the paste variance        ##
 ######################################################################
-variance<-function(para_h,innovation,ht){
+variance<-function(para_h,innovation,h_t){
+  
+  if (h_t < 3){
+    ht = h_t
+  }else{
+    v <- c(0.004791519,0.0002532843,0.4112256, 2.03423, 0.6579539, 1.82348, 0.5221694,0.0003014343, 0.6417815, 0.03610618,0.0004268574, 0.2940531, 0.03243031, 0.04024623, 0.007511524, 0.03384112, 0.1993153, 0.03679305, 0.0002753676,0.0001220703)
+    ht = sample(v, 1)
+  }
+  
+  
   # para_h<-c() set up the parameters of the model 
   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[4] 
   
@@ -31,9 +40,17 @@ variance<-function(para_h,innovation,ht){
 ######          Simulation Monte Carlo            ##
 ####################################################
 
-Sim<-function(para_h,para_distribution,ht){
+Sim<-function(para_h,para_distribution,h_t){
   # vol contains current volatility
   # r contains the risk free rate 
+  
+  if (h_t < 3){
+    ht = h_t
+  }else{
+    v <- c(0.004791519,0.0002532843,0.4112256, 2.03423, 0.6579539, 1.82348, 0.5221694,0.0003014343, 0.6417815, 0.03610618,0.0004268574, 0.2940531, 0.03243031, 0.04024623, 0.007511524, 0.03384112, 0.1993153, 0.03679305, 0.0002753676,0.0001220703)
+    ht = sample(v, 1)
+  }
+  
   
   # para_h<-c() set up the parameters of the model 
   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[4] 
@@ -64,14 +81,29 @@ Sim<-function(para_h,para_distribution,ht){
   # value of theta   
   theta <-  -1/2 - ((alpha* beta*sqrt(delta))/(sqrt(ht)*(gama_d^(3/2)))) -(1/2)*((A*B)^(1/2))
   
-  # change in parameter under RN distribution
-  beta_0=beta + sqrt(abs(ht))*theta
+  if (is.nan(theta)){
+    print("A")
+    print(A)
+    print("B")
+    print(B)
+    print("ht")
+    print(ht)
+    print("delta")
+    print(delta)
+    print("theta")
+    print(theta)
+  }else{
+    print(theta)
+  }
   
+  
+
+  
+  # change in parameter under RN distribution
+  beta_0= beta + sqrt(abs(ht))*theta
   
   print("beta_0")
   print(beta_0)
-  print("alpha")
-  print(alpha)
 
   if (is.nan(beta_0) || is.na(beta_0)){
     v <- c(1.762313, -1.76079, -1.761573,  -1.761083, -1.761151,  -1.761161, -1.760833,  -1.761174,  -1.761196, -1.986122)
@@ -82,10 +114,7 @@ Sim<-function(para_h,para_distribution,ht){
     result  <- rgh(1,alpha,beta0,delta,mu,-1/2)[1]
   }
   
-  print("beta_0")
-  print(beta_0)
-  print("beta0")
-  print(beta0)
+
   
   
   
@@ -185,7 +214,7 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
       }else{
         v <- c(0.004791519,0.0002532843,0.4112256, 2.03423, 0.6579539, 1.82348, 0.5221694,0.0003014343, 0.6417815, 0.03610618,0.0004268574, 0.2940531, 0.03243031, 0.04024623, 0.007511524, 0.03384112, 0.1993153, 0.03679305, 0.0002753676,0.0001220703)
         ht[i]= sample(v, 1)
-        Inv[i]= Sim(para_h1,para_distribution1,0.0001220703) 
+        Inv[i]= Sim(para_h1,para_distribution1,ht[i]) 
         
       }
     
