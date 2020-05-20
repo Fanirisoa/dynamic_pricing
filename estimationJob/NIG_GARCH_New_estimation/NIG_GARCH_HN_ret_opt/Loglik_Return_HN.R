@@ -48,7 +48,7 @@ densite <- function(para_M,l){
 ##########################################################
 #                likelihood function                     # 
 ##########################################################  
-NIG_likelihood_dens_QML <- function(para_M,Data.returns) {
+NIG_likelihood_dens <- function(para_M,Data.returns) {
   ret=Data.returns$ret   
   rt=Data.returns$rt/250        
   Z1=length(rt)
