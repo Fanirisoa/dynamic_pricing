@@ -4,15 +4,21 @@
 gsqrt <- function(para_h,ret,h,rt)
 {
   ## set up the parameters of the model : para_h
-  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]   
+  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda1= para_h[5]   
+  
+  # Change from mt = lamda0*((ht)^(1/2))- (ht)/2   to   mt = lamda1*ht
+  #   lamda0*((ht)^(1/2))- (ht)/2 = lamda1*ht
+  #   lamda0*((ht)^(1/2)) = lamda1*ht + (ht)/2
+  #   lamda0*((ht)^(1/2)) = lamda1*ht + (ht)/2  
+  #     
   
   
   # Parameter under the physical probability
   h0=(a0 )/(1 - b1 - a1- a2/2)   
   g0=b1+ a1+ a2/2
 
-  mt = lamda0*((h)^(1/2))- (h)/2
-  g1 = b1+ (a1+a2*(pnorm(lamda0)))*(1+lamda0^2)+a2*lamda0*dnorm(lamda0) 
+  mt=lamda0*((h)^(1/2))- (h)/2
+  g1=b1+ (a1+a2*(pnorm(lamda0)))*(1+lamda0^2)+a2*lamda0*dnorm(lamda0) 
   
   drapeau=0
   if (a0<=0){drapeau=1}
@@ -71,11 +77,8 @@ Retdensity <- function(para_h,Ret,h,r)
 
   # Parameter under the physical probability
   h0=(a0 )/(1 - b1 - a1- a2/2)   
-  
-  lambda = (lamda0/sqrt(h0)) - (1/2)
-  
   g1=b1+ a1+ a2/2
-  g0=b1+ (a1+a2*(pnorm(lamda)))*(1+lamda^2)+a2*lamda*dnorm(lamda) 
+  g0=b1+ (a1+a2*(pnorm(lamda0)))*(1+lamda0^2)+a2*lamda0*dnorm(lamda0) 
 
   drapeau=0
   if (a0<=0){drapeau=1}
@@ -108,7 +111,7 @@ Retdensity <- function(para_h,Ret,h,r)
   }
  
   if (drapeau==0){
-    resultat= (1/(sqrt(2*pi*h)))*exp((-1/2)*(((Ret-r-lamda*h)^2)/h)) 
+    resultat= (1/(sqrt(2*pi*h)))*exp((-1/2)*(((Ret-r-lamda0*h)^2)/h)) 
   }else{
     resultat=NA
   }
