@@ -31,16 +31,11 @@ ts.vol_P= shape_vol_P (para_h, Data.returns)
 ts.plot(ts.vol_P , col = "steelblue", main = "GJR Garch Model",xlab="Time",ylab="Volatility")
 grid()
 
-ts.vol_Q= shape_vol_Q (para_h, Data.returns) 
-ts.plot(ts.vol_Q, col = "steelblue", main = "GJR Garch Model",xlab="Time",ylab="Volatility")
-grid()
-
-
 #####################################################
 ###              Log values returns           #######
 #####################################################
 start.time <- Sys.time()
-ILK=GJR_likelihood_ret(para_h, Data.returns)
+ILK=GJR_likelihood_ret_mt(para_h, Data.returns)
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
@@ -49,6 +44,15 @@ ILK
 
 
 
-
+#####################################################
+###      Optimization  of the model           #######
+#####################################################
+start.time <- Sys.time()
+Sol=optim(para_h, GJR_likelihood_ret , Data.returns=Data.returns, method="Nelder-Mead",control = list(maxit = 5000))
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+Sol
+para_h1<-Sol$par
 
 
