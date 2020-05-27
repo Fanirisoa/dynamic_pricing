@@ -9,8 +9,10 @@ gsqrt <- function(para_h,ret,h,rt)
   # Change from mt = lamda0*((ht)^(1/2))- (ht)/2   to   mt = lamda1*ht
   #   lamda0*((ht)^(1/2))- (ht)/2 = lamda1*ht
   #   lamda0*((ht)^(1/2)) = lamda1*ht + (ht)/2
-  #   lamda0*((ht)^(1/2)) = lamda1*ht + (ht)/2  
-  #     
+  #   lamda0*((ht)^(1/2)) = (3/2)*lamda1*ht
+  #   lamda0 =   (3/2)*lamda1*ht*(ht^(-1/2))
+  #   lamda0 =   (3/2)*lamda1*(ht^(1/2)) 
+  lamda0 =   (3/2)*lamda1*(h^(1/2)) 
   
   
   # Parameter under the physical probability
@@ -18,21 +20,16 @@ gsqrt <- function(para_h,ret,h,rt)
   g0=b1+ a1+ a2/2
 
   mt=lamda0*((h)^(1/2))- (h)/2
-  g1=b1+ (a1+a2*(pnorm(lamda0)))*(1+lamda0^2)+a2*lamda0*dnorm(lamda0) 
-  
+
   drapeau=0
   if (a0<=0){drapeau=1}
   if (a1<=0){drapeau=1}
   if (a2<=0){drapeau=1}
   if (b1<=0){drapeau=1}
-  if (lamda0<=0){drapeau=1}
-  
-  
+
    if (is.na(g0)==TRUE){drapeau=1}else{
    if (g0>=1){drapeau=1}
    if (g0<=0.70){drapeau=1}
-   if (g1>=0.9975146){drapeau=1}
-   if (g1<=0.70){drapeau=1}
    if (abs(g0)==Inf){drapeau=1}
    if (1/abs(g0)==Inf){drapeau=1}
   }
@@ -73,7 +70,15 @@ gsqrt <- function(para_h,ret,h,rt)
 Retdensity <- function(para_h,Ret,h,r)
 {
   ## set up the parameters of the model : para_h
-  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]   
+  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda1= para_h[5]   
+  
+  # Change from mt = lamda0*((ht)^(1/2))- (ht)/2   to   mt = lamda1*ht
+  #   lamda0*((ht)^(1/2))- (ht)/2 = lamda1*ht
+  #   lamda0*((ht)^(1/2)) = lamda1*ht + (ht)/2
+  #   lamda0*((ht)^(1/2)) = (3/2)*lamda1*ht
+  #   lamda0 =   (3/2)*lamda1*ht*(ht^(-1/2))
+  #   lamda0 =   (3/2)*lamda1*(ht^(1/2)) 
+  lamda0 =   (3/2)*lamda1*(h^(1/2)) 
 
   # Parameter under the physical probability
   h0=(a0 )/(1 - b1 - a1- a2/2)   
@@ -111,10 +116,11 @@ Retdensity <- function(para_h,Ret,h,r)
   }
  
   if (drapeau==0){
-    resultat= (1/(sqrt(2*pi*h)))*exp((-1/2)*(((Ret-r-lamda0*h)^2)/h)) 
+    resultat=  (1/(sqrt(2*pi*h)))*exp((-1/(2*h))*(((Ret-r-lamda0*((h)^(1/2))+(h)/2)^2)))
   }else{
     resultat=NA
   }
+  
   return(resultat)
 }
 
@@ -126,19 +132,23 @@ GJR_likelihood_ret <- function(para_h, Data.returns) {
   rt=Data.returns$rt/250        
   Z1=length(rt)
     
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]
+  ## set up the parameters of the model : para_h
+  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda1= para_h[5]   
   
   h = c()                                                          ####  A vector containing h from the model,
   h[1]= (a0 )/(1 - b1 - a1- a2/2)                                  ####  The first value for h, Unconditional Variance
   dens = Retdensity(para_h,ret[1],h[1],rt[1])
     
+  print(h[1])
+  print(dens)
   for (i in 2:Z1){
     h[i]= gsqrt(para_h,ret[i-1],h[i-1],rt[i-1]) ### 
     temp=Retdensity(para_h,ret[i],h[i],rt[i])
     dens<-dens+log(temp)
+
   }
   
+
   return(-dens)  
 }
 
@@ -150,7 +160,16 @@ GJR_likelihood_ret <- function(para_h, Data.returns) {
 gsqrt_Q <- function(para_h,ret,h,rt)
 {
   ## set up the parameters of the model : para_h
-  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]   
+  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda1= para_h[5]   
+  
+  # Change from mt = lamda0*((ht)^(1/2))- (ht)/2   to   mt = lamda1*ht
+  #   lamda0*((ht)^(1/2))- (ht)/2 = lamda1*ht
+  #   lamda0*((ht)^(1/2)) = lamda1*ht + (ht)/2
+  #   lamda0*((ht)^(1/2)) = (3/2)*lamda1*ht
+  #   lamda0 =   (3/2)*lamda1*ht*(ht^(-1/2))
+  #   lamda0 =   (3/2)*lamda1*(ht^(1/2)) 
+  lamda0 =   (3/2)*lamda1*(h^(1/2)) 
+  
   
   # Parameter under the physical probability
   h0=(a0 )/(1 - b1 - a1- a2/2)   
@@ -163,8 +182,7 @@ gsqrt_Q <- function(para_h,ret,h,rt)
   if (a1<=0){drapeau=1}
   if (a2<=0){drapeau=1}
   if (b1<=0){drapeau=1}
-  if (lamda0<=0){drapeau=1}
-  
+
   if (is.na(g0)==TRUE){drapeau=1}else{
     if (g0>=0.9975146){drapeau=1}
     if (g0<=0.50){drapeau=1}
@@ -194,7 +212,7 @@ gsqrt_Q <- function(para_h,ret,h,rt)
   }
   
   if (drapeau==0){
-    resultat= a0 +b1*h +(a1*(ret-rt-mt-lamda0)^2)+ (a2*(max(0,-(ret-rt-mt)+lamda0))^2)
+    resultat= a0 +b1*h + h*a1*(((ret-rt-mt)/(h^(-1/2))) - (lamda1+(1/2))*(h^(-1/2)))^2
   }else{
     resultat=NA
   }
@@ -210,7 +228,7 @@ shape_vol_P <- function(para_h, Data.returns) {
   Z1=length(rt)
   
   # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]
+  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda1= para_h[5]
   
   
   h = c()                                                        ####  A vector containing h from the model,
@@ -232,7 +250,7 @@ shape_vol_Q <- function(para_h, Data.returns) {
   Z1=length(rt)
   
   # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]
+  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda1= para_h[5]
   
  
   h = c()                                                        ####  A vector containing h from the model,
