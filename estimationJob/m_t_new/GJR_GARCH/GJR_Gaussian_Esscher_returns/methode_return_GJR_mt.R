@@ -48,7 +48,7 @@ ILK
 ###      Optimization  of the model           #######
 #####################################################
 start.time <- Sys.time()
-Sol=optim(para_h, GJR_likelihood_ret , Data.returns=Data.returns, method="Nelder-Mead",control = list(maxit = 5000))
+Sol=optim(para_h, GJR_likelihood_ret_mt , Data.returns=Data.returns, method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
