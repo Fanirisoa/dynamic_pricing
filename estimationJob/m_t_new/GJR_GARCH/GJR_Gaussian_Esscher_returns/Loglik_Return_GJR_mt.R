@@ -24,13 +24,13 @@ Retdensity <- function(para_h,Ret,h,r)
   if (b1<=0){drapeau=1}
 
   
-  print("Step 1:") 
-  print(drapeau) 
-  print(a0) 
-  print(a1) 
-  print(a2)
-  print(b1) 
-  print(lamda1) 
+  # print("Step 1:") 
+  # print(drapeau) 
+  # print(a0) 
+  # print(a1) 
+  # print(a2)
+  # print(b1) 
+  # print(lamda1) 
   # 
   # if (drapeau == 1) {
   #   break

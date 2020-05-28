@@ -40,8 +40,6 @@ time.taken
 
 ILK
 
-
-
 #####################################################
 ###      Optimization  of the model           #######
 #####################################################
@@ -52,5 +50,5 @@ time.taken <- end.time - start.time
 time.taken
 Sol
 para_h1<-Sol$par
-
-
+para_h
+para_h1
