@@ -21,6 +21,9 @@ path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/m_
 
 source(paste(path,"/parameters_setting_mt.R",sep=""))
 source(paste(path,"/Loglik_Return_GJR_mt.R",sep=""))
+source(paste(path,"/Simulation_MC.R",sep=""))
+source(paste(path,"/Function_Pricer_VIX_GJR.R",sep=""))
+source(paste(path,"/RMSE_GJR.R",sep=""))
 
 ######################################################################################
 ###               Volatility   plot under the initial parameters               #######
@@ -52,3 +55,16 @@ Sol
 para_h1<-Sol$par
 para_h
 para_h1
+
+############################################################
+####            In sample   RMSE                          ##
+############################################################
+start.time <- Sys.time()
+RMSE_mt= RMSEsim(para_h1,Data.N,Nb_MC)
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+
+RMSE_mt$rmse
+RMSE_mt$norm_rmse
+

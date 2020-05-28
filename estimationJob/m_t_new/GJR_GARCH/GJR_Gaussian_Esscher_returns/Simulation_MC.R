@@ -3,11 +3,19 @@
 ######################################################################
 variance<-function(para_h1,innovation,ht){
   # para_h<-c() set up the parameters of the model 
-  a0=para_h1[1]; a1=para_h1[2]; a2=para_h1[3];  b1= para_h1[4] ;  lamda0= para_h1[5]  
+  a0=para_h1[1]; a1=para_h1[2]; a2=para_h1[3];  b1= para_h1[4] ;  lamda1= para_h1[5]  
+  
+  # Change from mt = lamda0*((ht)^(1/2))- (ht)/2   to   mt = lamda1*ht
+  #   lamda0*((ht)^(1/2))- (ht)/2 = lamda1*ht
+  #   lamda0*((ht)^(1/2)) = lamda1*ht + (ht)/2
+  #   lamda0*((ht)^(1/2)) = (3/2)*lamda1*ht
+  #   lamda0 =   (3/2)*lamda1*ht*(ht^(-1/2))
+  #   lamda0 =   (3/2)*lamda1*(ht^(1/2)) 
+  lamda0 =   (3/2)*lamda1*(ht^(1/2)) 
   
   mt_star=-(ht)/2
   
-  ht_next=a0 +b1*ht+(a1*ht*(innovation)^2)+ (a2*max(0,-ht*(innovation)^2))
+  ht_next= a0 +b1*ht + h*a1*(((ret-rt-mt)/(ht^(-1/2)))- (lamda1+(1/2))*(ht^(-1/2)))^2
   vol=sqrt(ht_next)
   
   return(vol)  
@@ -23,6 +31,14 @@ Sim<-function(para_h,ht){
   # para_h<-c() set up the parameters of the model 
   a0=para_h1[1]; a1=para_h1[2]; a2=para_h1[3];  b1= para_h1[4] ;  lamda0= para_h1[5] 
   
+  # Change from mt = lamda0*((ht)^(1/2))- (ht)/2   to   mt = lamda1*ht
+  #   lamda0*((ht)^(1/2))- (ht)/2 = lamda1*ht
+  #   lamda0*((ht)^(1/2)) = lamda1*ht + (ht)/2
+  #   lamda0*((ht)^(1/2)) = (3/2)*lamda1*ht
+  #   lamda0 =   (3/2)*lamda1*ht*(ht^(-1/2))
+  #   lamda0 =   (3/2)*lamda1*(ht^(1/2)) 
+  lamda0 =   (3/2)*lamda1*(ht^(1/2)) 
+  
   result=rnorm(1,0,1)-(lamda0*(sqrt(ht))-(ht/2))/(sqrt(ht))-(sqrt(ht)/2)
   
   return(result)
@@ -36,6 +52,14 @@ Matrice_ret<-function(x,N_v){
   # para_h<-c() set up the parameters of the model 
   N = N_v
   a0=para_h1[1]; a1=para_h1[2]; a2=para_h1[3];  b1= para_h1[4] ;  lamda0= para_h1[5]  
+  
+  # Change from mt = lamda0*((ht)^(1/2))- (ht)/2   to   mt = lamda1*ht
+  #   lamda0*((ht)^(1/2))- (ht)/2 = lamda1*ht
+  #   lamda0*((ht)^(1/2)) = lamda1*ht + (ht)/2
+  #   lamda0*((ht)^(1/2)) = (3/2)*lamda1*ht
+  #   lamda0 =   (3/2)*lamda1*ht*(ht^(-1/2))
+  #   lamda0 =   (3/2)*lamda1*(ht^(1/2)) 
+  lamda0 =   (3/2)*lamda1*(ht^(1/2)) 
   
   # Parameter under the physical probability
   lamda0star= -(1/2)
