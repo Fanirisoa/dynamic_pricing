@@ -94,10 +94,10 @@ GJR_likelihood_ret_mt <- function(para_h, Data.returns) {
   dens = Retdensity(para_h,ret[1],h[1],rt[1])
   
  lamda0 = c() 
- lamda0 =   (3/2)*lamda1*(h[1]^(1/2)) 
+ lamda0[1] =   (3/2)*lamda1*(h[1]^(1/2)) 
   
   mt = c()                                                       ####  the predictible excess of return process mt,
-  mt[1]=lamda0*((h[1])^(1/2))- (h[1])/2
+  mt[1]=lamda0[1]*((h[1])^(1/2))- (h[1])/2
   
   for (i in 2:Z1){
     h[i]=a0 +b1*h[i-1]+(a1*(ret[i-1]-rt[i-1]-mt[i-1])^2)+ (a2*max(0,-(ret[i-1]-rt[i-1]-mt[i-1])^2))
