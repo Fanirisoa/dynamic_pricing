@@ -23,7 +23,7 @@ Pricer<-function(N_v,para_h1 ,Data.N){
   ######################################     
   ##   Step 1 : Sampling the returns  ## 
   ######################################  
-  print(paste0("level: ", 4))
+
   
   Y_t= lapply(1:Z1, function(x) Matrice_ret(x,N_v))
   

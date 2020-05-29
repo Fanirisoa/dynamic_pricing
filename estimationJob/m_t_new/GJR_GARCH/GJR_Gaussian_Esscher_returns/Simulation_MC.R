@@ -15,7 +15,7 @@ variance<-function(para_h1,innovation,ht){
   
   mt_star=-(ht)/2
   
-  ht_next= a0 +b1*ht + h*a1*(((ret-rt-mt)/(ht^(-1/2)))- (lamda1+(1/2))*(ht^(-1/2)))^2
+  ht_next= a0 +b1*ht + ht*a1*(innovation- (lamda1+(1/2))*(ht^(-1/2)))^2
   vol=sqrt(ht_next)
   
   return(vol)  
@@ -29,7 +29,7 @@ variance<-function(para_h1,innovation,ht){
 Sim<-function(para_h,ht){
 
   # para_h<-c() set up the parameters of the model 
-  a0=para_h1[1]; a1=para_h1[2]; a2=para_h1[3];  b1= para_h1[4] ;  lamda0= para_h1[5] 
+  a0=para_h1[1]; a1=para_h1[2]; a2=para_h1[3];  b1= para_h1[4] ;  lamda1= para_h1[5] 
   
   # Change from mt = lamda0*((ht)^(1/2))- (ht)/2   to   mt = lamda1*ht
   #   lamda0*((ht)^(1/2))- (ht)/2 = lamda1*ht
@@ -51,16 +51,8 @@ Sim<-function(para_h,ht){
 Matrice_ret<-function(x,N_v){  
   # para_h<-c() set up the parameters of the model 
   N = N_v
-  a0=para_h1[1]; a1=para_h1[2]; a2=para_h1[3];  b1= para_h1[4] ;  lamda0= para_h1[5]  
-  
-  # Change from mt = lamda0*((ht)^(1/2))- (ht)/2   to   mt = lamda1*ht
-  #   lamda0*((ht)^(1/2))- (ht)/2 = lamda1*ht
-  #   lamda0*((ht)^(1/2)) = lamda1*ht + (ht)/2
-  #   lamda0*((ht)^(1/2)) = (3/2)*lamda1*ht
-  #   lamda0 =   (3/2)*lamda1*ht*(ht^(-1/2))
-  #   lamda0 =   (3/2)*lamda1*(ht^(1/2)) 
-  lamda0 =   (3/2)*lamda1*(ht^(1/2)) 
-  
+  a0=para_h1[1]; a1=para_h1[2]; a2=para_h1[3];  b1= para_h1[4] ;  lamda1= para_h1[5]  
+
   # Parameter under the physical probability
   lamda0star= -(1/2)
   
@@ -74,8 +66,7 @@ Matrice_ret<-function(x,N_v){
   T=T*250
   T=round(T,0)     ####  Time to maturity expressed in terms of days
   
-  g1= b1+ (a1+a2*(pnorm(lamda0)))*(1+lamda0^2)+a2*lamda0*dnorm(lamda0)            ####  The percistence
-  h0=(a0 )/(1 - g1)                                                               ####  The first value for h, Unconditional Variance
+  h0=(a0 )/(1 - b1 - a1- a2/2)  
   
   base_sim=matrix(0,T[x],N)  
   for(j in 1:N)  
