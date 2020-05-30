@@ -13,13 +13,13 @@ Data.N=Data.N2[-c(506,1462,1638,1645),]
 #####################################################
 ###      Parameters of the silulation         #######
 #####################################################
-N= 2
+N= 200
 
 
 #####################################################
 ###             date to considere             #######
 #####################################################
-index_ht = which(Data.returns$date == "2008-01-07")
+index_ht = which(Data.returns$date == "2010-01-04")
 
 index_vix = which(Data.ret$date == "2010-01-04")
 
@@ -47,8 +47,9 @@ para_h<-c(1.180234e-12, 1.547729e-06, 4.550518e+02, 6.500111e-01 ,8.596182e+00, 
 ###   Initial parameter  para_distribution<-c() set up the parameters of the distribution   ####
 ### alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4];
 
-para_distribution<-c(5, 1.397610234,   0.007012446,  -0.286886696)
-#para_distribution<-c(2.237095e+01, -1.047143e+01,  7.135328e-03,  8.048087e-04)
+###para_distribution<-c(5, 1.397610234,   0.007012446,  -0.286886696)
+
+para_distribution<-c(2.237095e+01, -1.047143e+01,  7.135328e-03,  8.048087e-04)
 
 
 para_M = c(para_distribution,para_h)

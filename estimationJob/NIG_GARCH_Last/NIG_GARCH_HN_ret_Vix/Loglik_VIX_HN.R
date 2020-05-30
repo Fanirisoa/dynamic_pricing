@@ -190,7 +190,7 @@ Heston_likelihood_vix <- function(para_M, Data.returns,Data.ret){
   
   
   h_all= hstar(para_h,Data.returns)
-  h =h_all[index_ht:length(h_all)] 
+  h = h_all[index_ht:length(h_all)] 
     
     
   VIX_Model <- rep(NA, Nvix)
