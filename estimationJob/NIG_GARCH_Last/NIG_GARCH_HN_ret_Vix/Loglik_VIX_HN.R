@@ -172,9 +172,12 @@ VIX_Q<-function(para_h,h){
 #####       The Log-likeelihood over all Option        ####
 ###########################################################
 Heston_likelihood_vix <- function(para_M, Data.returns,Data.ret){
-  Vix=Data.ret$VIX      ####  Call dividende
   
+  Data.ret.reduiced <- Data.ret[index_vix:length(Data.ret$VIX),].reset_index()
+  row.names(Data.ret.reduiced) <- NULL
+  Vix=Data.ret$VIX     ####  Call dividende
   
+
   ## set up the parameters of the model : para_M = c(para_distribution,para_h) 
   alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]
   a0=para_M[5]; a1=para_M[6]; gama=para_M[7];  b1= para_M[8] ;  lamda0= para_M[9]  ; ro=para_M[10]
