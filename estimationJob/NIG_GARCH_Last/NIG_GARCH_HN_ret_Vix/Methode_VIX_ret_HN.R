@@ -17,7 +17,7 @@ library(xts)
 ###              Load : Data source,    Parameters of the model,  function to use          #######
 ##################################################################################################
 setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")  
-path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NIG_GARCH_New_estimation/NIG_GARCH_HN_ret_Vix"
+path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NIG_GARCH_Last/NIG_GARCH_HN_ret_Vix"
 
 source(paste(path,"/Fun_Pricer_VIX_ret_HN.R",sep=""))
 source(paste(path,"/MCSim_VIX_ret_HN.R",sep=""))

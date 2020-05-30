@@ -173,9 +173,9 @@ VIX_Q<-function(para_h,h){
 ###########################################################
 Heston_likelihood_vix <- function(para_M, Data.returns,Data.ret){
   
-  Data.ret.reduiced <- Data.ret[index_vix:length(Data.ret$VIX),].reset_index()
+  Data.ret.reduiced <- Data.ret[index_vix:length(Data.ret$VIX),]
   row.names(Data.ret.reduiced) <- NULL
-  Vix=Data.ret$VIX     ####  Call dividende
+  Vix=Data.ret.reduiced$VIX     ####  Call dividende
   
 
   ## set up the parameters of the model : para_M = c(para_distribution,para_h) 
@@ -188,8 +188,11 @@ Heston_likelihood_vix <- function(para_M, Data.returns,Data.ret){
   
   Nvix=length(Vix)
   
-  h = hstar(para_h,Data.returns)
   
+  h_all= hstar(para_h,Data.returns)
+  h =h_all[index_ht:length(h_all)] 
+    
+    
   VIX_Model <- rep(NA, Nvix)
   for (i in 1:Nvix){
     VIX_Model[i]= VIX_Q(para_h,h[i+1])
