@@ -52,14 +52,14 @@ time.taken
 ILK
 
 GJR_likelihood_ret(para_h, Data.returns)
-GJR_likelihood_vix(para_h,Data.returns) 
+GJR_likelihood_vix(para_h,Data.returns,Data.ret) 
 
 
 #####################################################
 ###      Optimization  of the model           #######
 #####################################################
 start.time <- Sys.time()
-Sol=optim(para_h,Heston_likelihood_Mix ,Data.ret=Data.ret, Data.N = Data.N,Data.returns=Data.returns, N=N, method="Nelder-Mead",control = list(maxit = 5000))
+Sol=optim(para_h,GJR_likelihood_Mix ,Data.ret=Data.ret, Data.N = Data.N,Data.returns=Data.returns, N=N, method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
