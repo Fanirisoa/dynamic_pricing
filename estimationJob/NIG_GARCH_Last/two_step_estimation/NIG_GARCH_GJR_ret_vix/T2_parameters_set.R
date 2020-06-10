@@ -33,8 +33,7 @@ index_vix = which(Data.ret$date == "2010-01-04")
 ###   Initial parameter  ####``
 ###   Initial parameter  para_h<-c() set up the parameters of the volatility  ####
 
-
-## para_h<-c(5.192896e-06, 1.240918e-01, 2.314273e-02, 8.504267e-01, 1.821112e-01, 9.657773e-01)
+para_h<-c(5.192896e-06, 1.240918e-01, 2.314273e-02, 8.504267e-01, 1.821112e-01, 9.657773e-01)
 
 ## para_h<-c(5.987174e-06,  1.240911e-01,  2.314265e-02,  8.504269e-01,  3.784983e-02, 9.546611e-01)  ## RMSE1$rmse : 0.06265758 RMSE3$rmse :0.07367674
 
@@ -54,4 +53,64 @@ index_vix = which(Data.ret$date == "2010-01-04")
 ## para_distribution<-c(200.237095e+01 ,-1.047143e+01,  7.135328e-03 , 80.048087e-04) #### RMSE2$rmse: 0.01082957
 
 para_distribution=c(1.269943539, -0.002488772,  1.620073612,  2.088112106)
+
+
+# > #####################################################
+# > ###      Optimization  of the model           #######
+# > #####################################################
+# > start.time <- Sys.time()
+# > Sol=optim(para_h,Heston_likelihood_Mix ,Data.ret=Data.ret, Data.N = Data.N,Data.returns=Data.returns, N=N, method="Nelder-Mead",control = list(maxit = 5000))
+# > end.time <- Sys.time()
+# > time.taken <- end.time - start.time
+# > time.taken
+# Time difference of 6.537053 secs
+# > 
+#   > Sol
+# $par
+# [1] 4.283064e-07 1.537493e-06 4.607389e+02 6.510114e-01 8.596181e+00 9.646984e-01
+# 
+# $value
+# [1] -7788.42
+# 
+# $counts
+# function gradient 
+# 309       NA 
+# 
+# $convergence
+# [1] 0
+# 
+# $message
+# NULL
+# 
+# > para_h1<-Sol$par
+# > para_h
+# [1] 1.180234e-12 1.547729e-06 4.550518e+02 6.500111e-01 8.596182e+00 9.646967e-01
+# > para_h1
+# [1] 4.283064e-07 1.537493e-06 4.607389e+02 6.510114e-01 8.596181e+00 9.646984e-01
+# > ##########################################################
+# > #                QML estimation  NIG                     # 
+#   > ##########################################################
+# > start.time <- Sys.time()
+# > QMLSol=optim(para_distribution,NIG_likelihood_dens_QML ,para_h =para_h1,Data.returns=Data.returns, method="Nelder-Mead",control = list(maxit = 5000))
+# > end.time <- Sys.time()
+# > time.taken <- end.time - start.time
+# > time.taken
+# Time difference of 3.966922 secs
+# > QMLSol
+# $par
+# [1]  1.27567837 -0.05863686  1.52691996  2.29519637
+# 
+# $value
+# [1] 3552.764
+# 
+# $counts
+# function gradient 
+# 129       NA 
+# 
+# $convergence
+# [1] 0
+# 
+# $message
+# NULL
+# 
 

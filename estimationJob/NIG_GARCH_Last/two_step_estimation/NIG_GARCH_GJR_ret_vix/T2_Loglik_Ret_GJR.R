@@ -40,7 +40,7 @@ Retdensity <- function(para_h,Ret,h,r)
 ###########################################################
 #####  The Log-likeelihood over all the returns dates  ####
 ###########################################################
-Heston_likelihood_ret <- function(para_h, Data.returns) {
+GJR_likelihood_ret <- function(para_h, Data.returns) {
   ret=Data.returns$ret   
   rt=Data.returns$rt/250        
   Z1=length(rt)

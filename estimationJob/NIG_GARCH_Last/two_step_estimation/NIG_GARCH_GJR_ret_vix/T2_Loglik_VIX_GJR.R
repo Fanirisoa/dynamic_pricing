@@ -156,7 +156,7 @@ VIX_Q<-function(para_h,h){
 ###########################################################
 #####       The Log-likeelihood over all Option        ####
 ###########################################################
-Heston_likelihood_vix <- function(para_h,Data.returns) {
+GJR_likelihood_vix <- function(para_h,Data.returns) {
 
   # para_h<-c() set up the parameters of the model 
   a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]

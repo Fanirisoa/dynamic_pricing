@@ -21,7 +21,7 @@ path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NI
 
 source(paste(path,"/T2_parameters_set.R",sep=""))
 source(paste(path,"/T2_Loglik_Ret_GJR.R",sep=""))
-source(paste(path,"/TT2_Loglik_VIX_GJR.R",sep=""))
+source(paste(path,"/T2_Loglik_VIX_GJR.R",sep=""))
 source(paste(path,"/T2_Loglik_Mix_VIX_GJR.R",sep=""))
 source(paste(path,"/T2_QMLNIG_VIX_GJR.R",sep=""))
 
@@ -45,14 +45,14 @@ grid()
 #####################################################
 
 start.time <- Sys.time()
-ILK=Heston_likelihood_Mix(para_h,Data.ret, Data.N,Data.returns,N) 
+ILK=GJR_likelihood_Mix(para_h,Data.ret, Data.N,Data.returns,N) 
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
 ILK
 
-Heston_likelihood_ret(para_h, Data.returns)
-Heston_likelihood_vix(para_h,Data.returns,Data.ret) 
+GJR_likelihood_ret(para_h, Data.returns)
+GJR_likelihood_vix(para_h,Data.returns) 
 
 
 #####################################################
