@@ -158,7 +158,10 @@ VIX_Q<-function(para_h,h){
 #####       The Log-likeelihood over all Option        ####
 ###########################################################
 GJR_likelihood_vix <- function(para_M, Data.returns,Data.ret){
-  Vix=Data.ret$VIX      ####  Call dividende
+  
+  Data.ret.reduiced <- Data.ret[index_vix:length(Data.ret$VIX),]
+  row.names(Data.ret.reduiced) <- NULL
+  Vix=Data.ret.reduiced$VIX     ####  Call dividende
   
   # para_M = c(para_distribution,para_h) 
   # alpha=para_distribution[1], beta=para_distribution[2], delta=para_distribution[3], mu=para_distribution[4]
@@ -173,12 +176,15 @@ GJR_likelihood_vix <- function(para_M, Data.returns,Data.ret){
   # para_h<-c() set up the parameters of the model 
   a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]
   
+  
   VIX_Market<-Vix
-
   Nvix=length(Vix)
   
-  h = hstar(para_h,Data.returns)
   
+  h_all= hstar(para_h,Data.returns)
+  h = h_all[index_ht:length(h_all)] 
+  
+
   VIX_Model <- rep(NA, Nvix)
   for (i in 1:Nvix){
     VIX_Model[i]= VIX_Q(para_h,h[i+1])
