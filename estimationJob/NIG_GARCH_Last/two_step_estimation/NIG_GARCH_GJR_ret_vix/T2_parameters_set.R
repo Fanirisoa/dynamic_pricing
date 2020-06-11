@@ -98,5 +98,5 @@ $convergence
 
 $message
 NULL
-
+7.609e-02
 > 
