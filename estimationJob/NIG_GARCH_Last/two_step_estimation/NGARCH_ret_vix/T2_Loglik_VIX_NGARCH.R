@@ -4,35 +4,21 @@
 h_vol<-function(para_h,h,ret,rt){
   
   # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5]; a=para_h[6]; b=para_h[7]  ; c=para_h[8]; d=para_h[9]   ; ro=para_h[10]
+  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5];  ro=para_h[6]
   
-  ## Mean 0 and Variance 1
-  c0=a^2 - b^2
- 
+
   # Parameter under the physical probability
   h0=a0/(1- (b1+a1*(1+gama^2)))    
-  b0=abs(b)
-  
-  
+
   
   drapeau=0
   if (a0<=0){drapeau=1}
   if (b1<=0){drapeau=1}
   if (a1<=0){drapeau=1}
-  if (b0<=0){drapeau=1}
-  if (c<=0){drapeau=1}
-  if (c0<=0){drapeau=1}
-  if (a<=0){drapeau=1}
   if (ro<=0){drapeau=1}
   if (ro>=1){drapeau=1}
   if (gama<=0){drapeau=1}
   
-  if (is.na(b0)==TRUE){drapeau=1}else{
-    if (b0<=0){drapeau=1}
-    if (b0>=a){drapeau=1}
-    if (b0==Inf){drapeau=1}
-    if (1/b0==Inf){drapeau=1}
-  }
   
   if (is.na(h0)==TRUE){drapeau=1}else{
     if (h0<=0){drapeau=1}
@@ -40,20 +26,14 @@ h_vol<-function(para_h,h,ret,rt){
     if (1/abs(h0)==Inf){drapeau=1}
   }
   
-  if (is.na(c)==TRUE){drapeau=1}else{
-    if (c<=0){drapeau=1}
-    if (abs(c)==Inf){drapeau=1}
-    if (1/abs(c)==Inf){drapeau=1}
-  }
-  
   if (is.na(h)==TRUE){drapeau=1}else{
     if (h<=0){drapeau=1}
     if (abs(h)==Inf){drapeau=1}
     if (1/abs(h)==Inf){drapeau=1}
   }
-  
+             
   if (drapeau==0){
-    resultat= a0 +b1*h+a1*h*(((ret-rt+K_eps(sqrt(h),a,b,c,d))/(sqrt(h)))-lambda-gama)^2
+    resultat= a0 +b1*h+a1*h*((ret-rt- lambda*sqrt(h)+(1/2)*h)/(sqrt(h))-gama)^2
   }else{
     resultat=NA
   }
@@ -72,17 +52,10 @@ hstar<-function(para_h,Data.returns){
   Z1=length(ret)
   
   # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5]; a=para_h[6]; b=para_h[7]  ; c=para_h[8]; d=para_h[9]   ; ro=para_h[10]
-  
-  ## Mean 0 and Variance 1
-  c0=a^2 - b^2
+  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5];  ro=para_h[6]
 
   # Parameter under the physical probability
   h0=a0/(1- (b1+a1*(1+gama^2)))    
-  b0=abs(b)
-  
-  
- 
   
   h_star = c()                                                                ####  A vector containing h from the model,
   h_star[1]=a0/(1- (b1+a1*(1+gama^2)))                                        ####  The first value for h,
@@ -95,20 +68,10 @@ hstar<-function(para_h,Data.returns){
   if (a0<=0){drapeau=1}
   if (b1<=0){drapeau=1}
   if (a1<=0){drapeau=1}
-  if (b0<=0){drapeau=1}
-  if (c<=0){drapeau=1}
-  if (c0<=0){drapeau=1}
-  if (a<=0){drapeau=1}
   if (ro<=0){drapeau=1}
   if (ro>=1){drapeau=1}
   if (gama<=0){drapeau=1}
   
-  if (is.na(b0)==TRUE){drapeau=1}else{
-    if (b0<=0){drapeau=1}
-    if (b0>=a){drapeau=1}
-    if (b0==Inf){drapeau=1}
-    if (1/b0==Inf){drapeau=1}
-  }
   
   if (is.na(h0)==TRUE){drapeau=1}else{
     if (h0<=0){drapeau=1}
@@ -116,17 +79,14 @@ hstar<-function(para_h,Data.returns){
     if (1/abs(h0)==Inf){drapeau=1}
   }
   
-  if (is.na(c)==TRUE){drapeau=1}else{
-    if (c<=0){drapeau=1}
-    if (abs(c)==Inf){drapeau=1}
-    if (1/abs(c)==Inf){drapeau=1}
-  }
+
   
   if (drapeau==0){
     resultat=h_star
   }else{
     resultat=rep(NA, Z1)
   }
+  
   return(resultat)
 }
 
@@ -140,33 +100,18 @@ VIX_Q<-function(para_h,h,Ret,r){
   T_0=22
   
   # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5]; a=para_h[6]; b=para_h[7]  ; c=para_h[8]; d=para_h[9]   ; ro=para_h[10]
+  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5];  ro=para_h[6]
   
-  ## Mean 0 and Variance 1
-  c0=a^2 - b^2
-
   # Parameter under the physical probability
   h0=a0/(1- (b1+a1*(1+gama^2)))    
-  b0=abs(b)
-  
+
   drapeau=0
   if (a0<=0){drapeau=1}
   if (b1<=0){drapeau=1}
   if (a1<=0){drapeau=1}
-  if (b0<=0){drapeau=1}
-  if (c<=0){drapeau=1}
-  if (c0<=0){drapeau=1}
-  if (a<=0){drapeau=1}
   if (ro<=0){drapeau=1}
   if (ro>=1){drapeau=1}
   if (gama<=0){drapeau=1}
-  
-  if (is.na(b0)==TRUE){drapeau=1}else{
-    if (b0<=0){drapeau=1}
-    if (b0>=a){drapeau=1}
-    if (b0==Inf){drapeau=1}
-    if (1/b0==Inf){drapeau=1}
-  }
   
   if (is.na(h0)==TRUE){drapeau=1}else{
     if (h0<=0){drapeau=1}
@@ -174,12 +119,6 @@ VIX_Q<-function(para_h,h,Ret,r){
     if (1/abs(h0)==Inf){drapeau=1}
   }
   
-  if (is.na(c)==TRUE){drapeau=1}else{
-    if (c<=0){drapeau=1}
-    if (abs(c)==Inf){drapeau=1}
-    if (1/abs(c)==Inf){drapeau=1}
-  }
-    
   Psy = b1+a1*(1+(lambda+gama)^2)
   #  VIX 
   
@@ -203,23 +142,16 @@ NGARCH_likelihood_vix <- function(para_h,Data.returns,Data.ret) {
   
   
   # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5]; a=para_h[6]; b=para_h[7]  ; c=para_h[8]; d=para_h[9]   ; ro=para_h[10]
+  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5];  ro=para_h[6]
   
-  ## Mean 0 and Variance 1
-  c0=a^2 - b^2
-
   # Parameter under the physical probability
   h0=a0/(1- (b1+a1*(1+gama^2)))    
-  b0=abs(b)
-  
   
   VIX_Market<-Vix
   Nvix=length(Vix)
   
-  
   h_all= hstar(para_h,Data.returns)
   h = h_all[index_ht:length(h_all)] 
-  
   
   VIX_Model <- rep(NA, Nvix)
   for (i in 1:Nvix){

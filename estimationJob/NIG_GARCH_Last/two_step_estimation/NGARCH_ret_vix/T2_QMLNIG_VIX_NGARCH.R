@@ -1,288 +1,102 @@
-####################################################
-######         Cumulant  generating function      ##
-####################################################
-K_eps<-function(z,a,b,c,d){
+########################################################################
+#      Fonction densite chaque loi conditionelle pour les returns      # 
+########################################################################
+
+densite <- function(para_distribution,para_h,l){
+  alpha=para_distribution[1]
+  beta=para_distribution[2]
+  delta=para_distribution[3]
+  mu=para_distribution[4]
   
-  ## Mean 0 and Variance 1
-  c0=a^2 - b^2
-  c2=a^2 - (b+z*c)^2
+  ## set up the parameters of the model : para_h
+  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5];  ro=para_h[6]
+  
+  
+  gamma_0 = sqrt((alpha^2) -(beta^2))
+  
+  ## Normalisation :
+  sigma_z = (delta*(alpha^2))/((gamma_0)^3)
+  
+  mu_z= mu - ((delta*beta)/(gamma_0 ))
+  
+  ## Parametrization : 
+  
+  alpha_1 = alpha*(sigma_z)
+  beta_1 =beta*(sigma_z)
+  delta_1 =delta/(sigma_z)
+  mu_1 =(1/(sigma_z))*(mu-mu_z)
   
   
   drapeau=0
-  if (is.na(c0)==TRUE){drapeau=1}else{
-    if (c0<=0){drapeau=1}
-    if (c0==Inf){drapeau=1}
-    if (1/c0==Inf){drapeau=1}
-  }
+  if (abs(alpha)<abs(beta)){drapeau=1}
+  if (alpha<=0){drapeau=1}
+  if (alpha==Inf){drapeau=1}
+  if (delta<=0){drapeau=1}
   
-  if (is.na(c2)==TRUE){drapeau=1}else{
-    if (c2<=0){drapeau=1}
-    if (abs(c2)==Inf){drapeau=1}
-    if (1/abs(c2)==Inf){drapeau=1}
-  }
-
+  
+  if (abs(alpha_1)<abs(beta_1)){drapeau=1}
+  if (alpha_1<=0){drapeau=1}
+  if (alpha_1==Inf){drapeau=1}
+  if (delta_1<=0){drapeau=1}
+  
+  
   if (drapeau==0){
-    resultat=  z*d+sqrt(a^2 - b^2)-sqrt(a^2 - (b+z*c)^2)
-  }else{
-    resultat=NA
-  }
-  return(resultat)
-}
-  
-
-####################################################
-######         The volatility updating rule       ##
-####################################################
-gsqrt <- function(para_h,ret,h,rt)
-{
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5]; a=para_h[6]; b=para_h[7]  ; c=para_h[8]; d=para_h[9]   ; ro=para_h[10]
-  
-  ## Mean 0 and Variance 1
-  c0=a^2 - b^2
- 
-  # Parameter under the physical probability
-  h0=a0/(1- (b1+a1*(1+gama^2)))    
-  b0=abs(b)
-  g0=(b1+a1*(1+gama^2))
-  
-  drapeau=0
-  if (a0<=0){drapeau=1}
-  if (b1<=0){drapeau=1}
-  if (a1<=0){drapeau=1}
-  if (g0<=0.2){drapeau=1}
-  if (g0>=1){drapeau=1}
-  if (b0<=0){drapeau=1}
-  if (c<=0){drapeau=1}
-  if (c0<=0){drapeau=1}
-  if (a<=0){drapeau=1}
-  
-  if (is.na(b0)==TRUE){drapeau=1}else{
-    if (b0<=0){drapeau=1}
-    if (b0>=a){drapeau=1}
-    if (b0==Inf){drapeau=1}
-    if (1/b0==Inf){drapeau=1}
-  }
- 
-  if (is.na(h0)==TRUE){drapeau=1}else{
-    if (h0<=0){drapeau=1}
-    if (abs(h0)==Inf){drapeau=1}
-    if (1/abs(h0)==Inf){drapeau=1}
-  }
- 
-  if (is.na(c)==TRUE){drapeau=1}else{
-    if (c<=0){drapeau=1}
-    if (abs(c)==Inf){drapeau=1}
-    if (1/abs(c)==Inf){drapeau=1}
-  }
-  
-
-  if (drapeau==0){
-    resultat= a0 +b1*h+a1*h*((ret-rt- lambda*sqrt(h)+K_eps(sqrt(h),a,b,c,d))/(sqrt(h))-gama)^2
+    resultat=dgh(l,alpha_1,beta_1,delta_1,mu_1,-1/2)
   }else{
     resultat=NA
   }
   return(resultat)
 }
 
-###########################################################
-#####  The conditional density of the daily return     ####
-###########################################################
-Retdensity <- function(para_h,ret,h,rt)
-{
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5]; a=para_h[6]; b=para_h[7]  ; c=para_h[8]; d=para_h[9]   ; ro=para_h[10]
-  
-  ## Mean 0 and Variance 1
-  c0=a^2 - b^2
- 
-  # Parameter under the physical probability
-  h0=a0/(1- (b1+a1*(1+gama^2)))    
-  b0=abs(b)
-  g0=(b1+a1*(1+gama^2))
-  
-  drapeau=0
-  if (a0<=0){drapeau=1}
-  if (b1<=0){drapeau=1}
-  if (a1<=0){drapeau=1}
-  if (g0<=0.2){drapeau=1}
-  
-  if (b0<=0){drapeau=1}
-  if (c<=0){drapeau=1}
-  if (c0<=0){drapeau=1}
-  if (a<=0){drapeau=1}
-  
-  if (is.na(g0)==TRUE){drapeau=1}else{
-    if (g0<=0.2){drapeau=1}
-    if (g0>=1){drapeau=1}
-    if (g0==Inf){drapeau=1}
-    if (1/g0==Inf){drapeau=1}
-  }
-  
-  
-  if (is.na(b0)==TRUE){drapeau=1}else{
-    if (b0<=0){drapeau=1}
-    if (b0>=a){drapeau=1}
-    if (b0==Inf){drapeau=1}
-    if (1/b0==Inf){drapeau=1}
-  }
-  
-  if (is.na(h0)==TRUE){drapeau=1}else{
-    if (h0<=0){drapeau=1}
-    if (abs(h0)==Inf){drapeau=1}
-    if (1/abs(h0)==Inf){drapeau=1}
-  }
-  
-  if (is.na(c)==TRUE){drapeau=1}else{
-    if (c<=0){drapeau=1}
-    if (abs(c)==Inf){drapeau=1}
-    if (1/abs(c)==Inf){drapeau=1}
-  }
-  
-  if (drapeau==0){
-    resultat= dnig((ret-rt- lambda*sqrt(h)+K_eps(sqrt(h),a,b,c,d))/(sqrt(h)), alpha = a, beta = b, delta = c, mu = d, log = FALSE)
-
-  }else{
-    resultat=NA
-  }
-  return(resultat)
-}
-
-
-###########################################################
-#####  The Log-likeelihood over all the returns dates  ####
-###########################################################
-NGARCH_likelihood_ret <- function(para_h, Data.returns) {
+##########################################################
+#                likelihood function                     # 
+##########################################################  
+NGARCH_likelihood_dens_QML <- function(para_distribution,para_h,Data.returns) {
   ret=Data.returns$ret   
   rt=Data.returns$rt/250        
   Z1=length(rt)
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5]; a=para_h[6]; b=para_h[7]  ; c=para_h[8]; d=para_h[9]   ; ro=para_h[10]
   
-  ## Mean 0 and Variance 1
-  c0=a^2 - b^2
+  # para_distribution<-c() set up the parameters of NIG
+  alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4];
+  
+  # para_h<-c() set up the parameters of the model 
+  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5];  ro=para_h[6]
+  
+  
+  gamma_0 = sqrt((alpha^2) -(beta^2))
+  
+  ## Normalisation :
+  sigma_z = (delta*(alpha^2))/((gamma_0)^3)
+  mu_z= mu - ((delta*beta)/(gamma_0 ))
+  
+  ## Parametrization : 
+  
+  alpha_1 = alpha*(sigma_z)
+  beta_1 =beta*(sigma_z)
+  delta_1 =delta/(sigma_z)
+  mu_1 =(1/(sigma_z))*(mu-mu_z)
  
   
+  h = c()                                                        ####  A vector containing h from the model,
+  h[1]=a0/(1- (b1+a1*(1+gama^2)))                                 ####  The first value for h, Unconditional Variance
   
-  h = c()                                                          ####  A vector containing h from the model,
-  h[1]=a0/(1- (b1+a1*(1+gama^2)))                                  ####  The first value for h, Unconditional Variance
-  dens = Retdensity(para_h,ret[1],h[1],rt[1])
+  mt = c()                                                       ####  the predictible excess of return process mt,
+  mt[1]=lambda*((h[1])^(1/2))- (h[1])/2
+  
+  z = c()                                                        ####  A vector containing z from the model,  innovation
+  z[1]=(ret[1]-rt[1] -mt[1])/ (sqrt(h[1]))  
+  
+  dens = densite(para_distribution,para_h,z[1])
   
   for (i in 2:Z1){
-    h[i]= gsqrt(para_h,ret[i-1],h[i-1],rt[i-1]) ### a0 +b1*h[i-1]+a1*(((ret[i-1]-rt[i-1]-lamda0*(h[i-1]))/(sqrt(h[i-1]))) - gama*(sqrt(h[i-1])))^2
-    temp=Retdensity(para_h,ret[i],h[i],rt[i])
+    h[i]  = a0 +b1*h[i-1]+a1*h[i-1]*((ret[i-1]-rt[i-1]-mt[i-1])/(sqrt(h[i-1]))-gama)^2
+    mt[i] =  lambda*((h[i])^(1/2))- (h[i])/2
+    z[i]  = (ret[i]-rt[i] -mt[i])/ (sqrt(h[i])) 
+    temp  = densite(para_distribution,para_h,z[i])
     dens<-dens+log(temp)
   }
   
-  return(dens)  
+  return(dens/length(dens))
 }
 
 
-
-####################################################
-######   The volatility updating rule under Q     ##
-####################################################
-gsqrt_Q <- function(para_h,ret,h,rt)
-{
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5]; a=para_h[6]; b=para_h[7]  ; c=para_h[8]; d=para_h[9]   ; ro=para_h[10]
-  
-  ## Mean 0 and Variance 1
-  c0=a^2 - b^2
- 
-  
-  # Parameter under the physical probability
-  h0=a0/(1- (b1+a1*(1+gama^2)))    
-  b0=abs(b)
-  
-  
-  drapeau=0
-  if (a0<=0){drapeau=1}
-  if (b1<=0){drapeau=1}
-  if (a1<=0){drapeau=1}
-  
-  if (b0<=0){drapeau=1}
-  if (c<=0){drapeau=1}
-  if (c0<=0){drapeau=1}
-  if (a<=0){drapeau=1}
-  
-  if (is.na(b0)==TRUE){drapeau=1}else{
-    if (b0<=0){drapeau=1}
-    if (b0>=a){drapeau=1}
-    if (b0==Inf){drapeau=1}
-    if (1/b0==Inf){drapeau=1}
-  }
-  
-  if (is.na(h0)==TRUE){drapeau=1}else{
-    if (h0<=0){drapeau=1}
-    if (abs(h0)==Inf){drapeau=1}
-    if (1/abs(h0)==Inf){drapeau=1}
-  }
-  
-  if (is.na(c)==TRUE){drapeau=1}else{
-    if (c<=0){drapeau=1}
-    if (abs(c)==Inf){drapeau=1}
-    if (1/abs(c)==Inf){drapeau=1}
-  }
-  
-  
-  if (drapeau==0){
-    resultat= a0 +b1*h+a1*h*((ret-rt- lambda*sqrt(h))/(sqrt(h))-gama)^2
-  }else{
-    resultat=NA
-  }
-  return(resultat)
-}
-####################################################
-######         The volatility shape under Q       ##
-####################################################
-shape_vol_P <- function(para_h, Data.returns) {
-  ret=Data.returns$ret   
-  rt=Data.returns$rt/250        
-  Z1=length(rt)
-  
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5]; a=para_h[6]; b=para_h[7]  ; c=para_h[8]; d=para_h[9]   ; ro=para_h[10]  
-  ## Mean 0 and Variance 1
-  c0=a^2 - b^2
- 
-  # Parameter under the physical probability
-  h0=a0/(1- (b1+a1*(1+gama^2)))    
-  b0=abs(b)
-  
-  h = c()                                                        ####  A vector containing h from the model,
-  h[1]=h0                                                        ####  The first value for h, Unconditional Variance
-  
-  for (i in 2:Z1){
-    h[i]= gsqrt(para_h,ret[i-1],h[i-1],rt[i-1]) ### a0 +b1*h[i-1]+a1*(((ret[i-1]-rt[i-1]-lamda0*(h[i-1]))/(sqrt(h[i-1]))) - gama*(sqrt(h[i-1])))^2
-  }
-  
-  return(h)  
-}
-
-####################################################
-######         The volatility shape under Q       ##
-####################################################
-shape_vol_Q <- function(para_h, Data.returns) {
-  ret=Data.returns$ret   
-  rt=Data.returns$rt/250        
-  Z1=length(rt)
-  
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5]; a=para_h[6]; b=para_h[7]  ; c=para_h[8]; d=para_h[9]   ; ro=para_h[10]  
-  ## Mean 0 and Variance 1
-  c0=a^2 - b^2
- 
-  # Parameter under the physical probability
-  h0=a0/(1- (b1+a1*(1+gama^2)))    
-  b0=abs(b)
-  
-  h = c()                                                        ####  A vector containing h from the model,
-  h[1]=h0                                                        ####  The first value for h, Unconditional Variance
-  
-  for (i in 2:Z1){
-    h[i]= gsqrt_Q (para_h,ret[i-1],h[i-1],rt[i-1]) ### a0 +b1*h[i-1]+a1*(((ret[i-1]-rt[i-1]-lamda0*(h[i-1]))/(sqrt(h[i-1]))) - gama*(sqrt(h[i-1])))^2
-  }
-  
-  return(h)  
-}
