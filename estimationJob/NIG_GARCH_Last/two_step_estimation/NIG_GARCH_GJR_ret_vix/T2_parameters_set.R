@@ -44,7 +44,7 @@ para_h<-c(5.192896e-06, 1.240918e-01, 2.314273e-02, 8.504267e-01, 1.821112e-01, 
 ###   Initial parameter  para_distribution<-c() set up the parameters of the distribution   ####
 ### alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4];
 
-## #para_distribution<-c(5, 1.397610234,   0.007012446,  -0.286886696)
+para_distribution<-c(5, 1.397610234,   0.007012446,  -0.286886696)
 
 ## para_distribution<-c(2.237095e+01, -1.047143e+01,  7.135328e-03,  8.048087e-04)
 
@@ -52,7 +52,7 @@ para_h<-c(5.192896e-06, 1.240918e-01, 2.314273e-02, 8.504267e-01, 1.821112e-01, 
 
 ## para_distribution<-c(200.237095e+01 ,-1.047143e+01,  7.135328e-03 , 80.048087e-04) #### RMSE2$rmse: 0.01082957
 
-para_distribution=c(1.269943539, -0.002488772,  1.620073612,  2.088112106)
+## para_distribution=c(1.269943539, -0.002488772,  1.620073612,  2.088112106)
 
 
 # > #####################################################

@@ -49,3 +49,53 @@ para_distribution<-c(5, 1.397610234,   0.007012446,  -0.286886696)
 ## para_distribution<-c(200.237095e+01 ,-1.047143e+01,  7.135328e-03 , 80.048087e-04) #### RMSE2$rmse: 0.01082957
 
 ##para_distribution=c(1.269943539, -0.002488772,  1.620073612,  2.088112106)
+
+
+
+time.taken
+Time difference of 10.72467 secs
+> 
+  > Sol
+$par
+[1] 3.583930e-06 7.956879e-01 6.174894e-02 1.487816e+00 2.839657e-03 9.541882e-01
+
+$value
+[1] -7615.632
+
+$counts
+function gradient 
+433       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL
+
+> para_h1<-Sol$par
+> para_h
+[1] 1.6030e-06 7.9570e-01 6.1750e-02 1.1460e+00 3.7360e-02 9.5417e-01
+> para_h1
+[1] 3.583930e-06 7.956879e-01 6.174894e-02 1.487816e+00 2.839657e-03 9.541882e-01
+> ##########################################################
+
+time.taken
+Time difference of 8.785261 secs
+> QMLSol
+$par
+[1]  1.665984840 -0.002144004  2.141671838  1.234367968
+
+$value
+[1] 3491.764
+
+$counts
+function gradient 
+271       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL
+
+> 
