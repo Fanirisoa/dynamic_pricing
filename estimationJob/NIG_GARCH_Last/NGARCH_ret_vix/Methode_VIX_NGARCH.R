@@ -18,7 +18,7 @@ library(xts)
 ###              Load : Data source,    Parameters of the model,  function to use          #######
 ##################################################################################################
 setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")  
-path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NIG_GARCH_Last/NGARCH_ret_vix"
+path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NIG_GARCH_New_estimation/NGARCH_ret_vix"
 
 source(paste(path,"/parameters_set.R",sep=""))
 source(paste(path,"/Loglik_Mix_NGARCH.R",sep=""))

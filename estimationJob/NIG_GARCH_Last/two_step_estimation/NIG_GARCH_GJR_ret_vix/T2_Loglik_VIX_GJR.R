@@ -168,7 +168,6 @@ GJR_likelihood_vix <- function(para_h,Data.returns,Data.ret) {
   
   
   VIX_Market<-Vix
-  
   Nvix=length(Vix)
   
   
