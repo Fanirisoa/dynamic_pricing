@@ -96,7 +96,7 @@ NGARCH_likelihood_dens_QML <- function(para_distribution,para_h,Data.returns) {
     dens<-dens+log(temp)
   }
   
-  return(dens/length(dens))
+  return(-dens/length(dens))
 }
 
 

@@ -135,15 +135,13 @@ VIX_Q<-function(para_h,h,Ret,r){
 #####       The Log-likeelihood over all Option        ####
 ###########################################################
 NGARCH_likelihood_vix <- function(para_h,Data.returns,Data.ret) {
+  # para_h<-c() set up the parameters of the model 
+  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5];  ro=para_h[6]
   
   Data.ret.reduiced <- Data.ret[index_vix:length(Data.ret$VIX),]
   row.names(Data.ret.reduiced) <- NULL
   Vix=Data.ret.reduiced$VIX     ####  Call dividende
-  
-  
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; b1=para_h[2]; a1=para_h[3];  gama= para_h[4]; lambda= para_h[5];  ro=para_h[6]
-  
+ 
   # Parameter under the physical probability
   h0=a0/(1- (b1+a1*(1+gama^2)))    
   
