@@ -25,10 +25,10 @@ source(paste(path,"/Loglik_Return_GJR.R",sep=""))
 source(paste(path,"/Loglik_VIX_GJR.R",sep=""))
 source(paste(path,"/Loglik_Mix_GJR.R",sep=""))
 
-source(paste(path,"/Fun_Pricer_Vix_ret_GJR.R",sep=""))
-source(paste(path,"/RMSE_VIX_GJR.R",sep=""))
-source(paste(path,"/RMSE_VIX_GJR.R",sep=""))
-source(paste(path,"/MCSim_VIX_ret_GJR.R",sep=""))
+## source(paste(path,"/Fun_Pricer_Vix_ret_GJR.R",sep=""))
+## source(paste(path,"/RMSE_VIX_GJR.R",sep=""))
+## source(paste(path,"/RMSE_VIX_GJR.R",sep=""))
+## source(paste(path,"/MCSim_VIX_ret_GJR.R",sep=""))
 
 
 #####################################################

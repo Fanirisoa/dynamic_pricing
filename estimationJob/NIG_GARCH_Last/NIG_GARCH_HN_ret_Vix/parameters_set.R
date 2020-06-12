@@ -47,11 +47,34 @@ para_h<-c(1.180234e-12, 1.547729e-06, 4.550518e+02, 6.500111e-01 ,8.596182e+00, 
 ###   Initial parameter  para_distribution<-c() set up the parameters of the distribution   ####
 ### alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4];
 
-###para_distribution<-c(5, 1.397610234,   0.007012446,  -0.286886696)
+para_distribution<-c(5.21, 1.397610234,   0.007012446,  -0.286886696)
 
-para_distribution<-c(2.237095e+01, -1.047143e+01,  7.135328e-03,  8.048087e-04)
-
+###para_distribution<-c(2.237095e+01, -1.047143e+01,  7.135328e-03,  8.048087e-04)
 
 para_M = c(para_distribution,para_h)
 
-
+# Time difference of 23.90931 secs
+# > 
+#   > Sol
+# $par
+# [1] 5.209999e+00 4.236129e+00 7.010943e-03 5.401264e+00 2.124409e-06 1.518744e-06 4.578959e+02 6.555648e-01 8.596186e+00 9.646951e-01
+# 
+# $value
+# [1] 6868.731
+# 
+# $counts
+# function gradient 
+# 559       NA 
+# 
+# $convergence
+# [1] 0
+# 
+# $message
+# NULL
+# 
+# > para_M1<-Sol$par
+# > para_M
+# [1]  5.210000e+00  1.397610e+00  7.012446e-03 -2.868867e-01  1.180234e-12  1.547729e-06  4.550518e+02  6.500111e-01  8.596182e+00  9.646967e-01
+# > para_M1
+# [1] 5.209999e+00 4.236129e+00 7.010943e-03 5.401264e+00 2.124409e-06 1.518744e-06 4.578959e+02 6.555648e-01 8.596186e+00 9.646951e-01
+# > 
