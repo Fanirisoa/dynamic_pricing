@@ -19,6 +19,7 @@ gsqrt <- function(para_h,ret,h,rt)
   if (a1<=0){drapeau=1}
   if (gama<=0){drapeau=1}
   if (b1<=0){drapeau=1}
+  if (b1>0.916718){drapeau=1}
   if (lamda0<=-1/2){drapeau=1}
   
   if (is.na(g1)==TRUE){drapeau=1}else{
@@ -87,6 +88,7 @@ hstar<-function(para_h,Data.returns){
   if (a1<=0){drapeau=1}
   if (gama<=0){drapeau=1}
   if (b1<=0){drapeau=1}
+  if (b1>0.916718){drapeau=1}
   if (lamda0<=-1/2){drapeau=1}
   if (ro<=0){drapeau=1}
   if (ro>=1){drapeau=1}

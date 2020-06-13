@@ -25,13 +25,15 @@ densite <- function(para_M,l){
   delta_1 <- delta/(sigma_z)
   mu_1 <- (1/(sigma_z))*(mu-mu_z)
   
+  ##\delta>1 et \beta<0
   
   drapeau=0
   if (abs(alpha)<= abs(beta)){drapeau=1}
   if (alpha<=0){drapeau=1}
   if (alpha==Inf){drapeau=1}
-  if (delta<=0){drapeau=1}
+
   
+
   ## if (abs(alpha_1)<= abs(beta_1)){drapeau=1}
   ## if (alpha_1<=0){drapeau=1}
   ## if (alpha_1==Inf){drapeau=1}
