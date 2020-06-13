@@ -83,7 +83,7 @@ hstar<-function(para_h,Data.returns){
   if (a1<=0){drapeau=1}
   if (a2<=0){drapeau=1}
   if (b1<=0){drapeau=1}
-  if (ro<=0){drapeau=1}
+  if (ro<=0.9){drapeau=1}
   if (ro>=1){drapeau=1}
   
   if (is.na(g1)==TRUE){drapeau=1}else{
@@ -128,7 +128,7 @@ VIX_Q<-function(para_h,h){
   if (a1<=0){drapeau=1}
   if (a2<=0){drapeau=1}
   if (b1<=0){drapeau=1}
-  if (ro<=0){drapeau=1}
+  if (ro<=0.9){drapeau=1}
   if (ro>=1){drapeau=1}
   
   if (is.na(h)==TRUE){drapeau=1}else{
