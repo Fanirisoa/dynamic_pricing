@@ -80,7 +80,7 @@ para_M = c(para_distribution,para_h)
 # [1] 5.209999e+00 4.236129e+00 7.010943e-03 5.401264e+00 2.124409e-06 1.518744e-06 4.578959e+02 6.555648e-01 8.596186e+00 9.646951e-01
 # > 
 
-
+runif(10, 5.0, 7.5)
 # 
 # > time.taken
 # Time difference of 1.379159 mins

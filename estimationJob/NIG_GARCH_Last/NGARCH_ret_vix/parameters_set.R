@@ -42,26 +42,50 @@ para_h<-c(3.205257e-06  ,7.957262e-01  ,6.170762e-02 , 1.394690e+00 , 5.144851e-
 ###   Initial parameter  para_distribution<-c() set up the parameters of the distribution   ####
 ### alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4];
 
- para_distribution<-c(5, 1.397610234,   0.007012446,  -0.286886696)
+para_distribution=c(1.269943539, -0.002488772,  1.8970073612,  2.088112106)
+
+###para_distribution<-c(5, 1.397610234,   0.007012446,  -0.286886696)
 ### para_distribution<-c(48.4956802775, -5.5025899512 , 0.0091739853 , 0.0003863926)
 ###para_distribution<-c(2.237095e+01, -1.047143e+01,  7.135328e-03,  8.048087e-04)
 
   
  para_M = c(para_distribution,para_h)
  
+ # 
+ # > time.taken
+ # Time difference of 31.62563 secs
+ # > 
+ #   > Sol
+ # $par
+ # [1]  5.090424e+00  1.556652e+00  6.213178e-03  8.240468e-04  2.659985e-05  7.956720e-01  6.163473e-02  1.105530e+00 -2.493983e-02  9.541983e-01
+ # 
+ # $value
+ # [1] -5728.951
+ # 
+ # $counts
+ # function gradient 
+ # 907       NA 
+ # 
+ # $convergence
+ # [1] 0
+ # 
+ # $message
+ # NULL
+ # 
+ 
  > time.taken
- Time difference of 31.62563 secs
+ Time difference of 1.042508 mins
  > 
    > Sol
  $par
- [1]  5.090424e+00  1.556652e+00  6.213178e-03  8.240468e-04  2.659985e-05  7.956720e-01  6.163473e-02  1.105530e+00 -2.493983e-02  9.541983e-01
+ [1]  1.591441e+00 -2.165630e-01  1.805700e+00  2.012885e+00  1.608771e-02  9.961319e-01  2.156253e-08  1.317049e+00  1.191766e-01  9.987627e-01
  
  $value
- [1] -5728.951
+ [1] 4513.538
  
  $counts
  function gradient 
- 907       NA 
+ 1863       NA 
  
  $convergence
  [1] 0
@@ -69,3 +93,9 @@ para_h<-c(3.205257e-06  ,7.957262e-01  ,6.170762e-02 , 1.394690e+00 , 5.144851e-
  $message
  NULL
  
+ > para_M1<-Sol$par
+ > para_M1
+ [1]  1.591441e+00 -2.165630e-01  1.805700e+00  2.012885e+00  1.608771e-02  9.961319e-01  2.156253e-08  1.317049e+00  1.191766e-01  9.987627e-01
+ > para_M
+ [1]  1.269944e+00 -2.488772e-03  1.897007e+00  2.088112e+00  3.205257e-06  7.957262e-01  6.170762e-02  1.394690e+00  5.144851e-02  9.546611e-01
+ > 

@@ -11,12 +11,13 @@ densite <- function(para_M,l){
   alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]
   a0=para_M[5]; b1=para_M[6]; a1=para_M[7];  gama= para_M[8] ;  lambda= para_M[9]  ; ro=para_M[10]
 
-  
+
   drapeau=0
   if (abs(alpha)<abs(beta)){drapeau=1}
   if (alpha<=0){drapeau=1}
   if (alpha==Inf){drapeau=1}
-  if (delta<=0){drapeau=1}
+  if (delta<1.78455){drapeau=1}
+   
   
   if (drapeau==0){
     resultat=dgh(l,alpha,beta,delta,mu,-1/2)
