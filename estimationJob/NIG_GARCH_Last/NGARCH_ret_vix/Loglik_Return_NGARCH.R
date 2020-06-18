@@ -16,8 +16,8 @@ densite <- function(para_M,l){
   if (abs(alpha)<abs(beta)){drapeau=1}
   if (alpha<=0){drapeau=1}
   if (alpha==Inf){drapeau=1}
-  if (delta<1.78455){drapeau=1}
-   
+
+  
   
   if (drapeau==0){
     resultat=dgh(l,alpha,beta,delta,mu,-1/2)
