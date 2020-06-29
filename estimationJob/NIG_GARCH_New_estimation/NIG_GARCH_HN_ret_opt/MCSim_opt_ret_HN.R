@@ -80,30 +80,11 @@ Sim<-function(para_h,para_distribution,h_t){
   
   # value of theta   
   theta <-  -1/2 - ((alpha* beta*sqrt(delta))/(sqrt(ht)*(gama_d^(3/2)))) -(1/2)*((A*B)^(1/2))
-  
-  if (is.nan(theta)){
-    print("A")
-    print(A)
-    print("B")
-    print(B)
-    print("ht")
-    print(ht)
-    print("delta")
-    print(delta)
-    print("theta")
-    print(theta)
-  }else{
-    print(theta)
-  }
-  
-  
 
   
   # change in parameter under RN distribution
   beta_0= beta + sqrt(abs(ht))*theta
   
-  print("beta_0")
-  print(beta_0)
 
   if (is.nan(beta_0) || is.na(beta_0)){
     v <- c(1.762313, -1.76079, -1.761573,  -1.761083, -1.761151,  -1.761161, -1.760833,  -1.761174,  -1.761196, -1.986122)
