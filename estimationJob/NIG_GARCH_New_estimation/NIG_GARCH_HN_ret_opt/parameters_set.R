@@ -35,8 +35,9 @@ para_h=c(1.854299e-04, 3.345238e-04 ,0.142406e+01 ,1.124012e-03 ,6.573458e-01, 9
 ### alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4];
 
 #para_distribution<-c(5, 1.397610234,   0.007012446,  -0.286886696)
-para_distribution<-c(2.237095e+01, -1.047143e+01,  7.135328e-03,  8.048087e-04)
+#para_distribution<-c(2.237095e+01, -1.047143e+01,  7.135328e-03,  8.048087e-04)
 
+para_distribution=c(8.478143e-01, -1.399045e-01,  1.973412e+00, 2.303577e+00)
 
 para_M = c(para_distribution,para_h)
 
