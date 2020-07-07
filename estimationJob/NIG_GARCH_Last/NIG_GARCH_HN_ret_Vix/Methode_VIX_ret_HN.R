@@ -76,3 +76,6 @@ time.taken
 RMSE2$rmse
 RMSE2$norm_rmse
 
+runif(6)
+
+1371781*5
