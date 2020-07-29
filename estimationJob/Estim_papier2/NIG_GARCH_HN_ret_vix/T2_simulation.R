@@ -134,7 +134,7 @@ modified_Retdensity <- function(para_h,Ret,h,r)
 ###########################################################
 #####      modified Log-likeelihood over all VIX       ####
 ###########################################################
-Heston_likelihood_vix <- function(para_h, Data.returns,Data.ret){
+Heston_likelihood_vix <- function(para_h, Data.returns,Data.ret, h){
   
   ## set up the parameters of the model : para_h
   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
