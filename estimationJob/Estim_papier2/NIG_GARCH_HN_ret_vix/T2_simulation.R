@@ -70,28 +70,6 @@ shape_vol_sim <- function(para_h, para_distribution, N_t) {
 
 
 
-
-###########################################################
-#####  modified  Log-likeelihood    returns            ####
-###########################################################
-modified_Heston_likelihood_ret <- function(para_h, Data.returns, h) {
-  ret=Data.returns$ret   
-  rt=Data.returns$rt/250        
-  Z1=length(rt)
-  
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]
-
-  dens = log(modified_Retdensity(para_h,ret[1],h[1],rt[1]))
-  for (i in 2:Z1){
-    temp=modified_Retdensity(para_h,ret[i],h[i],rt[i])
-    dens<-dens+log(temp)
-  }
-  
-  return(dens)  
-}
-
-
 ###########################################################
 #####  modified conditional density of the returns     ####
 ###########################################################
@@ -127,6 +105,29 @@ modified_Retdensity <- function(para_h,Ret,h,r)
     resultat=NA
   }
   return(resultat)
+}
+
+
+
+
+###########################################################
+#####  modified  Log-likeelihood    returns            ####
+###########################################################
+modified_Heston_likelihood_ret <- function(para_h, Data.returns, h) {
+  ret=Data.returns$ret   
+  rt=Data.returns$rt/250        
+  Z1=length(rt)
+  
+  # para_h<-c() set up the parameters of the model 
+  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]
+
+  dens = log(modified_Retdensity(para_h,ret[1],h[1],rt[1]))
+  for (i in 2:Z1){
+    temp=modified_Retdensity(para_h,ret[i],h[i],rt[i])
+    dens<-dens+log(temp)
+  }
+  
+  return(dens)  
 }
 
 
@@ -235,37 +236,26 @@ shape_VIX_sim <- function(para_h, para_distribution, N_t) {
     VIX_Model[i]= VIX_Q(para_h,h[i+1])
   }
   
-  return(h)  
+  return(VIX_Model)  
 }
 
 
 ###########################################################
 #####      modified Log-likeelihood over all VIX       ####
 ###########################################################
-Heston_likelihood_vix <- function(para_h, Data.returns,Data.ret, h){
+modified_Heston_likelihood_vix <- function(para_h, h_all, Vix_all,){
   
   ## set up the parameters of the model : para_h
   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
   
+
   
-  Data.ret.reduiced <- Data.ret[index_vix:length(Data.ret$VIX),]
-  row.names(Data.ret.reduiced) <- NULL
-  Vix=Data.ret.reduiced$VIX     ####  Call dividende
-  
-  
-  VIX_Market<-Vix
-  
-  Nvix=length(Vix)
+  VIX_Market <- Vix_all
+  Nvix <- length(VIX_Market)
   
   
-  h_all= hstar(para_h,Data.returns)
-  h = h_all[index_ht:length(h_all)] 
+  VIX_Model <- shape_VIX_sim(para_h1, para_distribution,Nvix)
   
-  
-  VIX_Model <- rep(NA, Nvix)
-  for (i in 1:Nvix){
-    VIX_Model[i]= VIX_Q(para_h,h[i+1])
-  }
   
   error <- rep(NA, Nvix)
   error[Nvix]=0
