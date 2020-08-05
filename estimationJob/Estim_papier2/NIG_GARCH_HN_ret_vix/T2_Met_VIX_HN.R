@@ -85,12 +85,11 @@ para_distribution1= QMLSol$par
 parametres_qml=c(para_h1,para_distribution1)
 
 
-
 ##############################
 #####  Simulation de H_t  ####
 ##############################
 
-h_vol= shape_vol_sim(para_h, para_distribution,2718)
+h_vol= shape_vol_sim(para_h1, para_distribution,2718)
 ts.plot(h_vol, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
 grid()
 
@@ -111,8 +110,8 @@ Sol_1$par
 #####  Simulation de VIX_t  ####
 #################################
 
-h_vol= shape_vol_sim(para_h, para_distribution,2718)
-ts.plot(h_vol, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
+Vix_sim= shape_VIX_sim(para_h, para_distribution,2718)
+ts.plot(Vix_sim, col = "steelblue", main = "Simulation VIX Model",xlab="2009",ylab="Volatility")
 grid()
 
 
