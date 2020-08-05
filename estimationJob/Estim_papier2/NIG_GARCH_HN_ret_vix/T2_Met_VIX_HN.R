@@ -107,5 +107,12 @@ para_h1
 Sol_1$par
 
 
+#################################
+#####  Simulation de VIX_t  ####
+#################################
+
+h_vol= shape_vol_sim(para_h, para_distribution,2718)
+ts.plot(h_vol, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
+grid()
 
 
