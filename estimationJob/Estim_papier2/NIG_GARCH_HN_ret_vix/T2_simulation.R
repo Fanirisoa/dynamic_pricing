@@ -50,14 +50,14 @@ vol_sim_h <- function(para_h, para_distribution,h)
 ####################################################
 ######         The volatility shape under Q       ##
 ####################################################
-shape_vol_sim <- function(para_h, para_distribution) {
+shape_vol_sim <- function(para_h, para_distribution, N_t) {
   ## set up the parameters of the model : para_h
   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]   
   
   # para_distribution<-c() set up the parameters of NIG
   alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4];
   
-  N = 2718
+  N = N_t
   h = c()                                                        ####  A vector containing h from the model,
   h[1]=(a0 + a1)/(1 - b1 - a1*(gama)^2)                          ####  The first value for h, Unconditional Variance
 
@@ -129,6 +129,29 @@ modified_Retdensity <- function(para_h,Ret,h,r)
   return(resultat)
 }
 
+
+
+
+
+
+
+####################################################
+######         Dimulation VIX ubder Q             ##
+####################################################
+shape_VIX_sim <- function(para_h, h_t, N_t) {
+  ## set up the parameters of the model : para_h
+  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]   
+
+  Nvix= N_t
+  h = hstar(para_h,Data.returns)
+  
+  VIX_Model <- rep(NA, Nvix)
+  for (i in 1:Nvix){
+    VIX_Model[i]= VIX_Q(para_h,h[i+1])
+  }
+  
+  return(h)  
+}
 
 
 ###########################################################

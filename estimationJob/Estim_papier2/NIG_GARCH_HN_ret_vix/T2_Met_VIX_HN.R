@@ -84,16 +84,16 @@ para_distribution1= QMLSol$par
 
 parametres_qml=c(para_h1,para_distribution1)
 
+
+
 ##############################
 #####  Simulation de H_t  ####
 ##############################
 
-h_vol= shape_vol_sim(para_h, para_distribution)
+h_vol= shape_vol_sim(para_h, para_distribution,2718)
 ts.plot(h_vol, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
 grid()
 
-
-length(h_vol)
 ######################################################
 ###      Modified Optimization  of the model     #####
 ######################################################
@@ -103,7 +103,8 @@ end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
 
-Sol_1
+para_h1
+Sol_1$par
 
 
 
