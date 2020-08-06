@@ -96,6 +96,8 @@ grid()
 ######################################################################
 ###      Modified Optimization  of the Log-likelihood  ret       #####
 ######################################################################
+modified_Heston_likelihood_ret()
+
 start.time <- Sys.time()
 Sol_1=optim(para_h1,modified_Heston_likelihood_ret ,Data.returns = Data.returns,h = h_vol, method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
@@ -114,9 +116,9 @@ Vix_sim= shape_VIX_sim(para_h1, para_distribution,2718)
 ts.plot(Vix_sim, col = "steelblue", main = "Simulation VIX Model",xlab="2009",ylab="Volatility")
 grid()
 
-########################################################
+############################################################
 ###   Modified Optimization  of Log-likelihood  VIX    #####
-########################################################
+############################################################
 start.time <- Sys.time()
 Sol_1=optim(para_h1,modified_Heston_likelihood_ret ,Data.returns = Data.returns,h = h_vol, method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
