@@ -119,8 +119,11 @@ grid()
 ############################################################
 ###   Modified Optimization  of Log-likelihood  VIX    #####
 ############################################################
+
+log_Vix = modified_Heston_likelihood_vix(para_h1, h_vol, Vix_sim)
+
 start.time <- Sys.time()
-Sol_1=optim(para_h1,modified_Heston_likelihood_ret ,Data.returns = Data.returns,h = h_vol, method="Nelder-Mead",control = list(maxit = 5000))
+Sol_1=optim(para_h1,modified_Heston_likelihood_vix ,h_all = h_vol , Vix_all = Vix_sim , method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
@@ -128,4 +131,4 @@ time.taken
 para_h1
 Sol_1$par
 
-modified_Heston_likelihood_vix <- function(para_h, h_all, Vix_all,)
+modified_Heston_likelihood_vix(para_h1, h_vol, Vix_sim)

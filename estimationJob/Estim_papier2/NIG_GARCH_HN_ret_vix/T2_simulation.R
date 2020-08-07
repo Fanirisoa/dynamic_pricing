@@ -113,17 +113,34 @@ modified_Retdensity <- function(para_h,Ret,h,r)
 ###########################################################
 #####  modified  Log-likeelihood    returns            ####
 ###########################################################
-modified_Heston_likelihood_ret <- function(para_h, Data.returns, h) {
-  ret=Data.returns$ret   
-  rt=Data.returns$rt/250        
-  Z1=length(rt)
-  
+modified_Heston_likelihood_ret <- function(para_h, para_distribution, h) {
+  n=length(h)
   # para_h<-c() set up the parameters of the model 
   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]
-
-  dens = log(modified_Retdensity(para_h,ret[1],h[1],rt[1]))
-  for (i in 2:Z1){
-    temp=modified_Retdensity(para_h,ret[i],h[i],rt[i])
+  
+  # para_distribution<-c() set up the parameters of NIG
+  alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4];
+  
+  ## Normalisation :
+  gamma_0 = sqrt((alpha^2) -(beta^2))
+  sigma_z = (delta*(alpha^2))/((gamma_0)^3)
+  mu_z= mu - ((delta*beta)/(gamma_0 ))
+  
+  ## Parametrization : 
+  alpha_1 = alpha*(sigma_z)
+  beta_1 =beta*(sigma_z)
+  delta_1 =delta/(sigma_z)
+  mu_1 =(1/(sigma_z))*(mu-mu_z)
+  
+  rt=0.0001197619
+  ret  = c()                            ####  A vector containing h from the model,
+  for (i in 1:n){
+    h[i]= rt  +lamda0*(h[i]) + ((h[i])^(1/2))*rgh(1,alpha_1,beta_1,delta_1,mu_1,-1/2)
+  }
+  
+  dens = log(modified_Retdensity(para_h,ret[1],h[1],rt))
+  for (i in 2:n){
+    temp=modified_Retdensity(para_h,ret[i],h[i],rt)
     dens<-dens+log(temp)
   }
   
@@ -243,7 +260,7 @@ shape_VIX_sim <- function(para_h, para_distribution, N_t) {
 ###########################################################
 #####      modified Log-likeelihood over all VIX       ####
 ###########################################################
-modified_Heston_likelihood_vix <- function(para_h, h_all, Vix_all,){
+modified_Heston_likelihood_vix <- function(para_h, h_all, Vix_all){
   
   ## set up the parameters of the model : para_h
   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
