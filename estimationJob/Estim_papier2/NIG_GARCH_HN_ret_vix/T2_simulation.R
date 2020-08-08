@@ -4,7 +4,7 @@
 ####################################################
 ######    The volatility updating ruleunder P     ##
 ####################################################
-vol_sim_h <- function(para_h, para_distribution,h)
+z_sim <- function(para_h, para_distribution,N_t)
 {
   ## set up the parameters of the model : para_h
   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]   
@@ -23,8 +23,23 @@ vol_sim_h <- function(para_h, para_distribution,h)
   delta_1 =delta/(sigma_z)
   mu_1 =(1/(sigma_z))*(mu-mu_z)
   
+  z = c()     
+  for (i in 1:N_t){
+    z[i]= rgh(1,alpha_1,beta_1,delta_1,mu_1,-1/2)
+  }
   
+  return(z)
+}
+
+####################################################
+######    The volatility updating ruleunder P     ##
+####################################################
+vol_sim_h <- function(para_h, para_distribution,h,z)
+{
+  ## set up the parameters of the model : para_h
+  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]   
   
+
   # Parameter under the physical probability
   h0=(a0 + a1)/(1 - b1 - a1*(gama)^2)    
   g0=b1 + a1*(gama)^2  
@@ -38,7 +53,7 @@ vol_sim_h <- function(para_h, para_distribution,h)
   }
   
   if (drapeau==0){
-    resultat= a0 +b1*h+a1*(rgh(1,alpha_1,beta_1,delta_1,mu_1,-1/2) - gama*(sqrt(h)))^2
+    resultat= a0 +b1*h+a1*(z - gama*(sqrt(h)))^2
   }else{
     resultat=NA
   }
@@ -50,7 +65,7 @@ vol_sim_h <- function(para_h, para_distribution,h)
 ####################################################
 ######         The volatility shape under P       ##
 ####################################################
-shape_vol_sim <- function(para_h, para_distribution, N_t) {
+shape_vol_sim <- function(para_h, para_distribution,z_sim, N_t) {
   ## set up the parameters of the model : para_h
   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]   
   
@@ -62,94 +77,28 @@ shape_vol_sim <- function(para_h, para_distribution, N_t) {
   h[1]=(a0 + a1)/(1 - b1 - a1*(gama)^2)                          ####  The first value for h, Unconditional Variance
 
   for (i in 2:N){
-    h[i]= vol_sim_h(para_h, para_distribution,h[i-1])
+    h[i]= vol_sim_h(para_h, para_distribution,h[i-1],z_sim[i-1])
     }
   
   return(h)  
 }
 
-
-
-###########################################################
-#####  modified conditional density of the returns     ####
-###########################################################
-modified_Retdensity <- function(para_h,Ret,h,r)
-{
-  ## set up the parameters of the model : para_h
-  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
-  
-  Z0=b1 + a1*(gama^2)
-  
-  drapeau=0
-  if (a0<=0){drapeau=1}
-  if (a1<=0){drapeau=1}
-  if (gama<=0){drapeau=1}
-  if (b1<=0){drapeau=1}
-  if (lamda0<=-1/2){drapeau=1}
-  
-  if (is.na(h)==TRUE){drapeau=1}else{
-    if (h<=0){drapeau=1}
-    if (abs(h)==Inf){drapeau=1}
-    if (1/abs(h)==Inf){drapeau=1}
-  }
-  if (is.na(Z0)==TRUE){drapeau=1}else{
-    if (Z0>=1){drapeau=1}
-    if (Z0<=0){drapeau=1}
-    if (abs(Z0)==Inf){drapeau=1}
-    if (1/abs(Z0)==Inf){drapeau=1}
-  }
-  
-  if (drapeau==0){
-    resultat= (1/(sqrt(2*pi*h)))*exp((-1/(2*h))*(((Ret-r-lamda0*h)^2)))
-  }else{
-    resultat=NA
-  }
-  return(resultat)
-}
-
-
-
-
-###########################################################
-#####  modified  Log-likeelihood    returns            ####
-###########################################################
-modified_Heston_likelihood_ret <- function(para_h, para_distribution, h) {
+####################################
+#####  Simulation of  returns   ####
+####################################
+ret_simulation <- function(para_h, para_distribution,z_sim, h) {
   n=length(h)
   # para_h<-c() set up the parameters of the model 
   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]
   
-  # para_distribution<-c() set up the parameters of NIG
-  alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4];
-  
-  ## Normalisation :
-  gamma_0 = sqrt((alpha^2) -(beta^2))
-  sigma_z = (delta*(alpha^2))/((gamma_0)^3)
-  mu_z= mu - ((delta*beta)/(gamma_0 ))
-  
-  ## Parametrization : 
-  alpha_1 = alpha*(sigma_z)
-  beta_1 =beta*(sigma_z)
-  delta_1 =delta/(sigma_z)
-  mu_1 =(1/(sigma_z))*(mu-mu_z)
-  
   rt=0.0001197619
   ret  = c()                            ####  A vector containing h from the model,
   for (i in 1:n){
-    ret[i]= rt  +lamda0*(h[i]) + ((h[i])^(1/2))*rgh(1,alpha_1,beta_1,delta_1,mu_1,-1/2)
+    ret[i]= rt  +lamda0*(h[i]) + ((h[i])^(1/2))*z_sim[i]
   }
   
-  dens = log(modified_Retdensity(para_h,ret[1],h[1],rt))
-  for (i in 2:n){
-    temp=modified_Retdensity(para_h,ret[i],h[i],rt)
-    dens<-dens+log(temp)
-  }
-  
-  return(dens)  
+  return(ret)  
 }
-
-
-
-
 
 
 ####################################################
@@ -257,47 +206,116 @@ shape_VIX_sim <- function(para_h, para_distribution, N_t) {
 }
 
 
-###########################################################
-#####      modified Log-likeelihood over all VIX       ####
-###########################################################
-modified_Heston_likelihood_vix <- function(para_h, h_all, Vix_all){
-  
-  ## set up the parameters of the model : para_h
-  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
-  
-
-  
-  VIX_Market <- Vix_all
-  Nvix <- length(VIX_Market)
-  
-  
-  VIX_Model <- shape_VIX_sim(para_h1, para_distribution,Nvix)
-  
-  
-  error <- rep(NA, Nvix)
-  error[Nvix]=0
-  for (i in 1:Nvix-1){
-    error[i]= VIX_Market[i] - VIX_Model[i]
-  }
-  
-  error_2 <- rep(NA, Nvix)
-  error_2[1]=0
-  for (i in 2:Nvix){
-    error_2[i]= ((error[i]-ro*error[i-1])^2)/(1-ro^2)
-  }
-  
-  sigma=mean(error^2)
-  log_like=-1/2*sum(log(sigma)+((error^2)/sigma))  
-  -(Nvix/2)*(log(2*pi)+log(sigma*(1-(ro^2))))+ (1/2)*(log(sigma*(1-(ro^2)))-log(sigma))-(1/(2*sigma))*(error[i]^2+sum(error_2))
-  
-  return(log_like)  
-  
-}
 
 
-
-
-
-
-
-
+# 
+# 
+# 
+# 
+# ###########################################################
+# #####  modified conditional density of the returns     ####
+# ###########################################################
+# modified_Retdensity <- function(para_h,Ret,h,r)
+# {
+#   ## set up the parameters of the model : para_h
+#   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
+#   
+#   Z0=b1 + a1*(gama^2)
+#   
+#   drapeau=0
+#   if (a0<=0){drapeau=1}
+#   if (a1<=0){drapeau=1}
+#   if (gama<=0){drapeau=1}
+#   if (b1<=0){drapeau=1}
+#   if (lamda0<=-1/2){drapeau=1}
+#   
+#   if (is.na(h)==TRUE){drapeau=1}else{
+#     if (h<=0){drapeau=1}
+#     if (abs(h)==Inf){drapeau=1}
+#     if (1/abs(h)==Inf){drapeau=1}
+#   }
+#   if (is.na(Z0)==TRUE){drapeau=1}else{
+#     if (Z0>=1){drapeau=1}
+#     if (Z0<=0){drapeau=1}
+#     if (abs(Z0)==Inf){drapeau=1}
+#     if (1/abs(Z0)==Inf){drapeau=1}
+#   }
+#   
+#   if (drapeau==0){
+#     resultat= (1/(sqrt(2*pi*h)))*exp((-1/(2*h))*(((Ret-r-lamda0*h)^2)))
+#   }else{
+#     resultat=NA
+#   }
+#   return(resultat)
+# }
+# 
+# 
+# 
+# 
+# ###########################################################
+# #####  modified  Log-likeelihood    returns            ####
+# ###########################################################
+# modified_Heston_likelihood_ret <- function(para_h, para_distribution,ret_sim, h) {
+#   n=length(h)
+#   # para_h<-c() set up the parameters of the model 
+#   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]
+#   
+#   
+#   rt=0.0001197619
+#   dens = log(modified_Retdensity(para_h,ret_sim[1],h[1],rt))
+#   for (i in 2:n){
+#     temp=modified_Retdensity(para_h,ret_sim[i],h[i],rt)
+#     dens<-dens+log(temp)
+#   }
+#   
+#   return(dens)  
+# }
+# 
+# 
+# 
+# 
+# 
+# ###########################################################
+# #####      modified Log-likeelihood over all VIX       ####
+# ###########################################################
+# modified_Heston_likelihood_vix <- function(para_h, h_all, Vix_all){
+#   
+#   ## set up the parameters of the model : para_h
+#   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
+#   
+# 
+#   
+#   VIX_Market <- Vix_all
+#   Nvix <- length(VIX_Market)
+#   
+#   
+#   VIX_Model <- shape_VIX_sim(para_h1, para_distribution,Nvix)
+#   
+#   
+#   error <- rep(NA, Nvix)
+#   error[Nvix]=0
+#   for (i in 1:Nvix-1){
+#     error[i]= VIX_Market[i] - VIX_Model[i]
+#   }
+#   
+#   error_2 <- rep(NA, Nvix)
+#   error_2[1]=0
+#   for (i in 2:Nvix){
+#     error_2[i]= ((error[i]-ro*error[i-1])^2)/(1-ro^2)
+#   }
+#   
+#   sigma=mean(error^2)
+#   log_like=-1/2*sum(log(sigma)+((error^2)/sigma))  
+#   -(Nvix/2)*(log(2*pi)+log(sigma*(1-(ro^2))))+ (1/2)*(log(sigma*(1-(ro^2)))-log(sigma))-(1/(2*sigma))*(error[i]^2+sum(error_2))
+#   
+#   return(log_like)  
+#   
+# }
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 

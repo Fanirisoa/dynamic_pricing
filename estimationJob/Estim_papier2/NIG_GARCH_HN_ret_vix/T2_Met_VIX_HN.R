@@ -84,51 +84,40 @@ para_distribution1= QMLSol$par
 
 parametres_qml=c(para_h1,para_distribution1)
 
+##############################
+#####  Simulation de H_t  ####
+##############################
+
+z_sim_val= z_sim(para_h1, para_distribution1,2718) 
+ts.plot(z_sim_val, col = "steelblue", main = "z_t values",xlab="z_t",ylab="Volatility")
+grid()
+
 
 ##############################
 #####  Simulation de H_t  ####
 ##############################
 
-h_vol= shape_vol_sim(para_h1, para_distribution,2718)
-ts.plot(h_vol, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
+Vol_sim= shape_vol_sim(para_h1, para_distribution1,z_sim_val,2718)
+ts.plot(Vol_sim, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
 grid()
-
-######################################################################
-###      Modified Optimization  of the Log-likelihood  ret       #####
-######################################################################
-modified_Heston_likelihood_ret(para_h1, para_distribution1, h_vol)
-
-start.time <- Sys.time()
-Sol_1=optim(para_h1,modified_Heston_likelihood_ret , para_distribution = para_distribution1,h = h_vol, method="Nelder-Mead",control = list(maxit = 5000))
-end.time <- Sys.time()
-time.taken <- end.time - start.time
-time.taken
-
-para_h1
-Sol_1$par
 
 
 #################################
-#####  Simulation de VIX_t  ####
+#####  Simulation de VIX_t   ####
 #################################
 
 Vix_sim= shape_VIX_sim(para_h1, para_distribution,2718)
 ts.plot(Vix_sim, col = "steelblue", main = "Simulation VIX Model",xlab="2009",ylab="Volatility")
 grid()
 
-############################################################
-###   Modified Optimization  of Log-likelihood  VIX    #####
-############################################################
+#################################
+#####  Simulation de VIX_t  ####
+#################################
 
-log_Vix = modified_Heston_likelihood_vix(para_h1, h_vol, Vix_sim)
-log_Vix
+Ret_sim=  ret_simulation(para_h1, para_distribution1,z_sim_val, Vol_sim)
+ts.plot(Vix_sim, col = "steelblue", main = "Simulation VIX Model",xlab="2009",ylab="Volatility")
+grid()
 
-start.time <- Sys.time()
-Sol_1=optim(para_h1,modified_Heston_likelihood_vix ,h_all = h_vol , Vix_all = Vix_sim , method="Nelder-Mead",control = list(maxit = 5000))
-end.time <- Sys.time()
-time.taken <- end.time - start.time
-time.taken
 
-para_h1
-Sol_1$par
+Heston_likelihood_ret_sim(para_h1, Ret_sim)
 

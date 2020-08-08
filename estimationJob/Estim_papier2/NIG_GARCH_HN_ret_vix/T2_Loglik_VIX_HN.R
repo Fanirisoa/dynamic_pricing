@@ -172,26 +172,19 @@ VIX_Q<-function(para_h,h){
 ###########################################################
 #####       The Log-likeelihood over all Option        ####
 ###########################################################
-Heston_likelihood_vix <- function(para_h, Data.returns,Data.ret){
+Heston_likelihood_vix <- function(para_h, ret.all,vix.all){
   
   ## set up the parameters of the model : para_h
   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
   
-  
-  Data.ret.reduiced <- Data.ret[index_vix:length(Data.ret$VIX),]
-  row.names(Data.ret.reduiced) <- NULL
-  Vix=Data.ret.reduiced$VIX     ####  Call dividende
-
-  
+  Vix=ret.all 
   VIX_Market<-Vix
   
   Nvix=length(Vix)
   
   
-  h_all= hstar(para_h,Data.returns)
-  h = h_all[index_ht:length(h_all)] 
-    
-    
+  h= hstar(para_h,ret.all)
+
   VIX_Model <- rep(NA, Nvix)
   for (i in 1:Nvix){
     VIX_Model[i]= VIX_Q(para_h,h[i+1])
@@ -216,4 +209,52 @@ Heston_likelihood_vix <- function(para_h, Data.returns,Data.ret){
   return(log_like)  
   
 }
+############################################################
+#####       The Log-likeelihood over all VIX sim        ####
+############################################################
+Heston_likelihood_vix <- function(para_h, Data.returns,Data.ret){
+  
+  ## set up the parameters of the model : para_h
+  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
+  
+  
+  Data.ret.reduiced <- Data.ret[index_vix:length(Data.ret$VIX),]
+  row.names(Data.ret.reduiced) <- NULL
+  Vix=Data.ret.reduiced$VIX     ####  Call dividende
+  
+  
+  VIX_Market<-Vix
+  
+  Nvix=length(Vix)
+  
+  
+  h_all= hstar(para_h,Data.returns)
+  h = h_all[index_ht:length(h_all)] 
+  
+  
+  VIX_Model <- rep(NA, Nvix)
+  for (i in 1:Nvix){
+    VIX_Model[i]= VIX_Q(para_h,h[i+1])
+  }
+  
+  error <- rep(NA, Nvix)
+  error[Nvix]=0
+  for (i in 1:Nvix-1){
+    error[i]= VIX_Market[i] - VIX_Model[i]
+  }
+  
+  error_2 <- rep(NA, Nvix)
+  error_2[1]=0
+  for (i in 2:Nvix){
+    error_2[i]= ((error[i]-ro*error[i-1])^2)/(1-ro^2)
+  }
+  
+  sigma=mean(error^2)
+  log_like=-1/2*sum(log(sigma)+((error^2)/sigma))  
+  -(Nvix/2)*(log(2*pi)+log(sigma*(1-(ro^2))))+ (1/2)*(log(sigma*(1-(ro^2)))-log(sigma))-(1/(2*sigma))*(error[i]^2+sum(error_2))
+  
+  return(log_like)  
+  
+}
+
 
