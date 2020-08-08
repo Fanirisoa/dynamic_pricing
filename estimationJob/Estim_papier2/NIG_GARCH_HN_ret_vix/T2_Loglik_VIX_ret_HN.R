@@ -19,6 +19,6 @@ Heston_likelihood_Mix <- function(para_h,Data.ret, Data.N,Data.returns,N) {
 #####  tHE LOGLIKELIHOODE of both the mixe return-option ####
 #############################################################
 Heston_likelihood_Mix_sim <- function(para_h,Ret_sim, Vix_sim) {
-  log_like <- Heston_likelihood_ret_sim(para_h1, Ret_sim) + Heston_likelihood_vix_sim(para_h1, Ret_sim,Vix_sim)
+  log_like <- Heston_likelihood_ret_sim(para_h, Ret_sim) + Heston_likelihood_vix_sim(para_h, Ret_sim,Vix_sim)
   return(-log_like)  
 }

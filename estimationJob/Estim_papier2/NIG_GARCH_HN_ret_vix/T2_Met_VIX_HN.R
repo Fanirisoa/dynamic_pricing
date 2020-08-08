@@ -115,7 +115,7 @@ grid()
 #################################
 
 Ret_sim=  ret_simulation(para_h1, para_distribution1,z_sim_val, Vol_sim)
-ts.plot(Vix_sim, col = "steelblue", main = "Simulation VIX Model",xlab="2009",ylab="Volatility")
+ts.plot(Ret_sim, col = "steelblue", main = "Simulation Ret Model",xlab="2009",ylab="Volatility")
 grid()
 
 
@@ -125,6 +125,7 @@ grid()
 Heston_likelihood_ret_sim(para_h1, Ret_sim)
 Heston_likelihood_vix_sim(para_h1, Ret_sim,Vix_sim)
 
+
 start.time <- Sys.time()
 Sol_sim=optim(para_h1,Heston_likelihood_Mix_sim ,Ret_sim=Ret_sim, Vix_sim = Vix_sim, method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
@@ -133,9 +134,23 @@ time.taken
 
 Sol_sim
 para_h2<-Sol_sim$par
+
 para_h
 para_h1
 para_h2
 
+##########################################################
+#                QML estimation  NIG                     # 
+##########################################################
+start.time <- Sys.time()
+QMLSol_sim=optim(para_distribution1,NIG_likelihood_dens_QML_sim ,para_h =para_h2,Ret_sim=Ret_sim, method="Nelder-Mead",control = list(maxit = 5000))
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+QMLSol
 
+para_distribution2 <- QMLSol_sim$par
 
+para_distribution
+para_distribution1
+para_distribution2

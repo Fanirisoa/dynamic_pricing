@@ -240,7 +240,7 @@ hstar_sim<-function(para_h,ret.all){
   h_star = c()                       ####  A vector containing h from the model,
   h_star[1]=h0                       ####  The first value for h,
   for (i in 2:Z1){ 
-    h_star[i]=gsqrt(para_h,ret[i-1],h_star[i-1],rt)
+    h_star[i]=gsqrt(para_h,ret.all[i-1],h_star[i-1],rt)
   }
 
   
