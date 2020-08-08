@@ -96,10 +96,10 @@ grid()
 ######################################################################
 ###      Modified Optimization  of the Log-likelihood  ret       #####
 ######################################################################
-modified_Heston_likelihood_ret()
+modified_Heston_likelihood_ret(para_h1, para_distribution1, h_vol)
 
 start.time <- Sys.time()
-Sol_1=optim(para_h1,modified_Heston_likelihood_ret ,Data.returns = Data.returns,h = h_vol, method="Nelder-Mead",control = list(maxit = 5000))
+Sol_1=optim(para_h1,modified_Heston_likelihood_ret , para_distribution = para_distribution1,h = h_vol, method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
@@ -121,6 +121,7 @@ grid()
 ############################################################
 
 log_Vix = modified_Heston_likelihood_vix(para_h1, h_vol, Vix_sim)
+log_Vix
 
 start.time <- Sys.time()
 Sol_1=optim(para_h1,modified_Heston_likelihood_vix ,h_all = h_vol , Vix_all = Vix_sim , method="Nelder-Mead",control = list(maxit = 5000))
@@ -131,4 +132,3 @@ time.taken
 para_h1
 Sol_1$par
 
-modified_Heston_likelihood_vix(para_h1, h_vol, Vix_sim)

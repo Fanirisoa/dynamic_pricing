@@ -135,7 +135,7 @@ modified_Heston_likelihood_ret <- function(para_h, para_distribution, h) {
   rt=0.0001197619
   ret  = c()                            ####  A vector containing h from the model,
   for (i in 1:n){
-    h[i]= rt  +lamda0*(h[i]) + ((h[i])^(1/2))*rgh(1,alpha_1,beta_1,delta_1,mu_1,-1/2)
+    ret[i]= rt  +lamda0*(h[i]) + ((h[i])^(1/2))*rgh(1,alpha_1,beta_1,delta_1,mu_1,-1/2)
   }
   
   dens = log(modified_Retdensity(para_h,ret[1],h[1],rt))

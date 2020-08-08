@@ -49,7 +49,6 @@ Heston_likelihood_ret <- function(para_h, Data.returns) {
   h = c()                                                        ####  A vector containing h from the model,
   h[1]=(a0 + a1)/(1 - b1 - a1*(gama)^2 )                         ####  The first value for h, Unconditional Variance
   dens = log(Retdensity(para_h,ret[1],h[1],rt[1]))
-  
   for (i in 2:Z1){
     h[i]=a0 +b1*h[i-1]+a1*(((ret[i-1]-rt[i-1]-lamda0*(h[i-1]))/((h[i-1])^(1/2))) - gama*((h[i-1])^(1/2)))^2
     temp=Retdensity(para_h,ret[i],h[i],rt[i])
