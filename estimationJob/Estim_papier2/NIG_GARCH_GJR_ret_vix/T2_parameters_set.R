@@ -54,49 +54,49 @@ para_h<-c(5.192896e-06, 1.240918e-01, 2.314273e-02, 8.504267e-01, 1.821112e-01, 
 
 para_distribution=c(1.269943539, -0.002488772,  1.620073612,  2.088112106)
 
-
-Time difference of 11.50057 secs
-> 
-  > Sol
-$par
-[1] 6.322308e-06 1.240908e-01 2.314260e-02 8.504271e-01 1.510303e-01 9.982321e-01
-
-$value
-[1] -7978.421
-
-$counts
-function gradient 
-377       NA 
-
-$convergence
-[1] 0
-
-$message
-NULL
-
-> para_h1<-Sol$par
-> para_h
-[1] 5.192896e-06 1.240918e-01 2.314273e-02 8.504267e-01 1.821112e-01 9.657773e-01
-> para_h1
-[1] 6.322308e-06 1.240908e-01 2.314260e-02 8.504271e-01 1.510303e-01 9.982321e-01
-> 
-  > time.taken
-Time difference of 6.283401 secs
-> QMLSol
-$par
-[1]  1.44765637 -0.07609839  1.71016068  2.24960222
-
-$value
-[1] 3584.715
-
-$counts
-function gradient 
-165       NA 
-
-$convergence
-[1] 0
-
-$message
-NULL
-7.609e-02
-> 
+# 
+# Time difference of 11.50057 secs
+# > 
+#   > Sol
+# $par
+# [1] 6.322308e-06 1.240908e-01 2.314260e-02 8.504271e-01 1.510303e-01 9.982321e-01
+# 
+# $value
+# [1] -7978.421
+# 
+# $counts
+# function gradient 
+# 377       NA 
+# 
+# $convergence
+# [1] 0
+# 
+# $message
+# NULL
+# 
+# > para_h1<-Sol$par
+# > para_h
+# [1] 5.192896e-06 1.240918e-01 2.314273e-02 8.504267e-01 1.821112e-01 9.657773e-01
+# > para_h1
+# [1] 6.322308e-06 1.240908e-01 2.314260e-02 8.504271e-01 1.510303e-01 9.982321e-01
+# > 
+#   > time.taken
+# Time difference of 6.283401 secs
+# > QMLSol
+# $par
+# [1]  1.44765637 -0.07609839  1.71016068  2.24960222
+# 
+# $value
+# [1] 3584.715
+# 
+# $counts
+# function gradient 
+# 165       NA 
+# 
+# $convergence
+# [1] 0
+# 
+# $message
+# NULL
+# 7.609e-02
+# > 

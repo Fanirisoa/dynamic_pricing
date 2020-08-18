@@ -111,7 +111,7 @@ ts.plot(Vix_sim, col = "steelblue", main = "Simulation VIX Model",xlab="2009",yl
 grid()
 
 #################################
-#####  Simulation de VIX_t  ####
+#####  Simulation de ret_t  ####
 #################################
 
 Ret_sim=  ret_simulation(para_h1, para_distribution1,z_sim_val, Vol_sim)

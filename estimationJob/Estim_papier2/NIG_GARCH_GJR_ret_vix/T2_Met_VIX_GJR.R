@@ -17,14 +17,15 @@ library(xts)
 ###              Load : Data source,    Parameters of the model,  function to use          #######
 ##################################################################################################
 setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")  
-path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/NIG_GARCH_Last/two_step_estimation/NIG_GARCH_GJR_ret_vix"
+path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/Estim_papier2/NIG_GARCH_GJR_ret_vix"
+
 
 source(paste(path,"/T2_parameters_set.R",sep=""))
 source(paste(path,"/T2_Loglik_Ret_GJR.R",sep=""))
 source(paste(path,"/T2_Loglik_VIX_GJR.R",sep=""))
 source(paste(path,"/T2_Loglik_Mix_VIX_GJR.R",sep=""))
 source(paste(path,"/T2_QMLNIG_VIX_GJR.R",sep=""))
-
+source(paste(path,"/T2_simulation.R",sep=""))
 
 
 ######################################################################################
@@ -84,9 +85,40 @@ para_distribution1= QMLSol$par
 parametres_qml=c(para_h1,para_distribution1)
 
 
+##############################
+#####  Simulation de H_t  ####
+##############################
+
+z_sim_val= z_sim(para_h1, para_distribution1,2718) 
+ts.plot(z_sim_val, col = "steelblue", main = "z_t values",xlab="z_t",ylab="Volatility")
+grid()
 
 
+##############################
+#####  Simulation de H_t  ####
+##############################
 
+Vol_sim= shape_vol_sim(para_h1, para_distribution1,z_sim_val,2718)
+ts.plot(Vol_sim, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
+grid()
+
+
+#################################
+#####  Simulation de ret_t  ####
+#################################
+
+Ret_sim=  ret_simulation(para_h1, para_distribution1,z_sim_val, Vol_sim)
+ts.plot(Ret_sim, col = "steelblue", main = "Simulation Ret Model",xlab="2009",ylab="Volatility")
+grid()
+
+
+#################################
+#####  Simulation de VIX_t   ####
+#################################
+
+Vix_sim= shape_VIX_sim(para_h1, para_distribution,2718)
+ts.plot(Vix_sim, col = "steelblue", main = "Simulation VIX Model",xlab="2009",ylab="Volatility")
+grid()
 
 
 
