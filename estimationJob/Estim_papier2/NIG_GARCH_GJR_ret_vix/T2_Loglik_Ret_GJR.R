@@ -65,6 +65,32 @@ GJR_likelihood_ret <- function(para_h, Data.returns) {
   return(dens)  
 }
 
+###########################################################
+#####  The Log-likeelihood over all the returns dates  ####
+###########################################################
+GJR_likelihood_ret_sim <- function(para_h, ret.all) {
+  n=length(ret.all)
+  rt=0.0001197619
+  
+  # para_h<-c() set up the parameters of the model 
+  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]
+  
+  h = c()                                                        ####  A vector containing h from the model,
+  h[1]=(a0 )/(1 - b1 - a1- a2/2)                                 ####  The first value for h, Unconditional Variance
+  dens = log(Retdensity(para_h,ret.all[1],h[1],rt))
+
+  mt = c()                                                       ####  the predictible excess of return process mt,
+  mt[1]=lamda0*((h[1])^(1/2))- (h[1])/2
+  
+  for (i in 2:n){
+    h[i]=a0 +b1*h[i-1]+(a1*(ret.all[i-1]-rt-mt[i-1])^2)+ (a2*max(0,-(ret.all[i-1]-rt-mt[i-1])^2))
+    mt[i]=lamda0*((h[i])^(1/2))- (h[i])/2
+    temp=Retdensity(para_h,ret.all[i],h[i],rt)
+    dens<-dens+log(temp)
+  }
+  
+  return(dens)  
+}
 
 ####################################################
 ######   The volatility updating rule under Q     ##

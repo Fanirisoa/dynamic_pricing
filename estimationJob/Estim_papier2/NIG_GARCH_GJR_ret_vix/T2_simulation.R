@@ -120,14 +120,9 @@ vol_sim_h_Q <- function(para_h, para_distribution,h)
   beta_1 =beta*(sigma_z)
   delta_1 =delta/(sigma_z)
   mu_1 =(1/(sigma_z))*(mu-mu_z)
-  
-  # Parameter under the physical probability
-  lamda0star= -(1/2)
-  gamastar= gama+lamda0+(1/2)
-
   # Parameter under the physical probability  
-  g1= b1 + a1*(gamastar^2)           ####  The percistence
-  h0=(a0 + a1)/(1 - g1)              ####  The first value for h, Unconditional Variance
+  g1= b1+ (a1+a2*(pnorm(lamda0)))*(1+lamda0^2)+a2*lamda0*dnorm(lamda0)            ####  The percistence
+  h0=(a0 )/(1 - g1)    
   
   drapeau=0
   
@@ -145,7 +140,7 @@ vol_sim_h_Q <- function(para_h, para_distribution,h)
   }
   
   if (drapeau==0){
-    resultat= a0 +b1*h+a1*(rgh(1,alpha_1,beta_1,delta_1,mu_1,-1/2) - gamastar*((h)^(1/2)))^2
+    resultat= a0 +b1*h+(a1*(rgh(1,alpha_1,beta_1,delta_1,mu_1,-1/2) -lamda0)^2)+ (a2*max(0,-(rgh(1,alpha_1,beta_1,delta_1,mu_1,-1/2) -lamda0)^2))
   }else{
     resultat=NA
   }
@@ -155,22 +150,21 @@ vol_sim_h_Q <- function(para_h, para_distribution,h)
 
 
 
+
 ####################################################
 ######         The volatility shape under Q       ##
 ####################################################
 shape_vol_sim_Q <- function(para_h, para_distribution, N_t) {
   ## set up the parameters of the model : para_h
-  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]   
+  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]
   
   # para_distribution<-c() set up the parameters of NIG
   alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4];
   
-  # Parameter under the physical probability
-  lamda0star= -(1/2)
-  gamastar= gama+lamda0+(1/2)
-  
-  g1= b1 + a1*(gamastar^2)           ####  The percistence
-  h0=(a0 + a1)/(1 - g1)              ####  The first value for h, Unconditional Variance
+
+  # Parameter under the physical probability  
+  g1= b1+ (a1+a2*(pnorm(lamda0)))*(1+lamda0^2)+a2*lamda0*dnorm(lamda0)            ####  The percistence
+  h0=(a0 )/(1 - g1)    
   
   
   N = N_t
@@ -190,8 +184,8 @@ shape_vol_sim_Q <- function(para_h, para_distribution, N_t) {
 ####################################################
 shape_VIX_sim <- function(para_h, para_distribution, N_t) {
   ## set up the parameters of the model : para_h
-  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]   
-
+  a0=para_h[1]; a1=para_h[2]; a2=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]  ; ro=para_h[6]
+  
   Nvix= N_t
   h = shape_vol_sim_Q(para_h, para_distribution, N_t)
   

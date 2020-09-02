@@ -13,3 +13,12 @@ GJR_likelihood_Mix <- function(para_h,Data.ret, Data.N,Data.returns,N) {
   return(-log_like)  
 }
 
+
+
+#############################################################
+#####  tHE LOGLIKELIHOODE of both the mixe return-option ####
+#############################################################
+GJR_likelihood_Mix_sim <- function(para_h,Ret_sim, Vix_sim) {
+  log_like <- GJR_likelihood_ret_sim(para_h, Ret_sim) + GJR_likelihood_vix_sim(para_h, Ret_sim,Vix_sim)
+  return(-log_like)  
+}
