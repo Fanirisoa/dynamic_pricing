@@ -116,12 +116,28 @@ ts.plot(Vix_sim, col = "steelblue", main = "Simulation VIX_t Model",xlab="Index 
 grid()
 
 #################################
-#####  Simulation de ret_t  ####
+#####  Simulation de Y_t  ####
 #################################
 
 Ret_sim=  ret_simulation(para_h1, para_distribution1,z_sim_val, Vol_sim)
-ts.plot(Ret_sim, col = "steelblue", main = "Simulation Ret Model",xlab="Index values",ylab="Y_t")
+ts.plot(Ret_sim, col = "steelblue", main = "Simulation Y_t Model",xlab="Index values",ylab="Y_t")
 grid()
+
+
+
+#####################################################
+###      Optimization  of the model           #######
+#####################################################
+start.time <- Sys.time()
+Sol=optim(para_h,Heston_likelihood_Mix ,Data.ret=Data.ret, Data.N = Data.N,Data.returns=Data.returns, N=N, method="Nelder-Mead",control = list(maxit = 5000))
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+
+Sol
+para_h1<-Sol$par
+para_h
+para_h1
 
 
 #####################################################
@@ -148,11 +164,27 @@ para_h2
 #                QML estimation  NIG                     # 
 ##########################################################
 start.time <- Sys.time()
-QMLSol_sim=optim(para_distribution1,NIG_likelihood_dens_QML_sim ,para_h =para_h2,Ret_sim=Ret_sim, method="Nelder-Mead",control = list(maxit = 5000))
+QMLSol=optim(para_distribution,NIG_likelihood_dens_QML ,para_h =para_h1,Data.returns=Data.returns, method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
 QMLSol
+
+para_distribution1= QMLSol$par
+
+parametres_qml=c(para_h1,para_distribution1)
+
+para_distribution
+para_distribution_int = para_distribution
+##########################################################
+#                QML estimation  NIG                     # 
+##########################################################
+start.time <- Sys.time()
+QMLSol_sim=optim(para_distribution_int,NIG_likelihood_dens_QML_sim ,para_h =para_h2,Ret_sim=Ret_sim, method="Nelder-Mead",control = list(maxit = 5000))
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+QMLSol_sim
 
 para_distribution2 <- QMLSol_sim$par
 
