@@ -33,11 +33,11 @@ source(paste(path,"/T2_simulation.R",sep=""))
 ######################################################################################
 
 ts.vol= shape_vol_P(para_h, Data.returns) 
-ts.plot(ts.vol, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
+ts.plot(ts.vol, col = "steelblue", main = "IG Garch Model",xlab="Simulation",ylab="Volatility")
 grid()
 
 ts.vol= shape_vol_Q(para_h, Data.returns) 
-ts.plot(ts.vol, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
+ts.plot(ts.vol, col = "steelblue", main = "IG Garch Model",xlab="Simulation",ylab="Volatility")
 grid()
 
 
@@ -84,12 +84,17 @@ para_distribution1= QMLSol$par
 
 parametres_qml=c(para_h1,para_distribution1)
 
+para_distribution
+para_distribution1
+
+para_h1 = para_h
+para_distribution1 = para_distribution
 ##############################
 #####  Simulation de H_t  ####
 ##############################
 
 z_sim_val= z_sim(para_h1, para_distribution1,2718) 
-ts.plot(z_sim_val, col = "steelblue", main = "z_t values",xlab="z_t",ylab="Volatility")
+ts.plot(z_sim_val, col = "steelblue", main = "Simulation z_t",xlab="Index values",ylab="z_t values")
 grid()
 
 
@@ -98,7 +103,7 @@ grid()
 ##############################
 
 Vol_sim= shape_vol_sim(para_h1, para_distribution1,z_sim_val,2718)
-ts.plot(Vol_sim, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
+ts.plot(Vol_sim, col = "steelblue", main = "Simulation vol of HN-NIG-GARCH",xlab="Index values",ylab="h_t")
 grid()
 
 
@@ -107,7 +112,7 @@ grid()
 #################################
 
 Vix_sim= shape_VIX_sim(para_h1, para_distribution,2718)
-ts.plot(Vix_sim, col = "steelblue", main = "Simulation VIX Model",xlab="2009",ylab="Volatility")
+ts.plot(Vix_sim, col = "steelblue", main = "Simulation VIX_t Model",xlab="Index values",ylab="VIX")
 grid()
 
 #################################
@@ -115,7 +120,7 @@ grid()
 #################################
 
 Ret_sim=  ret_simulation(para_h1, para_distribution1,z_sim_val, Vol_sim)
-ts.plot(Ret_sim, col = "steelblue", main = "Simulation Ret Model",xlab="2009",ylab="Volatility")
+ts.plot(Ret_sim, col = "steelblue", main = "Simulation Ret Model",xlab="Index values",ylab="Y_t")
 grid()
 
 
