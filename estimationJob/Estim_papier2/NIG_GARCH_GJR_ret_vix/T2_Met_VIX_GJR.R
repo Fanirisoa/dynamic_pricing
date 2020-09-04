@@ -86,11 +86,11 @@ parametres_qml=c(para_h1,para_distribution1)
 
 
 ##############################
-#####  Simulation de H_t  ####
+#####  Simulation de z_t  ####
 ##############################
 
 z_sim_val= z_sim(para_h1, para_distribution1,2718) 
-ts.plot(z_sim_val, col = "steelblue", main = "z_t values",xlab="z_t",ylab="Volatility")
+ts.plot(z_sim_val, col = "steelblue", main = "Simulation z_t",xlab="index",ylab="z_t values")
 grid()
 
 
@@ -99,7 +99,7 @@ grid()
 ##############################
 
 Vol_sim= shape_vol_sim(para_h1, para_distribution1,z_sim_val,2718)
-ts.plot(Vol_sim, col = "steelblue", main = "IG Garch Model",xlab="2009",ylab="Volatility")
+ts.plot(Vol_sim, col = "steelblue", main = "Simulation h_t",xlab="index",ylab="h_t values")
 grid()
 
 
@@ -108,7 +108,7 @@ grid()
 #################################
 
 Ret_sim=  ret_simulation(para_h1, para_distribution1,z_sim_val, Vol_sim)
-ts.plot(Ret_sim, col = "steelblue", main = "Simulation Ret Model",xlab="2009",ylab="Volatility")
+ts.plot(Ret_sim, col = "steelblue", main = "Simulation Ret Model",xlab="index",ylab="Y_t values")
 grid()
 
 
@@ -129,7 +129,7 @@ Ret_sim=  ret_simulation(para_h1, para_distribution1,z_sim_val, Vol_sim)
 ts.plot(Ret_sim, col = "steelblue", main = "Simulation Ret Model",xlab="2009",ylab="Volatility")
 grid()
 
-
+para_h_used = para_1
 #####################################################
 ###      Optimization  of the model           #######
 #####################################################

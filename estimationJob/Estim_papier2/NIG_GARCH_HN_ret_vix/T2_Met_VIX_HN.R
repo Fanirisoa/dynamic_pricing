@@ -90,7 +90,7 @@ para_distribution1
 para_h1 = para_h
 para_distribution1 = para_distribution
 ##############################
-#####  Simulation de H_t  ####
+#####  Simulation de z_t  ####
 ##############################
 
 z_sim_val= z_sim(para_h1, para_distribution1,2718) 
