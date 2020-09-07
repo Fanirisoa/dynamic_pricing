@@ -129,7 +129,7 @@ Ret_sim=  ret_simulation(para_h1, para_distribution1,z_sim_val, Vol_sim)
 ts.plot(Ret_sim, col = "steelblue", main = "Simulation Ret Model",xlab="2009",ylab="Volatility")
 grid()
 
-para_h_used = para_1
+
 #####################################################
 ###      Optimization  of the model           #######
 #####################################################
@@ -138,7 +138,7 @@ GJR_likelihood_vix_sim(para_h1, Ret_sim,Vix_sim)
 
 
 start.time <- Sys.time()
-Sol_sim=optim(para_h1,GJR_likelihood_Mix_sim ,Ret_sim=Ret_sim, Vix_sim = Vix_sim, method="Nelder-Mead",control = list(maxit = 5000))
+Sol_sim=optim(para_h,GJR_likelihood_Mix_sim ,Ret_sim=Ret_sim, Vix_sim = Vix_sim, method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
@@ -150,4 +150,36 @@ para_h
 para_h1
 para_h2
 
+
+##########################################################
+#                QML estimation  NIG                     # 
+##########################################################
+start.time <- Sys.time()
+QMLSol=optim(para_distribution,NIG_likelihood_dens_QML ,para_h =para_h1,Data.returns=Data.returns, method="Nelder-Mead",control = list(maxit = 5000))
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+QMLSol
+
+para_distribution1= QMLSol$par
+
+parametres_qml=c(para_h1,para_distribution1)
+
+para_distribution
+para_distribution_int = para_distribution
+##########################################################
+#                QML estimation  NIG                     # 
+##########################################################
+start.time <- Sys.time()
+QMLSol_sim=optim(para_distribution_int,NIG_likelihood_dens_QML_sim ,para_h =para_h2,Ret_sim=Ret_sim, method="Nelder-Mead",control = list(maxit = 5000))
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+QMLSol_sim
+
+para_distribution2 <- QMLSol_sim$par
+
+para_distribution
+para_distribution1
+para_distribution2
 
