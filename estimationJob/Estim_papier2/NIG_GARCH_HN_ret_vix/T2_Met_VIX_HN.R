@@ -112,7 +112,7 @@ grid()
 #####  Simulation de VIX_t   ####
 #################################
 
-Vix_sim= shape_VIX_sim(para_h1, para_distribution,2718)
+Vix_sim= shape_VIX_sim(para_h1, para_distribution1,2718)
 ts.plot(Vix_sim, col = "steelblue", main = "Simulation VIX_t Model",xlab="Index values",ylab="VIX")
 grid()
 
