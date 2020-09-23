@@ -16,8 +16,8 @@ library(xts)
 ##################################################################################################
 ###              Load : Data source,    Parameters of the model,  function to use          #######
 ##################################################################################################
-setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")  
-path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/Estim_papier2/NIG_GARCH_GJR_ret_vix"
+setwd("/Users/leafanirisoa/Documents/GitHub/dynamic_pricing/data_used")  
+path = "/Users/leafanirisoa/Documents/GitHub/dynamic_pricing/estimationJob/Estim_papier2/NIG_GARCH_GJR_ret_vix"
 
 
 source(paste(path,"/T2_parameters_set.R",sep=""))
@@ -116,7 +116,7 @@ grid()
 #####  Simulation de VIX_t   ####
 #################################
 
-Vix_sim= shape_VIX_sim(para_h1, para_distribution,2718)
+Vix_sim= shape_VIX_sim(para_h1, para_distribution1,2718)
 ts.plot(Vix_sim, col = "steelblue", main = "Simulation VIX Model",xlab="2009",ylab="Volatility")
 grid()
 
@@ -182,4 +182,21 @@ para_distribution2 <- QMLSol_sim$par
 para_distribution
 para_distribution1
 para_distribution2
+
+###########################################
+#####     Simulation de VIX_t result   ####
+###########################################
+
+Vix_sim_2= shape_VIX_sim(para_h1, para_distribution1,2718)
+ts.plot(Vix_sim_2, col = "steelblue", main = "Simulation VIX_t Model result",xlab="Index values",ylab="VIX")
+grid()
+
+##########################################################
+#####       Comparing VIX simulation and estimated    ####
+##########################################################
+VIX_Model <- Vix_sim_2
+VIX_Market <- Vix_sim 
+
+Compa_vix(VIX_Model,VIX_Market)
+
 

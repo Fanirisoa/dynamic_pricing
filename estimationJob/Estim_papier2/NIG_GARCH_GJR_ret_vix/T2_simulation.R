@@ -197,3 +197,56 @@ shape_VIX_sim <- function(para_h, para_distribution, N_t) {
   return(VIX_Model)  
 }
 
+
+##################################################################
+#####       Comparing predictibility of time series VIX       ####
+##################################################################
+Compa_vix <- function(VIX_Model,VIX_Market) {
+  Vix <- VIX_Market
+  Nvix=length(Vix)
+  
+  ## Error terms :
+  
+  error <- rep(NA, Nvix)
+  error[Nvix]=0
+  for (i in 1:Nvix-1){
+    error[i]= (VIX_Model[i]/ VIX_Market[i]) - 1
+  }
+  ## MPE :
+  
+  MPE_Vix <- rep(NA, Nvix)
+  MPE_Vix[Nvix]=0
+  for (i in 1:Nvix-1){
+    MPE_Vix[i]= (VIX_Model[i]*(1/VIX_Market[i]))-1
+  }
+  
+  MPE<- (mean(MPE_Vix))*0.1
+  
+  ## MAE :
+  
+  MAE_Vix <- rep(NA, Nvix)
+  MAE_Vix[Nvix]=0
+  for (i in 1:Nvix-1 ){
+    MAE_Vix[i]= abs((VIX_Market[i]*(1/VIX_Model[i]))-1)
+  }
+  
+  MAE<- (mean(MAE_Vix))*0.1
+  
+  ## RMSE_Vix :
+  RMSE_Vix <- rep(NA, Nvix)
+  RMSE_Vix[Nvix]=0
+  for (i in 1:Nvix-1){
+    RMSE_Vix[i]= (error[i])^2
+  }
+  
+  Vrmse<-sqrt((mean(RMSE_Vix)))
+  
+  ## MAE :
+  MAE2<- (mean(abs(error)))
+  
+  mse<-mean(RMSE_Vix)
+  
+  return(list(MPE=MPE, MAE=MAE ,Vrmse=Vrmse, MSE_VIX=mse))   
+}
+
+
