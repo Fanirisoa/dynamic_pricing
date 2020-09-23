@@ -16,8 +16,9 @@ library(xts)
 ##################################################################################################
 ###              Load : Data source,    Parameters of the model,  function to use          #######
 ##################################################################################################
-setwd("/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/data_used")  
-path = "/Users/leafanirisoa/Documents/projetGit/dynamic_pricing/estimationJob/Estim_papier2/NIG_GARCH_HN_ret_vix"
+setwd("/Users/leafanirisoa/Documents/GitHub/dynamic_pricing/data_used")  
+path = "/Users/leafanirisoa/Documents/GitHub/dynamic_pricing/estimationJob/Estim_papier2/NIG_GARCH_HN_ret_vix"
+
 
 
 source(paste(path,"/T2_parameters_set.R",sep=""))
