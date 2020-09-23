@@ -204,3 +204,12 @@ grid()
 ##########################################################
 #####       Comparing VIX simulation and estimated    ####
 ##########################################################
+VIX_Model <- Vix_sim_2
+VIX_Market <- Vix_sim 
+
+Compa_vix(VIX_Model,VIX_Market)
+
+
+
+
+

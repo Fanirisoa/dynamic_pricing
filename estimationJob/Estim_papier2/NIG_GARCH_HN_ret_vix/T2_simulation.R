@@ -210,7 +210,7 @@ shape_VIX_sim <- function(para_h, para_distribution, N_t) {
 #####       Comparing predictibility of time series VIX       ####
 ##################################################################
 Compa_vix <- function(VIX_Model,VIX_Market) {
-  VIX_Market<-Vix
+  Vix <- VIX_Market
   Nvix=length(Vix)
 
   ## Error terms :
@@ -228,7 +228,7 @@ Compa_vix <- function(VIX_Model,VIX_Market) {
     MPE_Vix[i]= (VIX_Model[i]*(1/VIX_Market[i]))-1
   }
   
-  MPE<- (mean(MPE_Vix))
+  MPE<- (mean(MPE_Vix))*0.1
   
   ## MAE :
   
@@ -238,7 +238,7 @@ Compa_vix <- function(VIX_Model,VIX_Market) {
     MAE_Vix[i]= abs((VIX_Market[i]*(1/VIX_Model[i]))-1)
   }
   
-  MAE<- (mean(MAE_Vix))
+  MAE<- (mean(MAE_Vix))*0.1
   
   ## RMSE_Vix :
   RMSE_Vix <- rep(NA, Nvix)
@@ -254,6 +254,6 @@ Compa_vix <- function(VIX_Model,VIX_Market) {
   
   mse<-mean(RMSE_Vix)
   
-  return(list(MPE=MPE, MAE=MAE ,MAE2=MAE2 ,Vrmse=Vrmse, MSE_VIX=mse))   
+  return(list(MPE=MPE, MAE=MAE ,Vrmse=Vrmse, MSE_VIX=mse))   
 }
 
