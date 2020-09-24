@@ -187,7 +187,7 @@ para_distribution2
 #####     Simulation de VIX_t result   ####
 ###########################################
 
-Vix_sim_2= shape_VIX_sim(para_h1, para_distribution1,2718)
+Vix_sim_2= shape_VIX_sim(para_h2, para_distribution2,2718)
 ts.plot(Vix_sim_2, col = "steelblue", main = "Simulation VIX_t Model result",xlab="Index values",ylab="VIX")
 grid()
 
