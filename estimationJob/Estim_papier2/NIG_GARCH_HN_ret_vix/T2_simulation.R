@@ -32,7 +32,7 @@ z_sim <- function(para_h, para_distribution,N_t)
 }
 
 ####################################################
-######    The volatility updating ruleunder P     ##
+######    The volatility updating rule under P    ##
 ####################################################
 vol_sim_h <- function(para_h, para_distribution,h,z)
 {
