@@ -188,7 +188,7 @@ shape_vol_sim_Q <- function(para_h, para_distribution, N_t) {
 
 
 ####################################################
-######         Dimulation VIX ubder Q             ##
+######         simulation VIX ubder Q             ##
 ####################################################
 shape_VIX_sim <- function(para_h, para_distribution, N_t) {
   ## set up the parameters of the model : para_h

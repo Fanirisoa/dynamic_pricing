@@ -109,15 +109,7 @@ grid()
 
 
 #################################
-#####  Simulation de VIX_t   ####
-#################################
-
-Vix_sim= shape_VIX_sim(para_h1, para_distribution1,2718)
-ts.plot(Vix_sim, col = "steelblue", main = "Simulation VIX_t Model",xlab="Index values",ylab="VIX")
-grid()
-
-#################################
-#####  Simulation de Y_t  ####
+#####  Simulation de Y_t    ####
 #################################
 
 Ret_sim=  ret_simulation(para_h1, para_distribution1,z_sim_val, Vol_sim)
@@ -125,91 +117,9 @@ ts.plot(Ret_sim, col = "steelblue", main = "Simulation Y_t Model",xlab="Index va
 grid()
 
 
+#################################
+#####   compute  de S_T      ####
+#################################
 
-#####################################################
-###      Optimization  of the model           #######
-#####################################################
-start.time <- Sys.time()
-Sol=optim(para_h,Heston_likelihood_Mix ,Data.ret=Data.ret, Data.N = Data.N,Data.returns=Data.returns, N=N, method="Nelder-Mead",control = list(maxit = 5000))
-end.time <- Sys.time()
-time.taken <- end.time - start.time
-time.taken
-
-Sol
-para_h1<-Sol$par
-para_h
-para_h1
-
-
-#####################################################
-###      Optimization  of the model           #######
-#####################################################
-Heston_likelihood_ret_sim(para_h1, Ret_sim)
-Heston_likelihood_vix_sim(para_h1, Ret_sim,Vix_sim)
-
-
-start.time <- Sys.time()
-Sol_sim=optim(para_h1,Heston_likelihood_Mix_sim ,Ret_sim=Ret_sim, Vix_sim = Vix_sim, method="Nelder-Mead",control = list(maxit = 5000))
-end.time <- Sys.time()
-time.taken <- end.time - start.time
-time.taken
-
-Sol_sim
-para_h2<-Sol_sim$par
-
-para_h
-para_h1
-para_h2
-
-##########################################################
-#                QML estimation  NIG                     # 
-##########################################################
-start.time <- Sys.time()
-QMLSol=optim(para_distribution,NIG_likelihood_dens_QML ,para_h =para_h1,Data.returns=Data.returns, method="Nelder-Mead",control = list(maxit = 5000))
-end.time <- Sys.time()
-time.taken <- end.time - start.time
-time.taken
-QMLSol
-
-para_distribution1= QMLSol$par
-
-parametres_qml=c(para_h1,para_distribution1)
-
-para_distribution
-para_distribution_int = para_distribution
-##########################################################
-#                QML estimation  NIG                     # 
-##########################################################
-start.time <- Sys.time()
-QMLSol_sim=optim(para_distribution_int,NIG_likelihood_dens_QML_sim ,para_h =para_h2,Ret_sim=Ret_sim, method="Nelder-Mead",control = list(maxit = 5000))
-end.time <- Sys.time()
-time.taken <- end.time - start.time
-time.taken
-QMLSol_sim
-
-para_distribution2 <- QMLSol_sim$par
-
-para_distribution
-para_distribution1
-para_distribution2
-
-###########################################
-#####     Simulation de VIX_t result   ####
-###########################################
-
-Vix_sim_2= shape_VIX_sim(para_h2, para_distribution2,2718)
-ts.plot(Vix_sim_2, col = "steelblue", main = "Simulation VIX_t Model result",xlab="Index values",ylab="VIX")
-grid()
-
-##########################################################
-#####       Comparing VIX simulation and estimated    ####
-##########################################################
-VIX_Model <- Vix_sim_2
-VIX_Market <- Vix_sim 
-
-Compa_vix(VIX_Model,VIX_Market)
-
-
-
-
+S_T = val_S_T(Ret_sim,S_0)
 
