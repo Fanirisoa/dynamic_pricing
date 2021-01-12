@@ -192,8 +192,8 @@ shape_vol_sim_Q <- function(para_h, para_distribution, N_t) {
 
 val_S_T<-function(Y,S_0){  
   # Y y_t return values at time t
-  a=apply(B[[i]],2,cumsum)
-  b=exp(a)
+  a = sum(Y)
+  b = exp(a)
   return(b*S_0) 
 }
 
