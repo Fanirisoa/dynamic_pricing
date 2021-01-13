@@ -124,17 +124,13 @@ S_0 = mean(Data.N$S)
 S_T = val_S_T(Ret_sim,S_0)
 S_T 
 
-length(Data.N$S)
-S=Data.N$S
-
+S_val=Data.N$S
 M=list()
 for(i in 1:length(Data.N$S))  
 {
-  M[i]=val_S_T(Ret_sim,S[i])
+  M[i]=val_S_T(Ret_sim,S_val[i])
 }
 
-
-
-plot(Data.N$S, M, main = "plot(1:100, (1:100) ^ 2)")
+plot(Data.N$S, M, main = "Values of S_T as function of S_0")
 
 
