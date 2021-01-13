@@ -125,7 +125,16 @@ S_T = val_S_T(Ret_sim,S_0)
 S_T 
 
 length(Data.N$S)
+S=Data.N$S
 
-plot(Data.N$S, (Data.N$S) ^ 2, main = "plot(1:100, (1:100) ^ 2)")
+M=list()
+for(i in 1:length(Data.N$S))  
+{
+  M[i]=val_S_T(Ret_sim,S[i])
+}
+
+
+
+plot(Data.N$S, M, main = "plot(1:100, (1:100) ^ 2)")
 
 
