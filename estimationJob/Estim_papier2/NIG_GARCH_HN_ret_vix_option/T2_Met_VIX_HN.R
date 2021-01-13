@@ -134,11 +134,7 @@ for(i in 1:length(Data.N$S))
 plot(Data.N$S, M, main = "Values of S_T as function of S_0",xlab="Values S_0",ylab="Values S_T",col = "red")
 
 
-
-
-
-
-
+c_S_T = col_S_T(S_T,40)
 
 
 

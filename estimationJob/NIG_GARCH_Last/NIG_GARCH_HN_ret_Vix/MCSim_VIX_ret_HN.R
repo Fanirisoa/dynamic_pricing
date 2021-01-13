@@ -133,7 +133,7 @@ Matrice_ret<-function(x,para_h1,para_distribution1){
   for(j in 1:N)  
   {
     vol= c()                                         ####  Collecte vector of vol
-    ht= c()                                           ####  Collecte vector of ht
+    ht= c()                                          ####  Collecte vector of ht
     Inv= c()                                         ####  Collecte vector of innovation
     
     vol[1]= 0.0001220703      ####  sqrt(h0)             ####  volatility starting value #### vol= 10e-8 sqrt((a0 + a1)/(1 - b1 - a1*(gamastar)^2 ))   0.0001220703  
