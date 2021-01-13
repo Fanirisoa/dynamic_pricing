@@ -124,3 +124,8 @@ S_0 = mean(Data.N$S)
 S_T = val_S_T(Ret_sim,S_0)
 S_T 
 
+length(Data.N$S)
+
+plot(Data.N$S, (Data.N$S) ^ 2, main = "plot(1:100, (1:100) ^ 2)")
+
+
