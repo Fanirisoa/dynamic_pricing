@@ -131,6 +131,17 @@ for(i in 1:length(Data.N$S))
   M[i]=val_S_T(Ret_sim,S_val[i])
 }
 
-plot(Data.N$S, M, main = "Values of S_T as function of S_0")
+plot(Data.N$S, M, main = "Values of S_T as function of S_0",xlab="Values S_0",ylab="Values S_T",col = "red")
+
+
+
+
+
+
+
+
+
+
+
 
 
