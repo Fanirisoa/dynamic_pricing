@@ -137,7 +137,15 @@ plot(Data.N$S, M, main = "Values of S_T as function of S_0",xlab="Values S_0",yl
 c_S_T = col_S_T(S_T,40)
 
 
+list.SK <- c(0.85,0.9,0.95,1,1.05,1.1,1.15,1.2)
+
+list.ttm <- c(22,46,109,173,234)
 
 
+list.K <-vec_K(list.SK,S_T)
 
 
+expand.grid(list.K,list.ttm)
+
+
+Data.N[1:10,]

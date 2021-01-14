@@ -199,27 +199,38 @@ val_S_T<-function(Y,S_0){
 
 
 #################################################
-#####    Generate   dataset of option Data.N ####
+####   Generate   dataset of option Data.N   ####
 #################################################
 
-col_S_T<-function(St,l){  
+vec_S_T<-function(St,l){  
   # St is the value of S_T
   # this function return list of constant values : St of length : l
-  col_St=c()    
-  for(i in 1:l) {
-    col_St[i] = St
-  }
-  return(col_St) 
+  return(rep(St, l)) 
 }
 
 
+########################################################
+###      Generate  values of the strike : K      #######
+########################################################
+
+vec_K<-function(SK,St){  
+  # SK  vector of values of the moneyness  S/K  
+  # this function return list of constant values : St of length : l
+  K=c()    
+  for(i in 1:length(SK)) {
+    K[i] = St/SK[i]
+  }
+  return(K) 
+}
 
 
+list.S <- vec_S_T(S_T,l)
+list.K <- vec_K(list.SK,S_T)
+list.ttm <- T
+K.ttm  <-  expand.grid(list.K,list.ttm)
 
 
-
-
-
+Dc<-data.frame(S=vec_S_T(S_T,l),K=Data.contract$K,T=Data.contract$T*250,r=Data.contract$r,d=Data.contract$d,SK,Pe=Data.contract$Pe,Per=Data.contract$Per)
 
 
 
