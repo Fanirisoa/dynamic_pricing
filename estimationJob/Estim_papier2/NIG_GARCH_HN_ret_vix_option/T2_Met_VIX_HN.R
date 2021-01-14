@@ -19,15 +19,14 @@ library(xts)
 setwd("/Users/leafanirisoa/Documents/GitHub/dynamic_pricing/data_used")  
 path = "/Users/leafanirisoa/Documents/GitHub/dynamic_pricing/estimationJob/Estim_papier2/NIG_GARCH_HN_ret_vix_option"
 
-
-
 source(paste(path,"/T2_parameters_set.R",sep=""))
 source(paste(path,"/T2_Loglik_Ret_HN.R",sep=""))
 source(paste(path,"/T2_Loglik_VIX_HN.R",sep=""))
 source(paste(path,"/T2_Loglik_VIX_ret_HN.R",sep=""))
 source(paste(path,"/T2_QMLNIG_VIX_HN.R",sep=""))
 source(paste(path,"/T2_simulation.R",sep=""))
-
+source(paste(path,"/T2_MCSim_opt_ret_HN.R",sep=""))
+source(paste(path,"/T2_Fun_Pricer_opt_ret_HN.R",sep=""))
 
 ######################################################################################
 ###               Volatility   plot under the initial parameters               #######
@@ -142,8 +141,11 @@ Data.N
 
 
 
-
-
-
+N=N_sim
+######################################################################
+######         Compute option prices using MC simulation            ##
+######################################################################
+P<-Pricer(N_sim,para_h1,para_distribution1,Data.N)
+P
 
 
