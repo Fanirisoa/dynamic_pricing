@@ -224,15 +224,15 @@ vec_K<-function(SK,St){
 }
 
 
-list.S <- vec_S_T(S_T,l)
-list.K <- vec_K(list.SK,S_T)
-list.ttm <- T
-K.ttm  <-  expand.grid(list.K,list.ttm)
-
-
-Dc<-data.frame(S=vec_S_T(S_T,l),K=Data.contract$K,T=Data.contract$T*250,r=Data.contract$r,d=Data.contract$d,SK,Pe=Data.contract$Pe,Per=Data.contract$Per)
-
-
+ger_Data.N<-function(l,r, S_T,list.SK,list.T){  
+  # SK  vector of values of the moneyness  S/K  
+  # this function return list of constant values : St of length : l
+  list.S <- vec_S_T(S_T,l)
+  list.K <- vec_K(list.SK,S_T)
+  list.ttm <- list.T
+  dataset_option <-  data.frame(expand.grid(K = list.K, T = list.ttm, S = S_T, r = r))
+  return(dataset_option) 
+}
 
 ######################################################################
 ######         Compute option prices using MC simulation            ##
