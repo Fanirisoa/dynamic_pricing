@@ -145,7 +145,11 @@ N=N_sim
 ######################################################################
 ######         Compute option prices using MC simulation            ##
 ######################################################################
+
+
+start.time <- Sys.time()
 P<-Pricer(N_sim,para_h1,para_distribution1,Data.N)
-P
-
-
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+P$P
