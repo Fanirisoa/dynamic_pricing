@@ -25,7 +25,7 @@ source(paste(path,"/T2_Loglik_VIX_HN.R",sep=""))
 source(paste(path,"/T2_Loglik_VIX_ret_HN.R",sep=""))
 source(paste(path,"/T2_QMLNIG_VIX_HN.R",sep=""))
 source(paste(path,"/T2_simulation.R",sep=""))
-source(paste(path,"/T2_MCSim_opt_ret_HN.R",sep=""))
+source(paste(path,"/T2_MCSim_opt_ret_HN_1.R",sep=""))
 source(paste(path,"/T2_Fun_Pricer_opt_ret_HN.R",sep=""))
 
 ######################################################################################
@@ -87,8 +87,8 @@ parametres_qml=c(para_h1,para_distribution1)
 para_distribution
 para_distribution1
 
-para_h1 = para_h
-para_distribution1 = para_distribution
+#para_h1 = para_h
+#para_distribution1 = para_distribution
 ##############################
 #####  Simulation de z_t  ####
 ##############################
@@ -138,8 +138,6 @@ plot(Data.N$S, M, main = "Values of S_T as function of S_0",xlab="Values S_0",yl
 
 Data.N <- ger_Data.N(l,r_0, S_T,list.SK,list.T)
 Data.N
-
-
 
 N=N_sim
 ######################################################################
