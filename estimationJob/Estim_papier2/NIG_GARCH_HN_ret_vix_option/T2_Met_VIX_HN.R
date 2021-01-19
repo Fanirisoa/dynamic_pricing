@@ -26,8 +26,8 @@ source(paste(path,"/T2_Loglik_VIX_ret_HN.R",sep=""))
 source(paste(path,"/T2_QMLNIG_VIX_HN.R",sep=""))
 source(paste(path,"/T2_simulation.R",sep=""))
 source(paste(path,"/T2_MCSim_opt_ret_HN_1.R",sep=""))
-# source(paste(path,"/T2_Fun_Pricer_opt_ret_HN.R",sep=""))
-source(paste(path,"/Simulation MC opt-return HN.R",sep=""))
+source(paste(path,"/T2_Fun_Pricer_opt_ret_HN.R",sep=""))
+# source(paste(path,"/Simulation MC opt-return HN.R",sep=""))
 
 ######################################################################################
 ###               Volatility   plot under the initial parameters               #######
@@ -147,7 +147,7 @@ N=N_sim
 
 
 start.time <- Sys.time()
-P<-Pricer(N_sim,para_h1,para_distribution1,Data.N)
+P<-Pricer_P(N_sim,para_h1,para_distribution1,Data.N)
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken

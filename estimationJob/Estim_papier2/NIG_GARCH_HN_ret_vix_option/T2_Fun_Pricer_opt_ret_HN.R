@@ -1,7 +1,7 @@
 ######################################################################
 ######         Compute option prices using MC simulation            ##
 ######################################################################
-Pricer<-function(N,para_h1,para_distribution1,Data.N){
+Pricer_P<-function(N,para_h1,para_distribution1,Data.N){
   ## This function compute option prices by MC, using the function "h" and "sim"
   ## para_h is a vector containing the volatility's parameters
   ## para_distribution is a vector containing the distribution's parameters
