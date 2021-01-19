@@ -26,7 +26,8 @@ source(paste(path,"/T2_Loglik_VIX_ret_HN.R",sep=""))
 source(paste(path,"/T2_QMLNIG_VIX_HN.R",sep=""))
 source(paste(path,"/T2_simulation.R",sep=""))
 source(paste(path,"/T2_MCSim_opt_ret_HN_1.R",sep=""))
-source(paste(path,"/T2_Fun_Pricer_opt_ret_HN.R",sep=""))
+# source(paste(path,"/T2_Fun_Pricer_opt_ret_HN.R",sep=""))
+source(paste(path,"/Simulation MC opt-return HN.R",sep=""))
 
 ######################################################################################
 ###               Volatility   plot under the initial parameters               #######
