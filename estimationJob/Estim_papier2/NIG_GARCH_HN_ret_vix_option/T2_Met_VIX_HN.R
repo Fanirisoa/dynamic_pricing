@@ -152,3 +152,6 @@ end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
 P$P
+
+Data.N$
+dataset_option <-  data.frame(expand.grid(K = Data.N$K, T = Data.N$T, S = Data.N$S, P$P, r = Data.N$r))
