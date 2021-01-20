@@ -29,6 +29,7 @@ source(paste(path,"/T2_MCSim_opt_ret_HN_1.R",sep=""))
 source(paste(path,"/T2_Fun_Pricer_opt_ret_HN.R",sep=""))
 # source(paste(path,"/Simulation MC opt-return HN.R",sep=""))
 
+
 ######################################################################################
 ###               Volatility   plot under the initial parameters               #######
 ######################################################################################
@@ -41,7 +42,7 @@ ts.vol= shape_vol_Q(para_h, Data.returns)
 ts.plot(ts.vol, col = "steelblue", main = "IG Garch Model",xlab="Simulation",ylab="Volatility")
 grid()
 
-
+Data.returns
 #####################################################
 ###              Log values returns           #######
 #####################################################
@@ -155,3 +156,44 @@ P$P
 
 option_dataset <-  data.frame(K = Data.N$K, T = Data.N$T, S = Data.N$S, C=P$P, r = Data.N$r)
 option_dataset
+
+############################################################### 
+######       Estimation tow step : return - option           ##
+###############################################################
+source(paste(path,"/option_return/Fun_Pricer_opt_ret_HN.R",sep=""))
+source(paste(path,"/option_return/MCSim_opt_ret_HN.R",sep=""))
+source(paste(path,"/option_return/Loglik_Option_HN.R",sep=""))
+source(paste(path,"/option_return/Loglik_Opt_ret_HN.R",sep=""))
+source(paste(path,"/option_return/Loglik_Return_HN.R",sep=""))
+
+#####################################################
+###              Log values returns           #######
+#####################################################
+
+start.time <- Sys.time()
+ILK=Heston_likelihood_Mix(para_M,Data.ret, option_dataset,Data.returns,2) 
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+ILK
+
+NIG_likelihood_dens(para_M, Data.returns)
+Heston_likelihood_opti(N,para_M, Data.ret, Data.N)
+
+
+
+#####################################################
+###      Optimization  of the model           #######
+#####################################################
+start.time <- Sys.time()
+Sol=optim(para_M,Heston_likelihood_Mix ,Data.ret=Data.ret, Data.N = Data.N,Data.returns=Data.returns, N=N, method="Nelder-Mead",control = list(maxit = 5000))
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+
+Sol
+para_M1<-Sol$par
+para_M1
+para_M
+
+
