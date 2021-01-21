@@ -160,12 +160,7 @@ option_dataset
 ############################################################### 
 ######       Estimation tow step : return - option           ##
 ###############################################################
-source(paste(path,"/option_return/Fun_Pricer_opt_ret_HN.R",sep=""))
-source(paste(path,"/option_return/MCSim_opt_ret_HN.R",sep=""))
-source(paste(path,"/option_return/Loglik_Option_HN.R",sep=""))
 source(paste(path,"/option_return/Loglik_Opt_ret_HN.R",sep=""))
-source(paste(path,"/option_return/Loglik_Return_HN.R",sep=""))
-
 #####################################################
 ###              Log values returns           #######
 #####################################################
