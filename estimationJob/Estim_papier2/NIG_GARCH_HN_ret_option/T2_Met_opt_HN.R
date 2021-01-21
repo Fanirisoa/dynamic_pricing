@@ -21,8 +21,11 @@ path = "/Users/leafanirisoa/Documents/GitHub/dynamic_pricing/estimationJob/Estim
 
 source(paste(path,"/T2_parameters_set.R",sep=""))
 source(paste(path,"/T2_Loglik_Ret_HN.R",sep=""))
+source(paste(path,"/T2_Loglik_mix_ret_HN.R",sep=""))
+source(paste(path,"/T2_Loglik_Option_HN.R",sep=""))
+
 source(paste(path,"/T2_Loglik_opt_HN.R",sep=""))
-source(paste(path,"/T2_Loglik_opt_ret_HN.R",sep=""))
+
 source(paste(path,"/T2_QMLNIG_opt_HN.R",sep=""))
 source(paste(path,"/T2_simulation.R",sep=""))
 source(paste(path,"/T2_MCSim_opt_ret_HN_1.R",sep=""))
@@ -48,7 +51,7 @@ Data.returns
 #####################################################
 
 start.time <- Sys.time()
-ILK=Heston_likelihood_Mix(para_h,Data.ret, Data.N,Data.returns,N) 
+ILK=Heston_likelihood_Mix_vix(para_h,Data.ret, Data.N,Data.returns,N) 
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
@@ -62,7 +65,7 @@ Heston_likelihood_vix(para_h,Data.returns,Data.ret)
 ###      Optimization  of the model           #######
 #####################################################
 start.time <- Sys.time()
-Sol=optim(para_h,Heston_likelihood_Mix ,Data.ret=Data.ret, Data.N = Data.N,Data.returns=Data.returns, N=N, method="Nelder-Mead",control = list(maxit = 5000))
+Sol=optim(para_h,Heston_likelihood_Mix_vix ,Data.ret=Data.ret, Data.N = Data.N,Data.returns=Data.returns, N=N, method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
