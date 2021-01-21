@@ -17,17 +17,17 @@ library(xts)
 ###              Load : Data source,    Parameters of the model,  function to use          #######
 ##################################################################################################
 setwd("/Users/leafanirisoa/Documents/GitHub/dynamic_pricing/data_used")  
-path = "/Users/leafanirisoa/Documents/GitHub/dynamic_pricing/estimationJob/Estim_papier2/NIG_GARCH_HN_ret_vix_option"
+path = "/Users/leafanirisoa/Documents/GitHub/dynamic_pricing/estimationJob/Estim_papier2/NIG_GARCH_HN_ret_option"
 
 source(paste(path,"/T2_parameters_set.R",sep=""))
 source(paste(path,"/T2_Loglik_Ret_HN.R",sep=""))
-source(paste(path,"/T2_Loglik_VIX_HN.R",sep=""))
-source(paste(path,"/T2_Loglik_VIX_ret_HN.R",sep=""))
-source(paste(path,"/T2_QMLNIG_VIX_HN.R",sep=""))
+source(paste(path,"/T2_Loglik_opt_HN.R",sep=""))
+source(paste(path,"/T2_Loglik_opt_ret_HN.R",sep=""))
+source(paste(path,"/T2_QMLNIG_opt_HN.R",sep=""))
 source(paste(path,"/T2_simulation.R",sep=""))
 source(paste(path,"/T2_MCSim_opt_ret_HN_1.R",sep=""))
 source(paste(path,"/T2_Fun_Pricer_opt_ret_HN.R",sep=""))
-# source(paste(path,"/Simulation MC opt-return HN.R",sep=""))
+
 
 
 ######################################################################################
@@ -160,35 +160,54 @@ option_dataset
 ############################################################### 
 ######       Estimation tow step : return - option           ##
 ###############################################################
-source(paste(path,"/option_return/Loglik_Opt_ret_HN.R",sep=""))
-#####################################################
-###              Log values returns           #######
-#####################################################
-
-start.time <- Sys.time()
-ILK=Heston_likelihood_Mix(para_M,Data.ret, option_dataset,Data.returns,2) 
-end.time <- Sys.time()
-time.taken <- end.time - start.time
-time.taken
-ILK
-
-NIG_likelihood_dens(para_M, Data.returns)
-Heston_likelihood_opti(N,para_M, Data.ret, Data.N)
-
-
-
 #####################################################
 ###      Optimization  of the model           #######
 #####################################################
+Heston_likelihood_ret_sim(para_h1, Ret_sim)
+Heston_likelihood_vix_sim(para_h1, Ret_sim,Vix_sim)
+
+
 start.time <- Sys.time()
-Sol=optim(para_M,Heston_likelihood_Mix ,Data.ret=Data.ret, Data.N = Data.N,Data.returns=Data.returns, N=N, method="Nelder-Mead",control = list(maxit = 5000))
+Sol_sim=optim(para_h1,Heston_likelihood_Mix_sim ,Ret_sim=Ret_sim, Vix_sim = Vix_sim, method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
 
-Sol
-para_M1<-Sol$par
-para_M1
-para_M
+Sol_sim
+para_h2<-Sol_sim$par
 
+para_h
+para_h1
+para_h2
 
+##########################################################
+#                QML estimation  NIG                     # 
+##########################################################
+start.time <- Sys.time()
+QMLSol=optim(para_distribution,NIG_likelihood_dens_QML ,para_h =para_h1,Data.returns=Data.returns, method="Nelder-Mead",control = list(maxit = 5000))
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+QMLSol
+
+para_distribution1= QMLSol$par
+
+parametres_qml=c(para_h1,para_distribution1)
+
+para_distribution
+para_distribution_int = para_distribution
+##########################################################
+#                QML estimation  NIG                     # 
+##########################################################
+start.time <- Sys.time()
+QMLSol_sim=optim(para_distribution_int,NIG_likelihood_dens_QML_sim ,para_h =para_h2,Ret_sim=Ret_sim, method="Nelder-Mead",control = list(maxit = 5000))
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+QMLSol_sim
+
+para_distribution2 <- QMLSol_sim$par
+
+para_distribution
+para_distribution1
+para_distribution2
