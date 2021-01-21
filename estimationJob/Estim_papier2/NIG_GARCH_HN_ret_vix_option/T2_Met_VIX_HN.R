@@ -127,7 +127,7 @@ S_T
 Data.Nbis=Data.N2[-c(506,1462,1638,1645),]
 S_val=Data.Nbis$S
 M=list()
-for(i in 1:length(Data.N$S))  
+for(i in 1:length(Data.Nbis$S))  
 {
   M[i]=val_S_T(Ret_sim,S_val[i])
 }
