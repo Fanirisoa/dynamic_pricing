@@ -124,15 +124,15 @@ grid()
 S_0 = mean(Data.N$S)
 S_T = val_S_T(Ret_sim,S_0)
 S_T 
-
-S_val=Data.N$S
+Data.Nbis=Data.N2[-c(506,1462,1638,1645),]
+S_val=Data.Nbis$S
 M=list()
 for(i in 1:length(Data.N$S))  
 {
   M[i]=val_S_T(Ret_sim,S_val[i])
 }
 
-plot(Data.N$S, M, main = "Values of S_T as function of S_0",xlab="Values S_0",ylab="Values S_T",col = "red")
+plot(Data.Nbis$S, M, main = "Values of S_T as function of S_0",xlab="Values S_0",ylab="Values S_T",col = "red")
 
 #################################################
 ####   Generate   dataset of option Data.N   ####
