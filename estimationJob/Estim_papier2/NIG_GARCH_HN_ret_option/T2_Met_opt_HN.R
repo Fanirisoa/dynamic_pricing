@@ -168,9 +168,8 @@ Heston_likelihood_ret_sim(para_h1, Ret_sim)
 para_M1 = c(para_distribution1,para_h1)
 Heston_likelihood_opt(N,para_M1,option_dataset)
 
-
 start.time <- Sys.time()
-Sol_sim=optim(para_h1,Heston_likelihood_Mix_sim ,Ret_sim=Ret_sim, Vix_sim = Vix_sim, method="Nelder-Mead",control = list(maxit = 5000))
+Sol_sim=optim(para_h1,Heston_likelihood_Mix_sim_opt ,para_distribution = para_distribution1, Ret_sim=Ret_sim, Data.N = option_dataset, method="Nelder-Mead",control = list(maxit = 500))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken

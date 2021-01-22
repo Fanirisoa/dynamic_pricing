@@ -131,20 +131,8 @@ implied.vol <-   function(S, K, T, r, C,d, type="C"){
 ####################################################
 V<-function(S, K, T, r, C,d, type="C"){ 
   sig<-implied.vol(S, K, T, r, C,d, type="C")    ## Function to find BS Implied Vol using Bisection Method
-  d1 <-   (1/(sig*sqrt(T)))*(log(S/K)+ ( r - (sig^2)/2)*T)
-
-
+  d1 <-   (1/(sig*sqrt(T)))*(log(S/K)+ ( r - 0 + (sig^2)/2)*T)
   
-  print(paste0("T: ", T ))
-  print(paste0("sqrt(T): ", sqrt(T)))
-  print(paste0(" sig*sqrt(T): ",  (sig*sqrt(T))))
-  print(paste0("sig  : ",  sig ))
-  print(paste0("d  : ",  d ))
-  print(paste0("r : ",  r ))
-  print(paste0("d  : ",  d ))
-  print(paste0(" log(S/K) : ",  log(S/K)))
-  print(paste0("d1  : ",  d1 ))
-  print(paste0("--------" ))
   if(sig==-1){
     return(V=10^6)
   }else{
@@ -259,8 +247,6 @@ Heston_likelihood_opt <- function(N,para_M,Data.N) {
 
   P<-Pricer_P(N,para_h1,para_distribution1,Data.N)$P
   V<-Vega(Data.N=Data.N, type="C")
-
-  print(paste0("Vega: ", V))
   
   error <- rep(NA, length(C))
   for (i in 1:length(C)){
