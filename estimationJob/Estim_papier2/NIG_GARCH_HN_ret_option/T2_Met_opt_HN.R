@@ -22,13 +22,11 @@ path = "/Users/leafanirisoa/Documents/GitHub/dynamic_pricing/estimationJob/Estim
 source(paste(path,"/T2_parameters_set.R",sep=""))
 source(paste(path,"/T2_Loglik_Ret_HN.R",sep=""))
 source(paste(path,"/T2_Loglik_mix_ret_HN.R",sep=""))
-source(paste(path,"/T2_Loglik_Option_HN.R",sep=""))
-
 source(paste(path,"/T2_Loglik_opt_HN.R",sep=""))
-
+source(paste(path,"/T2_Loglik_vix_HN.R",sep=""))
 source(paste(path,"/T2_QMLNIG_opt_HN.R",sep=""))
 source(paste(path,"/T2_simulation.R",sep=""))
-source(paste(path,"/T2_MCSim_opt_ret_HN_1.R",sep=""))
+source(paste(path,"/T2_MCSim_opt_ret_HN.R",sep=""))
 source(paste(path,"/T2_Fun_Pricer_opt_ret_HN.R",sep=""))
 
 
@@ -45,7 +43,7 @@ ts.vol= shape_vol_Q(para_h, Data.returns)
 ts.plot(ts.vol, col = "steelblue", main = "IG Garch Model",xlab="Simulation",ylab="Volatility")
 grid()
 
-Data.returns
+
 #####################################################
 ###              Log values returns           #######
 #####################################################
@@ -148,7 +146,7 @@ N=N_sim
 ######################################################################
 ######         Compute option prices using MC simulation            ##
 ######################################################################
-
+Data.N=Data.N[1:40,]
 
 start.time <- Sys.time()
 P<-Pricer_P(N_sim,para_h1,para_distribution1,Data.N)
@@ -167,7 +165,8 @@ option_dataset
 ###      Optimization  of the model           #######
 #####################################################
 Heston_likelihood_ret_sim(para_h1, Ret_sim)
-Heston_likelihood_vix_sim(para_h1, Ret_sim,Vix_sim)
+para_M1 = c(para_distribution1,para_h1)
+Heston_likelihood_opt(N,para_M1,option_dataset)
 
 
 start.time <- Sys.time()

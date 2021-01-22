@@ -1,37 +1,25 @@
 ####################################################
 ######         The volatility updating rule       ##
 ####################################################
-gsqrt <- function(para_h,ret,h,rt)
+fsqrt <- function(para_h,ret,h,rt)
 {
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
+  ## set up the parameters of the model : para_h
+  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5]   
   
   # Parameter under the physical probability
   lamda0star= -(1/2)
   gamastar= gama+lamda0+(1/2)
   
-  g1= b1 + a1*(gamastar^2)           ####  The percistence
-  h0=(a0 + a1)/(1 - g1)              ####  The first value for h, Unconditional Variance
-  z2=1 - b1 - a1*(gamastar)^2 
+  
+  h0=(a0 + a1)/(1 - b1 - a1*(gamastar)^2)    
   
   drapeau=0
   if (a0<=0){drapeau=1}
   if (a1<=0){drapeau=1}
   if (gama<=0){drapeau=1}
   if (b1<=0){drapeau=1}
-  if (lamda0<=-1/2){drapeau=1}
+  if (lamda0<=0){drapeau=1}
   
-  if (is.na(g1)==TRUE){drapeau=1}else{
-    if (g1>=1){drapeau=1}
-    if (g1<=0){drapeau=1}
-    if (abs(g1)==Inf){drapeau=1}
-    if (1/abs(g1)==Inf){drapeau=1}
-  }
-  if (is.na(z2)==TRUE){drapeau=1}else{
-    if (z2<0){drapeau=1}
-    if (abs(z2)==Inf){drapeau=1}
-    if (1/abs(z2)==Inf){drapeau=1}
-  }
   if (is.na(h0)==TRUE){drapeau=1}else{
     if (h0<=0){drapeau=1}
     if (abs(h0)==Inf){drapeau=1}
@@ -45,42 +33,33 @@ gsqrt <- function(para_h,ret,h,rt)
   }
   
   if (drapeau==0){
-    resultat= a0 +b1*h+a1*(((ret-rt-lamda0star*(h))/((h)^(1/2))) - gamastar*((h)^(1/2)))^2
+    resultat= a0 +b1*h+a1*(((ret-rt-lamda0star*(h))/(sqrt(h))) - gamastar*(sqrt(h)))^2
   }else{
     resultat=NA
   }
   return(resultat)
 }
 
-##############################################################
-######     Conditional variance with risk netral Proba      ##
-##############################################################
-hstar<-function(para_h,Data.returns){
-  rt=Data.returns$rt/250        #### Interest rate Data : Data.BSJ$rt
-  ret=Data.returns$ret          #### Returns : Data.BSJ$ret
+
+h<-function(para_h,Data.ret){
+  rt=Data.ret$rt/250        #### Interest rate Data : Data.BSJ$rt
+  ret =Data.ret$ret         #### Returns : Data.BSJ$ret
   Z1=length(ret)
   
   # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
-  
+  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[4] 
   
   # Parameter under the physical probability
   lamda0star= -(1/2)
   gamastar= gama+lamda0+(1/2)
   
-  g1= b1 + a1*(gamastar^2)           ####  The percistence
-  h0=(a0 + a1)/(1 - g1)              ####  The first value for h, Unconditional Variance
-  
-  
-  h_star = c()                       ####  A vector containing h from the model,
-  h_star[1]=h0                       ####  The first value for h,
-  for (i in 2:Z1){ 
-    h_star[i]=gsqrt(para_h,ret[i-1],h_star[i-1],rt[i-1])
+  h_star = c()                                                        ####  A vector containing h from the model,
+  h_star[1]=(a0 + a1)/(1 - b1 - a1*(gamastar)^2 )                     ####  The first value for h,
+  for (i in 2:Z1){
+    h_star[i]=  fsqrt(para_h,ret[i-1],h_star[i-1],rt[i-1]) ####  a0 +b1*h_star[i-1]+a1*(((ret[i-1]-rt[i-1]-lamda0star*(h_star[i-1]))/(sqrt(h_star[i-1]))) - gamastar*(sqrt(h_star[i-1])))^2
+    
   }
-  
-  
-  z2=min(h_star)
-  z3=1 - b1 - a1*(gamastar)^2 
+  fsqrt(para_h,ret[i-1],h_star[i-1],rt[i-1]) ####  a0 +b1*h_star[i-1]+a1*(((ret[i-1]-rt[i-1]-lamda0star*(h_star[i-1]))/(sqrt(h_star[i-1]))) - gamastar*(sqrt(h_star[i-1])))^2
   
   drapeau=0
   
@@ -88,26 +67,7 @@ hstar<-function(para_h,Data.returns){
   if (a1<=0){drapeau=1}
   if (gama<=0){drapeau=1}
   if (b1<=0){drapeau=1}
-  if (lamda0<=-1/2){drapeau=1}
-  if (ro<=0){drapeau=1}
-  if (ro>=1){drapeau=1}
-  
-  if (is.na(g1)==TRUE){drapeau=1}else{
-    if (g1>=1){drapeau=1}
-    if (g1<=0){drapeau=1}
-    if (abs(g1)==Inf){drapeau=1}
-    if (1/abs(g1)==Inf){drapeau=1}
-  }
-  if (is.na(z2)==TRUE){drapeau=1}else{
-    if (z2<0){drapeau=1}
-    if (abs(z2)==Inf){drapeau=1}
-    if (1/abs(z2)==Inf){drapeau=1}
-  }
-  if (is.na(z3)==TRUE){drapeau=1}else{
-    if (z3<=0){drapeau=1}
-    if (abs(z3)==Inf){drapeau=1}
-    if (1/abs(z3)==Inf){drapeau=1}
-  }
+  if (lamda0<=0){drapeau=1}
   
   if (drapeau==0){
     resultat=h_star
@@ -117,208 +77,209 @@ hstar<-function(para_h,Data.returns){
   return(resultat)
 }
 
-######################
-######     VIX      ##
-######################
-VIX_Q<-function(para_h,h){
-  tau = 250
-  T_0=22
-  
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ; lamda0= para_h[5] ; ro=para_h[6]
-  
-  # Parameter under the physical probability
-  lamda0star= -(1/2)
-  gamastar= gama+lamda0+(1/2)
-  
-  g1= b1 + a1*(gamastar^2)           ####  The percistence
-  h0=(a0 + a1)/(1 - g1)              ####  The first value for h, Unconditional Variance
-  
-  Psy = g1
-  h_0 = h0
-  
-  drapeau=0
-  if (a0<=0){drapeau=1}
-  if (a1<=0){drapeau=1}
-  if (gama<=0){drapeau=1}
-  if (b1<=0){drapeau=1}
-  if (lamda0<=-1/2){drapeau=1}
-  if (ro<=0){drapeau=1}
-  if (ro>=1){drapeau=1}
-  
-  if (is.na(h)==TRUE){drapeau=1}else{
-    if (h<=0){drapeau=1}
-    if (abs(h)==Inf){drapeau=1}
-    if (1/abs(h)==Inf){drapeau=1}
+####################################################
+######   Computation of the Vega                  ##
+####################################################
+######   Black-Scholes Function for call          ##
+####################################################
+C_BS <-  function(S, K, T, r, sig,d, type="C"){
+  d1 <- (log(S/K) + (r -d + sig^2/2)*T) / (sig*sqrt(T))
+  d2 <- d1 - sig*sqrt(T)
+  if(type=="C"){
+    value <- S*pnorm(d1) - K*exp(-r*T)*pnorm(d2)
   }
-  if (is.na(g1)==TRUE){drapeau=1}else{
-    if (g1>=1){drapeau=1}
-    if (g1<=0){drapeau=1}
-    if (abs(g1)==Inf){drapeau=1}
-    if (1/abs(g1)==Inf){drapeau=1}
+  if(type=="P"){
+    value <- K*exp(-r*T)*pnorm(-d2) - S*pnorm(-d1)
+  }
+  return(value)
+}
+####################################################
+######   BS Implied Vol using Bisection Method    ##
+####################################################
+implied.vol <-   function(S, K, T, r, C,d, type="C"){
+  sig <- 0.20
+  sig.up <- 1
+  sig.down <- 0.000001
+  count <- 0
+  C_market <- C
+  err <- C_BS(S, K, T, r, sig,0 ,type="C") - C_market 
+  
+  ## repeat until error is sufficiently small or counter hits 1000
+  while(abs(err) > 0.000001 && count<10000){
+    if(err < 0){
+      sig.down <- sig
+      sig <- (sig.up + sig)/2
+    }else{
+      sig.up <- sig
+      sig <- (sig.down + sig)/2
+    }
+    err <- C_BS(S, K, T, r, sig,0, type) - C_market
+    count <- count + 1
   }
   
-  #  VIX 
-  
-  if (drapeau==0){
-    resultat= 100*sqrt(tau*((h*((1-Psy^T_0)/((1-Psy)*T_0))) + h_0*(1-((1-Psy^T_0)/((1-Psy)*T_0)))))
+  ## return NA if counter hit 1000
+  if(count==10000){
+    return(-1)
   }else{
-    resultat=NA
+    return(sig)
   }
-  return(resultat)
-  
 }
 
-####################################################### 
-#####       The Log-likeelihood over all VIX       ####
-####################################################### 
-Heston_likelihood_vix <- function(para_h, Data.returns,Data.ret){
-  
-  ## set up the parameters of the model : para_h
-  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
-  
-  
-  Data.ret.reduiced <- Data.ret[index_vix:length(Data.ret$VIX),]
-  row.names(Data.ret.reduiced) <- NULL
-  Vix=Data.ret.reduiced$VIX     ####  Call dividende
-  
-  
-  VIX_Market<-Vix
-  
-  Nvix=length(Vix)
-  
-  
-  h_all= hstar(para_h,Data.returns)
-  h = h_all[index_ht:length(h_all)] 
-  
-  
-  VIX_Model <- rep(NA, Nvix)
-  for (i in 1:Nvix){
-    VIX_Model[i]= VIX_Q(para_h,h[i+1])
-  }
-  
-  error <- rep(NA, Nvix)
-  error[Nvix]=0
-  for (i in 1:Nvix-1){
-    error[i]= VIX_Market[i] - VIX_Model[i]
-  }
-  
-  error_2 <- rep(NA, Nvix)
-  error_2[1]=0
-  for (i in 2:Nvix){
-    error_2[i]= ((error[i]-ro*error[i-1])^2)/(1-ro^2)
-  }
-  
-  sigma=mean(error^2)
-  log_like=-1/2*sum(log(sigma)+((error^2)/sigma))  
-  -(Nvix/2)*(log(2*pi)+log(sigma*(1-(ro^2))))+ (1/2)*(log(sigma*(1-(ro^2)))-log(sigma))-(1/(2*sigma))*(error[i]^2+sum(error_2))
-  
 
-  return(log_like)  
+####################################################
+######   To compute vega                          ##
+####################################################
+V<-function(S, K, T, r, C,d, type="C"){ 
+  sig<-implied.vol(S, K, T, r, C,d, type="C")    ## Function to find BS Implied Vol using Bisection Method
+  d1 <-   (1/(sig*sqrt(T)))*(log(S/K)+ ( r - (sig^2)/2)*T)
+
+
   
+  print(paste0("T: ", T ))
+  print(paste0("sqrt(T): ", sqrt(T)))
+  print(paste0(" sig*sqrt(T): ",  (sig*sqrt(T))))
+  print(paste0("sig  : ",  sig ))
+  print(paste0("d  : ",  d ))
+  print(paste0("r : ",  r ))
+  print(paste0("d  : ",  d ))
+  print(paste0(" log(S/K) : ",  log(S/K)))
+  print(paste0("d1  : ",  d1 ))
+  print(paste0("--------" ))
+  if(sig==-1){
+    return(V=10^6)
+  }else{
+    return(V=(1.0/sqrt(2*pi))*(S*exp(-r*T))*(exp(-((d1^2))))*sqrt(T))
+  }
 }
 
-##############################################################
-######     Conditional variance with risk netral Proba sim  ##
-##############################################################
-hstar_sim<-function(para_h,ret.all){
-  rt=0.0001197619
-  Z1=length(ret.all)
+Vega <- function(Data.N, type="C")
+{  
   
-  # para_h<-c() set up the parameters of the model 
-  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
-  
-  
-  # Parameter under the physical probability
-  lamda0star= -(1/2)
-  gamastar= gama+lamda0+(1/2)
-  
-  g1= b1 + a1*(gamastar^2)           ####  The percistence
-  h0=(a0 + a1)/(1 - g1)              ####  The first value for h, Unconditional Variance
+  T=Data.N$T*250   ####  Time to maturity expressed in terms of years in terms of days
+  S=Data.N$S       ####  Prix du sous-jacent: Data.contract$S
+  K=Data.N$K       ####  Strike  Prix d'exercice: data$strike
+  r=Data.N$r/250   ####  Interest rate Data.contract$r
+  C=Data.N$C       ####  Call price
+  d=0              ####  Call dividende
   
   
-  h_star = c()                       ####  A vector containing h from the model,
-  h_star[1]=h0                       ####  The first value for h,
-  for (i in 2:Z1){ 
-    h_star[i]=gsqrt(para_h,ret.all[i-1],h_star[i-1],rt)
+  vega <- rep(NA, length(C))
+  for (i in 1:length(C)){
+    vega[i] = V(S[i], K[i], T[i], r[i], C[i], d[i], type="C")
   }
+  return(vega)
+}
 
-  
-  z2=min(h_star)
-  z3=1 - b1 - a1*(gamastar)^2 
-  
-  drapeau=0
-  
-  if (a0<=0){drapeau=1}
-  if (a1<=0){drapeau=1}
-  if (gama<=0){drapeau=1}
-  if (b1<=0){drapeau=1}
-  if (lamda0<=-1/2){drapeau=1}
-  if (ro<=0){drapeau=1}
-  if (ro>=1){drapeau=1}
-  
-  if (is.na(g1)==TRUE){drapeau=1}else{
-    if (g1>=1){drapeau=1}
-    if (g1<=0){drapeau=1}
-    if (abs(g1)==Inf){drapeau=1}
-    if (1/abs(g1)==Inf){drapeau=1}
+############################################################
+#### Function that returns Root Mean Squared Error        ##
+############################################################
+MSE <- function(para_h,Data.ret,Data.N)
+{  
+  C=Data.N$C       ####  Call price
+  P<-Price_fft(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N)
+  error <- rep(NA, length(C))
+  for (i in 1:length(C)){
+    error[i] = (P[i]  -  C[i])^2
   }
-  if (is.na(z2)==TRUE){drapeau=1}else{
-    if (z2<0){drapeau=1}
-    if (abs(z2)==Inf){drapeau=1}
-    if (1/abs(z2)==Inf){drapeau=1}
+  MSE<-sqrt(mean(error))
+  return(MSE)
+}
+
+RMSE <- function(para_h,Data.ret,Data.N)
+{  
+  C=Data.N$C       ####  Call price
+  P<-Price_fft(para_h=para_h,Data.ret=Data.ret, Data.N=Data.N)
+  V<-Vega(Data.N=Data.N, type="C")
+  error <- rep(NA, length(C))
+  for (i in 1:length(C)){
+    error[i] = ((P[i]  -  C[i])/V[i])^2
   }
-  if (is.na(z3)==TRUE){drapeau=1}else{
-    if (z3<=0){drapeau=1}
-    if (abs(z3)==Inf){drapeau=1}
-    if (1/abs(z3)==Inf){drapeau=1}
-  }
-  
-  if (drapeau==0){
-    resultat=h_star
-  }else{
-    resultat=rep(NA, Z1)
-  }
-  return(resultat)
+  rmse<-sqrt((mean(error)))
+  return(rmse)
 }
 
 
 ############################################################
-#####       The Log-likeelihood over all VIX sim        ####
+#### Function that returns Root Mean Squared Error        ##
 ############################################################
-Heston_likelihood_vix_sim <- function(para_h, ret.all,vix.all){
+
+
+RMSEsim <- function(N,para_M, Data.N)
+{  
+  C=Data.N$C       ####  Call price
   
-  ## set up the parameters of the model : para_h
-  a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] ; ro=para_h[6]
+  ## set up the parameters of the model : para_M = c(para_distribution,para_h) 
+  alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]                   ## para_distribution<-c() set up the parameters of NIG
+  a0=para_M[5]; a1=para_M[6]; gama=para_M[7];  b1= para_M[8] ;  lamda0= para_M[9]     ## para_h<-c() set up the parameters of the model
   
-  VIX_Market<-vix.all 
-  Nvix=length(ret.all )
+  para_h1 = c(a0,a1,gama,b1,lamda0)
+  para_distribution1= c(alpha,beta,delta,mu)
   
+  P<-Pricer(N,para_h1,para_distribution1,Data.N)$P
+  V<-Vega(Data.N=Data.N, type="C")
   
-  h= hstar_sim(para_h,ret.all)
+  Norm_b= (1/sqrt((1/length(C))*sum((C)^2)))*100
   
+  error <- rep(NA, length(C))
+  for (i in 1:length(C)){
+    error[i] = ((P[i]  -  C[i])/V[i])^2
+  }
+  norm_rmse<-Norm_b*sqrt((mean(error)))
+  rmse<-sqrt((mean(error)))
+  return(list(rmse=rmse,P=P,error=error,norm_rmse=norm_rmse)) 
+}
+
+
+
+###########################################################
+#####       The Log-likeelihood over all Option        ####
+###########################################################
+Heston_likelihood_opt <- function(N,para_M,Data.N) {
   
-  VIX_Model <- rep(NA, Nvix)
-  for (i in 1:Nvix){
-    VIX_Model[i]= VIX_Q(para_h,h[i+1])
+  # alpha=para_distribution[1], beta=para_distribution[2], delta=para_distribution[3], mu=para_distribution[4]
+  # a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] 
+  
+  ## set up the parameters of the model : para_M = c(para_distribution,para_h) 
+  alpha=para_M[1];  beta=para_M[2];  delta=para_M[3];  mu=para_M[4]                   ## para_distribution<-c() set up the parameters of NIG
+  a0=para_M[5]; a1=para_M[6]; gama=para_M[7];  b1= para_M[8] ;  lamda0= para_M[9]     ## para_h<-c() set up the parameters of the model
+  
+  para_h1 = c(a0,a1,gama,b1,lamda0)
+  para_distribution1= c(alpha,beta,delta,mu)
+
+  
+  drapeau=0
+  if (abs(alpha)<= abs(beta)){drapeau=1}
+  if (alpha<=0){drapeau=1}
+  if (alpha==Inf){drapeau=1}
+  if (delta<=0){drapeau=1}
+  
+  if (drapeau==0){
+    
+  C=Data.N$C       ####  Call dividende
+
+  P<-Pricer_P(N,para_h1,para_distribution1,Data.N)$P
+  V<-Vega(Data.N=Data.N, type="C")
+
+  print(paste0("Vega: ", V))
+  
+  error <- rep(NA, length(C))
+  for (i in 1:length(C)){
+    error[i]=((P[i]  -  C[i])/V[i])
   }
   
-  error <- rep(NA, Nvix)
-  error[Nvix]=0
-  for (i in 1:Nvix-1){
-    error[i]= VIX_Market[i] - VIX_Model[i]
+
+  
+  sigma <- mean(error^2)
+  
+  log_like_NIG <- (-1/2)*(sum(log(sigma)+((error^2)/sigma)))
+  
+
+  }else{
+    log_like_NIG = NA
   }
   
-  error_2 <- rep(NA, Nvix)
-  error_2[1]=0
-  for (i in 2:Nvix){
-    error_2[i]= ((error[i]-ro*error[i-1])^2)/(1-ro^2)
-  }
-  
-  sigma=mean(error^2)
-  log_like=-1/2*sum(log(sigma)+((error^2)/sigma))  
-  -(Nvix/2)*(log(2*pi)+log(sigma*(1-(ro^2))))+ (1/2)*(log(sigma*(1-(ro^2)))-log(sigma))-(1/(2*sigma))*(error[i]^2+sum(error_2))
-  
-  return(log_like)  
+  return(log_like_NIG)  
   
 }
+
+

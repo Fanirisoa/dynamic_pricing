@@ -1,7 +1,7 @@
 ##########################################################
 #####  tHE LOGLIKELIHOODE of both the mixe return-vix ####
 ##########################################################
-Heston_likelihood_Mix <- function(para_h,Data.ret, Data.N,Data.returns,N) {
+Heston_likelihood_Mix_vix <- function(para_h,Data.ret, Data.N,Data.returns,N) {
   ret =Data.returns$ret   
   T=Data.N$T
   N1=length(ret)
