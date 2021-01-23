@@ -35,11 +35,13 @@ index_vix = which(Data.ret$date == "2010-01-04")
 
 ###   Initial parameter  ####``
 ###   Initial parameter  para_h<-c() set up the parameters of the volatility  ####
-
-
 ### ###  para_h<-c(1.180234e-12, 1.547729e-06, 4.550518e+02, 6.500111e-01 ,8.596182e+00, 9.646967e-01)
 para_h<-c(3.757e-12, 2.252e-05, 1.423e+01, 9.117e-01 ,1.513e+00, 0.9992)
 
+para_h<-c(3.757e-12, 2.252e-05, 1.423e+01, 9.117e-01 ,1.513e+00, 0.9992)
+
+###   Paper 2 parameter  ####``
+para_h<-c(3.854e-08,2.252e-05,5.379e+01,8.272e-01,1.020e+00, 0.9992)
 
 
 ### para_h<-c(3.313135e-15, 1.366366e-06, 4.274284e+02, 7.324341e-01, 8.531595e+00, 9.95507e-01)  ## RMSE2$rmse : 0.0154167 ## RMSE3$rmse : 0.01615634
@@ -81,7 +83,6 @@ para_h2=c(1.854299e-04, 3.345238e-04 ,0.142406e+01 ,1.124012e-03 ,6.573458e-01, 
 ### alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4];
 
 para_distribution2=c(8.478143e-01, -1.399045e-01,  1.973412e+00, 2.303577e+00)
-
 para_M = c(para_distribution2,para_h2)
 
 

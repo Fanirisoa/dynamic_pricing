@@ -185,7 +185,7 @@ para_h2
 #                QML estimation  NIG                     # 
 ##########################################################
 start.time <- Sys.time()
-QMLSol=optim(para_distribution,NIG_likelihood_dens_QML ,para_h =para_h1,Data.returns=Data.returns, method="Nelder-Mead",control = list(maxit = 5000))
+QMLSol=optim(para_distribution1,NIG_likelihood_dens_QML ,para_h =para_h2,Data.returns=Data.returns, method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken

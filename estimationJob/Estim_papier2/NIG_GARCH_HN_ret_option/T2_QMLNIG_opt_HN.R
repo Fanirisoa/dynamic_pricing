@@ -11,7 +11,15 @@ densite <- function(para_distribution,para_h,l){
   ## set up the parameters of the model : para_h
   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[5] 
   
-  gamma_0 = sqrt((alpha^2) -(beta^2))
+  gamma_bis = sqrt((alpha^2) -(beta^2))
+  
+  if (is.nan(gamma_bis)){
+    v <- c(2.40452927929406)
+    gamma_0 <- sample(v, 1)
+  }else{
+    gamma_0 <- gamma_bis
+  }
+  
   
   ## Normalisation :
   sigma_z = (delta*(alpha^2))/((gamma_0)^3)
@@ -25,6 +33,12 @@ densite <- function(para_distribution,para_h,l){
   delta_1 =delta/(sigma_z)
   mu_1 =(1/(sigma_z))*(mu-mu_z)
   
+  print(paste0("gamma_0  : ", gamma_0))
+  # print(paste0("sigma_z  : ", sigma_z))  
+  # print(paste0("alpha  : ", alpha))
+  # print(paste0("beta : ", beta))
+  # print(paste0("alpha_1  : ", alpha_1))
+  # print(paste0("beta_1 : ", beta_1))
   
   drapeau=0
   if (abs(alpha)<abs(beta)){drapeau=1}
@@ -36,9 +50,10 @@ densite <- function(para_distribution,para_h,l){
   if (alpha_1<=0){drapeau=1}
   if (alpha_1==Inf){drapeau=1}
   if (delta_1<=0){drapeau=1}
-  
 
+  
     if (drapeau==0){
+      
       resultat=dgh(l,alpha_1,beta_1,delta_1,mu_1,-1/2)
     }else{
       resultat=NA
