@@ -33,7 +33,7 @@ densite <- function(para_distribution,para_h,l){
   delta_1 =delta/(sigma_z)
   mu_1 =(1/(sigma_z))*(mu-mu_z)
   
-  print(paste0("gamma_0  : ", gamma_0))
+  #print(paste0("gamma_0  : ", gamma_0))
   # print(paste0("sigma_z  : ", sigma_z))  
   # print(paste0("alpha  : ", alpha))
   # print(paste0("beta : ", beta))

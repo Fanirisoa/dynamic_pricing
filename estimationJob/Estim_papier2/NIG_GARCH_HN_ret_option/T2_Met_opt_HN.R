@@ -90,8 +90,18 @@ parametres_qml=c(para_h1,para_distribution1)
 para_distribution
 para_distribution1
 
-#para_h1 = para_h
-#para_distribution1 = para_distribution
+#######################
+#####  Parameters  ####
+#######################
+
+para_h
+para_h1
+
+para_distribution
+para_distribution1
+
+##para_h1 = para_h
+##para_distribution1 = para_distribution
 ##############################
 #####  Simulation de z_t  ####
 ##############################
