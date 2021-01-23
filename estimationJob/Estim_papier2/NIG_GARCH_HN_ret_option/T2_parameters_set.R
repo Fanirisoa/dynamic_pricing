@@ -36,11 +36,10 @@ index_vix = which(Data.ret$date == "2010-01-04")
 ###   Initial parameter  ####``
 ###   Initial parameter  para_h<-c() set up the parameters of the volatility  ####
 ### ###  para_h<-c(1.180234e-12, 1.547729e-06, 4.550518e+02, 6.500111e-01 ,8.596182e+00, 9.646967e-01)
-para_h<-c(3.757e-12, 2.252e-05, 1.423e+01, 9.117e-01 ,1.513e+00, 0.9992)
 
-para_h<-c(3.757e-12, 2.252e-05, 1.423e+01, 9.117e-01 ,1.513e+00, 0.9992)
+#para_h<-c(3.757e-12, 2.252e-05, 1.423e+01, 9.117e-01 ,1.513e+00, 0.9992)
 
-###   Paper 2 parameter  ####``
+###   Paper 2 parameter  ####
 para_h<-c(3.854e-08,2.252e-05,5.379e+01,8.272e-01,1.020e+00, 0.9992)
 
 
@@ -65,7 +64,10 @@ para_h<-c(3.854e-08,2.252e-05,5.379e+01,8.272e-01,1.020e+00, 0.9992)
 
 ## ## para_distribution=c(1.269943539, -0.002488772,  1.620073612,  2.088112106)
 
-para_distribution=c(1.4365, -0.0538,  1.3920,  11.6243)
+#para_distribution=c(1.4365, -0.0538,  1.3920,  11.6243)
+
+###   Paper 2 parameter  ####
+para_distribution=c(1.2501,-0.0106,1.4728,2.7086)
 
 #######################################################################
 ###    Parameters of the model  tow step return-option         #######
