@@ -100,8 +100,8 @@ para_h1
 para_distribution
 para_distribution1
 
-##para_h1 = para_h
-##para_distribution1 = para_distribution
+para_h1 = para_h
+para_distribution1 = para_distribution
 ##############################
 #####  Simulation de z_t  ####
 ##############################
