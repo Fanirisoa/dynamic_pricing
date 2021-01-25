@@ -209,12 +209,12 @@ para_distribution1= QMLSol$par
 parametres_qml=c(para_h1,para_distribution1)
 
 para_distribution
-para_distribution_int = para_distribution
+para_distribution1 
 ##########################################################
 #                QML estimation  NIG                     # 
 ##########################################################
 start.time <- Sys.time()
-QMLSol_sim=optim(para_distribution_int,NIG_likelihood_dens_QML_sim ,para_h =para_h2,Ret_sim=Ret_sim, method="Nelder-Mead",control = list(maxit = 5000))
+QMLSol_sim=optim(para_distribution1,NIG_likelihood_dens_QML_sim ,para_h =para_h1,Ret_sim=Ret_sim, method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
@@ -226,12 +226,11 @@ para_distribution
 para_distribution1
 para_distribution2
 
-
 #####################################################
 ###      Optimization  of the model           #######
 #####################################################
 start.time <- Sys.time()
-Sol=optim(para_h1,Heston_likelihood_Mix_vix ,Data.ret=Data.ret, Data.N = option_dataset,Data.returns=Data.returns, N=100, method="Nelder-Mead",control = list(maxit = 5000))
+Sol=optim(para_h1,Heston_likelihood_Mix_ret_sim ,Ret_sim = Ret_sim, Data.returns = Data.returns,method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
