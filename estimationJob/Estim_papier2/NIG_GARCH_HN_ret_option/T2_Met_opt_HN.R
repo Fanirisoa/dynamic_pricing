@@ -174,12 +174,14 @@ option_dataset
 #####################################################
 ###      Optimization  of the model           #######
 #####################################################
-Heston_likelihood_ret_sim(para_h1, Ret_sim)
+N = 2
+N_sim <- 2
+
 para_M1 = c(para_distribution1,para_h1)
-Heston_likelihood_opt(N,para_M1,option_dataset)
+Heston_likelihood_Mix_sim_opt(para_h1,para_distribution1,Ret_sim, option_dataset) 
 
 start.time <- Sys.time()
-Sol_sim=optim(para_h1,Heston_likelihood_Mix_sim_opt ,para_distribution = para_distribution1, Ret_sim=Ret_sim, Data.N = option_dataset, method="Nelder-Mead",control = list(maxit = 500))
+Sol_sim=optim(para_h1,Heston_likelihood_Mix_sim_opt ,para_distribution = para_distribution1, Ret_sim=Ret_sim, Data.N = option_dataset, method="Nelder-Mead",control = list(maxit = 5))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
@@ -194,6 +196,7 @@ para_h2
 ##########################################################
 #                QML estimation  NIG                     # 
 ##########################################################
+
 start.time <- Sys.time()
 QMLSol=optim(para_distribution1,NIG_likelihood_dens_QML ,para_h =para_h2,Data.returns=Data.returns, method="Nelder-Mead",control = list(maxit = 5000))
 end.time <- Sys.time()
