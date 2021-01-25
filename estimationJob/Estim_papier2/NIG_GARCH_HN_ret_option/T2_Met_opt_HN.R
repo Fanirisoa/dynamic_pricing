@@ -225,3 +225,18 @@ para_distribution2 <- QMLSol_sim$par
 para_distribution
 para_distribution1
 para_distribution2
+
+
+#####################################################
+###      Optimization  of the model           #######
+#####################################################
+start.time <- Sys.time()
+Sol=optim(para_h1,Heston_likelihood_Mix_vix ,Data.ret=Data.ret, Data.N = option_dataset,Data.returns=Data.returns, N=100, method="Nelder-Mead",control = list(maxit = 5000))
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+
+Sol
+para_h1<-Sol$par
+para_h
+para_h1
