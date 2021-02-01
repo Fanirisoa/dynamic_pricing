@@ -20,7 +20,7 @@ Pricer_P<-function(N,para_h1,para_distribution1,Data.N){
   r=Data.N$r/250   ####  Interest rate Data.contract$r
   Z1=length(r)
   
-  print(paste0("value of N : ", N))
+  print(paste0("value of N : ", 15000))
 
   
   T=Data.N$T       
