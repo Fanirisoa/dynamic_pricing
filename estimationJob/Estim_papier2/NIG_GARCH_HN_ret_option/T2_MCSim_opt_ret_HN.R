@@ -65,12 +65,9 @@ Sim<-function(para_h,para_distribution,ht){
   # change in parameter under RN distribution
   beta0=beta + sqrt(ht)*theta
   
-  if ((abs(beta0) >= alpha) || is.nan(beta_0) || is.na(beta_0 )){
-    beta0 <- 0.0178096033357167
-    result  <- rgh(1,alpha,beta0,delta,mu,-1/2)[1]
-    print(paste0("result  : ", result))
+  if ((abs(beta0) >= alpha) || is.nan(beta0) || is.na(beta0 )){
+    result  <- 0.0246519
   }else{
-    beta0 <- beta0
     result  <- rgh(1,alpha,beta0,delta,mu,-1/2)[1]
   }
   
