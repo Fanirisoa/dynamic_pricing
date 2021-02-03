@@ -148,6 +148,10 @@ plot(Data.Nbis$S, M, main = "Values of S_T as function of S_0",xlab="Values S_0"
 #################################################
 ####   Generate   dataset of option Data.N   ####
 #################################################
+Data_original = Data.N[1:40,]
+Data_original
+
+
 
 Data.N <- ger_Data.N(l,r_0, S_T,list.SK,list.T)
 Data.N

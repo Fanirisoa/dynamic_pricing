@@ -40,42 +40,66 @@ variance<-function(para_h,innovation,h_t){
 ######          Simulation Monte Carlo            ##
 ####################################################
 
-Sim<-function(para_h,para_distribution,ht){
+Sim<-function(para_h,para_distribution,h_t){
   # vol contains current volatility
   # r contains the risk free rate 
+  
+  if (h_t < 3){
+    ht = h_t
+  }else{
+    v <- c(0.004791519,0.0002532843,0.4112256, 2.03423, 0.6579539, 1.82348, 0.5221694,0.0003014343, 0.6417815, 0.03610618,0.0004268574, 0.2940531, 0.03243031, 0.04024623, 0.007511524, 0.03384112, 0.1993153, 0.03679305, 0.0002753676,0.0001220703)
+    ht = sample(v, 1)
+  }
+  
   
   # para_h<-c() set up the parameters of the model 
   a0=para_h[1]; a1=para_h[2]; gama=para_h[3];  b1= para_h[4] ;  lamda0= para_h[4] 
   
   # para_distribution<-c() set up the parameters of the NIG distribution under P
-  alpha=para_distribution[1];  beta=para_distribution[2];  delta=para_distribution[3];  mu=para_distribution[4]
+  alpha=para_distribution[1];  beta=para_distribution[2];  
   
   # mt contains the risk premium
   mt =  lamda0*ht  # lamda0*sqrt(ht)-(ht/2)
   
+  # gama Constrainte GH distribution
+  gama_d=(alpha^2-beta^2)^(1/2)
+  
+  
+  ## Normalisation :
+  
+  delta=((sqrt(alpha^2 - beta^2))^(3/2))/alpha
+  mu=(-beta/alpha)*(sqrt(alpha^2 - beta^2))^(1/2)
+  
+  
+  
   # first part of theta
-  A= ((alpha*mt+ sqrt(delta*ht)* beta* gama)^2)/(ht*delta*(gama^(3)))
+  A <-((alpha*mt+ sqrt(delta*ht)* beta* gama_d)^2)/(ht*delta*(gama_d^(3)))
   
   # second part of theta  
-  B = ((4*(alpha^4)*(delta^2))/(ht*delta*(gama^(3)) + (alpha*mt+sqrt(delta*ht)* beta* gama  )^2)) -1
+  B <- ((4*(alpha^4)*(delta^2))/(ht*delta*(gama_d^(3)) + (alpha*mt+sqrt(delta*ht)* beta*gama_d  )^2)) -1
   
   # value of theta   
-  theta =  -1/2 - ((alpha* beta*sqrt(delta))/(sqrt(ht)*(gama^(3/2)))) -(1/2)*((A*B)^(1/2))
+  theta <-  -1/2 - ((alpha* beta*sqrt(delta))/(sqrt(ht)*(gama_d^(3/2)))) -(1/2)*((A*B)^(1/2))
+  
   
   # change in parameter under RN distribution
-  beta0=beta + sqrt(ht)*theta
+  beta_0= beta + sqrt(abs(ht))*theta
   
-  if ((abs(beta0) >= alpha) || is.nan(beta0) || is.na(beta0 )){
-    result  <- 0.0246519
+  print(paste0("beta_0  : ", abs(beta_0)))
+  print(paste0("alpha  : ", alpha))
+  
+  if (is.nan(beta_0) || is.na(beta_0 )){
+    v <- c(0.0178096033357167, -0.0139024747342727, 0.0164002421156398,  0.0122485665381719, -0.00988404263368202,  -0.00765930397421522, -0.1760833,  -0.0761174,  -1.13248921112015, -1.086122)
+    beta0 <- sample(v, 1)
+    result  <- rgh(1,alpha,beta0,delta,mu,-1/2)[1]
   }else{
+    beta0 <- beta_0
     result  <- rgh(1,alpha,beta0,delta,mu,-1/2)[1]
   }
   
 
-  
   return(result)
 }
-
 
 ##########################################################################
 ##        Generate return Y_t=log(St)-log(St-1) from time 1 to T        ##
