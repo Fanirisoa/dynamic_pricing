@@ -148,7 +148,8 @@ plot(Data.Nbis$S, M, main = "Values of S_T as function of S_0",xlab="Values S_0"
 #################################################
 ####   Generate   dataset of option Data.N   ####
 #################################################
-Data_original = Data.N[1:40,]
+Data.PP=Data.N2[-c(506,1462,1638,1645),]
+Data_original = Data.PP[100:140,]
 Data_original
 
 
@@ -169,7 +170,9 @@ time.taken <- end.time - start.time
 time.taken
 P$P
 
-option_dataset <-  data.frame(K = Data.N$K, T = Data.N$T, S = Data.N$S, C=P$P, r = Data.N$r)
+P_price= c(26.03,56.78,78.16,104.91,130.91,163.61,200.91,230.87,31.86,44.38,65.70,85.62,120.91,150.81,178.41,205.95,9.15,17.32,30.90,51.27,81.58,122.18,169.02,211.07,12.11,38.00,50.48,69.12,98.17,125.67,158.27,194.77,14.18,26.71,38.84,57.77,80.27,111.77,141.27,179.88)
+  
+option_dataset <-  data.frame(K = Data.N$K, T = Data.N$T, S = Data.N$S, C=P_price, r = Data.N$r)
 option_dataset
 
 ############################################################### 
