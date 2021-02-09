@@ -229,7 +229,7 @@ ger_Data.N<-function(l,r, S_T,list.SK,list.T){
   # this function return list of constant values : St of length : l
   list.S <- vec_S_T(S_T,l)
   list.K <- vec_K(list.SK,S_T)
-  list.ttm <- list.T
+  list.ttm <- list.T/250
   dataset_option <-  data.frame(expand.grid(K = list.K, T = list.ttm, S = S_T, r = r))
   return(dataset_option) 
 }

@@ -149,7 +149,7 @@ plot(Data.Nbis$S, M, main = "Values of S_T as function of S_0",xlab="Values S_0"
 ####   Generate   dataset of option Data.N   ####
 #################################################
 Data.PP=Data.N2[-c(506,1462,1638,1645),]
-Data_original = Data.PP[100:140,]
+Data_original = Data.PP[200:240,]
 Data_original
 
 
