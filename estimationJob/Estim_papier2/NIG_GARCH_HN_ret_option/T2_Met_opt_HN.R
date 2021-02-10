@@ -180,14 +180,14 @@ option_dataset
 #####################################################
 ###      Optimization  of the model           #######
 #####################################################
-N = 2
-N_sim <- 2
+N = 20
+N_sim <- 20
 
 para_M1 = c(para_distribution1,para_h1)
 Heston_likelihood_Mix_sim_opt(para_h1,para_distribution1,Ret_sim, option_dataset) 
 
 start.time <- Sys.time()
-Sol_sim=optim(para_h1,Heston_likelihood_Mix_sim_opt ,para_distribution = para_distribution1, Ret_sim=Ret_sim, Data.N = option_dataset, method="Nelder-Mead",control = list(maxit = 5))
+Sol_sim=optim(para_h1,Heston_likelihood_Mix_sim_opt ,para_distribution = para_distribution1, Ret_sim=Ret_sim, Data.N = option_dataset, method="Nelder-Mead",control = list(maxit = 500))
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
