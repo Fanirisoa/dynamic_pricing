@@ -148,16 +148,18 @@ plot(Data.Nbis$S, M, main = "Values of S_T as function of S_0",xlab="Values S_0"
 #################################################
 ####   Generate   dataset of option Data.N   ####
 #################################################
-Data.PP=Data.N2[-c(506,1462,1638,1645),]
-Data_original = Data.PP[200:240,]
-Data_original
+##Data.PP=Data.N2[-c(506,1462,1638,1645),]
+##Data_original = Data.PP[200:240,]
+##Data_original
 
 
 
 Data.N <- ger_Data.N(l,r_0, S_T,list.SK,list.T)
 Data.N
 
+N_sim=1000
 N=N_sim
+N
 ######################################################################
 ######         Compute option prices using MC simulation            ##
 ######################################################################
@@ -170,9 +172,19 @@ time.taken <- end.time - start.time
 time.taken
 P$P
 
-P_price=c(35.56,59.46,96.00,128.00,147.50,174.30,182.60,201.91,37.70,61.41,98.47,132.98,151.10,176.47,188.10,211.01,42.39,65.53,101.61,159.76,180.18,195.52,211.34,224.41,48.83,67.99,112.95,166.41,193.05,220.77,246.94,255.48,58.61,79.05,135.75,179.43,208.57,256.83,263.58,281.25)
+#P_price=c(35.56,59.46,96.00,128.00,147.50,174.30,182.60,201.91,37.70,61.41,98.47,132.98,151.10,176.47,188.10,211.01,42.39,65.53,101.61,159.76,180.18,195.52,211.34,224.41,48.83,67.99,112.95,166.41,193.05,220.77,246.94,255.48,58.61,79.05,135.75,179.43,208.57,256.83,263.58,281.25)
 option_dataset <-  data.frame(K = Data.N$K, T = Data.N$T, S = Data.N$S, C=P$P, r = Data.N$r)
 option_dataset
+
+start.time <- Sys.time()
+P2<-Pricer_P(N_sim,para_h1,para_distribution1,Data.N)
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+
+
+option_dataset_2 <-  data.frame(K = Data.N$K, T = Data.N$T, S = Data.N$S, C=P$P, P = P2$P)
+option_dataset_2
 
 ############################################################### 
 ######       Estimation tow step : return - option           ##
