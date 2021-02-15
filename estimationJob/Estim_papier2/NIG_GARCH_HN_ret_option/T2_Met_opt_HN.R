@@ -157,7 +157,7 @@ plot(Data.Nbis$S, M, main = "Values of S_T as function of S_0",xlab="Values S_0"
 Data.N <- ger_Data.N(l,r_0, S_T,list.SK,list.T)
 Data.N
 
-N_sim=1000
+N_sim=2500
 N=N_sim
 N
 ######################################################################
@@ -176,6 +176,10 @@ P$P
 option_dataset <-  data.frame(K = Data.N$K, T = Data.N$T, S = Data.N$S, C=P$P, r = Data.N$r)
 option_dataset
 
+N_sim=100
+N=N_sim
+N
+
 start.time <- Sys.time()
 P2<-Pricer_P(N_sim,para_h1,para_distribution1,Data.N)
 end.time <- Sys.time()
@@ -183,8 +187,19 @@ time.taken <- end.time - start.time
 time.taken
 
 
-option_dataset_2 <-  data.frame(K = Data.N$K, T = Data.N$T, S = Data.N$S, C=P$P, P = P2$P)
+option_dataset_2 <-  data.frame(K = Data.N$K, T = Data.N$T, S = Data.N$S, C=P$P, P = P2$P, r = Data.N$r)
 option_dataset_2
+
+
+start.time <- Sys.time()
+RMSE_res<- RMSE_funct(option_dataset_2)
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+RMSE_res
+
+
+
 
 ############################################################### 
 ######       Estimation tow step : return - option           ##

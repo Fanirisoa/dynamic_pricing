@@ -234,6 +234,22 @@ ger_Data.N<-function(l,r, S_T,list.SK,list.T){
   return(dataset_option) 
 }
 
+RMSE_funct <- function(Data.N)
+{  
+  C=Data.N$C       ####  Call price
+  P=Data.N$P 
+  V<-Vega(Data.N=Data.N, type="C")
+  error <- rep(NA, length(C))
+  for (i in 1:length(C)){
+    error[i] = ((P[i]  -  C[i])/V[i])^2
+  }
+  rmse<-sqrt((mean(error)))
+  return(rmse)
+}
+
+
+
+
 # 
 # ######################################################################
 # ######         Compute option prices using MC simulation            ##
