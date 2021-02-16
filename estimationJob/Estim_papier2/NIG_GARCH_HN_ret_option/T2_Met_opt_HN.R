@@ -157,7 +157,7 @@ plot(Data.Nbis$S, M, main = "Values of S_T as function of S_0",xlab="Values S_0"
 Data.N <- ger_Data.N(l,r_0, S_T,list.SK,list.T)
 Data.N
 
-N_sim=1500
+N_sim=5500
 N=N_sim
 N
 ######################################################################
@@ -176,7 +176,7 @@ P$P
 option_dataset <-  data.frame(K = Data.N$K, T = Data.N$T, S = Data.N$S, C=P$P, r = Data.N$r)
 option_dataset
 
-N_sim=150
+N_sim=1500
 
 
 start.time <- Sys.time()
