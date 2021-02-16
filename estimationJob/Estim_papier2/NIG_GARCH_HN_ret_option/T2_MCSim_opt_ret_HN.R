@@ -85,8 +85,8 @@ Sim<-function(para_h,para_distribution,h_t){
   # change in parameter under RN distribution
   beta_0= beta + sqrt(abs(ht))*theta
   
-  print(paste0("beta_0  : ", abs(beta_0)))
-  print(paste0("alpha  : ", alpha))
+  ##print(paste0("beta_0  : ", abs(beta_0)))
+  ##print(paste0("alpha  : ", alpha))
   
   if (is.nan(beta_0) || is.na(beta_0 )){
     v <- c(0.0178096033357167, -0.0139024747342727, 0.0164002421156398,  0.0122485665381719, -0.00988404263368202,  -0.00765930397421522, -0.1760833,  -0.0761174,  -1.13248921112015, -1.086122)

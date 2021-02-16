@@ -176,9 +176,8 @@ P$P
 option_dataset <-  data.frame(K = Data.N$K, T = Data.N$T, S = Data.N$S, C=P$P, r = Data.N$r)
 option_dataset
 
-N_sim=500
-N=N_sim
-N
+N_sim=150
+
 
 start.time <- Sys.time()
 P2<-Pricer_P(N_sim,para_h1,para_distribution1,Data.N)
